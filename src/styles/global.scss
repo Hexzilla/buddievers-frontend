@@ -1,0 +1,158 @@
+body {
+	// Menu CSS
+	#app {
+		height: 100%;
+		min-height: 100vh;
+		margin: 0;
+		width: 100%;
+	}
+	.min-h-full {
+		min-height: 100vh;
+	}
+	.home {
+		height: 100%;
+		width: 100%;
+	}
+	.desktop-display-flex {
+		@include desktop {
+			display: flex;
+		}
+	}
+	.button-pink {
+		background-color: #cc019f;
+		color: #ffffff;
+		border-color: #cc019f;
+		&:hover,
+		&:focus,
+		&:active {
+			border-color: #cc019f;
+			background-color: #cc019f;
+			color: #ffffff;
+			font-weight: 600;
+		}
+	}
+
+	//font Control
+	.font-size-120 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 120px;
+		color: #00ce4c;
+		@include mobile {
+			font-size: 60px;
+		}
+	}
+
+	.font-size-120-white {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 100px;
+		color: #ffffff;
+		@include mobile {
+			font-size: 50px;
+		}
+	}
+
+	.font-size-70 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 70px;
+		color: #01472a;
+		@include mobile {
+			font-size: 35px;
+		}
+	}
+
+  .font-size-60 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 60px;
+		color: #00ce4c;
+    @include mobile {
+			font-size: 30px;
+		}
+	}
+
+  .font-size-50 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 50px;
+		color: #01472a;
+		@include mobile {
+			font-size: 25px;
+		}
+	}
+
+	.font-size-50-white {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 50px;
+		color: #ffffff;
+		@include mobile {
+			font-size: 25px;
+		}
+	}
+
+	.font-size-48 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 48px;
+		color: #01472a;
+		@include mobile {
+			font-size: 24px;
+		}
+	}
+
+
+
+	.font-size-32-white {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 32px;
+		color: #ffffff;
+		@include mobile {
+			font-size: 18px;
+		}
+	}
+
+	.font-size-32 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 32px;
+		color: #01472a;
+		@include mobile {
+			font-size: 24px;
+		}
+	}
+
+	.font-size-28 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 28px;
+		color: #01472a;
+		@include mobile {
+			font-size: 14px;
+		}
+	}
+
+	.font-size-18-white {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 18px;
+		color: #ffffff;
+		@include mobile {
+			font-size: 10px;
+		}
+	}
+}
