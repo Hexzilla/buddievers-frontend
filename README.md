@@ -1,5 +1,3 @@
-# gromlins-kart
-
 ## Project setup
 ```
 yarn install

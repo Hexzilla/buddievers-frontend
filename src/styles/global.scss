@@ -18,73 +18,67 @@ body {
 			display: flex;
 		}
 	}
-	.button-pink {
-		background-color: #cc019f;
-		color: #ffffff;
-		border-color: #cc019f;
-		&:hover,
-		&:focus,
-		&:active {
-			border-color: #cc019f;
-			background-color: #cc019f;
-			color: #ffffff;
-			font-weight: 600;
-		}
+	.green-div {
+		background: #016b43;
+	}
+	.normal-button {
+		background: #f5e2b2;
+		border: none;
 	}
 
 	//font Control
-	.font-size-120 {
+	.font-size-80-green {
 		font-family: 'Poppins';
 		font-style: normal;
 		font-weight: 900;
-		font-size: 120px;
+		font-size: 80px;
 		color: #00ce4c;
 		@include mobile {
-			font-size: 60px;
+			font-size: 40px;
 		}
 	}
 
-	.font-size-120-white {
+	.font-size-80-white {
 		font-family: 'Poppins';
 		font-style: normal;
 		font-weight: 900;
-		font-size: 100px;
+		font-size: 80px;
 		color: #ffffff;
 		@include mobile {
-			font-size: 50px;
+			font-size: 40px;
 		}
 	}
 
-	.font-size-70 {
+	.font-size-80 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 80px;
+		color: #01472a;
+		@include mobile {
+			font-size: 40px;
+		}
+	}
+
+	.font-size-70-white {
 		font-family: 'Poppins';
 		font-style: normal;
 		font-weight: 900;
 		font-size: 70px;
-		color: #01472a;
+		color: #ffffff;
 		@include mobile {
 			font-size: 35px;
 		}
 	}
 
-  .font-size-60 {
+	.font-size-60 {
 		font-family: 'Poppins';
 		font-style: normal;
 		font-weight: 900;
 		font-size: 60px;
-		color: #00ce4c;
-    @include mobile {
-			font-size: 30px;
-		}
-	}
-
-  .font-size-50 {
-		font-family: 'Poppins';
-		font-style: normal;
-		font-weight: 900;
-		font-size: 50px;
 		color: #01472a;
 		@include mobile {
-			font-size: 25px;
+			font-size: 30px;
 		}
 	}
 
@@ -110,7 +104,27 @@ body {
 		}
 	}
 
+	.font-size-42 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 42px;
+		color: #01472a;
+		@include mobile {
+			font-size: 21px;
+		}
+	}
 
+	.font-size-40-green {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 900;
+		font-size: 40px;
+		color: #00ce4c;
+		@include mobile {
+			font-size: 20px;
+		}
+	}
 
 	.font-size-32-white {
 		font-family: 'Poppins';
@@ -119,7 +133,7 @@ body {
 		font-size: 32px;
 		color: #ffffff;
 		@include mobile {
-			font-size: 18px;
+			font-size: 16px;
 		}
 	}
 
@@ -130,18 +144,29 @@ body {
 		font-size: 32px;
 		color: #01472a;
 		@include mobile {
-			font-size: 24px;
+			font-size: 16px;
 		}
 	}
 
-	.font-size-28 {
+	.font-size-21-green {
 		font-family: 'Poppins';
 		font-style: normal;
 		font-weight: 700;
-		font-size: 28px;
+		font-size: 21px;
+		color: #00ce4c;
+		@include mobile {
+			font-size: 12px;
+		}
+	}
+
+	.font-size-21 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 21px;
 		color: #01472a;
 		@include mobile {
-			font-size: 14px;
+			font-size: 12px;
 		}
 	}
 
@@ -154,5 +179,25 @@ body {
 		@include mobile {
 			font-size: 10px;
 		}
+	}
+
+	.font-size-18 {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 18px;
+		color: #01472a;
+		@include mobile {
+			font-size: 9px;
+		}
+	}
+
+	.font-size-18-discord {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 18px;
+		color: #01472a;
+	
 	}
 }
