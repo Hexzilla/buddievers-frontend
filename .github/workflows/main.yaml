@@ -19,7 +19,9 @@ jobs:
           script: |
             cd /home/buddies/Buddies-web
             git pull
-            pm2 stop buddies
+            pm2 delete buddies
             rm -rf dist
             yarn build
-            pm2 restart buddies
+            cd dist
+            pm2 start live-server --name buddies -- --port=3003
+            pm2 save
