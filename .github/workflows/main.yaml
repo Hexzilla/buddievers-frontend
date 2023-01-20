@@ -17,4 +17,11 @@ jobs:
           password: ${{ secrets.Buddeis_Password }}
           port: "22"
           script: |
+            cd /home/buddies/Buddies-web
+            git pull
             pm2 delete buddies
+            rm -rf dist
+            yarn build
+            cd dist
+            pm2 start live-server --name buddies -- --port=3003
+            pm2 save
