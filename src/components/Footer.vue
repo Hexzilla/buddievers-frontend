@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="columns pt-6 pb-6">
 				<div class="column">
-					<p class="font-size-32-white mb-3">STAY TUNED</p>
+					<p class="font-size-32-white mb-3">STAY TUNED!</p>
 					<div>
 						<b-input
 							placeholder="Email address"

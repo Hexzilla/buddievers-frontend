@@ -22,5 +22,4 @@ jobs:
             pm2 stop buddies
             rm -rf dist
             yarn build
-            cd /dist
-            pm2 start live-server --name buddies -- --port=3003
+            pm2 restart buddies
