@@ -29,3 +29,8 @@ a.navbar-item:focus-within{
 .navbar-burger{
     color: white !important;
 }
+
+.b-image-wrapper > img.has-ratio, .b-image-wrapper > img.placeholder {
+    height: auto !important;
+    width: auto !important;
+}

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- <nav>
-    </nav> -->
     <router-view/>
   </div>
 </template>
@@ -10,7 +8,8 @@
 @import './styles';
 
 #app {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: 'Poppins';
+	font-style: normal;
   text-align: center;
   color: #2c3e50;
   background-color: #000;

@@ -10,9 +10,6 @@
 							:to="{ path: '/' }"
 							class="control-navItem"
 						>
-							<!-- <b-button type="is-ghost" class="font-size-18-white" icon-left="github-circle">
-							Add
-						</b-button> -->
 							<div style="display: flex">
 								<img
 									src="img/home 1.png"
