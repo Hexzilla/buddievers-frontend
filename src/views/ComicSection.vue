@@ -1,7 +1,7 @@
 <template>
   <div class="green-div1 mt-6">
     <div class="columns m-4">
-      <div class="column pl-2">
+      <div class="column pl-2 ml-4">
         <div class="mobile-flex">
           <p class="font-size-96-white mt-2">BUDDIES COMIC</p>
           <p class="font-size-64-green">Incredible stories every month!</p>
@@ -46,4 +46,22 @@ export default class ComicSection extends Vue {}
 
 <style lang="scss">
 @import "~bulma/sass/utilities/_all";
+
+.book-img {
+  margin-top: -12vh;
+  height: 75vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (max-width: 1194px) {
+  .book-img {
+    display: none;
+  }
+}
+
+.green-div1 {
+  max-height: 500px;
+  background: #016b43;
+}
 </style>

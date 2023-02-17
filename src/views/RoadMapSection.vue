@@ -213,7 +213,12 @@ import VueMetamask from "vue-metamask";
 export default class RoadMapSection extends Vue {}
 </script>
   
-  <style lang="scss">
+<style lang="scss">
 @import "~bulma/sass/utilities/_all";
+
+.roadmap-iamge-div {
+  display: flex;
+  align-items: center;
+}
 </style>
   
