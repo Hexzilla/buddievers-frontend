@@ -1,7 +1,10 @@
 <template>
   <section>
     <p class="font-size-96-green mt-5 has-text-centered">UTILITY</p>
-    <b-carousel>
+    <b-carousel
+      :arrow="false"
+      :draggable="true"
+    >
       <b-carousel-item v-for="(item, i) in items" :key="i">
         <div class="columns mt-4 mb-5 ml-5">
           <div class="column is-6">
