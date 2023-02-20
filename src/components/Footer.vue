@@ -30,6 +30,7 @@
             src="img/email_arrow.png"
             alt="No Image"
             class="footer-icon-img"
+			style="width: 15vh; height: 6vh;"
           />
         </div>
         <div class="columns pt-6">
@@ -57,33 +58,6 @@
             </a>
           </div>
         </div>
-        <!-- <div class="columns is-mobile">
-          <div class="column is-5">
-          </div>
-          <div class="column is-3">
-            <div class="footer-icon-div-position">
-              <a href="" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="img/twitter white 1.png"
-                  alt="No Image"
-                  class="footer-icon-img"
-                />
-              </a>
-            </div>
-          </div>
-          <div class="column is-3">
-            <div class="footer-icon-div-position">
-              <a href="" target="_blank" rel="noopener noreferrer">
-                <img
-                  src="img/discord white 1.png"
-                  alt="No Image"
-                  class="footer-icon-img"
-                />
-              </a>
-            </div>
-          </div>
-          <div class="column is-1"></div>
-        </div> -->
       </div>
       <div class="column is-1"></div>
     </div>
