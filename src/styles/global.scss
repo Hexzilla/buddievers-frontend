@@ -134,6 +134,15 @@ body {
 			font-size: 20px;
 		}
 	}
+	
+	.font-size-40-white-400 {
+		font-weight: 400;
+		font-size: 2.08vw;
+		color: #ffffff;
+		@include mobile {
+			font-size: 20px;
+		}
+	}
 
 	.font-size-40-white {
 		font-weight: 900;
