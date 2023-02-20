@@ -5,17 +5,33 @@
 			<div class="column is-10">
 				<b-navbar spaced close-on-click transparent class="is-centered">
 					<template #end>
+						<b-navbar-item tag="router-link" :to="{ path: '/' }">
+							<img
+								src="img/JOIN US.png"
+								alt="No Image"
+								class="head-icon"
+							/>
+						</b-navbar-item>
+						<b-navbar-item tag="router-link" :to="{ path: '/' }">
+							<img
+								src="img/twitter.png"
+								alt="No Image"
+								class="head-icon"
+							/>
+						</b-navbar-item>
+						<b-navbar-item tag="router-link" :to="{ path: '/' }">
+							<img
+								src="img/discord.png"
+								alt="No Image"
+								class="head-icon mr-5"
+							/>
+						</b-navbar-item>
 						<b-navbar-item
 							tag="router-link"
 							:to="{ path: '/' }"
 							class="control-navItem"
 						>
 							<div style="display: flex">
-								<img
-									src="img/home 1.png"
-									alt="No Image"
-									class="home-icon"
-								/>
 								<p class="font-size-24-white pl-1">HOME</p>
 							</div>
 						</b-navbar-item>
@@ -38,16 +54,9 @@
 							<p class="font-size-24-white">COFFEE SHOP</p>
 						</b-navbar-item>
 
-						<b-navbar-item tag="router-link" :to="{ path: '/' }">
-							<img
-								src="img/twitter 1.png"
-								alt="No Image"
-								class="head-icon"
-							/>
-						</b-navbar-item>
 						<b-navbar-item>
 							<b-button
-								class="font-size-20 pr-4 pl-4 pt-0 pb-0 normal-button"
+								class="font-size-20 pr-4 ml-4 pl-4 pt-0 pb-0 normal-button"
 								>Connect Wallet</b-button
 							>
 						</b-navbar-item>
