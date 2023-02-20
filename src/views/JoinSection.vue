@@ -11,7 +11,7 @@
       </div>
       <div class="column is-6 pl-0 pr-0 pb-0">
         <img
-          src="img/moonbuddies 1.png"
+          src="img/moonbuddies 2.png"
           alt="No Image"
           class="fix-height-image"
         />

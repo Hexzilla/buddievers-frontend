@@ -6,11 +6,7 @@
 				<b-navbar spaced close-on-click transparent class="is-centered">
 					<template #end>
 						<b-navbar-item tag="router-link" :to="{ path: '/' }">
-							<img
-								src="img/JOIN US.png"
-								alt="No Image"
-								class="head-icon"
-							/>
+							<p class="font-size-24-green-light">JOIN US</p>
 						</b-navbar-item>
 						<b-navbar-item tag="router-link" :to="{ path: '/' }">
 							<img

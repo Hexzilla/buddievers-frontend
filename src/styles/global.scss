@@ -200,6 +200,15 @@ body {
 		}
 	}
 
+	.font-size-24-green-light {
+		font-weight: 900;
+		font-size: 1.25vw;
+		color: #00CE4C;
+		@include mobile {
+			font-size: 16px;
+		}
+	}
+
 	.font-size-24 {
 		font-weight: 700;
 		font-size: 1.25vw;
