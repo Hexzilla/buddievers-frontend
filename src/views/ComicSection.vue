@@ -1,33 +1,22 @@
 <template>
   <div class="green-div1 mt-6">
     <div class="columns m-4">
-      <div class="column pl-2 ml-4">
+      <div class="column is-7 pl-2 ml-4">
         <div class="mobile-flex">
           <p class="font-size-96-white mt-2">BUDDIES COMIC</p>
           <p class="font-size-64-green">Incredible stories every month!</p>
         </div>
+      </div>
+      <div class="column is-3">
+        <img class="book-img" src="img/budscomics 1.png" alt="No Image" />
+      </div>
+      <div class="column is-2" style="display: flex; align-items: center">
         <div>
-          <b-button
-            class="
-              font-size-25
-              mt-5
-              mb-5
-              pr-6
-              pl-6
-              pt-0
-              pb-0
-              center-start-button
-            "
-            size="is-large"
-            >READ</b-button
+          <b-button class="font-size-25 center-start-button" size="is-large"
+            >READ IT</b-button
           >
         </div>
       </div>
-      <img
-        class="book-img column is-6"
-        src="img/budscomics 1.png"
-        alt="No Image"
-      />
     </div>
   </div>
 </template>
@@ -48,8 +37,6 @@ export default class ComicSection extends Vue {}
 @import "~bulma/sass/utilities/_all";
 
 .book-img {
-  margin-top: -12vh;
-  height: 75vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -61,7 +48,6 @@ export default class ComicSection extends Vue {}
 }
 
 .green-div1 {
-  max-height: 500px;
   background: #016b43;
 }
 </style>
