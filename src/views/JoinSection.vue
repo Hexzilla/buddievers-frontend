@@ -1,17 +1,33 @@
 <template>
   <div class="green-div">
     <p class="font-size-80-white pt-6 has-text-centered">JOIN BUDDIES ST.</p>
-    <div class="columns pt-6 mx-0">
-      <div class="column is-6 px-0">
+    <div class="columns pt-6 pb-0 mx-0">
+      <div class="column is-6 px-0 pb-0">
         <img
           src="img/buddies-new 1.png"
           alt="No Image"
           class="fix-height-image"
         />
       </div>
-      <div class="column is-6 pl-0 pr-0">
+      <div class="column is-6 pl-0 pr-0 pb-0">
         <img
           src="img/moonbuddies 1.png"
+          alt="No Image"
+          class="fix-height-image"
+        />
+      </div>
+    </div>
+    <div class="columns pt-0 mx-0">
+      <div class="column is-6 p-0">
+        <img
+          src="img/seeCollections.png"
+          alt="No Image"
+          class="fix-height-image"
+        />
+      </div>
+      <div class="column is-6 p-0">
+        <img
+          src="img/seeCollections.png"
           alt="No Image"
           class="fix-height-image"
         />

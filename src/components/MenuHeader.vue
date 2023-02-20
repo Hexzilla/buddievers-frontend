@@ -96,7 +96,7 @@ export default class MenuHeader extends Vue {}
 }
 
 .green-div {
-	background: #016b43;
+	background: #166D43;
 }
 
 .brand {
