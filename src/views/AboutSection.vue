@@ -40,7 +40,7 @@
 
               <div class="column is-1"></div>
               <div class="column small-div">
-                <p class="font-size-40-white">+800</p>
+                <p class="font-size-40-white">+970</p>
                 <p class="font-size-20-white">$KSM VOLUME</p>
               </div>
               <div class="column is-1"></div>

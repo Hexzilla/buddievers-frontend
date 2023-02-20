@@ -26,8 +26,8 @@ import VueMetamask from "vue-metamask";
   },
 })
 export default class CharactorSection extends Vue {
-  arrow = true;
-  arrowHover = true;
+  arrow = false;
+  arrowHover = false;
   drag = true;
   gray = false;
   opacity = false;
