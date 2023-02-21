@@ -94,6 +94,15 @@ export const MARKETPLACE_V1_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.MOONBEAM]: '0x46B6062Ad95239e30E3506f42147D5cCA00B5f0E'
 };
 
+export const MINT1_ADDRESS: { [chainId in ChainId]?: string } = {
+  [ChainId.MOONRIVER]: '0x62e2A25b62820C3BD0dC0A69bEe794C0346616d7',
+};
+
+export const MINT2_ADDRESS: { [chainId in ChainId]?: string } = {
+  [ChainId.MOONRIVER]: '0x4FBFc1aB4720A6e6da2237e73f950faa080065a0',
+};
+
+
 export const WAREHOUSE_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.VOLTA]: '0xE796e4CC54856b5d88E44aAca85e3B7D633c34a1',
   [ChainId.MOONRIVER]: '0xe41509E3034f3f1C7Ea918423Da60B2bA6F14087',
