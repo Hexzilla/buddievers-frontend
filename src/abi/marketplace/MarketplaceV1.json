@@ -1,0 +1,892 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_governor",
+        "type": "address"
+      },
+      {
+        "internalType": "address payable",
+        "name": "_warehouse",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_strategyRegistry",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_feeManager",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_blacklistManager",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_swapListener",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "blacklistManager",
+        "type": "address"
+      }
+    ],
+    "name": "BlacklistManagerSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "orderHash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellerGetsBackAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Cancel",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "feeManager",
+        "type": "address"
+      }
+    ],
+    "name": "FeeManagerSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "orderHash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "buyer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "buyerSendsAmountFull",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "buyerSentAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellerSendsAmountFull",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellerSentAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "complete",
+        "type": "bool"
+      }
+    ],
+    "name": "Fill",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "orderHash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "seller",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sellAssetAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellAssetId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellAssetType",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "buyAssetAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "buyAssetId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "buyAssetType",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "strategy",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "salt",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "sellerEscrowsAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Order",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum DomainV1.AssetType",
+        "name": "assetType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      }
+    ],
+    "name": "PaymentTokenSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "registry",
+        "type": "address"
+      }
+    ],
+    "name": "StrategyRegistrySet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "listener",
+        "type": "address"
+      }
+    ],
+    "name": "SwapListenerSet",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "warehouse",
+        "type": "address"
+      }
+    ],
+    "name": "WarehouseSet",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "allowedPaymentToken",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "enabled",
+        "type": "bool"
+      },
+      {
+        "internalType": "enum DomainV1.AssetType",
+        "name": "assetType",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "blacklistManager",
+    "outputs": [
+      {
+        "internalType": "contract IBlacklistManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "strategy",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "enum DomainV1.AssetType",
+                "name": "assetType",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct DomainV1.Asset",
+            "name": "sellAsset",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "enum DomainV1.AssetType",
+                "name": "assetType",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct DomainV1.Asset",
+            "name": "buyAsset",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct DomainV1.Order",
+        "name": "_order",
+        "type": "tuple"
+      }
+    ],
+    "name": "calculateOrderHash",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_orderHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes",
+        "name": "cancelData",
+        "type": "bytes"
+      }
+    ],
+    "name": "cancelOrder",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "cancelOrderData",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "cancelOrderSig",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          {
+            "internalType": "bytes32",
+            "name": "strategy",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "uint256",
+            "name": "salt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "enum DomainV1.AssetType",
+                "name": "assetType",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct DomainV1.Asset",
+            "name": "sellAsset",
+            "type": "tuple"
+          },
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "addr",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "enum DomainV1.AssetType",
+                "name": "assetType",
+                "type": "uint8"
+              }
+            ],
+            "internalType": "struct DomainV1.Asset",
+            "name": "buyAsset",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct DomainV1.Order",
+        "name": "_order",
+        "type": "tuple"
+      },
+      {
+        "internalType": "bytes",
+        "name": "createData",
+        "type": "bytes"
+      }
+    ],
+    "name": "createOrder",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "orderHash",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "createOrderData",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "createOrderSig",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "orderHash",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_target",
+        "type": "address"
+      }
+    ],
+    "name": "drain",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeManager",
+    "outputs": [
+      {
+        "internalType": "contract IFeeManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_orderHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes",
+        "name": "fillData",
+        "type": "bytes"
+      }
+    ],
+    "name": "fillOrder",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "fillOrderData",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "signature",
+        "type": "bytes"
+      }
+    ],
+    "name": "fillOrderSig",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC1155BatchReceived",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "name": "onERC1155Received",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "_orderHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "orderExists",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_blacklistManager",
+        "type": "address"
+      }
+    ],
+    "name": "setBlacklistManager",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_feeManager",
+        "type": "address"
+      }
+    ],
+    "name": "setFeeManager",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_paymentTokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "enum DomainV1.AssetType",
+        "name": "_type",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bool",
+        "name": "enable",
+        "type": "bool"
+      }
+    ],
+    "name": "setPaymentToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_newStrategyRegistry",
+        "type": "address"
+      }
+    ],
+    "name": "setStrategyRegistry",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_swapListener",
+        "type": "address"
+      }
+    ],
+    "name": "setSwapListener",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_newWarehouse",
+        "type": "address"
+      }
+    ],
+    "name": "setWarehouse",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "strategyRegistry",
+    "outputs": [
+      {
+        "internalType": "contract StrategyRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "swapListener",
+    "outputs": [
+      {
+        "internalType": "contract ISwapListener",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "warehouse",
+    "outputs": [
+      {
+        "internalType": "contract Warehouse",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
+]

@@ -1,45 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "es2020",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-        "resolveJsonModule": true,
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "useDefineForClassFields": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "types": [
-      "webpack",
-      "webpack-env"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "lib": [
-      "es2020",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "src"
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
-    "src/sw.js"
-  ],
-  "exclude": [
-    "node_modules"
+    "src"
   ]
 }
