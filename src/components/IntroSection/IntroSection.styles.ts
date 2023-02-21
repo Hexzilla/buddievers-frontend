@@ -2,7 +2,12 @@ import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
     container : {
-        background: `url("@/assets/images/intro-background.png")`
+        background: `url("./intro-background.png")`,
+        width: "1668px",
+        height: "919px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     },
     button : {
         height: "98px",
