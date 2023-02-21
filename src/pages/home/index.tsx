@@ -3,6 +3,7 @@ import { Button } from 'ui';
 import { GlitchText, NavLink } from 'ui';
 import { styles } from './styles';
 import { useClasses } from 'hooks';
+import { IntroSection } from 'components/IntroSection/IntroSection';
 
 const HomePage = () => {
   const {
@@ -17,6 +18,8 @@ const HomePage = () => {
   } = useClasses(styles);
   return (
     <div className={homeContainer}>
+      <IntroSection/>
+      
       <GlitchText variant="h1" gutterBottom fontSize={48}>
         Discover, collect, and sell NFTs
       </GlitchText>

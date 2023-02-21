@@ -12,6 +12,7 @@ const v2_primary = '#d2023e';
 const v2_secondary = '#C5C5C5';
 const v2_black = '#000';
 const v2_darkGreen = '#016B43';
+const font_green = '#01472A';
 const v2_white = white;
 const v2_grey = '#C5C5C5';
 const V2_grey_disabled = '#505050';
@@ -34,7 +35,7 @@ export const palette: PaletteOptions = {
     paper: 'transparent',
   },
   text: {
-    primary: v2_white,
+    primary: font_green,
     secondary: v2_text,
     disabled: V2_grey_disabled,
   },
