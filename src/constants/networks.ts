@@ -15,13 +15,13 @@ export interface AddEthereumChainParameter {
 
 export const SUPPORTED_METAMASK_NETWORKS: {[key: number]: AddEthereumChainParameter} = {
     [ChainId.MOONRIVER]: {
-        chainId: '0x505',
-        chainName: 'Moonriver',
-        rpcUrls: ['https://rpc.api.moonriver.moonbeam.network'],
-        blockExplorerUrls: ['https://moonriver.moonscan.io'],
+        chainId: '0x13881',
+        chainName: 'Mumbai',
+        rpcUrls: ['https://polygon-mumbai.g.alchemy.com/v2/79Vntdxb1kcd1pZjfkvGC8RDt7rt1dZe'],
+        blockExplorerUrls: ['https://mumbai.polygonscan.com/'],
         nativeCurrency: {
-            name: 'Moonriver',
-            symbol: 'MOVR',
+            name: 'Mumbai',
+            symbol: 'MATIC',
             decimals: 18
         }
     },
