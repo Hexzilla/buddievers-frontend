@@ -636,7 +636,6 @@ export const BidDialog = () => {
                         inputFormat="MM/dd/yyyy"
                         value={selectedDate}
                         onChange={handleDateChange}
-                        renderInput={(params) => <TextField {...params} />}
                       />
                     </FormControl>
                   </LocalizationProvider>
