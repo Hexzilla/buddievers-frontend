@@ -20,6 +20,7 @@ import { MULTICALL2_ABI } from 'abi/multicall';
 import { ERC1155_ABI, ERC20_ABI, ERC721_ABI } from 'abi/token';
 import { useActiveWeb3React } from 'hooks';
 import { BURN_SEMAPHORE_ABI, WORKBENCHV2_ABI, WORKBENCH_ABI } from 'abi/loot';
+import { MINT1_ABI, MINT2_ABI } from 'abi/mint';
 
 export const useContract = (
   address: string | undefined,
@@ -137,4 +138,17 @@ export function useBurnSemaphoreContract(
     BURN_SEMAPHORE_ABI,
     withSignerIfPossible
   );
+}
+
+export function useMint1Contract(
+  address: string | undefined,
+  withSignerIfPossible = true
+): Contract | null {
+  return useContract(address, MINT1_ABI, withSignerIfPossible);
+}
+export function useMint2Contract(
+  address: string | undefined,
+  withSignerIfPossible = true
+): Contract | null {
+  return useContract(address, MINT2_ABI, withSignerIfPossible);
 }
