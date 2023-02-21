@@ -23,7 +23,7 @@ export enum ChainId {
   BSC = 56,
   EWC = 246,
   VOLTA = 73799,
-  MOONRIVER = 1285,
+  MOONRIVER = 80001,
   MOONBEAM= 1284
 }
 
@@ -32,7 +32,7 @@ export const PERMISSIONED_CHAINS = [ChainId.MOONRIVER, ChainId.MOONBEAM]
 export const DEFAULT_CHAIN = ChainId.MOONRIVER
 
 export const RPC_URLS: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'https://rpc.api.moonriver.moonbeam.network',
+  [ChainId.MOONRIVER]: 'https://polygon-mumbai.g.alchemy.com/v2/79Vntdxb1kcd1pZjfkvGC8RDt7rt1dZe',
   [ChainId.MOONBEAM]: 'https://moonbeam-rpc.moonsama.com'
 };
 
@@ -42,7 +42,7 @@ export const NATIVE_TOKEN_SYMBOL: { [chainId: number]: string } = {
 };
 
 export const NETWORK_NAME: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'Moonriver',
+  [ChainId.MOONRIVER]: 'Mumbai',
   [ChainId.MOONBEAM]: 'Moonbeam'
 };
 
