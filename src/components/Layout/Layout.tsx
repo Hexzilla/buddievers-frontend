@@ -60,33 +60,17 @@ export const Layout = ({ children }: LayoutProps) => {
                     Auctions
                   </NavLink>*/}
                   <NavLink href="/collections" className={navItem}>
-                    Collections
+                    HOME
                   </NavLink>
                   <NavLink href="/workbench" className={navItem}>
-                    Workbench
+                    BUDDIEVERSE
                   </NavLink>
                   <NavLink href="/freshoffers" className={navItem}>
-                    Latest offers
+                    MARKETPLACE
                   </NavLink>
                   <NavLink href="/freshtrades" className={navItem}>
-                    Latest trades
+                    COFFEE SHOP
                   </NavLink>
-                  <NavLink href="/myoffers" className={navItem}>
-                    My offers
-                  </NavLink>
-                  <NavLink href="/mynfts" className={navItem}>
-                    My NFTs
-                  </NavLink>
-                  <ExternalLink href="https://wiki.moonsama.com" className={navItem}>
-                    Docs↗
-                  </ExternalLink>
-                  <ExternalLink href="https://minecraft-metaverse.moonsama.com" className={navItem}>
-                    Bridge↗
-                  </ExternalLink>
-
-                  {/*<NavLink href="/explore" className={navItem}>
-                  Explore
-                </NavLink>*/}
                 </Stack>
               ) : (
                 <Drawer
@@ -100,33 +84,20 @@ export const Layout = ({ children }: LayoutProps) => {
                       Auctions
                     </NavLink>*/}
                     <NavLink href="/collections" className={navItemDrawer}>
-                      Collections
+                      HOME
                     </NavLink>
                     <NavLink href="/workbench" className={navItemDrawer}>
-                      Workbench
+                      BUDDIEVERSE
                     </NavLink>
                     <NavLink href="/freshoffers" className={navItemDrawer}>
-                      Latest offers
+                      MARKETPLACE
                     </NavLink>
                     <NavLink href="/freshtrades" className={navItemDrawer}>
-                      Latest trades
+                      COFFEE SHOP
                     </NavLink>
-                    <NavLink href="/myoffers" className={navItemDrawer}>
-                      My offers
-                    </NavLink>
-                    <NavLink href="/mynfts" className={navItemDrawer}>
-                      My NFTs
-                    </NavLink>
-                    <ExternalLink href="https://wiki.moonsama.com" className={navItemDrawer}>
-                      Docs↗
-                    </ExternalLink>
-                    <ExternalLink href="https://minecraft-metaverse.moonsama.com" className={navItemDrawer}>
-                      Bridge↗
-                    </ExternalLink>
                   </Box>
                 </Drawer>
               )}
-              <ConnectedNetwork />
               <Account />
             </Stack>
           </Stack>
