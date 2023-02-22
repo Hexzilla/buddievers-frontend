@@ -95,8 +95,11 @@ export const MARKETPLACE_V1_ADDRESS: { [chainId in ChainId]?: string } = {
 };
 
 export const MINT1_ADDRESS: { [chainId in ChainId]?: string } = {
-  [ChainId.MOONRIVER]: '0x62e2A25b62820C3BD0dC0A69bEe794C0346616d7',
+  [ChainId.MOONRIVER]: '0xc77775b55E498DE376844e576eB9d78459d4ae3B',
 };
+
+export const MINT_PRICE = '100000000000000000';
+export const GAS_LIMIT = 285000;
 
 export const MINT2_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.MOONRIVER]: '0x4FBFc1aB4720A6e6da2237e73f950faa080065a0',
