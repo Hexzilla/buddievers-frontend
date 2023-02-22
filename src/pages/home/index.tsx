@@ -5,6 +5,7 @@ import { styles } from './styles';
 import { useClasses } from 'hooks';
 import { IntroSection } from 'components/IntroSection/IntroSection';
 import { AboutSection } from 'components/AboutSection/AboutSection';
+import { CharactorSection } from 'components/CharactorSection/CharactorSection';
 
 const HomePage = () => {
   const {
@@ -21,6 +22,7 @@ const HomePage = () => {
     <div className={homeContainer}>
       <IntroSection/>
       <AboutSection/>
+      <CharactorSection/>
       
       <GlitchText variant="h1" gutterBottom fontSize={48}>
         Discover, collect, and sell NFTs
