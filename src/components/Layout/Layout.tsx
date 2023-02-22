@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-import WhiteLogoNormal from 'assets/images/moonsama-normal-white.svg';
-import WhiteLogoAlt from 'assets/images/moonsama-alt-white.svg';
+import WhiteLogoNormal from 'assets/images/logo.png';
+import WhiteLogoAlt from 'assets/images/logo.png';
 import { useMediaQuery } from 'beautiful-react-hooks';
 import { Account } from 'components';
 import { ConnectedNetwork } from 'components/ConnectedNetwork/ConnectedNetwork';
@@ -41,14 +41,14 @@ export const Layout = ({ children }: LayoutProps) => {
                   <MenuIcon />
                 </IconButton>
               )}
-              {/* <NavLink href="/" className={navItem}>
+              <NavLink href="/" className={navItem}>
                 {!isXs && <div className={logo}>
                   <img src={WhiteLogoNormal} alt="" />
                 </div>}
                 {isXs && <div className={logoAlt}>
                   <img src={WhiteLogoAlt} alt="" />
                 </div>}
-              </NavLink> */}
+              </NavLink>
             </Grid>
             <Stack direction='row' justifyContent='center' className={buttonContainer}>
               {!showRegularMenu ? (
