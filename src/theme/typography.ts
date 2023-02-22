@@ -6,7 +6,7 @@ export const fontWeight = {
 };
 
 export const typography = {
-  fontFamily: 'Space Mono, monospace',
+  fontFamily: 'Poppins',
   fontWeightRegular: fontWeight['regular'],
   fontWeightBold: fontWeight['bold'],
   fontWeightBolder: fontWeight['bolder'],

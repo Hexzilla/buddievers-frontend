@@ -9,6 +9,7 @@ export const styles = (theme: Theme) => ({
     aboutText: {
         fontSize: "96px",
         fontWeight: "900",
+        fontFamily: "Poppins",
         color: "#00CE4C"
     },
     greenBox: {
