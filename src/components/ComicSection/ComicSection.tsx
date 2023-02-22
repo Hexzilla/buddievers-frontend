@@ -12,7 +12,7 @@ export const ComicSection = () => {
     } = useClasses(styles);
     return (
         <div className={container}>
-            <div>
+            <div style={{flex:1}}>
                 <p className={title}>BUDDIES COMIC</p>
                 <p className={description}>Incredible stories every month!</p>
             </div>

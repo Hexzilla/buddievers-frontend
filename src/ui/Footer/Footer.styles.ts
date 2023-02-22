@@ -2,27 +2,16 @@ import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
   footerWrapper: {
-    textAlign: 'center',
-    color: theme.palette.text.primary,
-    margin: `${theme.spacing(8)}px 0 ${theme.spacing(4)}px 0`,
-    paddingTop: theme.spacing(8)
+    background: "#000",
+    color: "#FFFFFF",
+    padding: "4vw"
   },
-  iconsWrapper: {
-    margin: `${theme.spacing(2)}px 0`,
+  title:{
+    fontWeight: "900",
+    fontSize: "30px"
   },
-  icon: {
-    height: 'auto',
-    width: '30px',
-    margin: '0 16px',
-    fill: theme.palette.secondary.main,
-    transition: 'all 0.2s ease-in-out',
-
-    '&:hover': {
-      fill: theme.palette.primary.main,
-    },
-  },
-  copyrightText: {
-    fontSize: 12,
-    marginTop: theme.spacing(4),
-  },
+  text: {
+    fontWeight: "400",
+    fontSize: "20px"
+  }
 });
