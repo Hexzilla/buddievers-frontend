@@ -103,7 +103,7 @@ export const Layout = ({ children }: LayoutProps) => {
           </Stack>
         </Container>
       </Header>
-      <Container maxWidth="xl">{children}</Container>
+      <Container maxWidth="xl" style={{padding: "0px"}}>{children}</Container>
       <Footer />
     </>
   );

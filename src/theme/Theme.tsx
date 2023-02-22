@@ -40,7 +40,7 @@ const getDefaultOptions = (colors: PaletteOptions): ThemeOptions => ({
     MuiCssBaseline: {
       styleOverrides: {
         '*::-webkit-scrollbar': {
-          width: '0.5em',
+          width: '0em',
           cursor: 'pointer',
         },
         '*::-webkit-scrollbar-track': {
