@@ -7,6 +7,9 @@ import { IntroSection } from 'components/IntroSection/IntroSection';
 import { AboutSection } from 'components/AboutSection/AboutSection';
 import { CharactorSection } from 'components/CharactorSection/CharactorSection';
 import { UtilitySection } from 'components/UtilitySection/UtilitySection';
+import { ComicSection } from 'components/ComicSection/ComicSection';
+import { RoadSection } from 'components/RoadSection/RoadSection';
+import { JoinSection } from 'components/JoinSection/JoinSection';
 
 const HomePage = () => {
   const {
@@ -25,6 +28,9 @@ const HomePage = () => {
       <AboutSection/>
       <CharactorSection/>
       <UtilitySection/>
+      <ComicSection/>
+      <RoadSection/>
+      <JoinSection/>
       
       <GlitchText variant="h1" gutterBottom fontSize={48}>
         Discover, collect, and sell NFTs
