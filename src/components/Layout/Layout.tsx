@@ -41,16 +41,16 @@ export const Layout = ({ children }: LayoutProps) => {
                   <MenuIcon />
                 </IconButton>
               )}
-              <NavLink href="/" className={navItem}>
+              {/* <NavLink href="/" className={navItem}>
                 {!isXs && <div className={logo}>
                   <img src={WhiteLogoNormal} alt="" />
                 </div>}
                 {isXs && <div className={logoAlt}>
                   <img src={WhiteLogoAlt} alt="" />
                 </div>}
-              </NavLink>
+              </NavLink> */}
             </Grid>
-            <Stack direction='row' justifyContent='flex-end' className={buttonContainer}>
+            <Stack direction='row' justifyContent='center' className={buttonContainer}>
               {!showRegularMenu ? (
                 <Stack
                   direction={'row'}
