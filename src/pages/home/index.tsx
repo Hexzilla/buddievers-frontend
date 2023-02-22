@@ -6,6 +6,7 @@ import { useClasses } from 'hooks';
 import { IntroSection } from 'components/IntroSection/IntroSection';
 import { AboutSection } from 'components/AboutSection/AboutSection';
 import { CharactorSection } from 'components/CharactorSection/CharactorSection';
+import { UtilitySection } from 'components/UtilitySection/UtilitySection';
 
 const HomePage = () => {
   const {
@@ -23,6 +24,7 @@ const HomePage = () => {
       <IntroSection/>
       <AboutSection/>
       <CharactorSection/>
+      <UtilitySection/>
       
       <GlitchText variant="h1" gutterBottom fontSize={48}>
         Discover, collect, and sell NFTs

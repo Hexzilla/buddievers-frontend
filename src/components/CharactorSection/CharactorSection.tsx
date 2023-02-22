@@ -52,7 +52,7 @@ export const CharactorSection = () => {
                     Array(15).fill(0).map((item, i) => <img
                     key={`${i}`}
                     src={`./charactor (${i + 1}).png`}
-                    style={{width:"100%"}}
+                    style={{width:"100%", height:"100%"}}
                     />)
                 }
             </Carousel>

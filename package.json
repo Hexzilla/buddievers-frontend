@@ -27,6 +27,7 @@
     "@mui/lab": "^5.0.0-alpha.67",
     "@mui/material": "^5.0.0",
     "@reduxjs/toolkit": "^1.6.1",
+    "@sefailyasoz/react-carousel": "^1.1.1",
     "@talismn/web3react-v6-connector": "^6.0.1",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
