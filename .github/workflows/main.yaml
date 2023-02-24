@@ -1,5 +1,5 @@
 
-name: backend build
+name: Buddies-web
 on: 
   push:
     branches:
