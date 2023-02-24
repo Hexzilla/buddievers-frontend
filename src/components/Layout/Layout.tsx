@@ -59,17 +59,17 @@ export const Layout = ({ children }: LayoutProps) => {
                   {/*<NavLink href="/auctions" className={navItem}>
                     Auctions
                   </NavLink>*/}
-                  <NavLink href="/collections" className={navItem}>
+                  <NavLink href="/" className={navItem}>
                     HOME
+                  </NavLink>
+                  <NavLink href="/mint" className={navItem}>
+                    MINT NFT
                   </NavLink>
                   <NavLink href="/workbench" className={navItem}>
                     BUDDIEVERSE
                   </NavLink>
                   <NavLink href="/freshoffers" className={navItem}>
                     MARKETPLACE
-                  </NavLink>
-                  <NavLink href="/freshtrades" className={navItem}>
-                    COFFEE SHOP
                   </NavLink>
                 </Stack>
               ) : (
@@ -83,17 +83,17 @@ export const Layout = ({ children }: LayoutProps) => {
                     {/*<NavLink href="/auctions" className={navItemDrawer}>
                       Auctions
                     </NavLink>*/}
-                    <NavLink href="/collections" className={navItemDrawer}>
+                    <NavLink href="/" className={navItemDrawer}>
                       HOME
+                    </NavLink>
+                    <NavLink href="/mint" className={navItemDrawer}>
+                      MINT NFT
                     </NavLink>
                     <NavLink href="/workbench" className={navItemDrawer}>
                       BUDDIEVERSE
                     </NavLink>
                     <NavLink href="/freshoffers" className={navItemDrawer}>
                       MARKETPLACE
-                    </NavLink>
-                    <NavLink href="/freshtrades" className={navItemDrawer}>
-                      COFFEE SHOP
                     </NavLink>
                   </Box>
                 </Drawer>

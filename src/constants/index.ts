@@ -18,12 +18,12 @@ export enum ChainId {
   MAINNET = 1,
   ROPSTEN = 3,
   RINKEBY = 4,
-  GÖRLI = 5,
+  // GÖRLI = 5,
   KOVAN = 42,
   BSC = 56,
   EWC = 246,
   VOLTA = 73799,
-  MOONRIVER = 80001,
+  MOONRIVER = 5,
   MOONBEAM= 1284
 }
 
@@ -32,7 +32,7 @@ export const PERMISSIONED_CHAINS = [ChainId.MOONRIVER, ChainId.MOONBEAM]
 export const DEFAULT_CHAIN = ChainId.MOONRIVER
 
 export const RPC_URLS: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'https://polygon-mumbai.g.alchemy.com/v2/79Vntdxb1kcd1pZjfkvGC8RDt7rt1dZe',
+  [ChainId.MOONRIVER]: 'https://goerli.infura.io/v3/51f86d11ec0a4dcebdaad3810d4dbc7a',
   [ChainId.MOONBEAM]: 'https://moonbeam-rpc.moonsama.com'
 };
 
@@ -66,7 +66,7 @@ export const MULTICALL_NETWORKS: { [chainId: number]: string } = {
   [ChainId.ROPSTEN]: '0x53C43764255c17BD724F74c4eF150724AC50a3ed',
   [ChainId.KOVAN]: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
   [ChainId.RINKEBY]: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',
-  [ChainId.GÖRLI]: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
+  // [ChainId.GÖRLI]: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
   [ChainId.VOLTA]: '0xf097d0eAb2dC8B6396a6433978567C443a691815', // latest multicall 2 deployments
   [ChainId.MOONRIVER]: '0x8B60499C8e99d1218Df15ba6e8f0937e1878b86c', // latest multicall 2 deployments
   [ChainId.MOONBEAM]: '0x62614aee098C7a84dC070fF06688F4C35D3868F9'
@@ -95,10 +95,10 @@ export const MARKETPLACE_V1_ADDRESS: { [chainId in ChainId]?: string } = {
 };
 
 export const MINT1_ADDRESS: { [chainId in ChainId]?: string } = {
-  [ChainId.MOONRIVER]: '0xc77775b55E498DE376844e576eB9d78459d4ae3B',
+  [ChainId.MOONRIVER]: '0x1AbEE5A9cD42A387E1B5c9eA700Bd9f788a9f031',
 };
 
-export const MINT_PRICE = '100000000000000000';
+export const MINT_PRICE = '10000000000000000';
 export const GAS_LIMIT = 285000;
 
 export const MINT2_ADDRESS: { [chainId in ChainId]?: string } = {

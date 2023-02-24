@@ -80,12 +80,12 @@ const EXPLORER_PREFIXES: { [chainId in ChainId]: string } = {
   1: 'etherscan.io',
   3: 'ropsten.etherscan.io',
   4: 'rinkeby.etherscan.io',
-  5: 'goerli.etherscan.io',
+  // 5: 'goerli.etherscan.io',
   42: 'kovan.etherscan.io',
   56: 'bscscan.com',
   246: 'explorer.energyweb.org',
   73799: 'volta-explorer.energyweb.org',
-  80001: 'moonriver.moonscan.io',
+  5: 'moonriver.moonscan.io',
   1284: 'moonbeam-rpc.moonsama.com'
 };
 

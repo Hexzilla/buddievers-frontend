@@ -47,7 +47,7 @@ export const Routing = () => (
         </>
       }
     />
-    <Route path="/freshtrades" element={<FreshTradesPage />} />
+    <Route path="/mint" element={<FreshTradesPage />} />
     <Route
       path="/myoffers"
       element={

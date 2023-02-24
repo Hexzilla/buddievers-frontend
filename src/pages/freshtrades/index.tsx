@@ -3,7 +3,6 @@ import { Button, GlitchText } from 'ui';
 import { styles } from './styles';
 import { useMint1Contract } from 'hooks/useContracts/useContracts'
 import { MINT1_ADDRESS, ChainId, GAS_LIMIT, MINT_PRICE } from '../../constants'
-import { getMerkleProof } from '../../dev'
 
 const FreshTradesPage = () => {
   const { account, error } = useActiveWeb3React();
@@ -11,10 +10,8 @@ const FreshTradesPage = () => {
   const mintContract = useMint1Contract(MINT1_ADDRESS[ChainId.MOONRIVER], true);
   const { container, button } = useClasses(styles);
   const mintNFT = async () => {
-    const merkleProof = getMerkleProof(account || '')
     const res = await mintContract?.whitelistedMints(1,
-      ['0x' + Buffer.from(merkleProof[0].data).toString('hex')],
-      'https://drive.google.com/file/d/1A739BEoj7eU1GnuEdqoWt7AOPtypYN1u/view?usp=share_link', {
+      "https://drive.google.com/file/d/1A739BEoj7eU1GnuEdqoWt7AOPtypYN1u/view?usp=share_link", {
       gasLimit: GAS_LIMIT,
       from: account,
       value: MINT_PRICE
