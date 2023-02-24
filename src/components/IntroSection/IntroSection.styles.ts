@@ -7,7 +7,8 @@ export const styles = (theme: Theme) => ({
         height: "919px",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginBottom: "100px"
     },
     button : {
         height: "98px",

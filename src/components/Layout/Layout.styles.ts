@@ -31,8 +31,9 @@ export const styles = (theme: Theme) => ({
   navItem: {
     margin: '0 15px',
     textDecoration: 'none !important',
-    flexShrink: 0
-    
+    flexShrink: 0,
+    fontSize: "20px",
+    color: "#FFF"
   },
   navItemDrawer: {
     display: 'block',
@@ -41,6 +42,8 @@ export const styles = (theme: Theme) => ({
     '> a': {
       textDecoration: 'none !important',
     },
+    fontSize: "20px",
+    color: "#FFF"
   },
   inputContainer: {
     width: theme.spacing(32),
@@ -49,7 +52,7 @@ export const styles = (theme: Theme) => ({
     marginLeft: theme.spacing(1.5),
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     gap: theme.spacing(2),
   },
   iconButton: {
