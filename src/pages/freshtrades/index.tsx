@@ -46,19 +46,34 @@ const FreshTradesPage = () => {
     setOpen(false);
   };
 
-  const mintNFT = async () => {
+  const publicMint = async () => {
+    if (mintAmount <= 0 || mintAmount > 5) {
+      setOpen(true)
+      return;
+    }
+
+    console.debug('???', MINT_PRICE * mintAmount)
+
+    const res = await mintContract?.freeMint(mintAmount,
+      "https://drive.google.com/file/d/1A739BEoj7eU1GnuEdqoWt7AOPtypYN1u/view?usp=share_link", {
+      gasLimit: GAS_LIMIT,
+      from: account,
+      value: MINT_PRICE * mintAmount
+    }).then((receipt: any) => {
+      console.debug('result', receipt)
+    })
+  }
+
+  const whitelistMint = async () => {
     if (mintAmount <= 0 || mintAmount > 5) {
       setOpen(true)
       return;
     }
 
     const res = await mintContract?.whitelistedMints(mintAmount,
-      "https://drive.google.com/file/d/1A739BEoj7eU1GnuEdqoWt7AOPtypYN1u/view?usp=share_link", {
-      gasLimit: GAS_LIMIT,
-      from: account,
-      value: MINT_PRICE
-    }).then((receipt: any) => {
-      console.debug('result', receipt)
+      "https://drive.google.com/file/d/1A739BEoj7eU1GnuEdqoWt7AOPtypYN1u/view?usp=share_link")
+      .then((receipt: any) => {
+        console.debug('result', receipt)
     })
   }
 
@@ -81,30 +96,60 @@ const FreshTradesPage = () => {
         <GlitchText variant="h1">Mint NFT</GlitchText>
 
         <Typography variant="subtitle1" component="div">
-          Prepaid Mints: {prepaidNFTs} 
+          Prepaid Mints: {prepaidNFTs}
         </Typography>
         <br />
 
         <Typography variant="subtitle1" component="div">
-          Whitelisted Mints: {whitelistNFTs} 
+          Whitelisted Mints: {whitelistNFTs}
         </Typography>
         <br />
 
         <Typography variant="subtitle1" component="div">
-          Paid Mints: {paidNFTS} 
+          Paid Mints: {paidNFTS}
         </Typography>
         <br />
 
         <Typography variant="subtitle1" component="div">
-          Total remain free minted count: {0} 
+          Total remain free minted count: {0}
         </Typography>
         <br />
 
         <Typography variant="subtitle1" component="div">
-         Total remain normal mintable count: {TOTAL-paidNFTS-whitelistNFTs} 
+          Total remain normal mintable count: {TOTAL - paidNFTS - whitelistNFTs}
         </Typography>
         <br />
-        
+
+        {
+          prepaidNFTs != 0 && (
+            <>
+              <Grid container spacing={1}>
+                <Grid item xs={2}>
+                  <TextField
+                    id="filled-number"
+                    label="Mint amounts"
+                    type="number"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="filled"
+                    size="small"
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <Button
+                    className={button}
+                    onClick={whitelistMint}
+                  >
+                    Get My Prepaid Mints
+                  </Button>
+                </Grid>
+              </Grid>
+              <br />
+            </>
+          )
+        }
         <Grid container spacing={1}>
           <Grid item xs={2}>
             <TextField
@@ -122,15 +167,13 @@ const FreshTradesPage = () => {
           <Grid item xs={2}>
             <Button
               className={button}
-              onClick={mintNFT}
+              onClick={publicMint}
             >
-              Mint
+              Mints
             </Button>
           </Grid>
         </Grid>
         <br />
-
-        
 
         <Snackbar
           open={open}

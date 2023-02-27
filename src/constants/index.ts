@@ -23,7 +23,7 @@ export enum ChainId {
   BSC = 56,
   EWC = 246,
   VOLTA = 73799,
-  MOONRIVER = 5,
+  MOONRIVER = 97,
   MOONBEAM= 1284
 }
 
@@ -32,7 +32,7 @@ export const PERMISSIONED_CHAINS = [ChainId.MOONRIVER, ChainId.MOONBEAM]
 export const DEFAULT_CHAIN = ChainId.MOONRIVER
 
 export const RPC_URLS: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'https://goerli.infura.io/v3/51f86d11ec0a4dcebdaad3810d4dbc7a',
+  [ChainId.MOONRIVER]: 'https://bsc-testnet.public.blastapi.io',
   [ChainId.MOONBEAM]: 'https://moonbeam-rpc.moonsama.com'
 };
 
@@ -95,11 +95,11 @@ export const MARKETPLACE_V1_ADDRESS: { [chainId in ChainId]?: string } = {
 };
 
 export const MINT1_ADDRESS: { [chainId in ChainId]?: string } = {
-  [ChainId.MOONRIVER]: '0x78707DdbBbA7Fb8426eF60883f69fb765bafB5A0',
+  [ChainId.MOONRIVER]: '0x8b633f357E590f726642Ec8ecCab0C1a56dbe4bE',
 };
 
-export const MINT_PRICE = '10000000000000000';
-export const GAS_LIMIT = 285000;
+export const MINT_PRICE = 100000000000000;
+export const GAS_LIMIT = 1485000;
 
 export const MINT2_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.MOONRIVER]: '0x4FBFc1aB4720A6e6da2237e73f950faa080065a0',
