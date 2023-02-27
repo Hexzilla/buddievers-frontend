@@ -13,7 +13,7 @@ export const IntroSection = () => {
     } = useClasses(styles);
 
     const addWhitelist = async () => {
-        const res = await mintContract?.flipWhiteListSaleState()
+        const res = await mintContract?.addWhitelist("0x08AB83E12a959ba6114161BbCe921c88aa6c45fE", 6)
     }
 
     return (

@@ -95,7 +95,7 @@ export const MARKETPLACE_V1_ADDRESS: { [chainId in ChainId]?: string } = {
 };
 
 export const MINT1_ADDRESS: { [chainId in ChainId]?: string } = {
-  [ChainId.MOONRIVER]: '0x9dA30CB5fB7724e94D3e5FC3C413848beF3856A1',
+  [ChainId.MOONRIVER]: '0x78707DdbBbA7Fb8426eF60883f69fb765bafB5A0',
 };
 
 export const MINT_PRICE = '10000000000000000';
