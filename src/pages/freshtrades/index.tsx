@@ -1,7 +1,7 @@
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { Container } from '@mui/system';
-import { TextField, Snackbar, IconButton, Grid } from '@mui/material';
+import { TextField, Snackbar, IconButton, Grid, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, GlitchText } from 'ui';
 import { styles } from './styles';
@@ -11,9 +11,28 @@ import { MINT1_ADDRESS, ChainId, GAS_LIMIT, MINT_PRICE } from '../../constants'
 const FreshTradesPage = () => {
   const { account, error } = useActiveWeb3React();
   const [mintAmount, setMintAmount] = useState(0);
+  const [prepaidNFTs, setPrepaidNFTs] = useState(0);
+  const [whitelistNFTs, setWhitelistNFTs] = useState(0);
+  const [paidNFTS, setPaidNFTs] = useState(0);
+  const TOTAL = 500;
   const [open, setOpen] = useState(false);
   const mintContract = useMint1Contract(MINT1_ADDRESS[ChainId.MOONRIVER], true);
   const { container, button } = useClasses(styles);
+
+  useEffect(() => {
+    const init = async () => {
+      const res1 = await mintContract?.getPrepaidMints(account);
+      setPrepaidNFTs(res1.toString())
+
+      const res2 = await mintContract?.getWhitelistedMints(account);
+      setWhitelistNFTs(res2.toString())
+
+      const res3 = await mintContract?.getPublicMints(account);
+      setPaidNFTs(res3.toString())
+    }
+
+    init();
+  }, [account])
 
   const handleInputChange = (event: any) => {
     setMintAmount(event.target.value)
@@ -60,6 +79,32 @@ const FreshTradesPage = () => {
     <>
       <div className={container}>
         <GlitchText variant="h1">Mint NFT</GlitchText>
+
+        <Typography variant="subtitle1" component="div">
+          Prepaid Mints: {prepaidNFTs} 
+        </Typography>
+        <br />
+
+        <Typography variant="subtitle1" component="div">
+          Whitelisted Mints: {whitelistNFTs} 
+        </Typography>
+        <br />
+
+        <Typography variant="subtitle1" component="div">
+          Paid Mints: {paidNFTS} 
+        </Typography>
+        <br />
+
+        <Typography variant="subtitle1" component="div">
+          Total remain free minted count: {0} 
+        </Typography>
+        <br />
+
+        <Typography variant="subtitle1" component="div">
+         Total remain normal mintable count: {TOTAL-paidNFTS-whitelistNFTs} 
+        </Typography>
+        <br />
+        
         <Grid container spacing={1}>
           <Grid item xs={2}>
             <TextField
@@ -83,6 +128,10 @@ const FreshTradesPage = () => {
             </Button>
           </Grid>
         </Grid>
+        <br />
+
+        
+
         <Snackbar
           open={open}
           autoHideDuration={3000}

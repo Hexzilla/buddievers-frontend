@@ -37,7 +37,7 @@ export const RPC_URLS: { [chainId: number]: string } = {
 };
 
 export const NATIVE_TOKEN_SYMBOL: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'MATIC',
+  [ChainId.MOONRIVER]: 'GoerliETH',
   [ChainId.MOONBEAM]: 'GLMR'
 };
 
@@ -95,7 +95,7 @@ export const MARKETPLACE_V1_ADDRESS: { [chainId in ChainId]?: string } = {
 };
 
 export const MINT1_ADDRESS: { [chainId in ChainId]?: string } = {
-  [ChainId.MOONRIVER]: '0x1AbEE5A9cD42A387E1B5c9eA700Bd9f788a9f031',
+  [ChainId.MOONRIVER]: '0x78707DdbBbA7Fb8426eF60883f69fb765bafB5A0',
 };
 
 export const MINT_PRICE = '10000000000000000';

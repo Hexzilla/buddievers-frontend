@@ -48,13 +48,15 @@ export const CharactorSection = () => {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                {
-                    Array(15).fill(0).map((item, i) => <img
-                    key={`${i}`}
-                    src={`./charactor (${i + 1}).png`}
-                    style={{width:"100%", height:"100%"}}
-                    />)
-                }
+                <>
+                    {
+                        Array(15).fill(0).map((item, i) => <img
+                        key={`${i}`}
+                        src={`./charactor (${i + 1}).png`}
+                        style={{width:"100%", height:"100%"}}
+                        />)
+                    }
+                </>
             </Carousel>
         </div>
     );
