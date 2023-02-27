@@ -15,6 +15,7 @@ const FreshTradesPage = () => {
   const [whitelistNFTs, setWhitelistNFTs] = useState(0);
   const [paidNFTS, setPaidNFTs] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
+  const [errMessage, setErrMessage] = useState('');
   const [updated, setUpdated] = useState(false)
   const TOTAL = 500;
   const [open, setOpen] = useState(false);
@@ -62,6 +63,9 @@ const FreshTradesPage = () => {
       gasLimit: GAS_LIMIT,
       from: account,
       value: MINT_PRICE * mintAmount
+    }).catch((err: any) => {
+      setErrMessage("Please check your fund or network status!");
+      setOpen(true)
     }).then((receipt: any) => {
       setUpdated(!updated)
       console.debug('result', receipt)
@@ -70,12 +74,17 @@ const FreshTradesPage = () => {
 
   const whitelistMint = async () => {
     if (mintAmount <= 0 || mintAmount > 5) {
+      setErrMessage("Please input between 1 and 5");
       setOpen(true)
       return;
     }
 
     const res = await mintContract?.whitelistedMints(mintAmount,
       "https://drive.google.com/file/d/1A739BEoj7eU1GnuEdqoWt7AOPtypYN1u/view?usp=share_link")
+      .catch((err: any) => {
+        setErrMessage("Your whitelist sale finished!");
+        setOpen(true)
+      })
       .then((receipt: any) => {
         setUpdated(!updated)
         console.debug('result', receipt)
@@ -179,7 +188,7 @@ const FreshTradesPage = () => {
           open={open}
           autoHideDuration={3000}
           onClose={handleClose}
-          message="Please input between 1 and 5"
+          message={errMessage}
           action={action}
         />
       </div>
