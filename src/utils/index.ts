@@ -85,7 +85,7 @@ const EXPLORER_PREFIXES: { [chainId in ChainId]: string } = {
   56: 'bscscan.com',
   246: 'explorer.energyweb.org',
   73799: 'volta-explorer.energyweb.org',
-  5: 'moonriver.moonscan.io',
+  97: 'moonriver.moonscan.io',
   1284: 'moonbeam-rpc.moonsama.com'
 };
 
