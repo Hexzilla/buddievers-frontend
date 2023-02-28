@@ -53,6 +53,11 @@ const FreshTradesPage = () => {
   };
 
   const publicMint = async () => {
+    if (!account) {
+      setErrMessage("Please connect your wallet!");
+      setOpen(true)
+      return;
+    }
     if (mintAmount <= 0 || mintAmount > 5) {
       setErrMessage("Please input between 1 and 5");
       setOpen(true)
