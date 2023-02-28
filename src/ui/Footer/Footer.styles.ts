@@ -8,10 +8,10 @@ export const styles = (theme: Theme) => ({
   },
   title:{
     fontWeight: "900",
-    fontSize: "30px"
+    fontSize: "22px"
   },
   text: {
     fontWeight: "400",
-    fontSize: "20px"
+    fontSize: "15px"
   }
 });

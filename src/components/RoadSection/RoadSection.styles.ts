@@ -14,7 +14,7 @@ export const styles = (theme: Theme) => ({
     },
     title: {
         fontWeight: "900",
-        fontSize: "80px",
+        fontSize: "75px",
         color: "#00CE4C"
     }
 });

@@ -2,8 +2,8 @@ import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
     container : {
-        background: `url("./intro-background.png")`,
-        width: "1668px",
+        background: `url("./intro-background.png") no-repeat center`,
+        width: "100%",
         height: "919px",
         display: "flex",
         alignItems: "center",

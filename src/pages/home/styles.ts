@@ -5,6 +5,8 @@ export const styles = (theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+    paddingLeft: '15vw',
+    paddingRight: '15vw',
     margin: `${theme.spacing(5)}px 0`,
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',

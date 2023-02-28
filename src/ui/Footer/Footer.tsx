@@ -34,7 +34,7 @@ export const Footer = () => {
         >
           <img
             src="./B-BUDS 1.png"
-            style={{ width: "50%", height: "50%" }}
+            style={{ width: "30%", height: "30%" }}
           />
         </Grid>
         <Grid item xs={5}

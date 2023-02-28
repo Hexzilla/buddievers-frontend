@@ -8,7 +8,7 @@ export const styles = (theme: Theme) => ({
         paddingBottom: "4vh"
     },
     titleText: {
-        fontSize: "96px",
+        fontSize: "75px",
         fontWeight: "900",
         color: "#00CE4C"
     },
@@ -19,12 +19,11 @@ export const styles = (theme: Theme) => ({
     },
     subTitleText: {
         fontWeight: "900",
-        fontSize: "76px",
-        margin: "0px"
+        fontSize: "40px",
     },
     mainText: {
         fontWeight: "700",
-        fontSize: "24px",
+        fontSize: "17px",
         margin: "0px"
     }
 });

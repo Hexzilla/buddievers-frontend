@@ -13,7 +13,7 @@ export const RoadSection = () => {
         <div className={container}>
             <p className={title}>ROADMAP</p>
             <div className={stepContainer}>
-                <img src="./roadstep.png" />
+                <img src="./roadstep.png" style={{width: "70%"}}/>
             </div>
         </div>
     );

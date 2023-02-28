@@ -7,7 +7,7 @@ export const styles = (theme: Theme) => ({
         padding: "4vh",
     },
     aboutText: {
-        fontSize: "96px",
+        fontSize: "75px",
         fontWeight: "900",
         fontFamily: "Poppins",
         color: "#00CE4C"
@@ -15,24 +15,24 @@ export const styles = (theme: Theme) => ({
     greenBox: {
         background: "#00CE4B",
         margin: "10px",
-        width: "200px",
-        height: "200px",
+        width: "150px",
+        height: "150px",
         display: "grid"
     },
     whiteTextTiny: {
-        fontSize: "20px",
+        fontSize: "17px",
         fontWeight: "900",
         color: "#FFFFFF",
         margin: "0px"
     },
     whiteTextSmall: {
-        fontSize: "40px",
+        fontSize: "24px",
         fontWeight: "900",
         color: "#FFFFFF",
         margin: "0px"
     },
     whiteTextLarge: {
-        fontSize: "64px",
+        fontSize: "40px",
         fontWeight: "900",
         color: "#FFFFFF",
         margin: "0px"
@@ -43,6 +43,6 @@ export const styles = (theme: Theme) => ({
     },
     mainText: {
         fontWeight: "700",
-        fontSize: "24px"
+        fontSize: "17px"
     }
 });
