@@ -27,9 +27,9 @@ export const NetworkSelectorDialog = ({ open, onClose }: { open: boolean, onClos
             startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.MOONRIVER]} alt=''/>}
             color="primary"
           >
-            Switch to Moonriver
+            Switch to BNB Testnet
           </Button>
-          <Button
+          {/* <Button
             //className={formButton}
             onClick={() => {
               onClose(false)
@@ -39,7 +39,7 @@ export const NetworkSelectorDialog = ({ open, onClose }: { open: boolean, onClos
             color="primary"
           >
             Switch to Moonbeam
-          </Button>
+          </Button> */}
         </Stack>
       </Stack>
     </Dialog>

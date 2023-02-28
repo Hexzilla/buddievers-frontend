@@ -37,7 +37,7 @@ export const RPC_URLS: { [chainId: number]: string } = {
 };
 
 export const NATIVE_TOKEN_SYMBOL: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'GoerliETH',
+  [ChainId.MOONRIVER]: 'TBNB',
   [ChainId.MOONBEAM]: 'GLMR'
 };
 

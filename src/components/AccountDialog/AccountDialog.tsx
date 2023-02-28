@@ -413,9 +413,9 @@ export const AccountDialog = () => {
                 startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.MOONRIVER]} alt='' />}
                 color="primary"
               >
-                Switch to Moonriver
+                Switch to BNB Testnet
               </Button>
-              <Button
+              {/* <Button
                 //className={formButton}
                 onClick={() => {
                   addNetwork(ChainId.MOONBEAM);
@@ -424,7 +424,7 @@ export const AccountDialog = () => {
                 color="primary"
               >
                 Switch to Moonbeam
-              </Button>
+              </Button> */}
             </>
           )}
 
