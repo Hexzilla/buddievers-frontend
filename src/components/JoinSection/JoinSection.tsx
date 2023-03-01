@@ -18,18 +18,6 @@ export const JoinSection = () => {
             <Grid container spacing={0}>
                 <Grid item xs={6}>
                     <img
-                        src="./moonbuddies 1.png"
-                        style={{ width: "100%", height: "100%" }}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <img
-                        src="./moonbuddies 2.png"
-                        style={{ width: "100%", height: "100%" }}
-                    />
-                </Grid>
-                <Grid item xs={6}>
-                    <img
                         src="./seeCollections.png"
                         style={{ width: "100%", height: "100%" }}
                     />

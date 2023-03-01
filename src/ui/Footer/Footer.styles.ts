@@ -4,7 +4,7 @@ export const styles = (theme: Theme) => ({
   footerWrapper: {
     background: "#000",
     color: "#FFFFFF",
-    padding: "4vw"
+    padding: "2vw"
   },
   title:{
     fontWeight: "900",
