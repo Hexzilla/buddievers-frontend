@@ -14,25 +14,32 @@ const FreshTradesPage = () => {
   const [prepaidNFTs, setPrepaidNFTs] = useState(0);
   const [whitelistNFTs, setWhitelistNFTs] = useState(0);
   const [paidNFTS, setPaidNFTs] = useState(0);
+  const [totalSupply, setTotalSupply] = useState(0);
+  const [errMessage, setErrMessage] = useState('');
+  const [updated, setUpdated] = useState(false)
   const TOTAL = 500;
   const [open, setOpen] = useState(false);
   const mintContract = useMint1Contract(MINT1_ADDRESS[ChainId.MOONRIVER], true);
+  const imageURI = "https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png";
   const { container, button } = useClasses(styles);
 
   useEffect(() => {
     const init = async () => {
       const res1 = await mintContract?.getPrepaidMints(account);
-      setPrepaidNFTs(res1.toString())
+      setPrepaidNFTs(parseInt(res1.toString()))
 
       const res2 = await mintContract?.getWhitelistedMints(account);
-      setWhitelistNFTs(res2.toString())
+      setWhitelistNFTs(parseInt(res2.toString()))
 
       const res3 = await mintContract?.getPublicMints(account);
-      setPaidNFTs(res3.toString())
+      setPaidNFTs(parseInt(res3.toString()))
+
+      const res = await mintContract?.totalSupply();
+      setTotalSupply(parseInt(res.toString()))
     }
 
     init();
-  }, [account])
+  }, [account, updated])
 
   const handleInputChange = (event: any) => {
     setMintAmount(event.target.value)
@@ -46,19 +53,48 @@ const FreshTradesPage = () => {
     setOpen(false);
   };
 
-  const mintNFT = async () => {
+  const publicMint = async () => {
+    if (!account) {
+      setErrMessage("Please connect your wallet!");
+      setOpen(true)
+      return;
+    }
     if (mintAmount <= 0 || mintAmount > 5) {
+      setErrMessage("Please input between 1 and 5");
+      setOpen(true)
+      return;
+    }
+
+    const res = await mintContract?.freeMint(mintAmount,
+      imageURI, {
+      gasLimit: GAS_LIMIT,
+      from: account,
+      value: MINT_PRICE * mintAmount
+    }).catch((err: any) => {
+      setErrMessage("Please check your fund or network status!");
+      setOpen(true)
+    }).then((receipt: any) => {
+      setUpdated(!updated)
+      console.debug('result', receipt)
+    })
+  }
+
+  const whitelistMint = async () => {
+    if (mintAmount <= 0 || mintAmount > 5) {
+      setErrMessage("Please input between 1 and 5");
       setOpen(true)
       return;
     }
 
     const res = await mintContract?.whitelistedMints(mintAmount,
-      "https://drive.google.com/file/d/1A739BEoj7eU1GnuEdqoWt7AOPtypYN1u/view?usp=share_link", {
-      gasLimit: GAS_LIMIT,
-      from: account,
-      value: MINT_PRICE
-    }).then((receipt: any) => {
-      console.debug('result', receipt)
+      imageURI)
+      .catch((err: any) => {
+        setErrMessage("Your whitelist sale finished!");
+        setOpen(true)
+      })
+      .then((receipt: any) => {
+        setUpdated(!updated)
+        console.debug('result', receipt)
     })
   }
 
@@ -79,32 +115,57 @@ const FreshTradesPage = () => {
     <>
       <div className={container}>
         <GlitchText variant="h1">Mint NFT</GlitchText>
+        {
+          prepaidNFTs != 0 && (
+            <>
+            <Typography variant="subtitle1" component="div">
+              Prepaid Mints: {prepaidNFTs - whitelistNFTs}
+            </Typography>
+            <br />
+            </>
+          )
+        }
 
         <Typography variant="subtitle1" component="div">
-          Prepaid Mints: {prepaidNFTs} 
+          Owned NFTs: {whitelistNFTs + paidNFTS}
         </Typography>
         <br />
 
         <Typography variant="subtitle1" component="div">
-          Whitelisted Mints: {whitelistNFTs} 
+          Remain mintable NFT Counts: {TOTAL - totalSupply}
         </Typography>
         <br />
 
-        <Typography variant="subtitle1" component="div">
-          Paid Mints: {paidNFTS} 
-        </Typography>
-        <br />
-
-        <Typography variant="subtitle1" component="div">
-          Total remain free minted count: {0} 
-        </Typography>
-        <br />
-
-        <Typography variant="subtitle1" component="div">
-         Total remain normal mintable count: {TOTAL-paidNFTS-whitelistNFTs} 
-        </Typography>
-        <br />
-        
+        {
+          prepaidNFTs != 0 && (
+            <>
+              <Grid container spacing={1}>
+                <Grid item xs={2}>
+                  <TextField
+                    id="filled-number"
+                    label="Mint amounts"
+                    type="number"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="filled"
+                    size="small"
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                <Grid item xs={2}>
+                  <Button
+                    className={button}
+                    onClick={whitelistMint}
+                  >
+                    Get My Prepaid Mints
+                  </Button>
+                </Grid>
+              </Grid>
+              <br />
+            </>
+          )
+        }
         <Grid container spacing={1}>
           <Grid item xs={2}>
             <TextField
@@ -122,21 +183,19 @@ const FreshTradesPage = () => {
           <Grid item xs={2}>
             <Button
               className={button}
-              onClick={mintNFT}
+              onClick={publicMint}
             >
-              Mint
+              Mints
             </Button>
           </Grid>
         </Grid>
         <br />
 
-        
-
         <Snackbar
           open={open}
           autoHideDuration={3000}
           onClose={handleClose}
-          message="Please input between 1 and 5"
+          message={errMessage}
           action={action}
         />
       </div>
