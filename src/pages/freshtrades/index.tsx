@@ -20,10 +20,7 @@ const FreshTradesPage = () => {
   const TOTAL = 500;
   const [open, setOpen] = useState(false);
   const mintContract = useMint1Contract(MINT1_ADDRESS[ChainId.MOONRIVER], true);
-  const uris = ["https://ipfs.io/ipfs/QmTgEVJ8qYLfxaGmozraszGC3gyXznRnKi7rkfiRJRqSFQ?filename=06.png", 
-  "https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png",
-  "https://ipfs.io/ipfs/QmURHbbxXxRx4vTBJVbroNWeGXyJwK7Kx8LYLJFqBgMpvy?filename=05.png",
-  "https://ipfs.io/ipfs/QmV7Ybne4xZrqA1qBXybKuUuDRNVZmEPv4Kzb1WfXHEoP2?filename=08.png"]
+  const imageURI = "https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png";
   const { container, button } = useClasses(styles);
 
   useEffect(() => {
@@ -69,7 +66,7 @@ const FreshTradesPage = () => {
     }
 
     const res = await mintContract?.freeMint(mintAmount,
-      uris[Math.floor(Math.random() * 4)], {
+      imageURI, {
       gasLimit: GAS_LIMIT,
       from: account,
       value: MINT_PRICE * mintAmount
@@ -90,7 +87,7 @@ const FreshTradesPage = () => {
     }
 
     const res = await mintContract?.whitelistedMints(mintAmount,
-      uris[Math.floor(Math.random() * 4)])
+      imageURI)
       .catch((err: any) => {
         setErrMessage("Your whitelist sale finished!");
         setOpen(true)
