@@ -4,7 +4,7 @@ export const styles = (theme: Theme) => ({
     container : {
         background: `url("./intro-background.png") no-repeat center`,
         width: "100%",
-        height: "919px",
+        height: "719px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

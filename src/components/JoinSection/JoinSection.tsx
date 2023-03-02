@@ -7,7 +7,8 @@ export const JoinSection = () => {
     const {
         container,
         title,
-        description
+        description,
+        collection
     } = useClasses(styles);
     return (
         <div className={container}>
@@ -15,18 +16,22 @@ export const JoinSection = () => {
                 <p className={description}>THERE IS NO END OF THE ROAD</p>
                 <p className={title}>JOIN BUDDIES ST.</p>
             </div>
-            <Grid container spacing={0}>
+            <Grid container spacing={0} className={collection}>
                 <Grid item xs={6}>
-                    <img
+                    {/* <img
                         src="./seeCollections.png"
                         style={{ width: "100%", height: "100%" }}
-                    />
+                    /> */}
+                    <p >SEE BUDDIES</p>
+
                 </Grid>
                 <Grid item xs={6}>
-                    <img
+                    {/* <img
                         src="./seeCollections.png"
                         style={{ width: "100%", height: "100%" }}
-                    />
+                    /> */}
+                    <p >SEE MOONBUDDIES</p>
+
                 </Grid>
             </Grid>
         </div>

@@ -1,6 +1,12 @@
 import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
+  headerWrapper: {
+    paddingLeft: '10vw',
+    paddingRight: '10vw',
+    paddingTop: "1vw",
+    paddingBottom: "1vw",
+   },
   logo: {
     width: 140,
     height: 'auto',

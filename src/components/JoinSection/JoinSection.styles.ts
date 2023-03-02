@@ -15,5 +15,11 @@ export const styles = (theme: Theme) => ({
         fontWeight: "900",
         fontSize: "30px",
         color: "#FFFFFF"
-    }
+    },
+    collection: {
+        background:"#F5E2B2",
+        fontWeight: "900",
+        fontSize: "40px",
+        color: "#166D43",
+    },
 });

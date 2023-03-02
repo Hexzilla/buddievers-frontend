@@ -17,7 +17,7 @@ import { styles } from './Layout.styles';
 import { LayoutProps } from './Layout.types';
 
 export const Layout = ({ children }: LayoutProps) => {
-  const { logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer } =
+  const { headerWrapper, logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer } =
     useClasses(styles);
 
   const showRegularMenu = useMediaQuery(
@@ -33,7 +33,7 @@ export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Header>
-        <Container style={{ padding: '0 15px' }} maxWidth={false}>
+        <Container className={headerWrapper} maxWidth={false}>
           <Stack direction='row' alignItems="center" justifyContent="space-between">
             <Grid item xl={2} className={nav}>
               {showRegularMenu && (
