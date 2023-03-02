@@ -16,5 +16,9 @@ export const styles = (theme: Theme) => ({
   text: {
     fontWeight: "400",
     fontSize: "15px"
+  },
+  hypers : {
+    textDecoration : "none",
+    color : "white"
   }
 });

@@ -7,7 +7,18 @@ export const styles = (theme: Theme) => ({
     flexDirection: 'column',
     paddingLeft: '10vw',
     paddingRight: '10vw',
+    paddingTop : '50px',
     margin: `${theme.spacing(5)}px 0`,
+    [theme.breakpoints.down('sm')]: {
+      textAlign: 'center',
+    },
+  },
+  introContainer : {
+    background : theme.palette.background.darkGreen,
+    paddingLeft: '10vw',
+    paddingRight: '10vw',
+    paddingBottom: '50px',
+    margin: `${theme.spacing(10)} 0`,
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
     },

@@ -8,7 +8,8 @@ export const styles = (theme: Theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: "100px"
+        marginBottom: "100px",
+        marginTop: "150px"
     },
     button : {
         height: "98px",
@@ -17,6 +18,11 @@ export const styles = (theme: Theme) => ({
         padding: "30px",
         fontSize: "25px",
         fontWeight: 900,
-        color: theme.palette.text.primary
+        color: theme.palette.text.primary,
+        "&:hover":{
+            backgroundColor: "rgba(0,0,0,0.4)",
+            boxShadow: "none",
+            color: "white"
+        }
     }
 });

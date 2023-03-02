@@ -7,6 +7,7 @@ export const JoinSection = () => {
     const {
         container,
         title,
+        hypers,
         description,
         collection
     } = useClasses(styles);
@@ -22,7 +23,7 @@ export const JoinSection = () => {
                         src="./seeCollections.png"
                         style={{ width: "100%", height: "100%" }}
                     /> */}
-                    <p >SEE BUDDIES</p>
+                    <a className={hypers} href="https://singular.app/collectibles/kusama/5225293d2cbb586654-BUDDIES"><p >BUDDIES</p></a>
 
                 </Grid>
                 <Grid item xs={6}>
@@ -30,7 +31,7 @@ export const JoinSection = () => {
                         src="./seeCollections.png"
                         style={{ width: "100%", height: "100%" }}
                     /> */}
-                    <p >SEE MOONBUDDIES</p>
+                    <a className={hypers} href="#"><p >MOONBUDDIES</p></a>
 
                 </Grid>
             </Grid>

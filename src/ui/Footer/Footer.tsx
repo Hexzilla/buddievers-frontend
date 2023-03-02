@@ -9,8 +9,10 @@ export const Footer = () => {
   const {
     footerWrapper,
     title,
-    text
+    text,
+    hypers
   } = useClasses(styles);
+
   return (
     <Container maxWidth={false} className={footerWrapper}>
       <Grid container spacing={0}>
@@ -18,9 +20,9 @@ export const Footer = () => {
           <p className={title}>QUICK LINKS</p>
           <Grid container spacing={0}>
             <Grid item xs={6}>
-              <p className={text}>BUDDIES</p>
-              <p className={text}>MOON BUDDIES</p>
-              <p className={text}>About</p>
+              <a className={hypers} href="https://singular.app/collectibles/kusama/5225293d2cbb586654-BUDDIES" target={'_blank'}><p className={text}>BUDDIES</p></a>
+              <a className={hypers} href="#" target={'_blank'}><p className={text}>MOON BUDDIES</p></a>
+              <a className={hypers} href="/faqs" target={'_blank'}><p className={text}>FAQ</p></a>
             </Grid>
             <Grid item xs={6}>
               <p className={text}>Marketplace</p>
@@ -56,14 +58,18 @@ export const Footer = () => {
               <p className={title}>JOIN US</p>
             </Grid>
             <Grid item xs={2} style={{ alignSelf: "center" }}>
-              <img
-                src="./twitter.png"
-              />
+              <a href="https://twitter.com/Buddies_St" target={'_blank'}>
+                <img
+                  src="./twitter.png"
+                />
+              </a>
             </Grid>
             <Grid item xs={2} style={{ alignSelf: "center" }}>
-              <img
-                src="./discord.png"
-              />
+              <a href="https://discord.gg/9HSbQQ7gpw" target={'_blank'}>
+                <img
+                  src="./discord.png"
+                />
+              </a>
             </Grid>
             <Grid item xs={2}>
             </Grid>

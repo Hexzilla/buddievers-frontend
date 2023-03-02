@@ -15,7 +15,7 @@ export const IntroSection = () => {
     const addWhitelist = async () => {
         // const res = await mintContract?.flipPublicSaleState();
         // const res = await mintContract?.flipWhiteListSaleState();
-        const res = await mintContract?.addWhitelist("0x2d3Bee3B347C29ff6712E1365BB08F7Af14Ae6F7", 3)
+        window.open("https://discord.gg/9HSbQQ7gpw")
     }
 
     return (

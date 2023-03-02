@@ -2,7 +2,7 @@ import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
   appBar: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.darkGreen,
     padding:"1vh"
   },
   marquee: {

@@ -14,6 +14,7 @@ import { JoinSection } from 'components/JoinSection/JoinSection';
 const HomePage = () => {
   const {
     homeContainer,
+    introContainer,
     betaText,
     betaTitle,
     pageContent,
@@ -23,14 +24,18 @@ const HomePage = () => {
     iconBlock,
   } = useClasses(styles);
   return (
-    <div className={homeContainer}>
-      <IntroSection/>
-      <AboutSection/>
-      <CharactorSection/>
-      <UtilitySection/>
-      <ComicSection/>
-      <RoadSection/>
-      <JoinSection/>
+    <div>
+      <div className={introContainer}>
+        <IntroSection/>
+      </div>
+      <div className={homeContainer}>
+        <AboutSection/>
+        <CharactorSection/>
+        <UtilitySection/>
+        <ComicSection/>
+        <RoadSection/>
+        <JoinSection/>
+      </div>
     </div>
   );
 };

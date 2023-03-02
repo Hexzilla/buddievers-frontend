@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import CollectionPage from './collection';
 import HomePage from './home';
+import FAQs from './FAQs';
 import TokenPage from './token';
 import MyOrdersPage from './yourorders';
 import FreshOrdersPage from './freshorders';
@@ -17,6 +18,7 @@ import AuctionListPage from './auctions';
 export const Routing = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
+    <Route path="/faqs" element={<FAQs />} />
     <Route path="/collections" element={<CollectionListPage />} />
     <Route
       path="/collection/:type/:address/:subcollectionId"

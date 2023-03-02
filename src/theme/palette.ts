@@ -31,7 +31,8 @@ export const palette: PaletteOptions = {
     main: v2_secondary,
   },
   background: {
-    default: v2_darkGreen,
+    default: v2_white,
+    darkGreen : v2_darkGreen,
     paper: 'transparent',
   },
   text: {

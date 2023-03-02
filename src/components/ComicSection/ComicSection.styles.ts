@@ -10,7 +10,6 @@ export const styles = (theme: Theme) => ({
     title: {
         fontWeight: "900",
         fontSize: "60px",
-        color: "#FFFFFF",
         margin: "0px"
     },
     description: {
@@ -27,6 +26,10 @@ export const styles = (theme: Theme) => ({
         fontWeight: 900,
         color: theme.palette.text.primary,
         marginRight: "2vw",
-        marginLeft: "5vw"
+        marginLeft: "5vw",
+        "&:hover" : {
+            background : "rgba(0,0,0,0.5)",
+            color : 'white'
+        }
     }
 });
