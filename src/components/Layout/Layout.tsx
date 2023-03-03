@@ -17,7 +17,7 @@ import { styles } from './Layout.styles';
 import { LayoutProps } from './Layout.types';
 
 export const Layout = ({ children }: LayoutProps) => {
-  const { headerWrapper, logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer } =
+  const { headerWrapper, logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer, headerGrids, navLinkContainer1, navLinkContainer2, navItemMobile, socialImages, socialTitle } =
     useClasses(styles);
 
   const showRegularMenu = useMediaQuery(
@@ -34,46 +34,92 @@ export const Layout = ({ children }: LayoutProps) => {
     <>
       <Header>
         <Container className={headerWrapper} maxWidth={false}>
-          <Stack direction='row' alignItems="center" justifyContent="space-between">
-            <Grid item xl={2} className={nav}>
-              {showRegularMenu && (
-                <IconButton onClick={() => setIsDrawerOpened(true)}>
-                  <MenuIcon />
-                </IconButton>
-              )}
-              <NavLink href="/" className={navItem}>
-                {!isXs && <div className={logo}>
-                  <img src={WhiteLogoNormal} alt="" />
-                </div>}
-                {isXs && <div className={logoAlt}>
-                  <img src={WhiteLogoAlt} alt="" />
-                </div>}
-              </NavLink>
-            </Grid>
-            <Stack direction='row' justifyContent='center' className={buttonContainer}>
-              {!showRegularMenu ? (
-                <Stack
-                  direction={'row'}
-                  onClick={() => setIsDrawerOpened(false)}
-                >
-                  {/*<NavLink href="/auctions" className={navItem}>
-                    Auctions
-                  </NavLink>*/}
-                  <NavLink href="/" className={navItem}>
-                    HOME
-                  </NavLink>
-                  <NavLink href="/mint" className={navItem}>
-                    MINT NFT
-                  </NavLink>
-                  <NavLink href="/workbench" className={navItem}>
-                    BUDDIEVERSE
-                  </NavLink>
-                  <NavLink href="/freshoffers" className={navItem}>
-                    MARKETPLACE
-                  </NavLink>
-                </Stack>
-              ) : (
-                <Drawer
+        {showRegularMenu && (
+          <IconButton onClick={() => setIsDrawerOpened(true)}>
+            <MenuIcon />
+          </IconButton>
+        )}
+          <Stack direction='row' justifyContent='center' className={buttonContainer}>
+            {!showRegularMenu ? (
+              <>
+              <Grid container spacing={2}>
+                <Grid className={headerGrids} item xs={2}>
+                  <Grid container spacing={0}>
+                    <Grid item md={2}>
+                    </Grid>
+                    <Grid item md={4}>
+                      <p className = {socialTitle}>JOIN US</p>
+                    </Grid>
+                    <Grid item md={2} style={{ alignSelf: "center" }}>
+                      <a href="https://twitter.com/Buddies_St" target={'_blank'}>
+                        <img
+                          className={socialImages}
+                          src="./twitter.png"
+                        />
+                      </a>
+                    </Grid>
+                    <Grid item md={2} style={{ alignSelf: "center" }}>
+                      <a href="https://discord.gg/9HSbQQ7gpw" target={'_blank'}>
+                        <img
+                          className={socialImages}
+                          src="./discord.png"
+                        />
+                      </a>
+                    </Grid>
+                    <Grid item md={2}>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid className={headerGrids} item xs={3}>
+                  <Stack
+                    className={navLinkContainer1}
+                    direction={'row'}
+                    onClick={() => setIsDrawerOpened(false)}
+                  >
+                    <NavLink href="/" className={navItem}>
+                      HOME
+                    </NavLink>
+                    <NavLink href="/mint" className={navItem}>
+                      BUDDIEVERSE
+                    </NavLink>
+                  </Stack>
+                </Grid>
+                  {showRegularMenu && (
+                    <IconButton onClick={() => setIsDrawerOpened(true)}>
+                      <MenuIcon />
+                    </IconButton>
+                  )}
+                  <Grid className={headerGrids} item xs={1}>
+                    <NavLink href="/" className={navItem}>
+                      {!isXs && <div className={logo}>
+                        <img src={WhiteLogoNormal} alt="" />
+                      </div>}
+                      {isXs && <div className={logoAlt}>
+                        <img src={WhiteLogoAlt} alt="" />
+                      </div>}
+                    </NavLink>
+                  </Grid>
+                  <Grid className={headerGrids} item xs={4}>
+                    <Stack
+                      className={navLinkContainer2}
+                      direction={'row'}
+                      onClick={() => setIsDrawerOpened(false)}
+                    >
+                      <NavLink href="/workbench" className={navItem}>
+                        MARKETPLACE
+                      </NavLink>
+                      <NavLink href="/freshoffers" className={navItem}>
+                        COFFEE SHOP
+                      </NavLink>
+                    </Stack>
+                  </Grid>
+                  <Grid className={headerGrids} item xs={2}>
+                    <Account />
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              <><Drawer
                   open={isDrawerOpened}
                   onClose={() => setIsDrawerOpened(false)}
                   onOpen={() => setIsDrawerOpened(true)}
@@ -81,8 +127,8 @@ export const Layout = ({ children }: LayoutProps) => {
                 >
                   <Box>
                     {/*<NavLink href="/auctions" className={navItemDrawer}>
-                      Auctions
-                    </NavLink>*/}
+      Auctions
+    </NavLink>*/}
                     <NavLink href="/" className={navItemDrawer}>
                       HOME
                     </NavLink>
@@ -97,9 +143,16 @@ export const Layout = ({ children }: LayoutProps) => {
                     </NavLink>
                   </Box>
                 </Drawer>
-              )}
-              <Account />
-            </Stack>
+                <NavLink href="/" className={navItemMobile}>
+                    {!isXs && <div className={logo}>
+                      <img src={WhiteLogoNormal} alt="" />
+                    </div>}
+                    {isXs && <div className={logoAlt}>
+                      <img src={WhiteLogoAlt} alt="" />
+                    </div>}
+                  </NavLink></>
+            )}
+            
           </Stack>
         </Container>
       </Header>

@@ -17,7 +17,10 @@ export const styles = (theme: Theme) => ({
         margin: "10px",
         width: "150px",
         height: "150px",
-        display: "grid"
+        display: "grid",
+        "@media (max-width : 1192px)" : {
+            width : "100%",
+        }
     },
     whiteTextTiny: {
         fontSize: "17px",

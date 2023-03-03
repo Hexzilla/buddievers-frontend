@@ -18,7 +18,7 @@ export const JoinSection = () => {
                 <p className={title}>JOIN BUDDIES ST.</p>
             </div>
             <Grid container spacing={0} className={collection}>
-                <Grid item xs={6}>
+                <Grid item md={6} sm={12}>
                     {/* <img
                         src="./seeCollections.png"
                         style={{ width: "100%", height: "100%" }}
@@ -26,7 +26,7 @@ export const JoinSection = () => {
                     <a className={hypers} href="https://singular.app/collectibles/kusama/5225293d2cbb586654-BUDDIES"><p >BUDDIES</p></a>
 
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item md={6} sm={12}>
                     {/* <img
                         src="./seeCollections.png"
                         style={{ width: "100%", height: "100%" }}

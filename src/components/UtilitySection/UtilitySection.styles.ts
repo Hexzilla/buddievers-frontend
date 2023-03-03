@@ -18,6 +18,8 @@ export const styles = (theme: Theme) => ({
         padding: "2vh"
     },
     subTitleText: {
+        marginTop : "0px",
+        marginBottom : "20px",
         fontWeight: "900",
         fontSize: "40px",
     },

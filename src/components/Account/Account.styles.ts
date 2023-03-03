@@ -6,7 +6,8 @@ export const styles = (theme: Theme) => ({
     background: '#F5E2B2',
     borderRadius: '10px',
     color: '#01472A',
-    fontWeight: '900'
+    fontWeight: '900',
+    width : '180px'
     /*
     [theme.breakpoints.down('sm')]: {
       background: 'none',

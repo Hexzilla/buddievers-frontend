@@ -19,6 +19,9 @@ export const styles = (theme: Theme) => ({
         fontWeight: "900",
         fontSize: "25px",
         color: "#166D43",
+        "@media (max-width : 1192px)" : {
+            display : "block",
+        }
     },
     hypers : {
         textDecoration : "none",

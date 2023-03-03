@@ -9,7 +9,7 @@ export const styles = (theme: Theme) => ({
         alignItems: "center",
         justifyContent: "center",
         marginBottom: "100px",
-        marginTop: "150px"
+        marginTop: "14vh"
     },
     button : {
         height: "98px",
