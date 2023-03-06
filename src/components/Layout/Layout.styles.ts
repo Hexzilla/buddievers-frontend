@@ -53,7 +53,7 @@ export const styles = (theme: Theme) => ({
     }
   },
   logoAlt: {
-    height: '35px',
+    height: '60px',
     width: 'auto',
     '& > img': {
       height: '100%',
