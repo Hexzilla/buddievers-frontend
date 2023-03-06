@@ -10,7 +10,10 @@ export const styles = (theme : Theme) => ({
         alignItems: "center",
         justifyContent: "center",
         // marginBottom: "100px",
-        marginTop: "14vh"
+        marginTop: "14vh",
+        "@media (min-width : 2990px)" : {
+            marginTop : "9vh"
+        }
     },
      button : {
         height: "98px",
