@@ -22,6 +22,13 @@ export const styles = (theme: Theme) => ({
             width : "100%",
         }
     },
+    aboutTextWrapper : {
+        width : '60%',
+        margin : "auto",
+        "@media (max-width : 1910px)" : {
+            width : '80%'
+        }
+    },
     whiteTextTiny: {
         fontSize: "17px",
         fontWeight: "900",

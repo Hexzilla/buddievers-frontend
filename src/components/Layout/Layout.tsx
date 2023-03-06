@@ -43,44 +43,19 @@ export const Layout = ({ children }: LayoutProps) => {
             {!showRegularMenu ? (
               <>
               <Grid container spacing={2}>
-                <Grid className={headerGrids} item xs={2}>
-                  <Grid container spacing={0}>
-                    <Grid item md={2}>
-                    </Grid>
-                    <Grid item md={4}>
-                      <p className = {socialTitle}>JOIN US</p>
-                    </Grid>
-                    <Grid item md={2} style={{ alignSelf: "center" }}>
-                      <a href="https://twitter.com/Buddies_St" target={'_blank'}>
-                        <img
-                          className={socialImages}
-                          src="./twitter.png"
-                        />
-                      </a>
-                    </Grid>
-                    <Grid item md={2} style={{ alignSelf: "center" }}>
-                      <a href="https://discord.gg/9HSbQQ7gpw" target={'_blank'}>
-                        <img
-                          className={socialImages}
-                          src="./discord.png"
-                        />
-                      </a>
-                    </Grid>
-                    <Grid item md={2}>
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid className={headerGrids} item xs={3}>
+                <Grid className={headerGrids} item md={5}>
                   <Stack
                     className={navLinkContainer1}
                     direction={'row'}
                     onClick={() => setIsDrawerOpened(false)}
                   >
-                    <NavLink href="/" className={navItem}>
-                      HOME
-                    </NavLink>
                     <NavLink href="/mint" className={navItem}>
+                      
                       BUDDIEVERSE
+                    </NavLink>
+                    <NavLink href="/marketplace" className={navItem}>
+                      
+                      MARKETPLACE
                     </NavLink>
                   </Stack>
                 </Grid>
@@ -89,7 +64,7 @@ export const Layout = ({ children }: LayoutProps) => {
                       <MenuIcon />
                     </IconButton>
                   )}
-                  <Grid className={headerGrids} item xs={1}>
+                  <Grid className={headerGrids} item md={2}>
                     <NavLink href="/" className={navItem}>
                       {!isXs && <div className={logo}>
                         <img src={WhiteLogoNormal} alt="" />
@@ -99,22 +74,21 @@ export const Layout = ({ children }: LayoutProps) => {
                       </div>}
                     </NavLink>
                   </Grid>
-                  <Grid className={headerGrids} item xs={4}>
+                  <Grid className={headerGrids} item md={5}>
                     <Stack
                       className={navLinkContainer2}
                       direction={'row'}
                       onClick={() => setIsDrawerOpened(false)}
                     >
-                      <NavLink href="/workbench" className={navItem}>
-                        MARKETPLACE
-                      </NavLink>
                       <NavLink href="/freshoffers" className={navItem}>
+                        
                         COFFEE SHOP
                       </NavLink>
+                      <NavLink href="#" className={navItem}>
+                        
+                        <Account />
+                      </NavLink>
                     </Stack>
-                  </Grid>
-                  <Grid className={headerGrids} item xs={2}>
-                    <Account />
                   </Grid>
                 </Grid>
               </>

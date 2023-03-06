@@ -10,7 +10,7 @@ export const styles = (theme: Theme) => ({
         textAlign: "center",
         backgroundSize: "cover",
         backgroundRepeat: "round",
-        backgroundImage: `url("./roadBackground.png")`
+        // backgroundImage: `url("./roadBackground.png")`
     },
     title: {
         fontWeight: "900",

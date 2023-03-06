@@ -21,7 +21,8 @@ export const AboutSection = () => {
         whiteTextSmall,
         whiteTextLarge,
         whiteTextTiny,
-        greenBox
+        greenBox,
+        aboutTextWrapper
     } = useClasses(styles);
     
     return (
@@ -29,12 +30,13 @@ export const AboutSection = () => {
             <Grid item md={6} sm={12}
                 className={leftContainer}
             >
-                <p className={aboutText}>ABOUT</p>
-                <p className={subTitleText}>An NFT project building the utopia.</p>
-                <p className={mainText}>Launched in April 2022, BUDDIES quickly evolved into one of the most successful collections on Kusama Network with just 50 NFTs.</p>
-                <p className={mainText}>BUDDIES have built a solid economic backing by collecting assets and through Alpha Trading, thereby proving that it is one of the most successful NFT collections in the Polkadot ecosystem. BUDDIES have 6 core value propositions: Art, Value, Utility, Profitability, Education & Fun.</p>
-                <p className={mainText}>Now, we are working toward our multi-chain future as we will debut our second generation NFT collection on Moonsama network. Moonbuddies is the final generation of the BUDDIES NFT collection, but just the beginning for our community goals.</p>
-            
+                <div className={aboutTextWrapper}>
+                    <p className={aboutText}>ABOUT</p>
+                    <p className={subTitleText}>An NFT project building the utopia.</p>
+                    <p className={mainText}>Launched in April 2022, BUDDIES quickly evolved into one of the most successful collections on Kusama Network with just 50 NFTs.</p>
+                    <p className={mainText}>BUDDIES have built a solid economic backing by collecting assets and through Alpha Trading, thereby proving that it is one of the most successful NFT collections in the Polkadot ecosystem. BUDDIES have 6 core value propositions: Art, Value, Utility, Profitability, Education & Fun.</p>
+                    <p className={mainText}>Now, we are working toward our multi-chain future as we will debut our second generation NFT collection on Moonsama network. Moonbuddies is the final generation of the BUDDIES NFT collection, but just the beginning for our community goals.</p>
+                </div>
                 <Stack direction="row" style={{justifyContent: "center", width : "100%"}}>
                     <Item className={greenBox}>
                         <p className={whiteTextLarge}>50</p>

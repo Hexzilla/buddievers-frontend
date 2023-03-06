@@ -10,22 +10,36 @@ export const styles = (theme: Theme) => ({
     titleText: {
         fontSize: "75px",
         fontWeight: "900",
-        color: "#00CE4C"
+        color: "#00CE4C",
     },
     leftContainer: {
         background: "#FFF",
-        textAlign: "center",
+        textAlign: "left",
         padding: "2vh"
     },
     subTitleText: {
-        marginTop : "0px",
+        marginTop : "80px",
         marginBottom : "20px",
         fontWeight: "900",
         fontSize: "40px",
+        "@media (max-width : 1910px)" : {
+            marginTop : "0px",
+        }
     },
     mainText: {
         fontWeight: "700",
         fontSize: "17px",
-        margin: "0px"
+        margin: "0px",
+        marginTop : "50px",
+        "@media (max-width : 1910px)" : {
+            marginTop : "20px",
+        }
+    },
+    leftTextWrapper : {
+        width : '60%',
+        margin : "auto",
+        "@media (max-width : 1910px)" : {
+            width : "80%"
+        }
     }
 });

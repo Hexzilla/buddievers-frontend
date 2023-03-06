@@ -29,7 +29,10 @@ export const styles = (theme: Theme) => ({
     width : "30px"
    },
   logo: {
-    width: 140,
+    // width: 140,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
     height: 'auto',
     '& > img': {
       maxWidth: '100%',
@@ -39,7 +42,7 @@ export const styles = (theme: Theme) => ({
       //marginLeft: '20px',
     },
     "@media (max-width : 1910px)" : {
-      width : 80,
+      // width : 80,
     }
   },
   socialTitle : {

@@ -5,9 +5,11 @@ export const styles = (theme: Theme) => ({
         width: "100%",
         display: "flex",
         alignItems: "center",
-        padding: "2vw 8vh"
+        padding: "2vw 8vh",
+        backgroundColor : "#01472A"
     },
     title: {
+        color : "white",
         fontWeight: "900",
         fontSize: "60px",
         margin: "0px"

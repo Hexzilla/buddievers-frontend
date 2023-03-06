@@ -14,11 +14,13 @@ import MintPage from './mint';
 import MyNFTsPage from './mynfts';
 import { SubcollectionListPage } from './subcollection-list';
 import AuctionListPage from './auctions';
+import MarketplacePage from './marketplace';
 
 export const Routing = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/faqs" element={<FAQs />} />
+    <Route path="/marketplace" element={<MarketplacePage />} />
     <Route path="/collections" element={<CollectionListPage />} />
     <Route
       path="/collection/:type/:address/:subcollectionId"

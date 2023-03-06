@@ -17,7 +17,11 @@ import {
 } from 'hooks/useApproveCallback/useApproveCallback';
 import { compareDesc } from 'date-fns';
 import { assetTypeToStringAssetType } from 'utils/subgraph';
-
+import { MarketIntroSection } from 'components/MarketIntroSection/MarketIntroSection'
+import { MarketBuySection } from 'components/MarketBuySection/MarketBuySection';
+import { MarketMoreSection } from 'components/MarketMoreSection/MarketMoreSection';
+import { styles } from './styles';
+import { useClasses } from 'hooks';
 const StyledContainer = styled('div')`
   tex-align: center;
 `;
@@ -92,11 +96,13 @@ const MarketplacePage = () => {
     approve()
   }
   */
-
+  const { container } = useClasses(styles);
   return (
-    <StyledContainer>
-      <GlitchText>Marketplace is coming soon, biatch!</GlitchText>
-    </StyledContainer>
+    <div className={container}>
+      <MarketIntroSection />
+      <MarketBuySection />
+      <MarketMoreSection />
+    </div>
   );
 };
 
