@@ -21,7 +21,7 @@ const getDefaultOptions = (colors: PaletteOptions): ThemeOptions => ({
       sm: 576,
       md: 768,
       lg: 992,
-      xl: 2440,
+      xl: 3500,
     },
   },
   components: {

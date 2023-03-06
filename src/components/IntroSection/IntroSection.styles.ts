@@ -12,6 +12,9 @@ export const styles = (theme: Theme) => ({
         marginTop: "14vh",
         "@media (max-width : 400px)" : {
             marginTop : "-2vh"
+        },
+        "@media (min-width : 2990px)" : {
+            marginTop : "9vh"
         }
     },
     button : {

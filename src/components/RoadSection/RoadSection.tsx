@@ -11,7 +11,7 @@ export const RoadSection = () => {
     } = useClasses(styles);
     return (
         <div className={container}>
-            <p className={title}>ROADMAP</p>
+            {/* <p className={title}>ROADMAP</p> */}
             <div className={stepContainer}>
                 <img src="./Section6.png" style={{width: "100%"}}/>
             </div>
