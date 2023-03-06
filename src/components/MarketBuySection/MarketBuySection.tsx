@@ -1,13 +1,13 @@
 import { useClasses } from 'hooks';
 import { styles } from './MarketBuySection.styles';
 import { Grid } from '@mui/material';
-export const MarketBuySection = () => {
+export const MarketBuySection = ({imgName, price, name}) => {
     const { container, overViewItem, btnBuy, btnOffer } = useClasses(styles);
     return (
         <div className={container}>
             <Grid container spacing={4}>
                 <Grid item md={4} sm={12}>
-                    <img src='./charactor (5).png' style={{ maxWidth : "100%", height : "100%", borderRadius : "20px" }} />
+                    <img src={`./${imgName}`} style={{ maxWidth : "100%", height : "100%", borderRadius : "20px" }} />
                 </Grid>
                 <Grid item md={8} sm={12}>
                     <div>
@@ -41,12 +41,12 @@ export const MarketBuySection = () => {
                     <div>
                         <Grid container spacing={2}>
                             <Grid item md={6} sm={12} style={{ textAlign : "left", marginTop : "20px" }}>
-                                <p style={{ fontSize : "24px", color : "rgba(255, 255, 255, 0.5)", margin : 0 }}>BUDDIES</p>
-                                <p style={{ fontSize : "40px", color : "white", fontWeight : "900", margin : 0 }}>BUDDY #192</p>
+                                <p style={{ fontSize : "24px", color : "rgba(255, 255, 255, 0.5)", margin : 0 }}>MOONBUDDIES</p>
+                                <p style={{ fontSize : "38px", color : "white", fontWeight : "900", margin : 0 }}>{name}</p>
                             </Grid>
                             <Grid item md={6} sm={12} style={{ textAlign : "right", marginTop : "20px" }}>
                                 <p style={{ fontSize : "24px", color : "#00CE4C", margin : 0 }}>PRICE</p>
-                                <p style={{ fontSize : "40px", color : "white", fontWeight : "900", margin : 0 }}>2500 SAMA</p>
+                                <p style={{ fontSize : "38px", color : "white", fontWeight : "900", margin : 0 }}>{price} SAMA</p>
                             </Grid>
                         </Grid>
                     </div>

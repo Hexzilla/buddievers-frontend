@@ -15,7 +15,7 @@ export const MarketIntroSection = () => {
                 variant="contained"
                 onClick={addWhitelist}
             >
-                JOIN BUDDIES ST.
+                MARKETPLACE
             </Button>
         </div>
     );

@@ -20,7 +20,7 @@ export const styles = (theme: Theme) => ({
     // paddingLeft: '10vw',
     // paddingRight: '10vw',
     // paddingBottom: '50px',
-    margin: `${theme.spacing(10)} 0`,
+    margin: `${theme.spacing(5)} 0`,
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
     },

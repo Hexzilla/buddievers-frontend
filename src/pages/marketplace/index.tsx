@@ -22,6 +22,7 @@ import { MarketBuySection } from 'components/MarketBuySection/MarketBuySection';
 import { MarketMoreSection } from 'components/MarketMoreSection/MarketMoreSection';
 import { styles } from './styles';
 import { useClasses } from 'hooks';
+import { useState } from 'react';
 const StyledContainer = styled('div')`
   tex-align: center;
 `;
@@ -96,12 +97,20 @@ const MarketplacePage = () => {
     approve()
   }
   */
+ const [ imgName, setImgName ] = useState("charactor (5).png");
+ const [ price, setPrice ] = useState("2500");
+ const [ name, setName ] = useState("MOONBUDDIE #192");
+ const getCheckNowEvent = (imageName, nftName, nftPrice) => {
+  setImgName(imageName);
+  setPrice(nftPrice);
+  setName(nftName);
+ }
   const { container } = useClasses(styles);
   return (
     <div className={container}>
       <MarketIntroSection />
-      <MarketBuySection />
-      <MarketMoreSection />
+      <MarketBuySection imgName={imgName} price={price} name={name} />
+      <MarketMoreSection getCheckNowEvent={getCheckNowEvent} />
     </div>
   );
 };

@@ -2,9 +2,13 @@ import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
     container: {
-        width: "100%",
+        width: "80%",
+        margin : "auto",
         textAlign: "center",
-        background: "#FFFFFF"
+        background: "#FFFFFF",
+        "@media (max-width : 1192px)" : {
+            width : "100%"
+        }
     },
     stepContainer : {
         textAlign: "center",
