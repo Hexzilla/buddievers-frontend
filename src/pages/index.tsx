@@ -15,6 +15,7 @@ import MyNFTsPage from './mynfts';
 import { SubcollectionListPage } from './subcollection-list';
 import AuctionListPage from './auctions';
 import MarketplacePage from './marketplace';
+import MarketBuddies from './marketbuddies';
 
 export const Routing = () => (
   <Routes>
@@ -22,6 +23,7 @@ export const Routing = () => (
     <Route path="/faqs" element={<FAQs />} />
     <Route path="/marketplace" element={<MarketplacePage />} />
     <Route path="/collections" element={<CollectionListPage />} />
+    <Route path="/buddies" element={<MarketBuddies />} />
     <Route
       path="/collection/:type/:address/:subcollectionId"
       element={
