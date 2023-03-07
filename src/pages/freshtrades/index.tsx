@@ -1,6 +1,5 @@
 import { useState, Fragment, useEffect } from 'react';
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { Container } from '@mui/system';
 import {
   TextField,
   Snackbar,
@@ -30,7 +29,6 @@ const FreshTradesPage = () => {
     'https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png';
   const { container, button } = useClasses(styles);
 
-  console.log('errMessage', errMessage);
   useEffect(() => {
     const init = async () => {
       const res1 = await mintContract?.getPrepaidMints(account);
@@ -83,13 +81,18 @@ const FreshTradesPage = () => {
         value: MINT_PRICE * mintAmount,
       })
       .catch((err: any) => {
+        console.error(err);
         setErrMessage('Please check your fund or network status!');
         setOpen(true);
       })
-      .then((receipt: any) => {
+      .then((tx: any) => {
+        console.debug('tx', tx);
+        return tx.wait(3);
+      })
+      .then(() => {
         setUpdated(!updated);
-        console.debug('result', receipt);
         setErrMessage('You have successfully minted token!');
+        setOpen(true);
       });
   };
 
@@ -104,13 +107,18 @@ const FreshTradesPage = () => {
     await mintContract
       ?.whitelistedMints(mintAmount, imageURI)
       .catch((err: any) => {
+        console.error(err);
         setErrMessage('Your whitelist sale finished!');
         setOpen(true);
       })
-      .then((receipt: any) => {
+      .then((tx: any) => {
+        console.debug('tx', tx);
+        return tx.wait(3);
+      })
+      .then(() => {
         setUpdated(!updated);
-        console.debug('result', receipt);
         setErrMessage('You have successfully minted token!');
+        setOpen(true);
       });
   };
 
