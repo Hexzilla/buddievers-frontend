@@ -35,5 +35,27 @@ export const SUPPORTED_METAMASK_NETWORKS: {[key: number]: AddEthereumChainParame
             symbol: 'GLMR',
             decimals: 18
         }
-    }
+    },
+    [ChainId.BSC]: {
+        chainId: '0x38',
+        chainName: 'Binance Smart Chain',
+        rpcUrls: ['https://bsc-dataseed.binance.org'],
+        blockExplorerUrls: ['https://bscscan.com'],
+        nativeCurrency: {
+            name: 'BNB',
+            symbol: 'BNB',
+            decimals: 18
+        }
+    },
+    [ChainId.BSC_TESTNET]: {
+        chainId: '0x61',
+        chainName: 'Binance Smart Chain Testnet',
+        rpcUrls: ['https://bsc-testnet.public.blastapi.io'],
+        blockExplorerUrls: ['https://testnet.bscscan.com'],
+        nativeCurrency: {
+            name: 'BNB',
+            symbol: 'BNB',
+            decimals: 18
+        }
+    },
 }

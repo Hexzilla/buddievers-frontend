@@ -408,9 +408,9 @@ export const AccountDialog = () => {
               <Button
                 //className={formButton}
                 onClick={() => {
-                  addNetwork(ChainId.MOONRIVER);
+                  addNetwork(ChainId.BSC_TESTNET);
                 }}
-                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.MOONRIVER]} alt='' />}
+                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.BSC_TESTNET]} alt='' />}
                 color="primary"
               >
                 Switch to BNB Testnet
