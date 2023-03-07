@@ -100,7 +100,7 @@ const MarketplacePage = () => {
  const [ imgName, setImgName ] = useState("charactor (5).png");
  const [ price, setPrice ] = useState("2500");
  const [ name, setName ] = useState("MOONBUDDIE #192");
- const getCheckNowEvent = (imageName, nftName, nftPrice) => {
+ const getCheckNowEvent = (imageName : any, nftName : any, nftPrice : any) => {
   setImgName(imageName);
   setPrice(nftPrice);
   setName(nftName);

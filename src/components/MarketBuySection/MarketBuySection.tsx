@@ -1,7 +1,7 @@
 import { useClasses } from 'hooks';
 import { styles } from './MarketBuySection.styles';
 import { Grid } from '@mui/material';
-export const MarketBuySection = ({imgName, price, name}) => {
+export const MarketBuySection = ({imgName, price, name} : any) => {
     const { container, overViewItem, btnBuy, btnOffer } = useClasses(styles);
     return (
         <div className={container}>

@@ -2,7 +2,7 @@ import { useClasses } from "hooks";
 
 import {styles} from "./MarketMoreSection.styles";
 import { Grid } from "@mui/material";
-export const MarketMoreSection = ({getCheckNowEvent}) => {
+export const MarketMoreSection = ({getCheckNowEvent} : any) => {
     const { btnCheckNow } = useClasses(styles);
     return (
         <div>
