@@ -26,7 +26,7 @@ const MarketPlacePage = () => {
                     <p className={cardTitle}>BUDDIES</p>
                     <p className={cardSubTitle}>Description</p>
                     <p className={cardText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit massa in est pulvinar mattis. Sed malesuada bibendum sapien, quis ultricies mi lacinia vitae. </p>
-                    <Link to={{ pathname : "/buddies" }}><button className={cardButton}>SEE COLLECTION</button></Link>
+                    <Link to={{ pathname : "/https://singular.app/collectibles/kusama/5225293d2cbb586654-BUDDIES" }} target={"_blank"}><button className={cardButton}>SEE COLLECTION</button></Link>
                 </Grid>
 
                 <Grid item md={4} sm={12}>
@@ -34,7 +34,7 @@ const MarketPlacePage = () => {
                     <p className={cardTitle}>MOONBUDDIES</p>
                     <p className={cardSubTitle}>Description</p>
                     <p className={cardText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit massa in est pulvinar mattis. Sed malesuada bibendum sapien, quis ultricies mi lacinia vitae. </p>
-                    <Link to={{  }}><button className={cardButton}>SEE COLLECTION</button></Link>
+                    <Link to={{ pathname : "/moonbuddies" }}><button className={cardButton}>SEE COLLECTION</button></Link>
                 </Grid>
 
                 <Grid item md={4} sm={12}>

@@ -20,5 +20,32 @@ export const styles = (theme : Theme) => ({
         "@media (min-width : 2990px)" : {
             marginTop : "9vh"
         }
+    },
+    cardImg : {
+        width : '100%'
+    },
+    cardMiddle : {
+        width : '100%',
+        background : "linear-gradient(0deg, #01472A, #01472A), linear-gradient(0deg, #01472A, #01472A), #01472A",
+        paddingTop : "20px",
+        paddingBottom : "20px",
+        paddingLeft : "50px",
+        marginTop : "-6px",
+    },
+    cardBottom : {
+        width : '100%',
+        background : "rgba(0, 0, 0, 0.5)",
+        paddingTop : "20px",
+        paddingBottom : "20px",
+        paddingLeft : "50px",
+    },
+    btnBuy : {
+        padding: '10px 20px',
+        width: '70px',
+        height: '44px',
+        background: '#166D43',
+        border : "none",
+        color : 'white',
+        cursor : "pointer"
     }
 });

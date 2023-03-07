@@ -16,14 +16,15 @@ import { SubcollectionListPage } from './subcollection-list';
 import AuctionListPage from './auctions';
 import MarketplacePage from './marketplace';
 import MarketBuddies from './marketbuddies';
-
+import MarketplaceDetail from './marketplacedetail';
 export const Routing = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/faqs" element={<FAQs />} />
     <Route path="/marketplace" element={<MarketplacePage />} />
     <Route path="/collections" element={<CollectionListPage />} />
-    <Route path="/buddies" element={<MarketBuddies />} />
+    <Route path="/moonbuddies" element={<MarketBuddies />} />
+    <Route path="/buddieDetail" element={<MarketplaceDetail />} />
     <Route
       path="/collection/:type/:address/:subcollectionId"
       element={

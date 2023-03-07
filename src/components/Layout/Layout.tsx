@@ -80,7 +80,7 @@ export const Layout = ({ children }: LayoutProps) => {
                       direction={'row'}
                       onClick={() => setIsDrawerOpened(false)}
                     >
-                      <NavLink href="/freshoffers" className={navItem}>
+                      <NavLink href="#" className={navItem}>
                         
                         COFFEE SHOP
                       </NavLink>

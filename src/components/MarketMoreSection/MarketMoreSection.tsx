@@ -11,7 +11,7 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
                 <div style={{ marginTop : "30px" }}>
                     <Grid container spacing={4}>
                         <Grid item md={3} sm={6} >
-                            <img src="./charactor (1).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                            <img src="./charactor (5).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
                             <Grid container>
                                 <Grid item md={6}>
                                     <p style={{ fontWeight : "900" }}>Buddie</p>
@@ -28,7 +28,7 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
                         </Grid>
 
                         <Grid item md={3} sm={6} >
-                            <img src="./charactor (2).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                            <img src="./charactor (6).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
                             <Grid container>
                                 <Grid item md={6}>
                                     <p style={{ fontWeight : "900" }}>Buddie</p>
@@ -45,7 +45,7 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
                         </Grid>
 
                         <Grid item md={3} sm={6} >
-                            <img src="./charactor (3).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                            <img src="./charactor (7).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
                             <Grid container>
                                 <Grid item md={6}>
                                     <p style={{ fontWeight : "900" }}>Buddie</p>
@@ -62,7 +62,7 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
                         </Grid>
 
                         <Grid item md={3} sm={6} >
-                            <img src="./charactor (4).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                            <img src="./charactor (8).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
                             <Grid container>
                                 <Grid item md={6}>
                                     <p style={{ fontWeight : "900" }}>Buddie</p>
@@ -87,7 +87,7 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
                 <div style={{ marginTop : "30px" }}>
                     <Grid container spacing={2}>
                         <Grid item md={3} sm={6} >
-                            <img src="./charactor (8).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                            <img src="./charactor (9).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
                             <Grid container>
                                 <Grid item md={8}>
                                     {/* <p style={{ fontWeight : "900" }}>Buddie</p> */}
@@ -101,7 +101,7 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
                         </Grid>
 
                         <Grid item md={3} sm={6} >
-                            <img src="./charactor (9).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                            <img src="./charactor (10).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
                             <Grid container>
                                 <Grid item md={8}>
                                     {/* <p style={{ fontWeight : "900" }}>Buddie</p> */}
