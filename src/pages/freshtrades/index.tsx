@@ -23,8 +23,10 @@ const FreshTradesPage = () => {
   const imageURI = "https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png";
   const { container, button } = useClasses(styles);
 
+  console.log('errMessage', errMessage)
   useEffect(() => {
     const init = async () => {
+      console.log('init~~~~~~~~~~~~~~~~~~~~~~~');
       const res1 = await mintContract?.getPrepaidMints(account);
       setPrepaidNFTs(parseInt(res1.toString()))
 
@@ -37,9 +39,8 @@ const FreshTradesPage = () => {
       const res = await mintContract?.totalSupply();
       setTotalSupply(parseInt(res.toString()))
     }
-
     init();
-  }, [account, updated])
+  }, [account, updated, mintContract]);
 
   const handleInputChange = (event: any) => {
     setMintAmount(event.target.value)
@@ -65,7 +66,8 @@ const FreshTradesPage = () => {
       return;
     }
 
-    const res = await mintContract?.freeMint(mintAmount,
+    setErrMessage('');
+    await mintContract?.freeMint(mintAmount,
       imageURI, {
       gasLimit: GAS_LIMIT,
       from: account,
@@ -76,6 +78,7 @@ const FreshTradesPage = () => {
     }).then((receipt: any) => {
       setUpdated(!updated)
       console.debug('result', receipt)
+      setErrMessage('You have successfully minted token!');
     })
   }
 
@@ -86,16 +89,18 @@ const FreshTradesPage = () => {
       return;
     }
 
-    const res = await mintContract?.whitelistedMints(mintAmount,
-      imageURI)
+    setErrMessage('');
+    await mintContract
+      ?.whitelistedMints(mintAmount, imageURI)
       .catch((err: any) => {
-        setErrMessage("Your whitelist sale finished!");
-        setOpen(true)
+        setErrMessage('Your whitelist sale finished!');
+        setOpen(true);
       })
       .then((receipt: any) => {
-        setUpdated(!updated)
-        console.debug('result', receipt)
-    })
+        setUpdated(!updated);
+        console.debug('result', receipt);
+        setErrMessage('You have successfully minted token!');
+      });
   }
 
   const action = (
