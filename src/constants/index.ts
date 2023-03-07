@@ -1,5 +1,6 @@
 import MoonriverIcon from '../assets/images/moonriver_icon.svg'
 import MoonbeamIcon from '../assets/images/moonbeam_icon.svg'
+import BscIcon from '../assets/images/bsc_icon.svg'
 
 export const CHAIN_ID = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1285', 10);
 
@@ -18,37 +19,37 @@ export enum ChainId {
   MAINNET = 1,
   ROPSTEN = 3,
   RINKEBY = 4,
-  // GÖRLI = 5,
   KOVAN = 42,
   BSC = 56,
+  BSC_TESTNET = 97,
   EWC = 246,
   VOLTA = 73799,
   MOONRIVER = 97,
   MOONBEAM= 1284
 }
 
-export const PERMISSIONED_CHAINS = [ChainId.MOONRIVER, ChainId.MOONBEAM]
+export const PERMISSIONED_CHAINS = [ChainId.BSC, ChainId.BSC_TESTNET]
 
-export const DEFAULT_CHAIN = ChainId.MOONRIVER
+export const DEFAULT_CHAIN = ChainId.BSC_TESTNET
 
 export const RPC_URLS: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'https://bsc-testnet.public.blastapi.io',
-  [ChainId.MOONBEAM]: 'https://moonbeam-rpc.moonsama.com'
+  [ChainId.BSC]: 'https://bsc-dataseed.binance.org',
+  [ChainId.BSC_TESTNET]: 'https://bsc-testnet.public.blastapi.io',
 };
 
 export const NATIVE_TOKEN_SYMBOL: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'TBNB',
-  [ChainId.MOONBEAM]: 'GLMR'
+  [ChainId.BSC]: 'BNB',
+  [ChainId.BSC_TESTNET]: 'BNB'
 };
 
 export const NETWORK_NAME: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'Mumbai',
-  [ChainId.MOONBEAM]: 'Moonbeam'
+  [ChainId.BSC]: 'Binance Smart Chain',
+  [ChainId.BSC_TESTNET]: 'Binance Smart Chain Testnet'
 };
 
 export const NETWORK_ICONS: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: MoonriverIcon,
-  [ChainId.MOONBEAM]: MoonbeamIcon
+  [ChainId.BSC]: BscIcon,
+  [ChainId.BSC_TESTNET]: BscIcon
 };
 
 export const MARKETPLACE_SUBGRAPH_URLS: { [chainId: number]: string } = {
@@ -66,7 +67,6 @@ export const MULTICALL_NETWORKS: { [chainId: number]: string } = {
   [ChainId.ROPSTEN]: '0x53C43764255c17BD724F74c4eF150724AC50a3ed',
   [ChainId.KOVAN]: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
   [ChainId.RINKEBY]: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',
-  // [ChainId.GÖRLI]: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
   [ChainId.VOLTA]: '0xf097d0eAb2dC8B6396a6433978567C443a691815', // latest multicall 2 deployments
   [ChainId.MOONRIVER]: '0x8B60499C8e99d1218Df15ba6e8f0937e1878b86c', // latest multicall 2 deployments
   [ChainId.MOONBEAM]: '0x62614aee098C7a84dC070fF06688F4C35D3868F9'
@@ -105,19 +105,17 @@ export const MINT2_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.MOONRIVER]: '0x4FBFc1aB4720A6e6da2237e73f950faa080065a0',
 };
 
-
 export const WAREHOUSE_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.VOLTA]: '0xE796e4CC54856b5d88E44aAca85e3B7D633c34a1',
   [ChainId.MOONRIVER]: '0xe41509E3034f3f1C7Ea918423Da60B2bA6F14087',
   [ChainId.MOONBEAM]: '0x108E9B2BFB98402208E4172f5045BF605F148eEb'
 };
 
-export const RECOGNIZED_COLLECTIONS_ADDRESS: { [chainId in ChainId]?: string } =
-  {
-    [ChainId.VOLTA]: '0xe35D9ACD226165d21d8bC7cf2C6D71b0deCb67d6',
-    [ChainId.MOONRIVER]: '0x45613dAd51D4262dB6c0F94Fc96435D8800500cD',
-    [ChainId.MOONBEAM]: '0x9b7c849864F246b1A963fdbbbfC198083e646e5b'
-  };
+export const RECOGNIZED_COLLECTIONS_ADDRESS: { [chainId in ChainId]?: string } = {
+  [ChainId.VOLTA]: '0xe35D9ACD226165d21d8bC7cf2C6D71b0deCb67d6',
+  [ChainId.MOONRIVER]: '0x45613dAd51D4262dB6c0F94Fc96435D8800500cD',
+  [ChainId.MOONBEAM]: '0x9b7c849864F246b1A963fdbbbfC198083e646e5b'
+};
 
 export const WMOVR_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.VOLTA]: '0xcBe8903EFA22711608D2f0B9aA09852f9B30DBdc', //0xFF3e85e33A8Cfc73fe08F437bFAEADFf7C95e285
@@ -127,7 +125,9 @@ export const WMOVR_ADDRESS: { [chainId in ChainId]?: string } = {
 export const EXPLORER_URL: { [chainId in ChainId]?: string } = {
   [ChainId.VOLTA]: 'https://volta-explorer.energyweb.org',
   [ChainId.MOONRIVER]: 'https://moonriver.moonscan.io',
-  [ChainId.MOONBEAM]: 'https://blockscout.moonbeam.network'
+  [ChainId.MOONBEAM]: 'https://blockscout.moonbeam.network',
+  [ChainId.BSC]: 'https://bscscan.com',
+  [ChainId.BSC_TESTNET]: 'https://testnet.bscscan.com'
 };
 
 export const PROTOCOL_FEE_BPS = '200';
