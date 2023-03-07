@@ -33,7 +33,6 @@ const FreshTradesPage = () => {
   console.log('errMessage', errMessage);
   useEffect(() => {
     const init = async () => {
-      console.log('init~~~~~~~~~~~~~~~~~~~~~~~');
       const res1 = await mintContract?.getPrepaidMints(account);
       setPrepaidNFTs(parseInt(res1.toString()));
 
