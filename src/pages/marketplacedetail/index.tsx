@@ -23,6 +23,7 @@ import { MarketMoreSection } from 'components/MarketMoreSection/MarketMoreSectio
 import { styles } from './styles';
 import { useClasses } from 'hooks';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 const StyledContainer = styled('div')`
   tex-align: center;
 `;
@@ -97,9 +98,10 @@ const MarketplaceDetail = () => {
     approve()
   }
   */
- const [ imgName, setImgName ] = useState("charactor (5).png");
- const [ price, setPrice ] = useState("2500");
- const [ name, setName ] = useState("MOONBUDDIE #192");
+ const { state } = useLocation();
+ const [ imgName, setImgName ] = useState(state.imgName);
+ const [ price, setPrice ] = useState(state.Price);
+ const [ name, setName ] = useState(state.Name);
  const getCheckNowEvent = (imageName : any, nftName : any, nftPrice : any) => {
   setImgName(imageName);
   setPrice(nftPrice);
