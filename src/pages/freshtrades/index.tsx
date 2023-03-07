@@ -1,12 +1,18 @@
 import { useState, Fragment, useEffect } from 'react';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { Container } from '@mui/system';
-import { TextField, Snackbar, IconButton, Grid, Typography } from '@mui/material';
+import {
+  TextField,
+  Snackbar,
+  IconButton,
+  Grid,
+  Typography,
+} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { Button, GlitchText } from 'ui';
 import { styles } from './styles';
-import { useMint1Contract } from 'hooks/useContracts/useContracts'
-import { MINT1_ADDRESS, ChainId, GAS_LIMIT, MINT_PRICE } from '../../constants'
+import { useMint1Contract } from 'hooks/useContracts/useContracts';
+import { MINT1_ADDRESS, ChainId, GAS_LIMIT, MINT_PRICE } from '../../constants';
 
 const FreshTradesPage = () => {
   const { account, error } = useActiveWeb3React();
@@ -16,37 +22,41 @@ const FreshTradesPage = () => {
   const [paidNFTS, setPaidNFTs] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
   const [errMessage, setErrMessage] = useState('');
-  const [updated, setUpdated] = useState(false)
+  const [updated, setUpdated] = useState(false);
   const TOTAL = 500;
   const [open, setOpen] = useState(false);
   const mintContract = useMint1Contract(MINT1_ADDRESS[ChainId.MOONRIVER], true);
-  const imageURI = "https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png";
+  const imageURI =
+    'https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png';
   const { container, button } = useClasses(styles);
 
-  console.log('errMessage', errMessage)
+  console.log('errMessage', errMessage);
   useEffect(() => {
     const init = async () => {
       console.log('init~~~~~~~~~~~~~~~~~~~~~~~');
       const res1 = await mintContract?.getPrepaidMints(account);
-      setPrepaidNFTs(parseInt(res1.toString()))
+      setPrepaidNFTs(parseInt(res1.toString()));
 
       const res2 = await mintContract?.getWhitelistedMints(account);
-      setWhitelistNFTs(parseInt(res2.toString()))
+      setWhitelistNFTs(parseInt(res2.toString()));
 
       const res3 = await mintContract?.getPublicMints(account);
-      setPaidNFTs(parseInt(res3.toString()))
+      setPaidNFTs(parseInt(res3.toString()));
 
       const res = await mintContract?.totalSupply();
-      setTotalSupply(parseInt(res.toString()))
-    }
+      setTotalSupply(parseInt(res.toString()));
+    };
     init();
   }, [account, updated, mintContract]);
 
   const handleInputChange = (event: any) => {
-    setMintAmount(event.target.value)
-  }
+    setMintAmount(event.target.value);
+  };
 
-  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -56,36 +66,38 @@ const FreshTradesPage = () => {
 
   const publicMint = async () => {
     if (!account) {
-      setErrMessage("Please connect your wallet!");
-      setOpen(true)
+      setErrMessage('Please connect your wallet!');
+      setOpen(true);
       return;
     }
     if (mintAmount <= 0 || mintAmount > 5) {
-      setErrMessage("Please input between 1 and 5");
-      setOpen(true)
+      setErrMessage('Please input between 1 and 5');
+      setOpen(true);
       return;
     }
 
     setErrMessage('');
-    await mintContract?.freeMint(mintAmount,
-      imageURI, {
-      gasLimit: GAS_LIMIT,
-      from: account,
-      value: MINT_PRICE * mintAmount
-    }).catch((err: any) => {
-      setErrMessage("Please check your fund or network status!");
-      setOpen(true)
-    }).then((receipt: any) => {
-      setUpdated(!updated)
-      console.debug('result', receipt)
-      setErrMessage('You have successfully minted token!');
-    })
-  }
+    await mintContract
+      ?.freeMint(mintAmount, imageURI, {
+        gasLimit: GAS_LIMIT,
+        from: account,
+        value: MINT_PRICE * mintAmount,
+      })
+      .catch((err: any) => {
+        setErrMessage('Please check your fund or network status!');
+        setOpen(true);
+      })
+      .then((receipt: any) => {
+        setUpdated(!updated);
+        console.debug('result', receipt);
+        setErrMessage('You have successfully minted token!');
+      });
+  };
 
   const whitelistMint = async () => {
     if (mintAmount <= 0 || mintAmount > 5) {
-      setErrMessage("Please input between 1 and 5");
-      setOpen(true)
+      setErrMessage('Please input between 1 and 5');
+      setOpen(true);
       return;
     }
 
@@ -101,7 +113,7 @@ const FreshTradesPage = () => {
         console.debug('result', receipt);
         setErrMessage('You have successfully minted token!');
       });
-  }
+  };
 
   const action = (
     <Fragment>
@@ -120,16 +132,14 @@ const FreshTradesPage = () => {
     <>
       <div className={container}>
         <GlitchText variant="h1">Mint NFT</GlitchText>
-        {
-          prepaidNFTs != 0 && (
-            <>
+        {prepaidNFTs != 0 && (
+          <>
             <Typography variant="subtitle1" component="div">
               Prepaid Mints: {prepaidNFTs - whitelistNFTs}
             </Typography>
             <br />
-            </>
-          )
-        }
+          </>
+        )}
 
         <Typography variant="subtitle1" component="div">
           Owned NFTs: {whitelistNFTs + paidNFTS}
@@ -141,36 +151,31 @@ const FreshTradesPage = () => {
         </Typography>
         <br />
 
-        {
-          prepaidNFTs != 0 && (
-            <>
-              <Grid container spacing={1}>
-                <Grid item xs={2}>
-                  <TextField
-                    id="filled-number"
-                    label="Mint amounts"
-                    type="number"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    variant="filled"
-                    size="small"
-                    onChange={handleInputChange}
-                  />
-                </Grid>
-                <Grid item xs={2}>
-                  <Button
-                    className={button}
-                    onClick={whitelistMint}
-                  >
-                    Get My Prepaid Mints
-                  </Button>
-                </Grid>
+        {prepaidNFTs != 0 && (
+          <>
+            <Grid container spacing={1}>
+              <Grid item xs={2}>
+                <TextField
+                  id="filled-number"
+                  label="Mint amounts"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="filled"
+                  size="small"
+                  onChange={handleInputChange}
+                />
               </Grid>
-              <br />
-            </>
-          )
-        }
+              <Grid item xs={2}>
+                <Button className={button} onClick={whitelistMint}>
+                  Get My Prepaid Mints
+                </Button>
+              </Grid>
+            </Grid>
+            <br />
+          </>
+        )}
         <Grid container spacing={1}>
           <Grid item xs={2}>
             <TextField
@@ -186,10 +191,7 @@ const FreshTradesPage = () => {
             />
           </Grid>
           <Grid item xs={2}>
-            <Button
-              className={button}
-              onClick={publicMint}
-            >
+            <Button className={button} onClick={publicMint}>
               Mints
             </Button>
           </Grid>
