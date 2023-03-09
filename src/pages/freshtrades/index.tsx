@@ -1,6 +1,8 @@
 import { useState, Fragment, useEffect } from 'react';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import {
+  Backdrop,
+  CircularProgress,
   TextField,
   Snackbar,
   IconButton,
@@ -14,12 +16,13 @@ import { useMint1Contract } from 'hooks/useContracts/useContracts';
 import { MINT1_ADDRESS, ChainId, GAS_LIMIT, MINT_PRICE } from '../../constants';
 
 const FreshTradesPage = () => {
-  const { account, error } = useActiveWeb3React();
+  const { account } = useActiveWeb3React();
   const [mintAmount, setMintAmount] = useState(0);
   const [prepaidNFTs, setPrepaidNFTs] = useState(0);
   const [whitelistNFTs, setWhitelistNFTs] = useState(0);
   const [paidNFTS, setPaidNFTs] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
+  const [minting, setMinting] = useState(false);
   const [errMessage, setErrMessage] = useState('');
   const [updated, setUpdated] = useState(false);
   const TOTAL = 500;
@@ -73,6 +76,7 @@ const FreshTradesPage = () => {
       return;
     }
 
+    setMinting(true);
     setErrMessage('');
     await mintContract
       ?.freeMint(mintAmount, imageURI, {
@@ -93,7 +97,8 @@ const FreshTradesPage = () => {
         setUpdated(!updated);
         setErrMessage('You have successfully minted token!');
         setOpen(true);
-      });
+      })
+      .finally(() => setMinting(false));
   };
 
   const whitelistMint = async () => {
@@ -103,6 +108,7 @@ const FreshTradesPage = () => {
       return;
     }
 
+    setMinting(true);
     setErrMessage('');
     await mintContract
       ?.whitelistedMints(mintAmount, imageURI)
@@ -119,7 +125,8 @@ const FreshTradesPage = () => {
         setUpdated(!updated);
         setErrMessage('You have successfully minted token!');
         setOpen(true);
-      });
+      })
+      .finally(() => setMinting(false));
   };
 
   const action = (
@@ -204,6 +211,10 @@ const FreshTradesPage = () => {
           </Grid>
         </Grid>
         <br />
+
+        <Backdrop sx={{ color: '#000', zIndex: 1000 }} open={minting}>
+          <CircularProgress color="primary" />
+        </Backdrop>
 
         <Snackbar
           open={open}
