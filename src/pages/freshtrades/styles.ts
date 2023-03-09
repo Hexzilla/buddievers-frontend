@@ -19,6 +19,7 @@ export const styles = (theme: Theme) => ({
     justifyContent: 'center',
     marginTop: 12,
     textAlign: 'center',
+    minHeight: '800px',
   },
   scene: {
     position: 'absolute',

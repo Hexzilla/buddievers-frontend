@@ -92,15 +92,15 @@ export interface WalletInfo {
 }
 
 export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
-  TALISMAN: {
-    connector: talisman,
-    name: 'Talisman',
-    iconName: 'talisman.svg',
-    description: 'Talisman wallet.',
-    href: null,
-    color: '#FF3D23',
-    icon: TalismanIcon,
-  },
+  // TALISMAN: {
+  //   connector: talisman,
+  //   name: 'Talisman',
+  //   iconName: 'talisman.svg',
+  //   description: 'Talisman wallet.',
+  //   href: null,
+  //   color: '#FF3D23',
+  //   icon: TalismanIcon,
+  // },
   INJECTED: {
     connector: injected,
     name: 'Injected',
