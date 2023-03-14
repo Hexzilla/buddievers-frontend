@@ -6,7 +6,7 @@ export const styles = (theme: Theme) => ({
         display: "flex",
         alignItems: "center",
         padding: "2vw 8vh",
-        backgroundColor : "#01472A"
+        backgroundColor : "#016B43"
     },
     title: {
         color : "white",

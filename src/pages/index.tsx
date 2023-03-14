@@ -17,10 +17,12 @@ import AuctionListPage from './auctions';
 import MarketplacePage from './marketplace';
 import MarketBuddies from './marketbuddies';
 import MarketplaceDetail from './marketplacedetail';
+import MintSoon from './mintSoon';
 export const Routing = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/faqs" element={<FAQs />} />
+    {/* <Route path="/mint" element={<MintSoon />} /> */}
     <Route path="/marketplace" element={<MarketplacePage />} />
     <Route path="/collections" element={<CollectionListPage />} />
     <Route path="/moonbuddies" element={<MarketBuddies />} />
