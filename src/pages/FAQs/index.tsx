@@ -9,43 +9,50 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
 
-    const Accordion = styled((props: AccordionProps) => (
-        <MuiAccordion disableGutters elevation={0} square {...props} />
-        ))(({ theme }) => ({
-            border: `none`,
-            '&:not(:last-child)': {
-                borderBottom: 0,
-            },
-            '&:before': {
-                display: 'none',
-            },
-    }));
-  
-    const AccordionSummary = styled((props: AccordionSummaryProps) => (
-        <MuiAccordionSummary
-        expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
-        {...props}
-        />
-        ))(({ theme }) => ({
-            backgroundColor: "transparent",
-            flexDirection: 'row-reverse',
-            '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-                transform: 'rotate(90deg)',
-            },
-            '& .MuiAccordionSummary-content': {
-                marginLeft: theme.spacing(1),
-            },
-            color : "white",
-            border : "none"
-    }));
-  
-    const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-        padding: theme.spacing(2),
+const Accordion = styled((props: AccordionProps) => (
+    <MuiAccordion disableGutters elevation={0} square {...props} />
+    ))(({ theme }) => ({
+        border: `none`,
+        '&:not(:last-child)': {
+            borderBottom: 0,
+        },
+        '&:before': {
+            display: 'none',
+        },
+}));
+
+const AccordionSummary = styled((props: AccordionSummaryProps) => (
+    <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+    />
+    ))(({ theme }) => ({
+        backgroundColor: "transparent",
+        flexDirection: 'row-reverse',
+        '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+            transform: 'rotate(90deg)',
+        },
+        '& .MuiAccordionSummary-content': {
+            marginLeft: theme.spacing(1),
+        },
         color : "white",
-        background : "rgba(0,0,0,0.5)"
-    }));
+        border : "none",
+        "& p" : {
+            fontSize : "24px",
+            fontWeight : "900"
+        }
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+    padding: theme.spacing(2),
+    color : "white",
+    background : "rgba(0,0,0,0.5)",
+    "& p" : {
+        fontSize : "16px",
+        fontWeight : "500"
+    }
+}));
 
 
 const FAQs = () => {
@@ -108,12 +115,12 @@ const FAQs = () => {
     const FAQItems = FAQs.map((FAQ) => 
         <Accordion expanded={expanded === 'panel' + FAQ.id} onChange={handleChange('panel' + FAQ.id)}>
             <AccordionSummary aria-controls={"panel" + FAQ.id + "d-content"} id={"panel" + FAQ.id + "d-haeder"}>
-                <Typography>{ FAQ.Question }</Typography>
+                <p>{ FAQ.Question }</p>
             </AccordionSummary>
             <AccordionDetails>
-                <Typography>
+                <p>
                     { FAQ.Answer }
-                </Typography>
+                </p>
             </AccordionDetails>
         </Accordion>
     )
