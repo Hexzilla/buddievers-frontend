@@ -11,7 +11,7 @@ export const ExternalLink = ({ href, children, fontSize }: any) => {
       target="_blank"
       rel="noreferrer"
       className={styles.externalLink}
-      style={{fontSize: fontSize ?? '12px'}}
+      style={{fontSize: fontSize ?? '14px'}}
     >
       {children}
     </a>

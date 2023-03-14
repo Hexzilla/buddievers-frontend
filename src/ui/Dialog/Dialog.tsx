@@ -6,7 +6,7 @@ import { useClasses } from 'hooks';
 import { styles } from './Dialog.styles';
 
 export const Dialog = ({ title, children, onClose, ...props }: DialogProps) => {
-  const { dialogContainer, dialogTitle, paperStyles, closeButton } =
+  const { dialogContainer, dialogTitle, dialogContent, paperStyles, closeButton } =
     useClasses(styles);
   const handleClose = () => {
     onClose && onClose({}, 'escapeKeyDown');
@@ -20,7 +20,7 @@ export const Dialog = ({ title, children, onClose, ...props }: DialogProps) => {
       onClose={onClose}
       {...props}
     >
-      <div>
+      <div className={dialogContent}>
         <DialogTitle className={dialogTitle}>
           <Typography>{title}</Typography>
           {onClose ? (

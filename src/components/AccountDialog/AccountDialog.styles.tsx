@@ -2,6 +2,8 @@ import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
   dialogContainer: {
+    justfyItems: 'center',
+    algnItems: 'center',
     display: 'flex',
     padding: '0 32px 32px 32px',
     flexDirection: 'column',
@@ -11,13 +13,44 @@ export const styles = (theme: Theme) => ({
   },
   titleSlot: {
     display: 'block',
-    marginBottom: '20px',
+    marginLeft: '40px',
+    marginBottom: '10px',
+    color: "#FFFFFF",
+    fontSize: '26px',
+    fontWeight: '900',
+    fontSytle: 'normal',
+    fontFamily: 'Poppins',
+    inlineHeight: '36px',
   },
   row: {
     marginTop: '20px',
     display: 'flex',
     flexDirection: 'row',
-    fontSize: '12px',
+    fontSize: '14px',
+    fontWeight: '500',
+    fontSytle: 'normal',
+    fontFamily: 'Poppins',
+    inlineHeight: '24px',
+    align: 'center',
+  },
+  otherCard :
+  {
+    borderRadius: '10px',
+    marginTop: '20px',
+    display: 'flex',
+    flexDirection: 'row',
+    background: "#F5E2B3",
+    color: "#01472A",
+    fontSize: '14px',
+    fontWeight: '700',
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    textAlign: 'center',
+    width: '220px',
+    margin: '35px',
+    "row:hover" : {
+      backgorund : '#FFFFFF'
+    }
   },
   fontSize12: {
     fontSize: '12px'
