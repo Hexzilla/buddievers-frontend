@@ -85,7 +85,7 @@ export const Layout = ({ children }: LayoutProps) => {
                       
                         MINT
                       </NavLink>
-                      <NavLink href="/faq" className={navItem}>
+                      <NavLink href="/faqs" className={navItem}>
                       
                         FAQ
                       </NavLink>
