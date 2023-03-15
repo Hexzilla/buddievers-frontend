@@ -50,25 +50,19 @@ export const Whitelist = ({ onNext }: Props) => {
   const state: MintState = 'soon';
 
   return (
-    <Grid
-      container
-      direction="column"
-      spacing={1}
-      alignItems="center"
-      style={{ width: '100%' }}
-    >
-      <Grid item md={2}>
+    <Grid container direction="column" spacing={1} alignItems="center">
+      <Grid item>
         <Logo />
       </Grid>
-      <Grid item md={2}>
+      <Grid item>
         <MainTitle>
           {state === 'soon' ? 'No Whitelist' : 'Mint Is Online'}
         </MainTitle>
       </Grid>
-      <Grid item md={2}>
+      <Grid item>
         <SubTitle>Join us on the public mint</SubTitle>
       </Grid>
-      <Grid item md={2}>
+      <Grid item>
         <ButtonContainer>
           <MintButton
             title="Take me to the lift off"

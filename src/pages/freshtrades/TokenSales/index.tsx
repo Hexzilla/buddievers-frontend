@@ -88,9 +88,7 @@ export const TokenSales = ({ onNext }: Props) => {
       <Grid item md={2}>
         <Grid container direction="row" spacing={1} alignItems="center">
           <Grid item md={6}>
-            <MintContainer>
-              
-            </MintContainer>
+            <MintContainer></MintContainer>
           </Grid>
           <Grid item md={6}>
             <LiveContainer></LiveContainer>

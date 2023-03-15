@@ -133,9 +133,12 @@ const FreshTradesPage = () => {
         <source src="./background.mp4" type="video/mp4" />
       </Video>
       <div className={container} style={stylesBackground}>
-        {/* {stage === 0 && <Welcome onNext={() => setStage(1)} />}
-        {stage === 1 && <Whitelist onNext={() => setStage(2)} />} */}
-        <TokenSales onNext={() => setStage(3)} />
+        {stage === 0 && <Welcome onNext={() => setStage(1)} />}
+        {stage === 1 && <Whitelist onNext={() => setStage(2)} />}
+        {/* <TokenSales onNext={() => setStage(3)} /> */}
+
+
+
         {/* <Grid item md={2}>
           <NavLink href="/" className={navItem}>
             <div className={logo}>

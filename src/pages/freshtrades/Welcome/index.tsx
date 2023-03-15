@@ -48,25 +48,19 @@ export const Welcome = ({ onNext }: Props) => {
   const state: MintState = 'soon';
 
   return (
-    <Grid
-      container
-      direction="column"
-      spacing={1}
-      alignItems="center"
-      style={{ width: '100%' }}
-    >
-      <Grid item md={2}>
+    <Grid container direction="column" spacing={1} alignItems="center">
+      <Grid item>
         <Logo />
       </Grid>
-      <Grid item md={2}>
+      <Grid item>
         <MainTitle>
           {state === 'soon' ? 'Mint Soon' : 'Mint Is Online'}
         </MainTitle>
       </Grid>
-      <Grid item md={2}>
+      <Grid item>
         <SubTitle>Check Your Whitelist Status</SubTitle>
       </Grid>
-      <Grid item md={2}>
+      <Grid item>
         <ButtonContainer>
           <MintButton
             title="Are you registered?"
