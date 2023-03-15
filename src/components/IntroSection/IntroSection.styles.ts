@@ -17,12 +17,12 @@ export const styles = (theme: Theme) => ({
         }
     },
     button : {
-        height: "61px",
-        borderRadius: "20px",
-        backgroundColor: "#F5E2B3",
-        padding: " 20px 40px",
-        fontSize: "14px",
-        fontWeight: 700,
+        height: "98px",
+        borderRadius: "10px",
+        backgroundColor: "#F5E2B2",
+        padding: "30px",
+        fontSize: "25px",
+        fontWeight: 900,
         color: theme.palette.text.primary,
         "&:hover":{
             backgroundColor: "rgba(0,0,0,0.4)",
