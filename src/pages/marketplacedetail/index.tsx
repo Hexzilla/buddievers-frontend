@@ -24,9 +24,13 @@ import { styles } from './styles';
 import { useClasses } from 'hooks';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { MarketplaceTrade } from 'components/MarketplaceTrade/MarketplaceTrade';
+
+
 const StyledContainer = styled('div')`
   tex-align: center;
 `;
+
 
 const MarketplaceDetail = () => {
   /*
@@ -112,6 +116,7 @@ const MarketplaceDetail = () => {
     <div className={container}>
       <MarketIntroSection />
       <MarketBuySection imgName={imgName} price={price} name={name} />
+      <MarketplaceTrade />
       <MarketMoreSection getCheckNowEvent={getCheckNowEvent} />
     </div>
   );

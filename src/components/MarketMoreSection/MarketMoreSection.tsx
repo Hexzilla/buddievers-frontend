@@ -81,43 +81,6 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
                     </Grid>
                 </div>
             </div>
-
-            <div style={{ marginTop : "50px", color : "white" }}>
-                <h1 style={{ fontSize : '40px', fontWeight : "900" }}>CHECK YOUR COLLECTION IN YOUR COFFEE PLACE</h1>
-                <div style={{ marginTop : "30px" }}>
-                    <Grid container spacing={2}>
-                        <Grid item md={3} sm={6} >
-                            <img src="./charactor (9).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
-                            <Grid container>
-                                <Grid item md={8}>
-                                    {/* <p style={{ fontWeight : "900" }}>Buddie</p> */}
-                                    <p style={{ fontWeight : "900", fontSize : "24px" }}>BUDDIE #70</p>
-                                    <p style={{ color : "white" }}>MOONBUDDIES</p>
-                                </Grid>
-                                <Grid item md={4} style={{ textAlign : "right" }}>
-                                </Grid>
-                            </Grid>
-                            <button className={btnCheckNow}>STAKE IT</button>
-                        </Grid>
-
-                        <Grid item md={3} sm={6} >
-                            <img src="./charactor (10).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
-                            <Grid container>
-                                <Grid item md={8}>
-                                    {/* <p style={{ fontWeight : "900" }}>Buddie</p> */}
-                                    <p style={{ fontWeight : "900", fontSize : "24px" }}>BUDDIE #70</p>
-                                    <p style={{ color : "white" }}>BUDDIES</p>
-                                </Grid>
-                                <Grid item md={4} style={{ textAlign : "right" }}>
-                                </Grid>
-                            </Grid>
-                            <button className={btnCheckNow}>STAKE IT</button>
-                        </Grid>
-                        <Grid item md={3} sm={6} ></Grid>
-                        <Grid item md={3} sm={6} ></Grid>
-                    </Grid>
-                </div>
-            </div>
         </div>
     );
 }

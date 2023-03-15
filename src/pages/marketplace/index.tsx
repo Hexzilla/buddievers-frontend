@@ -4,44 +4,40 @@ import { useClasses } from 'hooks';
 import { styles } from "./styles";
 import { Link } from "react-router-dom";
 const MarketPlacePage = () => {
-    const { container, introContainer, button, cardImg, cardTitle, cardSubTitle, cardText, cardButton } = useClasses(styles);
+    const { container, introContainer, button, cardImg, cardTitle, cardSubTitle, cardText, cardButton, bannerContainer } = useClasses(styles);
     const addWhitelist = () => {
         window.open("https://discord.gg/9HSbQQ7gpw")
     }
     return (
         <div className={container}>
             <div className={introContainer}>
-                <Button
-                    className={button}
-                    variant="contained"
-                    onClick={addWhitelist}
-                >
-                    MARKETPLACE
-                </Button>
+                <div className={ bannerContainer }>
+                    <p>MARKETPLACE</p>
+                </div>
             </div>
 
             <Grid container spacing={4} style={{ marginTop : "50px" }}>
                 <Grid item md={4} sm={12}>
                     <img src="./B-BUDS1.png" className={cardImg} />
                     <p className={cardTitle}>BUDDIES</p>
-                    <p className={cardSubTitle}>Description</p>
-                    <p className={cardText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit massa in est pulvinar mattis. Sed malesuada bibendum sapien, quis ultricies mi lacinia vitae. </p>
+                    <p className={cardSubTitle}>GENERATION1</p>
+                    <p className={cardText}>Genesis project with 50 NFTs allocated in Kusama Network</p><br />
                     <Link to={{ pathname : "/https://singular.app/collectibles/kusama/5225293d2cbb586654-BUDDIES" }} target={"_blank"}><button className={cardButton}>SEE COLLECTION</button></Link>
                 </Grid>
 
                 <Grid item md={4} sm={12}>
                     <img src="./B-BUDS2.png" className={cardImg} />
                     <p className={cardTitle}>MOONBUDDIES</p>
-                    <p className={cardSubTitle}>Description</p>
-                    <p className={cardText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit massa in est pulvinar mattis. Sed malesuada bibendum sapien, quis ultricies mi lacinia vitae. </p>
+                    <p className={cardSubTitle}>GENERATION2</p>
+                    <p className={cardText}>3D NFT project with 500 NFTs allocated in Exosama Network</p><br />
                     <Link to={{ pathname : "/moonbuddies" }}><button className={cardButton}>SEE COLLECTION</button></Link>
                 </Grid>
 
                 <Grid item md={4} sm={12}>
                     <img src="./B-BUDS3.png" className={cardImg} />
                     <p className={cardTitle}>$SEEDS</p>
-                    <p className={cardSubTitle}>Description</p>
-                    <p className={cardText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit massa in est pulvinar mattis. Sed malesuada bibendum sapien, quis ultricies mi lacinia vitae. </p>
+                    <p className={cardSubTitle}>BUDDIES ECONOMY</p>
+                    <p className={cardText}>Buddieverse alpha resource that let you to participate in events, to buy composable items and more</p>
                     <Link to={{  }}><button className={cardButton}>SEE COLLECTION</button></Link>
                 </Grid>
             </Grid>

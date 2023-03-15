@@ -19,7 +19,21 @@ export const styles = (theme : Theme) => ({
         marginTop: "14vh",
         "@media (min-width : 2990px)" : {
             marginTop : "9vh"
+        },
+        "& > div > p" : {
+            fontSize : "4.5vw",
+            fontWeight : "900",
+            color : 'white'
         }
+    },
+    bannerContainer : {
+        width : "100%", 
+        height : "100%", 
+        background : "rgba(0,0,0,0.5)", 
+        textAlign : "center",
+        display : "flex",
+        alignItems: "center",
+        justifyContent: "center",
     },
     button : {
         height: "98px",
