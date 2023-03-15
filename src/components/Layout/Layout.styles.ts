@@ -11,19 +11,14 @@ export const styles = (theme: Theme) => ({
     paddintBottom : "5px"
     
    },
-   navLinkContainer1 : {
+   navLinkContainer : {
     justifyContent : "initial",
     paddingTop: "20px",
     paddingBottom: "20px",
+    paddingLeft : "10px",
     borderBottom : "1px solid white",
     borderTop : "1px solid white",
-   },
-   navLinkContainer2 : {
-    justifyContent : "end",
-    paddingTop: "20px",
-    paddingBottom: "20px",
-    borderBottom : "1px solid white",
-    borderTop : "1px solid white",
+    maxHeight : "65px"
    },
    socialImages : {
     width : "30px"
@@ -69,10 +64,10 @@ export const styles = (theme: Theme) => ({
     justifyContent: 'space-between',
   },
   navItem: {
-    margin: '0 8%',
+    // margin: '0 8%',
     textDecoration: 'none !important',
     flexShrink: 0,
-    fontSize: "20px",
+    fontSize: "14px",
     color: "#FFF",
   },
   navItemMobile : {

@@ -17,7 +17,7 @@ import { styles } from './Layout.styles';
 import { LayoutProps } from './Layout.types';
 
 export const Layout = ({ children }: LayoutProps) => {
-  const { headerWrapper, logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer, headerGrids, navLinkContainer1, navLinkContainer2, navItemMobile, socialImages, socialTitle } =
+  const { headerWrapper, logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer, headerGrids, navLinkContainer, navItemMobile, socialImages, socialTitle } =
     useClasses(styles);
 
   const showRegularMenu = useMediaQuery(
@@ -45,19 +45,25 @@ export const Layout = ({ children }: LayoutProps) => {
               <Grid container spacing={2}>
                 <Grid className={headerGrids} item md={5}>
                   <Stack
-                    className={navLinkContainer1}
+                    className={navLinkContainer}
                     direction={'row'}
                     onClick={() => setIsDrawerOpened(false)}
                   >
-                    
-                    <NavLink href="/marketplace" className={navItem}>
-                      
-                      MARKETPLACE
-                    </NavLink>
-                    <NavLink href="#" className={navItem}>
-                        
-                      COFFEE SHOP
-                    </NavLink>
+                    <Grid container spacing={2}>
+                      <Grid item md={5}>
+                        <NavLink href="/marketplace" className={navItem}>
+                          
+                          MARKETPLACE
+                        </NavLink>
+                      </Grid>
+                      <Grid item md={5}>
+                        <NavLink href="#" className={navItem}>
+                            
+                          COFFEE SHOP
+                        </NavLink>
+                      </Grid>
+                      <Grid item md={2}></Grid>
+                    </Grid>
                   </Stack>
                 </Grid>
                   {showRegularMenu && (
@@ -65,7 +71,7 @@ export const Layout = ({ children }: LayoutProps) => {
                       <MenuIcon />
                     </IconButton>
                   )}
-                  <Grid className={headerGrids} item md={2}>
+                  <Grid className={headerGrids} item md={1}>
                     <NavLink href="/" className={navItem}>
                       {!isXs && <div className={logo}>
                         <img src={WhiteLogoNormal} alt="" />
@@ -77,22 +83,28 @@ export const Layout = ({ children }: LayoutProps) => {
                   </Grid>
                   <Grid className={headerGrids} item md={5}>
                     <Stack
-                      className={navLinkContainer2}
+                      className={navLinkContainer}
                       direction={'row'}
                       onClick={() => setIsDrawerOpened(false)}
                     >
-                      <NavLink href="/mint" className={navItem}>
-                      
-                        MINT
-                      </NavLink>
-                      <NavLink href="/faqs" className={navItem}>
-                      
-                        FAQ
-                      </NavLink>
-                      <NavLink href="#" className={navItem}>
+                      <Grid container>
+                        <Grid item md={4}>
+                          <NavLink href="/mint" className={navItem}>
                         
-                        <Account />
-                      </NavLink>
+                            MINT
+                          </NavLink>
+                        </Grid>
+                        <Grid item md={4} style={{ display : "flex", justifyContent : "center" }}>
+                          <NavLink href="/faqs" className={navItem}>
+                          
+                            FAQ
+                          </NavLink>
+                        </Grid>
+                        <Grid item md={4} style={{ display : "flex", justifyContent : "end" }}>
+                            <Account />
+                        </Grid>
+                      </Grid>
+                      
                     </Stack>
                   </Grid>
                 </Grid>
