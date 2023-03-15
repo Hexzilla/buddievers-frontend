@@ -40,7 +40,7 @@ const MarketBuddies = () => {
                                 <p style={{ color : "white" }}>4000 SAMA</p>
                             </Grid>
                             <Grid item md={3} sm={6}>
-                                <p className={searchTitle}>VOLUMN</p>
+                                <p className={searchTitle}>VOLUME</p>
                                 <p style={{ color : "white" }}>5M SAMA</p>
                             </Grid>
                             <Grid item md={3} sm={6}>
