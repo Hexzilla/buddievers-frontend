@@ -32,7 +32,7 @@ export const MarketBuySection = ({imgName, price, name} : any) => {
                             </Grid>
                             <Grid item md={3} sm={6}>
                                 <div className={overViewItem}>
-                                    <p>TOTAL VOLUMN</p>
+                                    <p>TOTAL VOLUME</p>
                                     <h4>5M SAMA</h4>
                                 </div>
                             </Grid>

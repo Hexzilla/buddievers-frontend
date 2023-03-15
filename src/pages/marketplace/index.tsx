@@ -38,7 +38,7 @@ const MarketPlacePage = () => {
                     <p className={cardTitle}>$SEEDS</p>
                     <p className={cardSubTitle}>BUDDIES ECONOMY</p>
                     <p className={cardText}>Buddieverse alpha resource that let you to participate in events, to buy composable items and more</p>
-                    <Link to={{  }}><button className={cardButton}>SEE COLLECTION</button></Link>
+                    <Link to={{ pathname : "/seeds" }}><button className={cardButton}>SEE COLLECTION</button></Link>
                 </Grid>
             </Grid>
         </div>
