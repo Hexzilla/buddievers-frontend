@@ -42,5 +42,19 @@ export const FAQStyles = (theme : Theme) => ({
         color : "white",
         fontSize : "2.4vw",
         fontWeight : "900"
+    },
+    bannerTxtContainer : {
+        width : "100%", 
+        height : "100%", 
+        background : "rgba(0,0,0,0.5)", 
+        textAlign : "center",
+        display : "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        "& > p" : {
+            fontSize : "4.5vw",
+            fontWeight : "900",
+            color : 'white'
+        }
     }
 })

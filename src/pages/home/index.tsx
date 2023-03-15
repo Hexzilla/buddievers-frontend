@@ -34,7 +34,6 @@ const HomePage = () => {
         <UtilitySection/>
         <ComicSection/>
         <RoadSection/>
-        <JoinSection/>
       </div>
     </div>
   );

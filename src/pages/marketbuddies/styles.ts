@@ -21,6 +21,20 @@ export const styles = (theme : Theme) => ({
             marginTop : "9vh"
         }
     },
+    bannerTxtContainer : {
+        width : "100%", 
+        height : "100%", 
+        background : "rgba(0,0,0,0.5)", 
+        textAlign : "center",
+        display : "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        "& > p" : {
+            fontSize : "4.5vw",
+            fontWeight : "900",
+            color : 'white'
+        }
+    },
     cardImg : {
         width : '100%'
     },
@@ -47,5 +61,68 @@ export const styles = (theme : Theme) => ({
         border : "none",
         color : 'white',
         cursor : "pointer"
+    },
+    paginationStyle : {
+        marginTop : "30px",
+        "& > ul > li > button" : {
+            background : "rgba(0, 206, 76, 0.6)",
+            color : "white",
+            borderRadius : "20px",
+            width : "61px",
+            height : "44px",
+        },
+        "& > ul > li > button.Mui-selected" : {
+            backgroundColor : "#00CE4C",
+        }
+    },
+    paginationContainer : {
+        display : "flex",
+        flexDirection : "row",
+        justifyContent : "center"
+    },
+    searchWrapper : {
+        marginTop : "20px"
+    },
+    searchTitle : {
+        color : "#00CE4C",
+        fontWeight : "900"
+    },
+    searchFields : {
+        display : "flex",
+        alignItems : "center",
+        "& > span" : {
+            color : "#00CE4C",
+            fontWeight : "900",
+            marginRight : "20px"
+        }
+    },
+    searchById : {
+        background : "rgba(0,0,0,0.6)",
+        height : '64px',
+        color : "white",
+        border : "none",
+        borderRadius : "20px",
+        paddingLeft : "20px",
+        "&::placeholder" : {
+            color : "rgba(255,255,255,0.7)"
+        },
+        "&:focus-visible" : {
+            outline : "none"
+        }
+    },
+    sortSelect : {
+        height : "64px",
+        color : "white",
+        paddingLeft : '20px',
+        paddingRight : '20px',
+        border : "1px solid rgba(0,0,0,0.4)",
+        borderRadius : "20px",
+        background : "transparent",
+        "& > option" : {
+            color : "black"
+        },
+        "&:focus-visible" : {
+            outline : "none"
+        }
     }
 });

@@ -12,7 +12,8 @@ export const RoadSection = () => {
         roadNumbers,
         roadExp,
         roadEnd,
-        carouselItems
+        carouselItems,
+        roadImg
     } = useClasses(styles);
     const responsive = {
         superLargeDesktop: {
@@ -58,7 +59,7 @@ export const RoadSection = () => {
                     <div>
                         <Grid container spacing={4}  className={ carouselItems }>
                             <Grid item md={2} sm={12}>
-                                <img src="./roadImg1.png" />
+                                <img src="./charactor (1).png" className={ roadImg } />
                             </Grid>
                             <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
@@ -80,7 +81,7 @@ export const RoadSection = () => {
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
                             <Grid item md={2} sm={12}>
-                                <img src="./roadImg2.png" />
+                                <img src="./charactor (2).png" className={ roadImg } />
                             </Grid>
                             <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
@@ -102,7 +103,7 @@ export const RoadSection = () => {
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
                             <Grid item md={2} sm={12}>
-                                <img src="./roadImg3.png" />
+                                <img src="./charactor (3).png" className={ roadImg } />
                             </Grid>
                             <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
@@ -115,7 +116,7 @@ export const RoadSection = () => {
                                     <li>BUDDIES Bank starts working</li>
                                     <li>Free BONG NFT airdrop</li>
                                     <li>Free banner airdrop</li>
-                                    <li>Status raffle</li>
+                                    <li>Statue raffle</li>
                                     <li>Skybreach & Bit.Country plots acquisition</li>
                                 </ul>
                             </Grid>
@@ -125,7 +126,7 @@ export const RoadSection = () => {
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
                             <Grid item md={2} sm={12}>
-                                <img src="./roadImg4.png" />
+                                <img src="./charactor (4).png" className={ roadImg } />
                             </Grid>
                             <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
@@ -148,7 +149,7 @@ export const RoadSection = () => {
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
                             <Grid item md={2} sm={12}>
-                                <img src="./roadImg5.png" />
+                                <img src="./charactor (5).png" className={ roadImg } />
                             </Grid>
                             <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
@@ -158,7 +159,7 @@ export const RoadSection = () => {
                             </Grid>
                             <Grid item md={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
-                                    <li>Collection launch in Moonsama Network</li>
+                                    <li>Collection launch in Exosama Network</li>
                                     <li>Launching Buddies web3</li>
                                     <li>Introducing resources system / circular economy</li>
                                     <li>Moonbank creation</li>
@@ -171,7 +172,7 @@ export const RoadSection = () => {
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
                             <Grid item md={2} sm={12}>
-                                <img src="./roadImg6.png" />
+                                <img src="./charactor (6).png" className={ roadImg } />
                             </Grid>
                             <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>

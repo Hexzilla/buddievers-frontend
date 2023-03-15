@@ -43,7 +43,7 @@ export const Footer = () => {
           style={{ alignSelf: "center", textAlign: "center" }}
         >
           <p className={title}>SIGN OUR NEWSLETTER</p>
-          <TextField id="outlined-basic" label="Email Address"
+          <TextField id="outlined-basic" label="Type your email address..."
             variant="outlined"
             inputProps={{
               style: {
@@ -51,10 +51,9 @@ export const Footer = () => {
                 fontSize: "23px"
               }
             }} />
-          <Grid container spacing={0}>
-            <Grid item md={2}>
-            </Grid>
-            <Grid item md={4}>
+          <Grid container spacing={0} style={{ marginTop : "30px" }}>
+
+            <Grid item md={3}>
               <p className={title}>JOIN US</p>
             </Grid>
             <Grid item md={2} style={{ alignSelf: "center" }}>
@@ -71,7 +70,12 @@ export const Footer = () => {
                 />
               </a>
             </Grid>
-            <Grid item md={2}>
+            <Grid item md={2} style={{ alignSelf: "center" }}>
+              <a href="https://t.me/MoonBUDDIES" target={'_blank'}>
+                <img
+                  src="./telegram.png"
+                />
+              </a>
             </Grid>
           </Grid>
         </Grid>

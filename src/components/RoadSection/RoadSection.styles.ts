@@ -58,8 +58,8 @@ export const styles = (theme: Theme) => ({
     roadExp : {
         color : "white",
         textAlign : "left",
-        fontSize : "1.3vw",
-        lineHeight : "30px",
+        fontSize : "1vw",
+        lineHeight : "23x",
         fontWeight : "500",
         "@media (max-width : 980px)" : {
             "& > li" : {
@@ -77,12 +77,12 @@ export const styles = (theme: Theme) => ({
         background: '#00CE4C',
         borderRadius: '20px',
         "& > h1" : {
-            fontSize : "2.2vw",
+            fontSize : "1.8vw",
             fontWeight : "900",
             margin : "0px",
         },
         "& > p" : {
-            fontSize : "1.3vw",
+            fontSize : "0.8vw",
         },
         "@media (max-width : 980px)" : {
             padding: '10px 30px',
@@ -98,5 +98,9 @@ export const styles = (theme: Theme) => ({
         "@media (max-width : 980px)" : {
             display : "block"
         }
+    },
+    roadImg : {
+        width : "100%",
+        borderRadius : "10px"
     }
 });
