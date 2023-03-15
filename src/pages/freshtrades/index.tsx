@@ -3,8 +3,10 @@ import { useClasses } from 'hooks';
 import { Paper, Grid, Typography, styled } from '@mui/material';
 import { NavLink, Button, Video } from 'ui';
 import { styles } from './styles';
-import WhiteLogoNormal from 'assets/images/logo.png';
 import useWindowDimensions from 'utils/windowsDimensions';
+import { Welcome } from './Welcome';
+import { Whitelist } from './Whitelist';
+import { TokenSales } from './TokenSales';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -17,6 +19,7 @@ const Img = styled('img')({
 });
 
 const FreshTradesPage = () => {
+  const [stage, setStage] = useState(0);
   const [beforeMint, setBeforeMint] = useState(false);
   const [whiteListed, setWhiteListed] = useState(false);
   const [registered, setRegistered] = useState(false);
@@ -130,7 +133,10 @@ const FreshTradesPage = () => {
         <source src="./background.mp4" type="video/mp4" />
       </Video>
       <div className={container} style={stylesBackground}>
-        <Grid item md={2}>
+        {/* {stage === 0 && <Welcome onNext={() => setStage(1)} />}
+        {stage === 1 && <Whitelist onNext={() => setStage(2)} />} */}
+        <TokenSales onNext={() => setStage(3)} />
+        {/* <Grid item md={2}>
           <NavLink href="/" className={navItem}>
             <div className={logo}>
               <img src={WhiteLogoNormal} alt="" />
@@ -149,7 +155,7 @@ const FreshTradesPage = () => {
           )
         ) : registered ? (
           !whiteListed ? (
-            <Typography className={mainTitle}>NO WHITELIST</Typography>
+            <Typography className={ }>NO WHITELIST</Typography>
           ) : (
             <Typography className={mainTitle}>CONGRATULATIONS</Typography>
           )
@@ -182,7 +188,7 @@ const FreshTradesPage = () => {
               <span className={subQuiz}>TAKE ME TO THE LIFT OFF</span>
             </Button>
           )}
-        </Grid>
+        </Grid> */}
       </div>
     </>
   );
