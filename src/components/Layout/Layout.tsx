@@ -57,7 +57,7 @@ export const Layout = ({ children }: LayoutProps) => {
                         </NavLink>
                       </Grid>
                       <Grid item md={5}>
-                        <NavLink href="#" className={navItem}>
+                        <NavLink href="/coffeeshop" className={navItem}>
                             
                           COFFEE SHOP
                         </NavLink>
@@ -123,14 +123,14 @@ export const Layout = ({ children }: LayoutProps) => {
                     <NavLink href="/" className={navItemDrawer}>
                       HOME
                     </NavLink>
+                    <NavLink href="/coffeeshop" className={navItemDrawer}>
+                      COFFEE SHOP
+                    </NavLink>
                     <NavLink href="/mint" className={navItemDrawer}>
-                      MINT NFT
+                      MINT
                     </NavLink>
-                    <NavLink href="/workbench" className={navItemDrawer}>
-                      BUDDIEVERSE
-                    </NavLink>
-                    <NavLink href="/freshoffers" className={navItemDrawer}>
-                      MARKETPLACE
+                    <NavLink href="/faqs" className={navItemDrawer}>
+                      FAQ
                     </NavLink>
                   </Box>
                 </Drawer>
