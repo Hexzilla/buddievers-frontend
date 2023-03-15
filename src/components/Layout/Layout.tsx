@@ -49,13 +49,14 @@ export const Layout = ({ children }: LayoutProps) => {
                     direction={'row'}
                     onClick={() => setIsDrawerOpened(false)}
                   >
-                    <NavLink href="/mint" className={navItem}>
-                      
-                      BUDDIEVERSE
-                    </NavLink>
+                    
                     <NavLink href="/marketplace" className={navItem}>
                       
                       MARKETPLACE
+                    </NavLink>
+                    <NavLink href="#" className={navItem}>
+                        
+                      COFFEE SHOP
                     </NavLink>
                   </Stack>
                 </Grid>
@@ -80,9 +81,13 @@ export const Layout = ({ children }: LayoutProps) => {
                       direction={'row'}
                       onClick={() => setIsDrawerOpened(false)}
                     >
-                      <NavLink href="#" className={navItem}>
-                        
-                        COFFEE SHOP
+                      <NavLink href="/mint" className={navItem}>
+                      
+                        MINT
+                      </NavLink>
+                      <NavLink href="/faqs" className={navItem}>
+                      
+                        FAQ
                       </NavLink>
                       <NavLink href="#" className={navItem}>
                         
