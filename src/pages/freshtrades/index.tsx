@@ -1,228 +1,192 @@
-import { useState, Fragment, useEffect } from 'react';
-import { useActiveWeb3React, useClasses } from 'hooks';
+import { useState, useEffect } from 'react';
+import { useClasses } from 'hooks';
+import { ImageAspectRatioTwoTone } from '@mui/icons-material';
 import {
   Backdrop,
   CircularProgress,
   TextField,
   Snackbar,
   IconButton,
+  Paper,
   Grid,
+  ButtonBase,
   Typography,
+  styled
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { Button, GlitchText } from 'ui';
+import { NavLink, Button, GlitchText } from 'ui';
+import { MonaLisa } from 'icons';
 import { styles } from './styles';
-import { useMint1Contract } from 'hooks/useContracts/useContracts';
-import { MINT1_ADDRESS, ChainId, GAS_LIMIT, MINT_PRICE } from '../../constants';
+import WhiteLogoNormal from 'assets/images/logo.png';
+
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+  borderRadius: '10px',
+  width: '400px',
+  height: '500px',
+});
 
 const FreshTradesPage = () => {
-  const { account } = useActiveWeb3React();
-  const [mintAmount, setMintAmount] = useState(0);
-  const [prepaidNFTs, setPrepaidNFTs] = useState(0);
-  const [whitelistNFTs, setWhitelistNFTs] = useState(0);
-  const [paidNFTS, setPaidNFTs] = useState(0);
-  const [totalSupply, setTotalSupply] = useState(0);
-  const [minting, setMinting] = useState(false);
-  const [errMessage, setErrMessage] = useState('');
-  const [updated, setUpdated] = useState(false);
-  const TOTAL = 500;
-  const [open, setOpen] = useState(false);
-  const mintContract = useMint1Contract(MINT1_ADDRESS[ChainId.MOONRIVER], true);
-  const imageURI =
-    'https://ipfs.io/ipfs/QmRF6pCcocSXnzA5SR6EdWJCqRr17gPN2CR35XfgzQEDa7?filename=02.png';
-  const { container, button } = useClasses(styles);
+  const [beforeMint, setBeforeMint] = useState(true);
+  const [whiteListed, setWhiteListed] = useState(false);
+  const [registered, setRegistered] = useState(false);
+  const [buddieVerse, setBuddieVerse] = useState(false);
+  const [moonBuddie, setMoonBuddie] = useState(false);
+  const { container, logo, navItem, mainTitle, subText, subButton, subQuiz, centerGrid, videoTitle, contentPaper, boardTitlePaper, boardTitle, boardBody, boardSubTitle, boardSubBody, boardButton, buttonText } = useClasses(styles);
 
-  useEffect(() => {
-    const init = async () => {
-      const res1 = await mintContract?.getPrepaidMints(account);
-      setPrepaidNFTs(parseInt(res1.toString()));
-
-      const res2 = await mintContract?.getWhitelistedMints(account);
-      setWhitelistNFTs(parseInt(res2.toString()));
-
-      const res3 = await mintContract?.getPublicMints(account);
-      setPaidNFTs(parseInt(res3.toString()));
-
-      const res = await mintContract?.totalSupply();
-      setTotalSupply(parseInt(res.toString()));
-    };
-    init();
-  }, [account, updated, mintContract]);
-
-  const handleInputChange = (event: any) => {
-    setMintAmount(event.target.value);
-  };
-
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const publicMint = async () => {
-    if (!account) {
-      setErrMessage('Please connect your wallet!');
-      setOpen(true);
-      return;
-    }
-    if (mintAmount <= 0 || mintAmount > 5) {
-      setErrMessage('Please input between 1 and 5');
-      setOpen(true);
-      return;
-    }
-
-    setMinting(true);
-    setErrMessage('');
-    await mintContract
-      ?.freeMint(mintAmount, imageURI, {
-        gasLimit: GAS_LIMIT,
-        from: account,
-        value: MINT_PRICE * mintAmount,
-      })
-      .catch((err: any) => {
-        console.error(err);
-        setErrMessage('Please check your fund or network status!');
-        setOpen(true);
-      })
-      .then((tx: any) => {
-        console.debug('tx', tx);
-        return tx.wait(3);
-      })
-      .then(() => {
-        setUpdated(!updated);
-        setErrMessage('You have successfully minted token!');
-        setOpen(true);
-      })
-      .finally(() => setMinting(false));
-  };
-
-  const whitelistMint = async () => {
-    if (mintAmount <= 0 || mintAmount > 5) {
-      setErrMessage('Please input between 1 and 5');
-      setOpen(true);
-      return;
-    }
-
-    setMinting(true);
-    setErrMessage('');
-    await mintContract
-      ?.whitelistedMints(mintAmount, imageURI)
-      .catch((err: any) => {
-        console.error(err);
-        setErrMessage('Your whitelist sale finished!');
-        setOpen(true);
-      })
-      .then((tx: any) => {
-        console.debug('tx', tx);
-        return tx.wait(3);
-      })
-      .then(() => {
-        setUpdated(!updated);
-        setErrMessage('You have successfully minted token!');
-        setOpen(true);
-      })
-      .finally(() => setMinting(false));
-  };
-
-  const action = (
-    <Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </Fragment>
-  );
+  if (moonBuddie)
+    return (
+      <>
+        <Paper
+          className={contentPaper}
+        >
+          <Grid container spacing={10} style={{marginTop:'-20px'}}>
+            <Grid item>
+              <Img alt="complex" src="./B-BUDS 5.png" />
+            </Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs className={boardTitlePaper}>
+                  <Typography className={boardTitle}>
+                    MOONBUDDIES
+                  </Typography>
+                  <Typography className={boardBody}>
+                    MOONBUDDIES#192
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography className={boardBody}>
+                    MINING <span style={{ color: "#00CE4C" }}> &nbsp;COMPLETE</span>
+                  </Typography>
+                  <Typography className={boardSubTitle}>CONGRATS, YOU 'VE MINTED <span style={{ color: '#00CE4C' }}> &nbsp;12&nbsp; </span>/&nbsp;150</Typography>
+                  <Typography className={boardSubBody}>
+                    welcome to the beginning of an incredible adventure <br />
+                    through the BUDDLEVERSE. CLick below for the next steps
+                  </Typography>
+                </Grid>
+                <Grid item container style={{justifyContent:"left"}}>
+                  <div style={{marginRight:"10px"}}>
+                    <Button className={boardButton}>
+                      <span className={buttonText}>MINT ANOTHER</span></Button>
+                  </div>
+                  <div style={{marginRight:"10px"}}>
+                    <Button className={boardButton}>
+                      <span className={buttonText}>GO TO BUDDIEVERSE</span></Button>
+                  </div>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+      </>
+    )
+  if (buddieVerse)
+    return (
+      <>
+        <div className={container}>
+          <Grid item md={2} style={{ alignSelf: "center", textAlign: "center" }}>
+            <div onClick={() => { setMoonBuddie(true) }} >
+              <img src={WhiteLogoNormal} alt="" />
+            </div>
+          </Grid>
+          <Typography className={videoTitle} >
+            LIFT OFF
+          </Typography>
+        </div>
+      </>
+    )
 
   return (
     <>
       <div className={container}>
-        <GlitchText variant="h1">Mint NFT</GlitchText>
-        {prepaidNFTs != 0 && (
-          <>
-            <Typography variant="subtitle1" component="div">
-              Prepaid Mints: {prepaidNFTs - whitelistNFTs}
-            </Typography>
-            <br />
-          </>
-        )}
-
-        <Typography variant="subtitle1" component="div">
-          Owned NFTs: {whitelistNFTs + paidNFTS}
-        </Typography>
-        <br />
-
-        <Typography variant="subtitle1" component="div">
-          Remain mintable NFT Counts: {TOTAL - totalSupply}
-        </Typography>
-        <br />
-
-        {prepaidNFTs != 0 && (
-          <>
-            <Grid container spacing={1}>
-              <Grid item xs={2}>
-                <TextField
-                  id="filled-number"
-                  label="Mint amounts"
-                  type="number"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="filled"
-                  size="small"
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={2}>
-                <Button className={button} onClick={whitelistMint}>
-                  Get My Prepaid Mints
-                </Button>
-              </Grid>
-            </Grid>
-            <br />
-          </>
-        )}
-        <Grid container spacing={1}>
-          <Grid item xs={2}>
-            <TextField
-              id="filled-number"
-              label="Mint amounts"
-              type="number"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="filled"
-              size="small"
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <Button className={button} onClick={publicMint}>
-              Mints
-            </Button>
-          </Grid>
+        <Grid item md={2}>
+          <NavLink href="/" className={navItem}>
+            <div className={logo}>
+              <img src={WhiteLogoNormal} alt="" />
+            </div>
+          </NavLink>
         </Grid>
+        {
+          !beforeMint ? (
+            registered ? (
+              !whiteListed ? (
+
+                <Typography className={mainTitle} >SORRY</Typography>
+              ) : (
+                <Typography className={mainTitle} >CONGRATULATIONS</Typography>
+              )
+            ) : (
+              <Typography className={mainTitle} >MINT SOON</Typography>
+            )
+          ) : (
+            registered ? (
+              !whiteListed ? (
+
+                <Typography className={mainTitle} >SORRY</Typography>
+              ) : (
+                <Typography className={mainTitle} >CONGRATULATIONS</Typography>
+              )
+            ) : (
+              <Typography className={mainTitle} >MINT IS ONLINE</Typography>
+            )
+          )
+
+        }
+        {
+          !registered ? (
+            <Typography className={subText} >
+              CHECK YOUR WHITELISTSTATUS
+            </Typography>
+          ) : (
+            !whiteListed ? (
+              <Typography className={subText} >
+                YOU ARE NOT WHITELISTED
+              </Typography>
+            ) : (
+              <Typography className={subText} >
+                YOU ARE WHITELISTED
+              </Typography>
+            )
+          )
+        }
         <br />
+        <Grid className={centerGrid} >
+          {
+            !registered ? (
+              <Button className={subButton}
+                onClick={() => setRegistered(true)}
+              >
+                <span className={subQuiz}>
+                  ARE YOU REGISTERED?
+                </span>
+              </Button>
+            ) : (
+              !whiteListed ? (
+                <Button className={subButton}
+                  onClick={() => setBuddieVerse(true)}
+                >
+                  <span className={subQuiz}>
+                    TAKE ME BUDISVERSE
+                  </span>
+                </Button>
 
-        <Backdrop sx={{ color: '#000', zIndex: 1000 }} open={minting}>
-          <CircularProgress color="primary" />
-        </Backdrop>
+              ) : (
+                <Button className={subButton}
+                  onClick={() => setBuddieVerse(true)}
+                >
+                  <span className={subQuiz}>
+                    TAKE ME TO LEFT OFF
+                  </span>
+                </Button>
 
-        <Snackbar
-          open={open}
-          autoHideDuration={3000}
-          onClose={handleClose}
-          message={errMessage}
-          action={action}
-        />
+              )
+
+            )
+          }
+        </Grid>
       </div>
     </>
   );
