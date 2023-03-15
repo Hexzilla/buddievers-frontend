@@ -3,9 +3,11 @@ import { useClasses } from 'hooks';
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Pagination from '@mui/material/Pagination';
+// import { TextField } from "@mui/material";
 
 const MarketBuddies = () => {
-    const { container, bannerContainer, cardImg, cardMiddle, cardBottom, btnBuy } = useClasses(styles);
+    const { container, bannerContainer, cardImg, cardMiddle, cardBottom, btnBuy, bannerTxtContainer, paginationStyle, paginationContainer,searchWrapper, searchTitle, searchFields, searchById, sortSelect } = useClasses(styles);
     const navigate = useNavigate();
     const toDetail = (imgName: any, Price: any, Name: any) => {
         navigate('/buddieDetail', {
@@ -18,7 +20,57 @@ const MarketBuddies = () => {
     }
     return (
         <div className={container}>
-            <div className={ bannerContainer }></div>
+            <div className={ bannerContainer }>
+                <div className={ bannerTxtContainer }>
+                    <p>MOONBUDDIES</p>
+                </div>
+            </div>
+            <div className={ searchWrapper }>
+                <Grid container spacing={4}>
+                    <Grid item md={6} sm={12}>
+                        <Grid container spacing={2}>
+                            <Grid item md={3} sm={6}>
+                                <p className={searchTitle}>FLOOR PRICE</p>
+                                <p style={{ color : "white" }}>BUDDIE #10</p>
+                                <p style={{ color : "white" }}>2500 SAMA</p>
+                            </Grid>
+                            <Grid item md={3} sm={6}>
+                                <p className={searchTitle}>LAST BUY</p>
+                                <p style={{ color : "white" }}>BUDDIE #28</p>
+                                <p style={{ color : "white" }}>4000 SAMA</p>
+                            </Grid>
+                            <Grid item md={3} sm={6}>
+                                <p className={searchTitle}>VOLUMN</p>
+                                <p style={{ color : "white" }}>5M SAMA</p>
+                            </Grid>
+                            <Grid item md={3} sm={6}>
+                                <p className={searchTitle}>OWNERS</p>
+                                <p style={{ color : "white" }}>320</p>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid item md={6} sm={12}>
+                        <Grid container style={{ marginTop : "20px" }}>
+                            <Grid item md={2} sm={12}></Grid>
+                            <Grid item md={5} sm={12}>
+                                <div className={searchFields}>
+                                    <span>ID:</span>
+                                    <input type="text" id="outlined-basic" placeholder="SEARCH" className={ searchById } />
+                                </div>
+                            </Grid>
+                            <Grid item md={5} sm={12}>
+                                <div className={searchFields}>
+                                    <span>SORT BY:</span>
+                                    <select className={ sortSelect }>
+                                        <option>PRICE LOWEST</option>
+                                        <option>PRICE HIGHEST</option>
+                                    </select>
+                                </div>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </div>
             <Grid container spacing={4} style={{ marginTop : 80 }}>
                 <Grid item md={3} sm={12}>
                     <img src="./charactor (1).png" className={cardImg} />
@@ -252,8 +304,9 @@ const MarketBuddies = () => {
                     </div>
                 </Grid>
             </Grid>
-
-           
+            <div className={ paginationContainer }>
+                <Pagination count={8} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
+            </div>
         </div>
     );
 }

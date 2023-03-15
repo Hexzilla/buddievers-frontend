@@ -56,7 +56,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 
 const FAQs = () => {
-    const { container, introContainer, button, FAQWrap, mainTitle  } = useClasses( FAQStyles );
+    const { container, introContainer, button, FAQWrap, mainTitle, bannerTxtContainer  } = useClasses( FAQStyles );
     const [expanded, setExpanded] = React.useState<string | false>('panel1');
     const [ FAQs, setFAQ ] = React.useState([
         {
@@ -127,17 +127,13 @@ const FAQs = () => {
     return(
         <div className={ container }>
             <div className={introContainer}>
-                <Button
-                    className={button}
-                    variant="contained"
-                    onClick={addWhitelist}
-                >
-                JOIN BUDDIES ST      
-                </Button>
+                <div className={ bannerTxtContainer }>
+                    <p>FREQUENT ASKED QUESTIONS</p>
+                </div>
             </div>
 
             <div className={ FAQWrap }>
-                <h1 className={ mainTitle }>FREQUENTLY ASKED QUESTIONS</h1>
+                <h1 className={ mainTitle }>LEARN MORE ABOUT THE PROJECT</h1>
                 { FAQItems }
             </div>
     </div>
