@@ -76,6 +76,77 @@ const Agreement = styled.div`
   border-radius: 10px;
 `;
 
+const ImageMarket = styled('img')`
+  width: 150px;
+  height: 150px;
+
+  border-radius: 150px;
+`;
+
+const TotalMintLabel = styled(Typography)`
+  width: 58px;
+  height: 48px;
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+
+  color: #FFFFFF;
+`;
+const TotalMintNumber = styled.div`
+  width: 42px;
+  height: 60px;
+
+  /* Desktop/H2 */
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 60px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  /* Neutral/White */
+
+  color: #FFFFFF;
+`;
+
+const LiveStatusDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 180px;
+  height: 48px;
+`;
+
+const LiveStatus = styled(Typography)`
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+
+  //styleName: Desktop/Body;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: center;
+`;
+ 
 export type MintState = 'soon' | 'online';
 
 type Props = {
@@ -88,10 +159,27 @@ export const TokenSales = ({ onNext }: Props) => {
       <Grid item md={2}>
         <Grid container direction="row" spacing={1} alignItems="center">
           <Grid item md={6}>
-            <MintContainer></MintContainer>
+            <MintContainer>
+              <Grid container direction="row" spacing={1} alignItems="center">
+                <Grid item md={12}>
+                  <ImageMarket alt="complex" src="./moonbuddies marketplace.png" />
+                </Grid>
+                <Grid item md={6} alignItems="left">
+                  <TotalMintLabel>Total minted</TotalMintLabel>
+                </Grid>
+                <Grid item md={6} alignItems="right">
+                  <TotalMintNumber>16</TotalMintNumber>
+                </Grid>
+              </Grid>
+            </MintContainer>
           </Grid>
           <Grid item md={6}>
-            <LiveContainer></LiveContainer>
+            <LiveContainer>
+              <LiveStatusDiv>
+                <LiveStatus>Whitelisted to mint: 0</LiveStatus>
+                <LiveStatus>Whitelisted minted: 5</LiveStatus>
+              </LiveStatusDiv>
+            </LiveContainer>
           </Grid>
         </Grid>
       </Grid>
