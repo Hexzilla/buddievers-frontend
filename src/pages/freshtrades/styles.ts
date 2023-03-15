@@ -12,19 +12,32 @@ export const styles = (theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    justifyItems: 'center',
     marginTop: -30,
     textAlign: 'center',
     minHeight: '800px',
-    background: '#000000',
+    position: 'absolute ',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    left: 0,
+    right: 0,
+  },
+  backVideo: {
+    position: 'absolute',
+    zIndex: "-10"
   },
   contentPaper: {
     flexGrow: 1,
-    background: '#000000',
     display: 'flex',
     flexDirection: 'column',
     minHeight: '800px',
     justifyContent: 'center',
     padding: "100px 200px",
+    position: 'absolute ',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    left: 0,
+    right: 0,
   },
   logo: {
     display: 'flex',
@@ -71,7 +84,8 @@ export const styles = (theme: Theme) => ({
     lineHeight: '36px',
     alignItems: 'center',
     textAlign: 'center',
-    color: ' #FFFFFF',
+    color: '#FFFFFF',
+    textTransform: 'uppercase',
   },
   centerGrid: {
     position: 'absolute',
@@ -79,6 +93,7 @@ export const styles = (theme: Theme) => ({
     transform: "translate(-50%, 300%)",
     order: 1
   },
+
   subButton: {
     display: 'flex',
     flexDirection: 'row',
@@ -185,8 +200,10 @@ export const styles = (theme: Theme) => ({
     alignItems: 'center',
     padding: '20px 40px',
     background: 'rgba(0, 206, 76, 0.6)',
-    borderRadius: '10px',
+    borderRadius: '20px',
     width: '230px',
+    height: '64px',
+    marginTop: '20px'
   },
   buttonText: {
     color: '#FFFFFF',
