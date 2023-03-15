@@ -65,7 +65,7 @@ export const Layout = ({ children }: LayoutProps) => {
                       <MenuIcon />
                     </IconButton>
                   )}
-                  <Grid className={headerGrids} item md={2}>
+                  <Grid className={headerGrids} item md={1}>
                     <NavLink href="/" className={navItem}>
                       {!isXs && <div className={logo}>
                         <img src={WhiteLogoNormal} alt="" />

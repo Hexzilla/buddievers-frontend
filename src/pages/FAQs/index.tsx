@@ -76,31 +76,36 @@ const FAQs = () => {
         },
         {
             "id" : 4,
+            "Question" : "What is MoonBuddies",
+            "Answer" : "Generation 2 of BUDDIES project, MoonBuddies is a 500 supply full 3D NFT collection allocated in Exosama Network. MoonBuddies NFT holders have x1 governance power."
+        },
+        {
+            "id" : 5,
             "Question" : "What is the Buddieverse?",
             "Answer" : "The Buddieverse is an immersive 3D experience with multiplayer networking, Resources / economy system, composability in real time and more."
         },
         {
-            "id" : 5,
+            "id" : 6,
             "Question" : "What is SEEDS?",
             "Answer" : "SEEDS is Buddieverse utility resource and the alpha element of BUDDIES economy."
         },
         {
-            "id" : 6,
+            "id" : 7,
             "Question" : "What is BUDDIES Bank?",
             "Answer" : "Buddies Bank and MoonBank are the core of the BUDDIES NFT holders economy. These both take a % of every NFT sale for using the funds in different investments and for paying royalties (20% of the 'liquidity' and 'high risk' assets) to holders on 3-6 months time-frames."
         },
         {
-            "id" : 7,
+            "id" : 8,
             "Question" : "What is BAT?",
             "Answer" : "Buddies Alpha Trading is an education tool that provide BUDDIES and MoonBuddies NFT holders of professional trading signals (No Financial Advice)."
         },
         {
-            "id" : 8,
+            "id" : 9,
             "Question" : "What is We3kly Web3 R3cap?",
             "Answer" : "BUDDIES weekly newsletter with the most exciting news from the Polkadot ecosystem and beyond. You can subscribe for free here: https://buddies.substack.com/"
         },
         {
-            "id" : 9,
+            "id" : 10,
             "Question" : "Where I can buy a BUDDIE NFT?",
             "Answer" : "Generation 1: Singular Marketplace - Kusama Network.\n Generation 2: Raresama Marketplace - Exosama Network"
         }
