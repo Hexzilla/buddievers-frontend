@@ -14,8 +14,9 @@ export const styles = (theme: Theme) => ({
     fontSize: "22px"
   },
   text: {
-    fontWeight: "400",
-    fontSize: "15px"
+    fontWeight: "900",
+    fontSize: "15px",
+    color: "rgba(255, 255, 255, 0.8)"
   },
   hypers : {
     textDecoration : "none",

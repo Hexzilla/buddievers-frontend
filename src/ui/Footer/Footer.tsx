@@ -43,7 +43,7 @@ export const Footer = () => {
           style={{ alignSelf: "center", textAlign: "center" }}
         >
           <p className={title}>SIGN OUR NEWSLETTER</p>
-          <TextField id="outlined-basic" label="Email Address"
+          <TextField id="outlined-basic" label="Type your email address..."
             variant="outlined"
             inputProps={{
               style: {
