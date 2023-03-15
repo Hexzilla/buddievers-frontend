@@ -30,6 +30,7 @@ export const Account = () => {
         className={button}
         size="medium"
         onClick={() => setAccountDialogOpen(true)}
+        style={{ marginTop : "-10px" }}
       > 
         {account && !isSm && <HeaderBalance />}
 
