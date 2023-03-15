@@ -5,9 +5,6 @@ export const styles = (theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    // paddingLeft: '10vw',
-    // paddingRight: '10vw',
-    paddingTop : '50px',
     margin: `${theme.spacing(5)}px 0`,
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
@@ -16,11 +13,6 @@ export const styles = (theme: Theme) => ({
   introContainer : {
     background: `url("./intro-background.png") no-repeat center`,
     backgroundSize : "cover",
-    // background : theme.palette.background.darkGreen,
-    // paddingLeft: '10vw',
-    // paddingRight: '10vw',
-    // paddingBottom: '50px',
-    margin: `${theme.spacing(5)} 0`,
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
     },
