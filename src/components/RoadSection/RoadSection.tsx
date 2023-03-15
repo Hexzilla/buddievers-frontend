@@ -116,7 +116,7 @@ export const RoadSection = () => {
                                     <li>BUDDIES Bank starts working</li>
                                     <li>Free BONG NFT airdrop</li>
                                     <li>Free banner airdrop</li>
-                                    <li>Status raffle</li>
+                                    <li>Statue raffle</li>
                                     <li>Skybreach & Bit.Country plots acquisition</li>
                                 </ul>
                             </Grid>
@@ -159,7 +159,7 @@ export const RoadSection = () => {
                             </Grid>
                             <Grid item md={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
-                                    <li>Collection launch in Moonsama Network</li>
+                                    <li>Collection launch in Exosama Network</li>
                                     <li>Launching Buddies web3</li>
                                     <li>Introducing resources system / circular economy</li>
                                     <li>Moonbank creation</li>

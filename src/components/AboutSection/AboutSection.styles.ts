@@ -7,7 +7,7 @@ export const styles = (theme: Theme) => ({
         padding: "4vh",
     },
     aboutText: {
-        fontSize: "75px",
+        fontSize: "40px",
         fontWeight: "900",
         fontFamily: "Poppins",
         color: "#00CE4C"
@@ -30,13 +30,13 @@ export const styles = (theme: Theme) => ({
         }
     },
     whiteTextTiny: {
-        fontSize: "17px",
+        fontSize: "16px",
         fontWeight: "900",
         color: "#FFFFFF",
         margin: "0px"
     },
     whiteTextSmall: {
-        fontSize: "24px",
+        fontSize: "16px",
         fontWeight: "900",
         color: "#FFFFFF",
         margin: "0px"
@@ -49,10 +49,10 @@ export const styles = (theme: Theme) => ({
     },
     subTitleText: {
         fontWeight: "900",
-        fontSize: "40px"
+        fontSize: "24px"
     },
     mainText: {
-        fontWeight: "700",
-        fontSize: "17px"
+        fontWeight: "500",
+        fontSize: "16px"
     }
 });
