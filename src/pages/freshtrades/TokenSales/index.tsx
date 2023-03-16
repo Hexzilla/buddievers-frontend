@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import { Grid, Typography } from '@mui/material';
-import { MintButton } from '../MintButton';
-import { Logo } from '../Logo';
+import { Grid, Typography, Checkbox } from '@mui/material';
+import { LiftOffButton } from '../LiftOffButton';
 
 const MintContainer = styled.div`
   display: flex;
@@ -32,23 +31,6 @@ const LiveContainer = styled.div`
   border-radius: 10px;
 `;
 
-const MainTitle = styled(Typography)`
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 900;
-  font-size: 80px;
-  line-height: 80px;
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  color: #ffffff;
-  text-transform: uppercase;
-
-  padding-top: 30px;
-`;
-
 const SubTitle = styled(Typography)`
   font-family: Poppins;
   font-style: normal;
@@ -76,6 +58,14 @@ const Agreement = styled.div`
   border-radius: 10px;
 `;
 
+const AgreementFinal = styled.div`
+  color: #FFFFFF;
+  padding-left:13px;
+`;
+const AgreementDetail = styled.div`
+  color: #FFFFFF;
+`;
+
 const ImageMarket = styled('img')`
   width: 150px;
   height: 150px;
@@ -94,6 +84,8 @@ const TotalMintLabel = styled(Typography)`
   line-height: 24px;
   display: flex;
   align-items: center;
+  text-align:left;
+  padding-left:20px;
 
   color: #FFFFFF;
 `;
@@ -113,6 +105,7 @@ const TotalMintNumber = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
+  padding-left:15px;
 
   /* Neutral/White */
 
@@ -131,22 +124,48 @@ const LiveStatusDiv = styled.div`
 `;
 
 const LiveStatus = styled(Typography)`
-  font-family: Poppins;
-  font-size: 16px;
+  
+  width: 171px;
+  height: 24px;
+
+  /* Desktop/Body */
+
+  font-family: 'Poppins';
+  font-style: normal;
   font-weight: 500;
+  font-size: 16px;
   line-height: 24px;
-  letter-spacing: 0em;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
   text-align: center;
 
-  //styleName: Desktop/Body;
-  font-family: Poppins;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: 0em;
-  text-align: center;
+  /* Neutral/White */
+
+  color: #FFFFFF;
 `;
- 
+
+const GreenSpan = styled('span')`
+  color: #00CE4C
+`;
+
+const StyledCheckbox = styled(Checkbox)`
+  box-sizing: border-box;
+
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  
+  /* Main/Light Green */
+  
+  color: #00CE4C;
+  /* Main/Light Green */
+  
+  border-radius: 5px;
+`;
+
 export type MintState = 'soon' | 'online';
 
 type Props = {
@@ -158,33 +177,50 @@ export const TokenSales = ({ onNext }: Props) => {
     <Grid container direction="column" spacing={1} alignItems="center">
       <Grid item md={2}>
         <Grid container direction="row" spacing={1} alignItems="center">
-          <Grid item md={6}>
+          <Grid item md={5}>
             <MintContainer>
               <Grid container direction="row" spacing={1} alignItems="center">
                 <Grid item md={12}>
                   <ImageMarket alt="complex" src="./moonbuddies marketplace.png" />
                 </Grid>
-                <Grid item md={6} alignItems="left">
+                <Grid item md={6} alignItems="center">
                   <TotalMintLabel>Total minted</TotalMintLabel>
                 </Grid>
-                <Grid item md={6} alignItems="right">
+                <Grid item md={6} alignItems="center">
                   <TotalMintNumber>16</TotalMintNumber>
                 </Grid>
               </Grid>
             </MintContainer>
           </Grid>
-          <Grid item md={6}>
+          <Grid item md={7}>
             <LiveContainer>
               <LiveStatusDiv>
-                <LiveStatus>Whitelisted to mint: 0</LiveStatus>
-                <LiveStatus>Whitelisted minted: 5</LiveStatus>
+                <LiveStatus>Whitelisted to mint: <span>0</span></LiveStatus>
+                <LiveStatus>Whitelisted minted: <GreenSpan>5</GreenSpan></LiveStatus>
               </LiveStatusDiv>
+              <LiveStatusDiv>
+                <LiveStatus>Available to mint:<span>194</span></LiveStatus>
+                <LiveStatus>You´ve minted:<GreenSpan>11</GreenSpan></LiveStatus>
+              </LiveStatusDiv>
+              <SubTitle>Start Mint.</SubTitle>
+              <LiftOffButton
+                title="LiftOff"
+                onClick={() => onNext()}
+              />
             </LiveContainer>
           </Grid>
         </Grid>
       </Grid>
       <Grid item md={2}>
-        <Agreement>I've read and accept the Terms & Conditions</Agreement>
+        <Agreement>
+          <AgreementDetail>
+            <Checkbox checked={true} />
+            I've read and accept the <GreenSpan>Terms & Conditions</GreenSpan>
+          </AgreementDetail>
+          <AgreementFinal>
+            All sales are final.
+          </AgreementFinal>
+        </Agreement>
       </Grid>
     </Grid>
   );

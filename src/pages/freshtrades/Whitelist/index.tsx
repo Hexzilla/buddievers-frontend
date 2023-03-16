@@ -56,7 +56,7 @@ export const Whitelist = ({ onNext }: Props) => {
       </Grid>
       <Grid item>
         <MainTitle>
-          {state === 'soon' ? 'No Whitelist' : 'Mint Is Online'}
+          {state === 'soon' ? 'Sorry' : 'Mint Is Online'}
         </MainTitle>
       </Grid>
       <Grid item>
