@@ -188,7 +188,11 @@ const getDefaultOptions = (colors: PaletteOptions): ThemeOptions => ({
           },
           '& a:hover': {
             textDecoration: 'underline',
-            color: 'rgba(255,255,255,0.8)',
+            color: '#00CE4C',
+          },
+          '& a:active': {
+            textDecoration: 'underline',
+            color: '#01472A',
           },
         },
       },

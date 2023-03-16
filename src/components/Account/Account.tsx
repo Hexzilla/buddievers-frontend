@@ -29,6 +29,7 @@ export const Account = () => {
       <Button
         className={button}
         size="medium"
+        disableRipple
         onClick={() => setAccountDialogOpen(true)}
         style={{ marginTop : "-10px" }}
       > 
@@ -44,7 +45,7 @@ export const Account = () => {
           )
         ) : (
           <div style={{ fontSize: 0, margin: '0 8px 0 0' }}>
-            <AccountBalanceWalletIcon />
+            {/* <AccountBalanceWalletIcon /> */}
           </div>
         )}
 
@@ -60,7 +61,7 @@ export const Account = () => {
           )
         ) : (
           !isSm ? (
-            'Connect'
+            'CONNECT WALLET'
           ): ('')
         )}
       </Button>
