@@ -104,7 +104,6 @@ export const styles = (theme: Theme) => ({
         borderRadius : "10px"
     },
     roadCarousel : {
-        color : "white",
         "& .react-multi-carousel-dot-list .react-multi-carousel-dot button" : {
             border : "none",
             background : "rgba(0, 255, 0, 0.3)"

@@ -36,9 +36,10 @@ export const styles = (theme: Theme) => ({
     borderRadius : "10px",
     paddingLeft : "20px",
     border : "none",
+    fontSize : "20px",
     "&::placeholder" : {
       fontStyle : "italic",
-      color : "#F4F4F4",
+      color : "grey",
       fontSize : "20px"
     }
   },
