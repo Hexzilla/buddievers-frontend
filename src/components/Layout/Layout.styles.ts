@@ -67,7 +67,7 @@ export const styles = (theme: Theme) => ({
     // margin: '0 8%',
     textDecoration: 'none !important',
     flexShrink: 0,
-    fontSize: "14px",
+    fontSize: "20px",
     color: "#FFF",
   },
   navItemMobile : {

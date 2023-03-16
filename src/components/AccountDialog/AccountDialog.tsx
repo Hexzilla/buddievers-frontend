@@ -178,9 +178,7 @@ export const AccountDialog = () => {
           <div style={{paddingLeft: theme.spacing(2)}}>{`${formattedBalance} ${NATIVE_TOKEN_SYMBOL[chainId ?? DEFAULT_CHAIN]}`}</div>
         </Stack>
         <Button
-          variant="outlined"
-          color="primary"
-          className={styles.row}
+          className={styles.otherCard}
           onClick={() => setWalletView(WALLET_VIEWS.OPTIONS)}
           style={{marginTop: theme.spacing(5)}}
         >
@@ -292,13 +290,13 @@ export const AccountDialog = () => {
       if (option.connector === injected) {
         // don't show injected if there's no injected provider
         if (!(window.web3 || window.ethereum)) {
-          if (option.name === 'MetaMask') {
+          if (option.name === 'METAMASK') {
             return (
               <OptionCard
                 id={`connect-${key}`}
                 key={key}
                 color={'#E8831D'}
-                header={'Install Metamask'}
+                header={'INSTALL METAMASK'}
                 subheader={null}
                 link={'https://metamask.io/'}
                 icon={MetamaskIcon}
@@ -309,7 +307,7 @@ export const AccountDialog = () => {
           }
         }
         // don't return metamask if injected provider isn't metamask
-        else if (option.name === 'MetaMask' && (!isMetamask || isTalisman)) {
+        else if (option.name === 'METAMASK' && (!isMetamask || isTalisman)) {
           return null;
         }
         // likewise for generic
@@ -325,7 +323,7 @@ export const AccountDialog = () => {
             id={`connect-${key}`}
             key={key}
             color={option.color}
-            header={'Install Talisman'}
+            header={'INSTALL TALISMAN'}
             subheader={null}
             link={'https://talisman.xyz'}
             icon={option.icon}
@@ -408,9 +406,9 @@ export const AccountDialog = () => {
               <Button
                 //className={formButton}
                 onClick={() => {
-                  addNetwork(ChainId.MOONRIVER);
+                  addNetwork(ChainId.BSC_TESTNET);
                 }}
-                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.MOONRIVER]} alt='' />}
+                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.BSC_TESTNET]} alt='' />}
                 color="primary"
               >
                 Switch to BNB Testnet
@@ -437,7 +435,6 @@ export const AccountDialog = () => {
         </div>
       );
     }
-
     if (account && walletView === WALLET_VIEWS.ACCOUNT) {
       return (
         <>
@@ -471,9 +468,7 @@ export const AccountDialog = () => {
       <div className={styles.dialogContainer}>
         {walletView !== WALLET_VIEWS.ACCOUNT ? (
           <Button
-            className={styles.titleSlot}
-            variant="outlined"
-            color="primary"
+            className={styles.otherCard}
             onClick={() => {
               setPendingError(false);
               setWalletView(WALLET_VIEWS.ACCOUNT);
@@ -482,7 +477,7 @@ export const AccountDialog = () => {
             Back
           </Button>
         ) : (
-          <span className={styles.titleSlot}>Connect to a wallet</span>
+          <span className={styles.titleSlot}>Don't have a wallet?</span>
         )}
         {walletView === WALLET_VIEWS.PENDING ? (
           <>
@@ -502,7 +497,7 @@ export const AccountDialog = () => {
         )}
         {walletView !== WALLET_VIEWS.PENDING && (
           <Typography variant="body2" className={styles.row}>
-            New to Ethereum? &nbsp;
+           New to Buddies? &nbsp;
             <ExternalLink href="https://ethereum.org/wallets">
               Learn more about wallets
             </ExternalLink>
@@ -516,7 +511,7 @@ export const AccountDialog = () => {
     <Dialog
       open={isAccountDialogOpen}
       onClose={() => setAccountDialogOpen(false)}
-      title="Account"
+      title="Connect to a wallet"
     >
       {getModalContent()}
     </Dialog>

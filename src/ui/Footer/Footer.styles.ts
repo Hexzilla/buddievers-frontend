@@ -8,14 +8,16 @@ export const styles = (theme: Theme) => ({
     paddingRight: '10vw',
     paddingTop: "1vw",
     paddingBottom: "1vw",
+    position: "relative",
    },
   title:{
     fontWeight: "900",
     fontSize: "22px"
   },
   text: {
-    fontWeight: "400",
-    fontSize: "15px"
+    fontWeight: "900",
+    fontSize: "15px",
+    color: "rgba(255, 255, 255, 0.8)"
   },
   hypers : {
     textDecoration : "none",

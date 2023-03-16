@@ -2,20 +2,46 @@ import { Theme } from '@mui/material';
 import { green } from '@mui/material/colors';
 
 export const styles = (theme: Theme) => ({
-  optionElementContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginTop: '0',
+  optionButton: {
     borderRadius: '10px',
     borderWidth: '1px',
     borderColor: theme.palette.secondary.contrastText,
+    background: "#F5E2B3",
+    marginRight:'50px',
+    marginLeft: '50px',
+    marginTop: '10px',
+    padding: '10px 10px',
+    "&:hover": {
+      background: "#F5E2B3"
+    },
+  },
+
+  optionElementContainer: {
+    width: '210px',
+    height: '41px',
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: '0',
+    justifyContent: 'center',
+    alignitems: 'center',
+    gap: '20px',
+    
   },
   headertext: {
     display: 'flex',
     flexFlow: 'row nowrap',
-    color: theme.palette.text.primary,
-    fontSize: '1rem',
-    fontWeight: 500,
+    color: "#01472A",
+    fontSize: '14px',
+    inlineHeight: '21px',
+    fontWeight: '700',
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    height: '21px',
+    textAlign: 'center',
+    alignItems: 'center',
+    flex: 'none',
+    flexGrow: '0',
+    order: '0'
   },
   subheader: {
     color: theme.palette.text.primary,

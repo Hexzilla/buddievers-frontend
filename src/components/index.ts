@@ -1,4 +1,5 @@
 export { Layout } from './Layout/Layout';
+export { MintLayout } from './MintLayout/Layout';
 export { ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
 export { Token } from './Token/Token';
 export { TokenLootbox } from './TokenLootbox/TokenLootbox';

@@ -371,7 +371,7 @@ const FreshOrdersPage = () => {
       setSellOrders(sellData);
       setBuyOrders(buyData);
     };
-    if (!paginationEnded) {
+    if (!paginationEnded && selectedTokenAddress) {
       getCollectionById();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

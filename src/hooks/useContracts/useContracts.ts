@@ -2,6 +2,7 @@ import { Contract } from '@ethersproject/contracts';
 import {
   BURN_SEMAPHORE_ADDRESSES,
   ChainId,
+  DEFAULT_CHAIN,
   MARKETPLACE_V1_ADDRESS,
   MULTICALL_NETWORKS,
   RECOGNIZED_COLLECTIONS_ADDRESS,
@@ -51,7 +52,7 @@ export function useMarketplaceV1Contract(
   const { chainId } = useActiveWeb3React();
   return useContract(
     chainId
-      ? MARKETPLACE_V1_ADDRESS[(chainId as ChainId) ?? ChainId.MOONRIVER]
+      ? MARKETPLACE_V1_ADDRESS[(chainId as ChainId) ?? DEFAULT_CHAIN]
       : undefined,
     MARKETPLACE_V1_ABI,
     withSignerIfPossible
@@ -65,7 +66,7 @@ export function useRecognizedCollectionsContract(
   return useContract(
     chainId
       ? RECOGNIZED_COLLECTIONS_ADDRESS[
-          (chainId as ChainId) ?? ChainId.MOONRIVER
+          (chainId as ChainId) ?? DEFAULT_CHAIN
         ]
       : undefined,
     RECOGNIZED_COLLECTIONS_ABI,
@@ -77,7 +78,7 @@ export function useWarehouseContract(): Contract | null {
   const { chainId } = useActiveWeb3React();
   return useContract(
     chainId
-      ? WAREHOUSE_ADDRESS[(chainId as ChainId) ?? ChainId.MOONRIVER]
+      ? WAREHOUSE_ADDRESS[(chainId as ChainId) ?? DEFAULT_CHAIN]
       : undefined,
     WAREHOUSE_ABI,
     false
@@ -90,7 +91,7 @@ export function useMulticall2Contract(
 ): Contract | null {
   const { chainId } = useActiveWeb3React();
   return useContract(
-    chainId ? MULTICALL_NETWORKS[chainId ?? ChainId.MOONRIVER] : undefined,
+    chainId ? MULTICALL_NETWORKS[chainId ?? DEFAULT_CHAIN] : undefined,
     MULTICALL2_ABI,
     withSignerIfPossible
   );
@@ -123,7 +124,7 @@ export function useWorkbenchContract(
 ): Contract | null {
   const { chainId } = useActiveWeb3React();
   return useContract(
-    version === 'V1' ? (chainId ? WORKBENCH_ADDRESSES[chainId ?? ChainId.MOONRIVER] : undefined) : (chainId ? WORKBENCHV2_ADDRESSES[chainId ?? ChainId.MOONRIVER] : undefined),
+    version === 'V1' ? (chainId ? WORKBENCH_ADDRESSES[chainId ?? DEFAULT_CHAIN] : undefined) : (chainId ? WORKBENCHV2_ADDRESSES[chainId ?? DEFAULT_CHAIN] : undefined),
     version === 'V1' ? WORKBENCH_ABI : WORKBENCHV2_ABI,
     withSignerIfPossible
   );
@@ -134,7 +135,7 @@ export function useBurnSemaphoreContract(
 ): Contract | null {
   const { chainId } = useActiveWeb3React();
   return useContract(
-    chainId ? BURN_SEMAPHORE_ADDRESSES[chainId ?? ChainId.MOONRIVER] : undefined,
+    chainId ? BURN_SEMAPHORE_ADDRESSES[chainId ?? DEFAULT_CHAIN] : undefined,
     BURN_SEMAPHORE_ABI,
     withSignerIfPossible
   );

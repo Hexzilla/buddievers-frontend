@@ -15,7 +15,6 @@ export default function useAddNetworkToMetamaskCb(): {
   const addNetwork = useCallback(
     async (chainId: ChainId) => {
       const provider = (await connector?.getProvider()) as ExternalProvider;
-      console.log('NETWORK called', { chainId, provider, connector });
 
       if (provider && provider.request) {
         if (!chainId) {
@@ -27,30 +26,22 @@ export default function useAddNetworkToMetamaskCb(): {
           setSuccess(false);
           return;
         }
-        console.log('NETWORK', network, chainId, provider);
         try {
-          console.debug('NETWORK check');
           await provider.request({
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: network.chainId }],
           });
-          console.debug('NETWORK exists');
           setSuccess(true);
         } catch (switchError) {
-          console.debug('NETWORK does not exist', switchError);
-          //if ((switchError as any)?.code === 4902) {
           try {
-            console.debug('NETWORK add chain', switchError);
             await provider.request({
               method: 'wallet_addEthereumChain',
               params: [network],
             });
-            console.debug('NETWORK add chain done', switchError);
             setSuccess(true);
           } catch (addError) {
             setSuccess(false);
           }
-          //}
         }
       } else {
         setSuccess(false);

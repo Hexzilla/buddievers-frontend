@@ -20,6 +20,14 @@ const v2_text = v2_secondary;
 const v2_lightBlack = '#111';
 const danger = '#d63535';
 
+declare module '@mui/material/styles/createPalette' {
+  export interface TypeBackground {
+    default: string;
+    darkGreen: string;
+    paper: string;
+  }
+}
+
 export const palette: PaletteOptions = {
   error: {
     main: danger,

@@ -32,7 +32,7 @@ export default function OptionCard({
   }, [link, onClick]);
 
   return (
-    <Button variant="outlined" style={{ color }} id={id} onClick={handleClick}>
+    <Button className={styles.optionButton} id={id} onClick={handleClick}>
       <div className={styles.optionElementContainer}>
         <div className={styles.optionCardLeft}>
           <div className={styles.headertext}>
