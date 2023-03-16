@@ -13,7 +13,8 @@ export const RoadSection = () => {
         roadExp,
         roadEnd,
         carouselItems,
-        roadImg
+        roadImg,
+        roadCarousel
     } = useClasses(styles);
     const responsive = {
         superLargeDesktop: {
@@ -55,6 +56,7 @@ export const RoadSection = () => {
                     removeArrowOnDeviceType={["tablet", "mobile"]}
                     dotListClass="custom-dot-list-style"
                     itemClass="carousel-item-padding-40-px"
+                    className={ roadCarousel }
                 >
                     <div>
                         <Grid container spacing={4}  className={ carouselItems }>

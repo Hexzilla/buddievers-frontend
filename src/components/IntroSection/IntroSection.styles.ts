@@ -24,10 +24,12 @@ export const styles = (theme: Theme) => ({
         fontSize: "25px",
         fontWeight: 900,
         color: theme.palette.text.primary,
-        "&:hover":{
-            backgroundColor: "rgba(0,0,0,0.4)",
-            boxShadow: "none",
-            color: "white"
+        "&:hover" : {
+        background : "#00CE4C"
+        },
+        "&:active" : {
+        color : "white",
+        background : "#01472A",
         }
     }
 });

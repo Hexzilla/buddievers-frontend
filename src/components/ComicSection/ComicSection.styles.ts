@@ -12,12 +12,14 @@ export const styles = (theme: Theme) => ({
         color : "white",
         fontWeight: "900",
         fontSize: "60px",
-        margin: "0px"
+        margin: "0px",
+        marginTop : "50px"
     },
     description: {
         fontWeight: "900",
         fontSize: "40px",
-        color: "#00CE4C"
+        color: "#00CE4C",
+        margin : 0
     },
     button : {
         height: "80px",
@@ -30,8 +32,11 @@ export const styles = (theme: Theme) => ({
         // marginRight: "2vw",
         // marginLeft: "5vw",
         "&:hover" : {
-            background : "rgba(0,0,0,0.5)",
-            color : 'white'
+        background : "#00CE4C"
+        },
+        "&:active" : {
+        color : "white",
+        background : "#01472A",
         }
     },
     comicImage : {

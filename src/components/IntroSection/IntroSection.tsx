@@ -21,6 +21,7 @@ export const IntroSection = () => {
     return (
         <div className={container}>
             <Button
+                disableRipple
                 className={button}
                 variant="contained"
                 onClick={addWhitelist}

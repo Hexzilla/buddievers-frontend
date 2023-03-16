@@ -58,6 +58,7 @@ export const ComicSection = () => {
                 </Grid>
                 <Grid item md={2} sm={12} style={{ display : "flex", flexDirection : "column" }}>
                     <Button
+                        disableRipple
                         className={button}
                         variant="contained"
                         onClick={handleClickOpen}
@@ -103,7 +104,8 @@ export const ComicSection = () => {
                 </Carousel>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} autoFocus>
+                    <Button disableRipple onClick={handleClose} autoFocus>
+                        
                         Close
                     </Button>
                 </DialogActions>

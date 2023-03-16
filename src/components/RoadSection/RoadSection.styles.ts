@@ -17,7 +17,7 @@ export const styles = (theme: Theme) => ({
     },
     title: {
         fontWeight: "900",
-        fontSize: "2.5vw",
+        fontSize: "75px",
         color: "#00CE4C",
         "@media (max-width : 1192px)" : {
             fontSize : "60px",
@@ -72,7 +72,7 @@ export const styles = (theme: Theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: '50px 40px',
+        padding: '20px 20px',
         color : "white",
         background: '#00CE4C',
         borderRadius: '20px',
@@ -102,5 +102,15 @@ export const styles = (theme: Theme) => ({
     roadImg : {
         width : "100%",
         borderRadius : "10px"
+    },
+    roadCarousel : {
+        color : "white",
+        "& .react-multi-carousel-dot-list .react-multi-carousel-dot button" : {
+            border : "none",
+            background : "rgba(0, 255, 0, 0.3)"
+        },
+        "& .react-multi-carousel-dot-list .react-multi-carousel-dot--active button" : {
+            background : "rgba(0, 255, 0, 1)"
+        }
     }
 });
