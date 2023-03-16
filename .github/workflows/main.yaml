@@ -3,7 +3,7 @@ name: Buddies-web
 on: 
   push:
     branches:
-      - main
+      - main1
   workflow_dispatch:   
 jobs:
   deploy:
