@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Stack, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -16,7 +17,7 @@ import { MAX_WIDTH_TO_SHOW_NAVIGATION } from '../../constants';
 import { styles } from './Layout.styles';
 import { LayoutProps } from './Layout.types';
 
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = () => {
   const { headerWrapper, logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer, headerGrids, navLinkContainer1, navLinkContainer2, navItemMobile, socialImages, socialTitle } =
     useClasses(styles);
 
@@ -135,7 +136,9 @@ export const Layout = ({ children }: LayoutProps) => {
           </Stack>
         </Container>
       </Header>
-      <Container maxWidth="xl" style={{padding: "0px"}}>{children}</Container>
+      <Container maxWidth="xl" style={{padding: "0px"}}>
+        <Outlet />
+      </Container>
       <Footer />
     </>
   );

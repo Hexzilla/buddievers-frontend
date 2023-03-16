@@ -1,5 +1,6 @@
+import { Outlet } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Stack, useTheme } from '@mui/material';
+import { Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -11,10 +12,8 @@ import { useState } from 'react';
 import { Drawer, Footer, Header, NavLink } from 'ui';
 import { MAX_WIDTH_TO_SHOW_NAVIGATION } from '../../constants';
 import { styles } from './Layout.styles';
-import { LayoutProps } from './Layout.types';
 
-export const MintLayout = ({ children }: LayoutProps) => {
-  const [stage, setStage] = useState(1);
+export const MintLayout = () => {
   const [currentTime, setCurrentTime] = useState("");
   const [connectStatus, setConnectStatus] = useState(1);
   const [liftOffStatus, setLiftOffStatus] = useState(1);
@@ -124,7 +123,9 @@ export const MintLayout = ({ children }: LayoutProps) => {
         </Container>
       </Header>
 
-      <Container maxWidth="xl" style={{ padding: "0px" }}>{children}</Container>
+      <Container maxWidth="xl" style={{ padding: "0px" }}>
+        <Outlet/>
+      </Container>
       <Footer />
     </>
   );
