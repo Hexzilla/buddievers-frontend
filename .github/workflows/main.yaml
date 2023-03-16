@@ -18,11 +18,8 @@ jobs:
           port: "22"
           script: |
             cd /home/buddies/Buddies-web
+            git checkout main
             git fetch
             git pull
-            pm2 delete buddies
             rm -rf build
             yarn build
-            cd build
-            pm2 start live-server --name buddies -- --port=3003
-            pm2 save
