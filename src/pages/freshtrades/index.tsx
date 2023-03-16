@@ -50,11 +50,10 @@ const FreshTradesPage = () => {
         </Video>
       </VideoContainer>
       <MintContainer>
-        {/* {stage === 0 && <Welcome onNext={() => setStage(1)} />}
+        {stage === 0 && <Welcome onNext={() => setStage(1)} />}
         {stage === 1 && <Whitelist onNext={() => setStage(2)} />}
         {stage === 2 && <TokenSales onNext={() => setStage(3)} />}
-        {stage === 3 && <MintComplete />}; */}
-        <MintComplete />
+        {stage === 3 && <MintComplete />};
       </MintContainer>
     </Container>
   );
