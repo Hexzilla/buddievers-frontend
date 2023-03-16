@@ -14,27 +14,41 @@ import { MAX_WIDTH_TO_SHOW_NAVIGATION } from '../../constants';
 import { styles } from './Layout.styles';
 
 export const MintLayout = () => {
-  const [currentTime, setCurrentTime] = useState("");
+  const [currentTime, setCurrentTime] = useState('');
   const [connectStatus, setConnectStatus] = useState(1);
   const [liftOffStatus, setLiftOffStatus] = useState(1);
 
-  const { mintTitleRightNetwork, mintTitleRightWallet, mintTitleLeft, mintTitleBold, headerWrapper, logo, logoAlt, nav, navItem, buttonContainer, navItemDrawer, headerGrids, navLinkContainer1, navLinkContainer2, navItemMobile, socialImages, socialTitle } =
-    useClasses(styles);
+  const {
+    mintTitleRightNetwork,
+    mintTitleRightWallet,
+    mintTitleLeft,
+    mintTitleBold,
+    headerWrapper,
+    navItemDrawer,
+    headerGrids,
+  } = useClasses(styles);
 
   const showRegularMenu = useMediaQuery(
     `(max-width: ${MAX_WIDTH_TO_SHOW_NAVIGATION}px)`
   );
-  const isXs = useMediaQuery(
-    `(max-width: 400px)`
-  );
-  console.log('xs', isXs)
+  const isXs = useMediaQuery(`(max-width: 400px)`);
+  console.log('xs', isXs);
 
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
 
   setInterval(() => {
     let ts = Date.now();
     let today = new Date(ts);
-    setCurrentTime(today.getDate() + 'd ' + today.getHours() + 'h ' + today.getMinutes() + 'm ' + today.getSeconds() + 's');
+    setCurrentTime(
+      today.getDate() +
+        'd ' +
+        today.getHours() +
+        'h ' +
+        today.getMinutes() +
+        'm ' +
+        today.getSeconds() +
+        's'
+    );
   }, 1000);
 
   return (
@@ -46,49 +60,78 @@ export const MintLayout = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Stack direction='row'>
+          <Stack direction="row">
             {!showRegularMenu ? (
               <>
-                <Grid container justifyContent='left' spacing={0}>
+                <Grid container justifyContent="left" spacing={0}>
                   <Grid className={headerGrids} item md={6}>
-                    {liftOffStatus === 1 &&
+                    {liftOffStatus === 1 && (
                       <div className={mintTitleLeft}>
-                        <span className={mintTitleBold}>MOONBUDDIES MISSION LAUNCH: </span>
+                        <span className={mintTitleBold}>
+                          MOONBUDDIES MISSION LAUNCH:{' '}
+                        </span>
                         {currentTime}
                       </div>
-                    }
+                    )}
                   </Grid>
-                  <Grid className={headerGrids} justifyContent='right' item md={2}>
-                    {connectStatus === 1 &&
+                  <Grid
+                    className={headerGrids}
+                    justifyContent="right"
+                    item
+                    md={2}
+                  >
+                    {connectStatus === 1 && (
                       <div className={mintTitleRightNetwork}>
                         <div className={mintTitleBold}>Network: </div>
                         Exosama Network
                       </div>
-                    }
+                    )}
                   </Grid>
-                  <Grid className={headerGrids} justifyContent='right' item md={2}>
-                    {connectStatus === 1 &&
+                  <Grid
+                    className={headerGrids}
+                    justifyContent="right"
+                    item
+                    md={2}
+                  >
+                    {connectStatus === 1 && (
                       <div className={mintTitleRightWallet}>
                         <div className={mintTitleBold}>Wallet: </div>
                         0xed...0s9d
                       </div>
-                    }
+                    )}
                   </Grid>
-                  <Grid className={headerGrids} justifyContent='right' item md={2}>
+                  <Grid
+                    className={headerGrids}
+                    justifyContent="right"
+                    item
+                    md={2}
+                  >
                     <Account />
                   </Grid>
                 </Grid>
               </>
             ) : (
               <>
-                <Grid container justifyContent='left' spacing={0}>
-                  <Grid className={headerGrids} justifyContent='left' item md={10}>
+                <Grid container justifyContent="left" spacing={0}>
+                  <Grid
+                    className={headerGrids}
+                    justifyContent="left"
+                    item
+                    md={10}
+                  >
                     <div className={mintTitleLeft}>
-                      <span className={mintTitleBold}>MOONBUDDIES MISSION LAUNCH: </span>
+                      <span className={mintTitleBold}>
+                        MOONBUDDIES MISSION LAUNCH:{' '}
+                      </span>
                       {currentTime}
                     </div>
                   </Grid>
-                  <Grid className={headerGrids} justifyContent='right' item md={2}>
+                  <Grid
+                    className={headerGrids}
+                    justifyContent="right"
+                    item
+                    md={2}
+                  >
                     <Drawer
                       open={isDrawerOpened}
                       onClose={() => setIsDrawerOpened(false)}
@@ -118,13 +161,12 @@ export const MintLayout = () => {
                 </Grid>
               </>
             )}
-
           </Stack>
         </Container>
       </Header>
 
-      <Container maxWidth="xl" style={{ padding: "0px" }}>
-        <Outlet/>
+      <Container maxWidth="xl" style={{ padding: '0px' }}>
+        <Outlet />
       </Container>
       <Footer />
     </>
