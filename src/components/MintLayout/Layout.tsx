@@ -52,11 +52,6 @@ export const MintLayout = () => {
     <>
       <Header>
         <Container className={headerWrapper} maxWidth={false}>
-          {showRegularMenu && (
-            <IconButton onClick={() => setIsDrawerOpened(true)}>
-              <MenuIcon />
-            </IconButton>
-          )}
           <Stack direction="row">
             {!showRegularMenu ? (
               <>
@@ -156,6 +151,11 @@ export const MintLayout = () => {
                     </Drawer>
                   </Grid>
                 </Grid>
+                {showRegularMenu && (
+                  <IconButton onClick={() => setIsDrawerOpened(true)}>
+                    <MenuIcon />
+                  </IconButton>
+                )}
               </>
             )}
           </Stack>
@@ -165,7 +165,7 @@ export const MintLayout = () => {
       <Container maxWidth="xl" style={{ padding: '0px' }}>
         <Outlet />
       </Container>
-      
+
       <Footer />
     </>
   );
