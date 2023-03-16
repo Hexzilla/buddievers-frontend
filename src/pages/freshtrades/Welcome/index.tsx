@@ -25,19 +25,24 @@ const SubTitle = styled(Typography)`
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
-
+  
   line-height: 36px;
   align-items: center;
   text-align: center;
 
   color: #ffffff;
   text-transform: uppercase;
-
-  padding: 0 20px;
+  @media (max-width: 1020px) {
+    
+    padding: 20px 50px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   padding-top: 40px;
+  @media (max-width: 1020px) {
+    padding-top: 80px;
+  }
 `;
 
 export type MintState = 'soon' | 'online';

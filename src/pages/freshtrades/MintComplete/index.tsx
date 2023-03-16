@@ -7,7 +7,7 @@ const Container = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: #ffffff;
+  color: #FFFFFF;
 `;
 
 const LeftPanel = styled.div`
@@ -17,17 +17,27 @@ const LeftPanel = styled.div`
 
   @media (max-width: 1020px) {
     justify-content: center;
-    padding: 40px;
+    padding: 0 40px 0 40px;
+    margin-top: -25px;
   }
 `;
 
 const ComplexImage = styled('img')`
-  width: 400px;
+  width:400px;
   border-radius: 10px;
 
   @media (max-width: 1020px) {
     width: 100%;
   }
+`;
+
+const RightPanel = styled(Grid)`
+   width: 470px;
+
+   @media (max-width: 1020px) {
+     width: 100%;
+     padding: 40px;
+   }
 `;
 
 const MoonBuddiesContainer = styled.div`
@@ -35,23 +45,40 @@ const MoonBuddiesContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 40px;
-  margin: 20px 0;
+  margin-bottom: 49px;
 
   width: 100%;
   background: rgba(0, 206, 76, 0.2);
   border-radius: 10px;
-
-  @media (max-width: 1020px) {
-    padding: 21px;
-  }
 `;
 
-const RightPanel = styled(Grid)`
-  width: 470px;
+const MoonBuddle = styled(Typography)`
+  font-size: 24px;
+  line-height: 36px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #00CE4C;
+`;
+
+const MoonBuddleDetail = styled(Typography)`
+  width: 390px;
+  height: 60px;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 60px;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #FFFFFF;
 
   @media (max-width: 1020px) {
-    width: 100%;
-    padding: 36px;
+    width: 230px;
+    height: 120px;
+    overflow-wrap: anywhere;
+    text-align: justify;
   }
 `;
 
@@ -66,19 +93,16 @@ const MintingComplete = styled(Typography)`
   text-align: center;
   text-transform: uppercase;
 
-  margin: 20px 0;
+  margin-bottom: 35px;
 
-  @media (max-width: 1020px) {
-    font-size: 30px;
+  @media (max-width: 1020px){
+    line-height: 40px;
+    flex-flow: wrap;
   }
 `;
 
-const MintStateContainer = styled(Typography)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 30px;
+const GreenSpan = styled('span')`
+  color: #00CE4C;
 `;
 
 const CongrateDesktop = styled(Typography)`
@@ -91,6 +115,8 @@ const CongrateDesktop = styled(Typography)`
   align-items: center;
   text-align: center;
   text-transform: uppercase;
+
+  margin-bottom: 7px;
 
   @media (max-width: 1020px) {
     display: none;
@@ -115,42 +141,17 @@ const CongrateMobile = styled(Typography)`
 
 const MintingSubDetail = styled(Typography)`
   line-height: 24px;
-  text-align: center;
+  text-align: left;
+  margin-bottom: 24px;
 `;
 
-const MoonBuddle = styled(Typography)`
-  font-size: 24px;
-  line-height: 36px;
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  color: #00ce4c;
-`;
-
-const MoonBuddleDetail = styled(Typography)`
-  width: 390px;
-  height: 60px;
-
-  font-weight: 900;
-  font-size: 40px;
-  line-height: 60px;
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  @media (max-width: 1020px) {
-    font-size: 30px;
-  }
-`;
-
-const ButtonContainer = styled.div`
+const MintButtonContainer = styled(Grid)`
   display: flex;
   justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 40px;
+  flex-wrap: nowrap;
+  @media (max-width: 1020px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const MintButton = styled(MaterialButton)`
@@ -159,86 +160,74 @@ const MintButton = styled(MaterialButton)`
   justify-content: center;
   align-items: center;
   padding: 0px;
-  margin: 0 10px;
-
-  width: 100%;
-  height: 64px;
+  margin: 0px;
 
   background: rgba(0, 206, 76, 0.6);
   border-radius: 20px;
 
   @media (max-width: 1020px) {
-    font-size: 30px;
+    width: 100%;
     margin-top: 20px;
   }
 `;
 
 const MintButtonText = styled(Typography)`
   line-height: 24px;
-
-  display: flex;
   align-items: center;
   text-align: center;
-
-  color: #ffffff;
+  color: #FFFFFF;
   text-transform: uppercase;
-`;
-
-const GreenSpan = styled('span')`
-  color: #00ce4c;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+  white-space: nowrap;
 `;
 
 export const MintComplete = () => {
   return (
     <Container>
-      <Grid container direction="row" alignItems="center">
-        <Grid item md={6} xs={12}>
-          <LeftPanel>
-            <ComplexImage alt="complex" src="./B-BUDS 5.png" />
-          </LeftPanel>
+        <Grid container direction="row" alignItems="center">
+            <Grid item md={6} xs={12}>
+                <LeftPanel>
+                    <ComplexImage alt="complex" src="./B-BUDS 5.png" />
+                </LeftPanel>
+            </Grid>
+            <Grid item md={6} xs={12}>
+                <RightPanel container direction="column">
+                    <MoonBuddiesContainer>
+                        <MoonBuddle>MOONBUDDIES</MoonBuddle>
+                        <MoonBuddleDetail>MOONBUDDIE #192</MoonBuddleDetail>
+                    </MoonBuddiesContainer>
+                    <MintingComplete>
+                      MINING<GreenSpan>&nbsp;COMPLETE</GreenSpan>
+                    </MintingComplete>
+                    <CongrateDesktop>
+                      CONGRATS, YOU'VE MINTED{' '}
+                      <span style={{ color: '#00CE4C' }}> &nbsp;12&nbsp; </span>
+                      /&nbsp;500
+                    </CongrateDesktop>
+                    <CongrateMobile>Congratulations.</CongrateMobile>
+                    <MintingSubDetail>
+                      Welcome to the beginning of an incredible adventure through the
+                      BUDDIEVERSE. Click below for the next steps.
+                    </MintingSubDetail>
+                    <MintButtonContainer
+                      container
+                      direction="row"
+                    >
+                        <MintButton>
+                          <MintButtonText>Mint Another</MintButtonText>
+                        </MintButton>
+                      
+                        <MintButton>
+                          <MintButtonText>Go To BuddieVerse</MintButtonText>
+                        </MintButton>
+
+                    </MintButtonContainer>
+                </RightPanel>
+            </Grid>
         </Grid>
-        <Grid item md={6} xs={12}>
-          <RightPanel container direction="column">
-            <MoonBuddiesContainer>
-              <MoonBuddle>MoonBuddies</MoonBuddle>
-              <MoonBuddleDetail>MoonBuddie #192</MoonBuddleDetail>
-            </MoonBuddiesContainer>
-            <MintingComplete>
-              MINING<GreenSpan>&nbsp;COMPLETE</GreenSpan>
-            </MintingComplete>
-            <MintStateContainer>
-              <CongrateDesktop>
-                CONGRATS, YOU'VE MINTED{' '}
-                <span style={{ color: '#00CE4C' }}> &nbsp;12&nbsp; </span>
-                /&nbsp;500
-              </CongrateDesktop>
-              <CongrateMobile>Congratulations</CongrateMobile>
-              <MintingSubDetail>
-                Welcome to the beginning of an incredible adventure through the
-                BUDDIEVERSE. Click below for the next steps.
-              </MintingSubDetail>
-            </MintStateContainer>
-            <ButtonContainer>
-              <Grid
-                container
-                direction="row"
-                sx={{ justifyContent: 'center' }}
-              >
-                <Grid sm={6} xs={12}>
-                  <MintButton>
-                    <MintButtonText>Mint Another</MintButtonText>
-                  </MintButton>
-                </Grid>
-                <Grid sm={6} xs={12}>
-                  <MintButton>
-                    <MintButtonText>Go To BuddieVerse</MintButtonText>
-                  </MintButton>
-                </Grid>
-              </Grid>
-            </ButtonContainer>
-          </RightPanel>
-        </Grid>
-      </Grid>
     </Container>
-  );
+  ); 
 };

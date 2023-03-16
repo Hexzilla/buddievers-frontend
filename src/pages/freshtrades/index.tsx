@@ -35,20 +35,20 @@ const MintContainer = styled.div`
   @media (max-width: 1020px) {
     height: 100%;
     min-height: 100vh;
-    padding-top: 180px;
+    padding-top: 130px;
     padding-bottom: 40px;
   }
 `;
 
-const FreshTradesPage = () => {
+const FreshTradesPage = ()=>{
   const [stage, setStage] = useState(0);
 
   return (
     <Container>
       <VideoContainer>
-        <Video id="background-video" loop autoPlay>
+        {/* <Video id="background-video" loop autoPlay>
           <source src="./background.mp4" type="video/mp4" />
-        </Video>
+        </Video> */}
       </VideoContainer>
       <MintContainer>
         {stage === 0 && <Welcome onNext={() => setStage(1)} />}

@@ -18,6 +18,9 @@ const MainTitle = styled(Typography)`
   text-transform: uppercase;
 
   padding-top: 30px;
+  @media (max-width: 1020px) {
+    padding-top: 100px;
+  }
 `;
 
 const SubTitle = styled(Typography)`
@@ -34,10 +37,16 @@ const SubTitle = styled(Typography)`
   text-transform: uppercase;
 
   padding-top: 10px;
+  @media (max-width: 1020px) {
+    padding-top: 20px;
+  }
 `;
 
 const ButtonContainer = styled.div`
   padding-top: 40px;
+  @media (max-width: 1020px) {
+    padding-top: 165px;
+  }
 `;
 
 export type MintState = 'soon' | 'online';
