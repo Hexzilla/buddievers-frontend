@@ -9,14 +9,14 @@ import IconButton from '@mui/material/IconButton';
 import { useMediaQuery } from 'beautiful-react-hooks';
 import { Account } from 'components';
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Drawer, Footer, Header, NavLink } from 'ui';
 import { useInterval } from 'hooks/useInterval';
 import { MAX_WIDTH_TO_SHOW_NAVIGATION } from '../../constants';
 import { styles } from './Layout.styles';
 
 export const MintLayout = () => {
-  const [remainTime, setRemainTime] = useState(3600 * 24 * 7);
+  const [remainTime, setRemainTime] = useState(0);
   const { account } = useActiveWeb3React();
   const [liftOffStatus, setLiftOffStatus] = useState(1);
 
@@ -37,6 +37,12 @@ export const MintLayout = () => {
   console.log('xs', isXs);
 
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
+
+  useEffect(() => {
+    const startTime = moment.utc("2023-03-19 16:00:00").local();
+    const remainTime = startTime.diff(moment(), 's');
+    setRemainTime(remainTime);
+  }, [])
 
   useInterval(() => {
     setRemainTime((time) => (time > 0 ? time - 1 : 0));
