@@ -26,3 +26,4 @@ jobs:
             yarn build
             cd build
             pm2 restart buddies
+
