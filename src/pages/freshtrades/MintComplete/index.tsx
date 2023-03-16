@@ -37,11 +37,12 @@ const MoonBuddiesContainer = styled.div`
   padding: 40px;
   margin: 20px 0;
 
+  width: 100%;
   background: rgba(0, 206, 76, 0.2);
   border-radius: 10px;
 
   @media (max-width: 1020px) {
-    padding: 32px;
+    padding: 21px;
   }
 `;
 
@@ -63,8 +64,13 @@ const MintingComplete = styled(Typography)`
   justify-content: center;
   align-items: center;
   text-align: center;
+  text-transform: uppercase;
 
   margin: 20px 0;
+
+  @media (max-width: 1020px) {
+    font-size: 30px;
+  }
 `;
 
 const MintStateContainer = styled(Typography)`
@@ -75,7 +81,7 @@ const MintStateContainer = styled(Typography)`
   margin-bottom: 30px;
 `;
 
-const MintingDetail = styled(Typography)`
+const CongrateDesktop = styled(Typography)`
   font-weight: 900;
   font-size: 24px;
   line-height: 36px;
@@ -84,6 +90,27 @@ const MintingDetail = styled(Typography)`
   justify-content: center;
   align-items: center;
   text-align: center;
+  text-transform: uppercase;
+
+  @media (max-width: 1020px) {
+    display: none;
+  }
+`;
+
+const CongrateMobile = styled(Typography)`
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 36px;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media (max-width: 1020px) {
+    display: flex;
+  }
 `;
 
 const MintingSubDetail = styled(Typography)`
@@ -113,6 +140,10 @@ const MoonBuddleDetail = styled(Typography)`
   display: flex;
   align-items: center;
   text-align: center;
+
+  @media (max-width: 1020px) {
+    font-size: 30px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -128,12 +159,18 @@ const MintButton = styled(MaterialButton)`
   justify-content: center;
   align-items: center;
   padding: 0px;
+  margin: 0 10px;
 
-  width: 235px;
+  width: 100%;
   height: 64px;
 
   background: rgba(0, 206, 76, 0.6);
   border-radius: 20px;
+
+  @media (max-width: 1020px) {
+    font-size: 30px;
+    margin-top: 20px;
+  }
 `;
 
 const MintButtonText = styled(Typography)`
@@ -170,31 +207,29 @@ export const MintComplete = () => {
               MINING<GreenSpan>&nbsp;COMPLETE</GreenSpan>
             </MintingComplete>
             <MintStateContainer>
-              <MintingDetail>
+              <CongrateDesktop>
                 CONGRATS, YOU'VE MINTED{' '}
                 <span style={{ color: '#00CE4C' }}> &nbsp;12&nbsp; </span>
                 /&nbsp;500
-              </MintingDetail>
+              </CongrateDesktop>
+              <CongrateMobile>Congratulations</CongrateMobile>
               <MintingSubDetail>
-                <div>Welcome to the beginning of an incredible adventure</div>
-                <div>
-                  through the BUDDIEVERSE. Click below for the next steps.
-                </div>
+                Welcome to the beginning of an incredible adventure through the
+                BUDDIEVERSE. Click below for the next steps.
               </MintingSubDetail>
             </MintStateContainer>
             <ButtonContainer>
               <Grid
                 container
                 direction="row"
-                spacing={2}
                 sx={{ justifyContent: 'center' }}
               >
-                <Grid xs={6}>
+                <Grid sm={6} xs={12}>
                   <MintButton>
                     <MintButtonText>Mint Another</MintButtonText>
                   </MintButton>
                 </Grid>
-                <Grid xs={6}>
+                <Grid sm={6} xs={12}>
                   <MintButton>
                     <MintButtonText>Go To BuddieVerse</MintButtonText>
                   </MintButton>
