@@ -61,7 +61,7 @@ export const MintLayout = () => {
   }, []);
 
   useInterval(() => {
-    //setRemainTime((time) => (time > 0 ? time - 1 : 0));
+    setRemainTime((time) => (time > 0 ? time - 1 : 0));
   }, 1000);
 
   const countdown = useMemo(() => {
