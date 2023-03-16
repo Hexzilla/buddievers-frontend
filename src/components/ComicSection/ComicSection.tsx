@@ -12,7 +12,8 @@ export const ComicSection = () => {
         title,
         description,
         button,
-        comicImage
+        comicImage,
+        comicCarousel
     } = useClasses(styles);
     const [open, setOpen] = React.useState(false);
 
@@ -78,10 +79,11 @@ export const ComicSection = () => {
                 </DialogTitle>
                 <DialogContent>
                     <Carousel
+                        className={ comicCarousel }
                         arrows={false}
                         swipeable={true}
-                        draggable={true}
-                        showDots={false}
+                        draggable={false}
+                        showDots={true}
                         responsive={responsive}
                         ssr={true} // means to render carousel on server-side.
                         infinite={true}
