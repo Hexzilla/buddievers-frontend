@@ -9,11 +9,13 @@ import IconButton from '@mui/material/IconButton';
 import { useMediaQuery } from 'beautiful-react-hooks';
 import { Account } from 'components';
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { useState, useMemo, useEffect } from 'react';
-import { Drawer, Footer, Header, NavLink } from 'ui';
+import { ReactNode, useState, useEffect, useMemo } from 'react';
+import { Drawer, Footer, NavLink } from 'ui';
 import { useInterval } from 'hooks/useInterval';
 import { MAX_WIDTH_TO_SHOW_NAVIGATION } from '../../constants';
 import { styles } from './Layout.styles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 
 export const MintLayout = () => {
   const [remainTime, setRemainTime] = useState(0);
@@ -28,7 +30,21 @@ export const MintLayout = () => {
     headerWrapper,
     navItemDrawer,
     headerGrids,
+    appBar,
+    toolBar,
   } = useClasses(styles);
+
+  const Header = ({ children }: { children: ReactNode }) => {
+    return (
+      <>
+        <AppBar className={appBar} elevation={0}>
+          <Toolbar className={toolBar} disableGutters>
+            {children}
+          </Toolbar>
+        </AppBar>
+      </>
+    );
+  };
 
   const showRegularMenu = useMediaQuery(
     `(max-width: ${MAX_WIDTH_TO_SHOW_NAVIGATION}px)`
@@ -39,13 +55,13 @@ export const MintLayout = () => {
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
 
   useEffect(() => {
-    const startTime = moment.utc("2023-03-19 16:00:00").local();
+    const startTime = moment.utc('2023-03-19 16:00:00').local();
     const remainTime = startTime.diff(moment(), 's');
     setRemainTime(remainTime);
-  }, [])
+  }, []);
 
   useInterval(() => {
-    setRemainTime((time) => (time > 0 ? time - 1 : 0));
+    //setRemainTime((time) => (time > 0 ? time - 1 : 0));
   }, 1000);
 
   const countdown = useMemo(() => {
@@ -118,10 +134,11 @@ export const MintLayout = () => {
                     md={10}
                   >
                     <div className={mintTitleLeft}>
-                      <span className={mintTitleBold}>
-                        MOONBUDDIES MISSION LAUNCH:{' '}
-                      </span>
-                      {countdown}
+                      <span className={mintTitleBold}>MOONBUDDIES MISSION</span>
+                      <div>
+                        <span className={mintTitleBold}>LAUNCH:</span>
+                        {countdown}
+                      </div>
                     </div>
                   </Grid>
                   <Grid
@@ -137,7 +154,7 @@ export const MintLayout = () => {
                       onClick={() => setIsDrawerOpened(false)}
                       anchor="right"
                     >
-                      <Box sx={{ display: 'flex' }}>
+                      <Box>
                         {/*<NavLink href="/auctions" className={navItemDrawer}>
                         Auctions
                       </NavLink>*/}

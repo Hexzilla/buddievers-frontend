@@ -1,15 +1,23 @@
+import { VerticalAlignCenter } from '@mui/icons-material';
 import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
-  headerWrapper: {
+    appBar: {
+      backgroundColor: theme.palette.background.darkGreen,
+       height: '65px',
+    },
+    toolBar: {
+      minHeight: '65px',
+    },
+   headerWrapper: {
     paddingTop: "1vw",
     paddingBottom: "1vw",
    },
    headerGrids : {
     display : "flex",
     flexDirection : "column",
-    paddintBottom : "5px"
-    
+    paddintBottom : "5px",
+    alignSelf: "flex-end",
    },
    navLinkContainer1 : {
     justifyContent : "initial",
@@ -106,8 +114,10 @@ export const styles = (theme: Theme) => ({
     },
   },
   mintTitleLeft: {
-    fontSize: "20px",
+    fontSize: "18px",
     color: "#FFF",
+    lineHeight: "20px",
+    margin: "10px",
   },
   mintTitleBold: {
     fontWeight: "bold",
@@ -121,5 +131,5 @@ export const styles = (theme: Theme) => ({
     fontSize: "16px",
     color: "#FFF",
     alignSelf: "center",
-  }
+  },
 });

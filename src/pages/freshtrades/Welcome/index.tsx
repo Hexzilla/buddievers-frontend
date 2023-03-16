@@ -32,6 +32,8 @@ const SubTitle = styled(Typography)`
 
   color: #ffffff;
   text-transform: uppercase;
+
+  padding: 0 20px;
 `;
 
 const ButtonContainer = styled.div`
