@@ -4,13 +4,16 @@ import { useClasses } from 'hooks';
 import { Telegram, Twitter } from 'icons';
 import React from 'react';
 import { styles } from './Footer.styles';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 export const Footer = () => {
   const {
     footerWrapper,
     title,
     text,
-    hypers
+    hypers,
+    footerInput,
+    footerButton
   } = useClasses(styles);
 
   return (
@@ -43,14 +46,10 @@ export const Footer = () => {
           style={{ alignSelf: "center", textAlign: "center" }}
         >
           <p className={title}>SIGN OUR NEWSLETTER</p>
-          <TextField id="outlined-basic" label="Type your email address..."
-            variant="outlined"
-            inputProps={{
-              style: {
-                color: "white",
-                fontSize: "23px"
-              }
-            }} />
+            <div style={{ display : 'flex', width : "80%", margin : "auto" }}>
+              <input type="email" className={ footerInput } placeholder="Type your email address..." />
+              <button className={ footerButton }><ArrowRightAltIcon style={{ color : "#01472A" }} /></button>
+            </div>
           <Grid container spacing={0} style={{ marginTop : "30px" }}>
 
             <Grid item md={3}>
