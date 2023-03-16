@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { theme } from 'theme/Theme';
 import { StyledNav } from './NavLink.styles';
 
 export const NavLink = ({

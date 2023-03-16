@@ -3,9 +3,6 @@ import Toolbar from '@mui/material/Toolbar';
 import { useClasses } from 'hooks';
 import { ReactNode, useState } from 'react';
 import { styles } from './Header.styles';
-import Marquee from 'react-fast-marquee';
-import { Link } from 'react-router-dom';
-import { X } from 'react-feather';
 
 export const Header = ({ children }: { children: ReactNode }) => {
   const { appBar, marquee, marqueeLink, marqueeClose } = useClasses(styles);

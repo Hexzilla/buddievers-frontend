@@ -1,5 +1,6 @@
 import MoonriverIcon from '../assets/images/moonriver_icon.svg'
 import MoonbeamIcon from '../assets/images/moonbeam_icon.svg'
+import ExosamaIcon from '../assets/images/exosama.png';
 import BscIcon from '../assets/images/bsc_icon.svg'
 
 export const CHAIN_ID = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1285', 10);
@@ -25,16 +26,18 @@ export enum ChainId {
   EWC = 246,
   VOLTA = 73799,
   MOONRIVER = 97,
-  MOONBEAM= 1284
+  MOONBEAM= 1284,
+  EXOSAMA = 2109,
 }
 
-export const PERMISSIONED_CHAINS = [ChainId.BSC, ChainId.BSC_TESTNET]
+export const PERMISSIONED_CHAINS = [ChainId.EXOSAMA]
 
-export const DEFAULT_CHAIN = ChainId.BSC_TESTNET
+export const DEFAULT_CHAIN = ChainId.EXOSAMA
 
 export const RPC_URLS: { [chainId: number]: string } = {
   [ChainId.MOONRIVER]: 'https://bsc-testnet.public.blastapi.io',
   [ChainId.MOONBEAM]: 'https://moonbeam-rpc.moonsama.com',
+  [ChainId.EXOSAMA]: 'https://rpc.exosama.com',
   [ChainId.BSC]: 'https://bsc-dataseed.binance.org',
   [ChainId.BSC_TESTNET]: 'https://bsc-testnet.public.blastapi.io',
 };
@@ -42,13 +45,15 @@ export const RPC_URLS: { [chainId: number]: string } = {
 export const NATIVE_TOKEN_SYMBOL: { [chainId: number]: string } = {
   [ChainId.MOONRIVER]: 'TBNB',
   [ChainId.MOONBEAM]: 'GLMR',
+  [ChainId.EXOSAMA]: 'SAMA',
   [ChainId.BSC]: 'BNB',
-  [ChainId.BSC_TESTNET]: 'BNB'
+  [ChainId.BSC_TESTNET]: 'BNB',
 };
 
 export const NETWORK_NAME: { [chainId: number]: string } = {
   [ChainId.MOONRIVER]: 'Mumbai',
   [ChainId.MOONBEAM]: 'Moonbeam',
+  [ChainId.EXOSAMA]: 'Exosama',
   [ChainId.BSC]: 'Binance Smart Chain',
   [ChainId.BSC_TESTNET]: 'Binance Smart Chain Testnet'
 };
@@ -56,6 +61,7 @@ export const NETWORK_NAME: { [chainId: number]: string } = {
 export const NETWORK_ICONS: { [chainId: number]: string } = {
   [ChainId.MOONRIVER]: MoonriverIcon,
   [ChainId.MOONBEAM]: MoonbeamIcon,
+  [ChainId.EXOSAMA]: ExosamaIcon,
   [ChainId.BSC]: BscIcon,
   [ChainId.BSC_TESTNET]: BscIcon
 };
@@ -134,6 +140,7 @@ export const EXPLORER_URL: { [chainId in ChainId]?: string } = {
   [ChainId.VOLTA]: 'https://volta-explorer.energyweb.org',
   [ChainId.MOONRIVER]: 'https://moonriver.moonscan.io',
   [ChainId.MOONBEAM]: 'https://blockscout.moonbeam.network',
+  [ChainId.EXOSAMA]: 'https://explorer.exosama.com/',
   [ChainId.BSC]: 'https://bscscan.com',
   [ChainId.BSC_TESTNET]: 'https://testnet.bscscan.com'
 };

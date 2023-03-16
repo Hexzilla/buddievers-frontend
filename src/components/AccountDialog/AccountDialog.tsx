@@ -186,7 +186,7 @@ export const AccountDialog = () => {
         </Button>
       </Stack>
     ),
-    [account, connectorName, getStatusIcon, styles, isSm, formattedBalance]
+    [chainId, theme, account, connectorName, getStatusIcon, styles, isSm, formattedBalance]
   );
 
   const clearAllTransactionsCallback = useCallback(() => {
@@ -402,16 +402,16 @@ export const AccountDialog = () => {
           {error instanceof UnsupportedChainIdError && (
             <>
               <div>Wrong Network</div>
-              <h5>Please connect to the appropriate Ethereum network.</h5>
+              <h5>Please connect to the appropriate Exosama network.</h5>
               <Button
                 //className={formButton}
                 onClick={() => {
-                  addNetwork(ChainId.BSC_TESTNET);
+                  addNetwork(ChainId.EXOSAMA);
                 }}
-                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.BSC_TESTNET]} alt='' />}
+                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.EXOSAMA]} alt='' />}
                 color="primary"
               >
-                Switch to BNB Testnet
+                Switch to Exosama Network
               </Button>
               {/* <Button
                 //className={formButton}
