@@ -33,6 +33,7 @@ const MintContainer = styled.div`
   z-index: 1;
 
   @media (max-width: 1020px) {
+    height: 100%;
     min-height: 100vh;
     padding-top: 180px;
     padding-bottom: 40px;

@@ -2,12 +2,31 @@ import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
 import MaterialButton from '@mui/material/Button';
 
+const Container = styled.div`
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #ffffff;
+`;
+
+const LeftPanel = styled.div`
+  display: flex;
+  justify-content: right;
+  padding-right: 60px;
+
+  @media (max-width: 1020px) {
+    justify-content: center;
+    padding: 40px;
+  }
+`;
+
 const ComplexImage = styled('img')`
   width: 400px;
   border-radius: 10px;
 
   @media (max-width: 1020px) {
-    padding: 40px;
+    width: 100%;
   }
 `;
 
@@ -16,116 +35,91 @@ const MoonBuddiesContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 40px;
-
-  width: 470px;
-  height: 176px;
+  margin: 20px 0;
 
   background: rgba(0, 206, 76, 0.2);
   border-radius: 10px;
+
+  @media (max-width: 1020px) {
+    padding: 32px;
+  }
 `;
 
-const DetailContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
+const RightPanel = styled(Grid)`
   width: 470px;
-  height: 176px;
 
-  margin: 30px;
+  @media (max-width: 1020px) {
+    width: 100%;
+    padding: 36px;
+  }
 `;
 
 const MintingComplete = styled(Typography)`
-  width: 470px;
-  height: 60px;
-
-  font-family: 'Poppins';
-  font-style: normal;
   font-weight: 900;
   font-size: 40px;
   line-height: 60px;
-  /* identical to box height */
 
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
 
-  /* Neutral/White */
-
-  color: #ffffff;
+  margin: 20px 0;
 `;
-const MintingDetail = styled(Typography)`
-  width: 439px;
-  height: 36px;
 
-  font-family: 'Poppins';
-  font-style: normal;
+const MintStateContainer = styled(Typography)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+`;
+
+const MintingDetail = styled(Typography)`
   font-weight: 900;
   font-size: 24px;
   line-height: 36px;
-  /* identical to box height */
 
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
-
-  /* Neutral/White */
-
-  color: #ffffff;
 `;
+
 const MintingSubDetail = styled(Typography)`
-  width: 456px;
-  height: 48px;
-
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
   line-height: 24px;
-  display: flex;
-  align-items: center;
-
-  /* Neutral/White */
-
-  color: #ffffff;
+  text-align: center;
 `;
-const MoonBuddle = styled(Typography)`
-  width: 173px;
-  height: 36px;
 
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
+const MoonBuddle = styled(Typography)`
   font-size: 24px;
   line-height: 36px;
-  /* identical to box height */
 
   display: flex;
   align-items: center;
   text-align: center;
-
-  /* Main/Light Green */
 
   color: #00ce4c;
 `;
+
 const MoonBuddleDetail = styled(Typography)`
   width: 390px;
   height: 60px;
 
-  font-family: 'Poppins';
-  font-style: normal;
   font-weight: 900;
   font-size: 40px;
   line-height: 60px;
-  /* identical to box height */
 
   display: flex;
   align-items: center;
   text-align: center;
+`;
 
-  /* Neutral/White */
-
-  color: #ffffff;
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
 `;
 
 const MintButton = styled(MaterialButton)`
@@ -143,25 +137,14 @@ const MintButton = styled(MaterialButton)`
 `;
 
 const MintButtonText = styled(Typography)`
-  font-family: 'Poppins';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
   line-height: 24px;
-  /* identical to box height */
 
   display: flex;
   align-items: center;
   text-align: center;
 
-  /* Neutral/White */
-
   color: #ffffff;
   text-transform: uppercase;
-`;
-
-const ButtonContainer = styled.div`
-  width: 500px;
 `;
 
 const GreenSpan = styled('span')`
@@ -170,53 +153,57 @@ const GreenSpan = styled('span')`
 
 export const MintComplete = () => {
   return (
-    <Grid container direction="row" spacing={1} alignItems="center">
-      <Grid item md={4} xs={12}>
-        <ComplexImage alt="complex" src="./B-BUDS 5.png" />
-      </Grid>
-      <Grid item md={6}>
-        <Grid container direction="column" spacing={1}>
-          <Grid item md={6}>
+    <Container>
+      <Grid container direction="row" alignItems="center">
+        <Grid item md={6} xs={12}>
+          <LeftPanel>
+            <ComplexImage alt="complex" src="./B-BUDS 5.png" />
+          </LeftPanel>
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <RightPanel container direction="column">
             <MoonBuddiesContainer>
               <MoonBuddle>MoonBuddies</MoonBuddle>
-              <MoonBuddleDetail>MoonBuddie#192</MoonBuddleDetail>
+              <MoonBuddleDetail>MoonBuddie #192</MoonBuddleDetail>
             </MoonBuddiesContainer>
-          </Grid>
-          <DetailContainer>
-            <Grid item md={6}>
-              <MintingComplete>
-                MINING
-                <GreenSpan> &nbsp;COMPLETE</GreenSpan>
-              </MintingComplete>
-            </Grid>
-            <Grid item md={6}>
+            <MintingComplete>
+              MINING<GreenSpan>&nbsp;COMPLETE</GreenSpan>
+            </MintingComplete>
+            <MintStateContainer>
               <MintingDetail>
                 CONGRATS, YOU'VE MINTED{' '}
                 <span style={{ color: '#00CE4C' }}> &nbsp;12&nbsp; </span>
                 /&nbsp;500
               </MintingDetail>
               <MintingSubDetail>
-                Welcome to the beginning of an incredible adventure <br />
-                through the BUDDIEVERSE. Click below for the next steps.
+                <div>Welcome to the beginning of an incredible adventure</div>
+                <div>
+                  through the BUDDIEVERSE. Click below for the next steps.
+                </div>
               </MintingSubDetail>
-            </Grid>
-          </DetailContainer>
-          <ButtonContainer>
-            <Grid item container direction={'row'}>
-              <Grid item xs={6}>
-                <MintButton>
-                  <MintButtonText>Mint Another</MintButtonText>
-                </MintButton>
+            </MintStateContainer>
+            <ButtonContainer>
+              <Grid
+                container
+                direction="row"
+                spacing={2}
+                sx={{ justifyContent: 'center' }}
+              >
+                <Grid xs={6}>
+                  <MintButton>
+                    <MintButtonText>Mint Another</MintButtonText>
+                  </MintButton>
+                </Grid>
+                <Grid xs={6}>
+                  <MintButton>
+                    <MintButtonText>Go To BuddieVerse</MintButtonText>
+                  </MintButton>
+                </Grid>
               </Grid>
-              <Grid item xs={6}>
-                <MintButton>
-                  <MintButtonText>Go To BuddieVerse</MintButtonText>
-                </MintButton>
-              </Grid>
-            </Grid>
-          </ButtonContainer>
+            </ButtonContainer>
+          </RightPanel>
         </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };
