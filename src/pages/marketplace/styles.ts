@@ -43,10 +43,12 @@ export const styles = (theme : Theme) => ({
         fontSize: "25px",
         fontWeight: 900,
         color: theme.palette.text.primary,
-        "&:hover":{
-            backgroundColor: "rgba(0,0,0,0.4)",
-            boxShadow: "none",
-            color: "white"
+        "&:hover" : {
+            background : "#00CE4C"
+        },
+        "&:active" : {
+            color : "white",
+            background : "#01472A",
         }
     },
     cardImg : {
@@ -56,7 +58,8 @@ export const styles = (theme : Theme) => ({
         fontSize : "40px",
         fontWeight : "900",
         color : "white",
-        marginBottom : 0
+        marginBottom : 0,
+        marginTop : 0
     },
     cardSubTitle : {
         fontSize : "16px",
@@ -78,6 +81,13 @@ export const styles = (theme : Theme) => ({
         color : "white",
         border : "none",
         cursor : "pointer",
+        "&:hover" : {
+            background : "rgba(0, 71, 42, 0.6)",
+        },
+        "&:active" : {
+            color : "white",
+            background : "#01472A",
+        }
     }
 
 });
