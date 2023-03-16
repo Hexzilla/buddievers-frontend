@@ -18,6 +18,8 @@ import MarketplacePage from './marketplace';
 import MarketBuddies from './marketbuddies';
 import MarketplaceDetail from './marketplacedetail';
 import MintSoon from './mintSoon';
+import Seeds from './seeds';
+import CoffeeShop from './coffeeshop';
 export const Routing = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
@@ -27,6 +29,8 @@ export const Routing = () => (
     <Route path="/collections" element={<CollectionListPage />} />
     <Route path="/moonbuddies" element={<MarketBuddies />} />
     <Route path="/buddieDetail" element={<MarketplaceDetail />} />
+    <Route path="/seeds" element={<Seeds />} />
+    <Route path="/coffeeshop" element={<CoffeeShop />} />
     <Route
       path="/collection/:type/:address/:subcollectionId"
       element={
