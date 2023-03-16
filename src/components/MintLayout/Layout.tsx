@@ -20,7 +20,6 @@ import Toolbar from '@mui/material/Toolbar';
 export const MintLayout = () => {
   const [remainTime, setRemainTime] = useState(0);
   const { account } = useActiveWeb3React();
-  const [liftOffStatus, setLiftOffStatus] = useState(1);
 
   const {
     mintTitleRightNetwork,
@@ -46,11 +45,9 @@ export const MintLayout = () => {
     );
   };
 
-  const showRegularMenu = useMediaQuery(
+  const isMobile = useMediaQuery(
     `(max-width: ${MAX_WIDTH_TO_SHOW_NAVIGATION}px)`
   );
-  const isXs = useMediaQuery(`(max-width: 400px)`);
-  console.log('xs', isXs);
 
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
 
@@ -70,125 +67,122 @@ export const MintLayout = () => {
     return `${day}d ${hour}h ${min}m ${sec}s`;
   }, [remainTime]);
 
+  const countdownView = useMemo(
+    () => (
+      <>
+        <span className={mintTitleBold}>LAUNCH: </span>
+        {countdown}
+      </>
+    ),
+    [countdown, mintTitleBold]
+  );
+
+  const desktopMeue = useMemo(
+    () => (
+      <>
+        <Grid container justifyContent="left" spacing={0}>
+          <Grid className={headerGrids} item md={6}>
+            <div className={mintTitleLeft}>
+              <span className={mintTitleBold}>Moonbuddies mission </span>
+              {countdownView}
+            </div>
+          </Grid>
+          <Grid className={headerGrids} justifyContent="right" item md={2}>
+            {!!account && (
+              <div className={mintTitleRightNetwork}>
+                <div className={mintTitleBold}>Network: </div>
+                Exosama Network
+              </div>
+            )}
+          </Grid>
+          <Grid className={headerGrids} justifyContent="right" item md={2}>
+            {!!account && (
+              <div className={mintTitleRightWallet}>
+                <div className={mintTitleBold}>Wallet: </div>
+                {account.slice(0, 4) + '...' + account.slice(-4)}
+              </div>
+            )}
+          </Grid>
+          <Grid className={headerGrids} justifyContent="right" item md={2}>
+            <Account />
+          </Grid>
+        </Grid>
+      </>
+    ),
+    [
+      account,
+      countdownView,
+      headerGrids,
+      mintTitleRightNetwork,
+      mintTitleRightWallet,
+      mintTitleBold,
+      mintTitleLeft,
+    ]
+  );
+
+  const mobileMenu = useMemo(
+    () => (
+      <>
+        <Grid container justifyContent="left" spacing={0}>
+          <Grid className={headerGrids} justifyContent="left" item md={10}>
+            <div className={mintTitleLeft}>
+              <span className={mintTitleBold}>MOONBUDDIES MISSION</span>
+              <div>{countdownView}</div>
+            </div>
+          </Grid>
+          <Grid className={headerGrids} justifyContent="right" item md={2}>
+            <Drawer
+              open={isDrawerOpened}
+              onClose={() => setIsDrawerOpened(false)}
+              onOpen={() => setIsDrawerOpened(true)}
+              onClick={() => setIsDrawerOpened(false)}
+              anchor="right"
+            >
+              <Box>
+                <NavLink href="/" className={navItemDrawer}>
+                  HOME
+                </NavLink>
+                <NavLink href="/mint" className={navItemDrawer}>
+                  MINT NFT
+                </NavLink>
+                <NavLink href="/workbench" className={navItemDrawer}>
+                  BUDDIEVERSE
+                </NavLink>
+                <NavLink href="/freshoffers" className={navItemDrawer}>
+                  MARKETPLACE
+                </NavLink>
+              </Box>
+            </Drawer>
+          </Grid>
+        </Grid>
+        {isMobile && (
+          <IconButton onClick={() => setIsDrawerOpened(true)}>
+            <MenuIcon />
+          </IconButton>
+        )}
+      </>
+    ),
+    [
+      countdownView,
+      headerGrids,
+      isDrawerOpened,
+      isMobile,
+      mintTitleBold,
+      mintTitleLeft,
+      navItemDrawer,
+    ]
+  );
+
   return (
     <>
       <Header>
         <Container className={headerWrapper} maxWidth={false}>
-          <Stack direction="row">
-            {!showRegularMenu ? (
-              <>
-                <Grid container justifyContent="left" spacing={0}>
-                  <Grid className={headerGrids} item md={6}>
-                    {liftOffStatus === 1 && (
-                      <div className={mintTitleLeft}>
-                        <span className={mintTitleBold}>
-                          MOONBUDDIES MISSION LAUNCH:{' '}
-                        </span>
-                        {countdown}
-                      </div>
-                    )}
-                  </Grid>
-                  <Grid
-                    className={headerGrids}
-                    justifyContent="right"
-                    item
-                    md={2}
-                  >
-                    {!!account && (
-                      <div className={mintTitleRightNetwork}>
-                        <div className={mintTitleBold}>Network: </div>
-                        Exosama Network
-                      </div>
-                    )}
-                  </Grid>
-                  <Grid
-                    className={headerGrids}
-                    justifyContent="right"
-                    item
-                    md={2}
-                  >
-                    {!!account && (
-                      <div className={mintTitleRightWallet}>
-                        <div className={mintTitleBold}>Wallet: </div>
-                        0xed...0s9d
-                      </div>
-                    )}
-                  </Grid>
-                  <Grid
-                    className={headerGrids}
-                    justifyContent="right"
-                    item
-                    md={2}
-                  >
-                    <Account />
-                  </Grid>
-                </Grid>
-              </>
-            ) : (
-              <>
-                <Grid container justifyContent="left" spacing={0}>
-                  <Grid
-                    className={headerGrids}
-                    justifyContent="left"
-                    item
-                    md={10}
-                  >
-                    <div className={mintTitleLeft}>
-                      <span className={mintTitleBold}>MOONBUDDIES MISSION</span>
-                      <div>
-                        <span className={mintTitleBold}>LAUNCH:</span>
-                        {countdown}
-                      </div>
-                    </div>
-                  </Grid>
-                  <Grid
-                    className={headerGrids}
-                    justifyContent="right"
-                    item
-                    md={2}
-                  >
-                    <Drawer
-                      open={isDrawerOpened}
-                      onClose={() => setIsDrawerOpened(false)}
-                      onOpen={() => setIsDrawerOpened(true)}
-                      onClick={() => setIsDrawerOpened(false)}
-                      anchor="right"
-                    >
-                      <Box>
-                        {/*<NavLink href="/auctions" className={navItemDrawer}>
-                        Auctions
-                      </NavLink>*/}
-                        <NavLink href="/" className={navItemDrawer}>
-                          HOME
-                        </NavLink>
-                        <NavLink href="/mint" className={navItemDrawer}>
-                          MINT NFT
-                        </NavLink>
-                        <NavLink href="/workbench" className={navItemDrawer}>
-                          BUDDIEVERSE
-                        </NavLink>
-                        <NavLink href="/freshoffers" className={navItemDrawer}>
-                          MARKETPLACE
-                        </NavLink>
-                      </Box>
-                    </Drawer>
-                  </Grid>
-                </Grid>
-                {showRegularMenu && (
-                  <IconButton onClick={() => setIsDrawerOpened(true)}>
-                    <MenuIcon />
-                  </IconButton>
-                )}
-              </>
-            )}
-          </Stack>
+          <Stack direction="row">{!isMobile ? desktopMeue : mobileMenu}</Stack>
         </Container>
       </Header>
-
       <Container maxWidth="xl" style={{ padding: '0px' }}>
         <Outlet />
       </Container>
-
       <Footer />
     </>
   );

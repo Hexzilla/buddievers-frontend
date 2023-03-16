@@ -121,6 +121,7 @@ export const styles = (theme: Theme) => ({
   },
   mintTitleBold: {
     fontWeight: "bold",
+    textTransform: "uppercase",
   },
   mintTitleRightNetwork: {
     fontSize: "16px",
