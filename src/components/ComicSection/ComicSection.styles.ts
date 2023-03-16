@@ -43,5 +43,14 @@ export const styles = (theme: Theme) => ({
         "@media (max-width : 1192px)" : {
             display : "none",
         }
+    },
+    comicCarousel : {
+        "& .react-multi-carousel-dot-list .react-multi-carousel-dot button" : {
+            border : "none",
+            background : "rgba(0, 255, 0, 0.3)"
+        },
+        "& .react-multi-carousel-dot-list .react-multi-carousel-dot--active button" : {
+            background : "rgba(0, 255, 0, 1)"
+        }
     }
 });
