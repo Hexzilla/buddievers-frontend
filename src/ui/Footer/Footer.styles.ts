@@ -8,6 +8,7 @@ export const styles = (theme: Theme) => ({
     paddingRight: '10vw',
     paddingTop: "1vw",
     paddingBottom: "1vw",
+    position: "relative",
    },
   title:{
     fontWeight: "900",

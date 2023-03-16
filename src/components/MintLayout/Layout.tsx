@@ -165,6 +165,7 @@ export const MintLayout = () => {
       <Container maxWidth="xl" style={{ padding: '0px' }}>
         <Outlet />
       </Container>
+      
       <Footer />
     </>
   );

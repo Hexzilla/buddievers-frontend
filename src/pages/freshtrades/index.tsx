@@ -1,35 +1,61 @@
+import styled from '@emotion/styled';
 import { useState } from 'react';
-import { useClasses } from 'hooks';
 
 import { Video } from 'ui';
-import { styles } from './styles';
-import useWindowDimensions from 'utils/windowsDimensions';
 
 import { MintComplete } from './MintComplete';
 import { TokenSales } from './TokenSales';
 import { Welcome } from './Welcome';
 import { Whitelist } from './Whitelist';
 
+const Container = styled.div`
+  position: relative;
+  background-color: black;
+`;
+
+const VideoContainer = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  @media (max-width: 1020px) {
+    display: none;
+  }
+`;
+
+const MintContainer = styled.div`
+  height: 1200px;
+
+  padding-top: 300px;
+  padding-bottom: 200px;
+  position: inherit;
+  z-index: 1;
+
+  @media (max-width: 1020px) {
+    height: 100vh;
+    padding-top: 180px;
+    padding-bottom: 40px;
+  }
+`;
+
 const FreshTradesPage = () => {
   const [stage, setStage] = useState(0);
-  const { container } = useClasses(styles);
-  const { height, width } = useWindowDimensions();
-  const stylesBackground = {
-    transform: `translate(0px, -${height * (width / height - 0.68)}px)`,
-  };
 
   return (
-    <>
-      <Video id="background-video" loop autoPlay>
-        <source src="./background.mp4" type="video/mp4" />
-      </Video>
-      <div className={container} style={stylesBackground}>
+    <Container>
+      <VideoContainer>
+        <Video id="background-video" loop autoPlay>
+          <source src="./background.mp4" type="video/mp4" />
+        </Video>
+      </VideoContainer>
+      <MintContainer>
         {stage === 0 && <Welcome onNext={() => setStage(1)} />}
         {stage === 1 && <Whitelist onNext={() => setStage(2)} />}
         {stage === 2 && <TokenSales onNext={() => setStage(3)} />}
         {stage === 3 && <MintComplete />};
-      </div>
-    </>
+      </MintContainer>
+    </Container>
   );
 };
 

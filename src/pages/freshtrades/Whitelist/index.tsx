@@ -55,12 +55,14 @@ export const Whitelist = ({ onNext }: Props) => {
         <Logo />
       </Grid>
       <Grid item>
-        <MainTitle>
-          {state === 'soon' ? 'Sorry' : 'Mint Is Online'}
-        </MainTitle>
+        <MainTitle>{state === 'soon' ? 'Sorry' : 'Mint Is Online'}</MainTitle>
       </Grid>
       <Grid item>
-        <SubTitle>Join us on the public mint</SubTitle>
+        <SubTitle>
+          {state === 'soon'
+            ? 'You are not whitelisted'
+            : 'Join us on the public mint'}
+        </SubTitle>
       </Grid>
       <Grid item>
         <ButtonContainer>
