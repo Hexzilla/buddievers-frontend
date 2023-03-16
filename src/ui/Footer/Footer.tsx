@@ -35,8 +35,8 @@ export const Footer = () => {
           style={{ alignSelf: "center", textAlign: "center" }}
         >
           <img
-            src="./B-BUDS 1.png"
-            style={{ width: "30%", height: "30%" }}
+            src="/static/media/logo.bb21bbec.png"
+            style={{ width: "40%", height: "30%" }}
           />
         </Grid>
         <Grid item md={5} sm={12}

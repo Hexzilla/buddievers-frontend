@@ -17,7 +17,13 @@ export const styles = (theme: Theme) => ({
   text: {
     fontWeight: "900",
     fontSize: "15px",
-    color: "rgba(255, 255, 255, 0.8)"
+    color: "rgba(255, 255, 255, 0.8)",
+    '&:hover': {
+      color: '#00CE4C',
+    },
+    '&:active': {
+      color: '#01472A',
+    },
   },
   hypers : {
     textDecoration : "none",
