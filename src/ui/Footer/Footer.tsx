@@ -45,10 +45,9 @@ export const Footer = () => {
         <Grid item lg={5} sm={12}
           style={{ alignSelf: "center", textAlign: "center" }}
         >
-          <p className={title}>SIGN OUR NEWSLETTER</p>
+          <p className={title}>KEEP UPDATE TO THE LATEST NEWS</p>
             <div style={{ display : 'flex', width : "80%", margin : "auto" }}>
-              <input type="email" className={ footerInput } placeholder="Type your email address..." />
-              <button className={ footerButton }><ArrowRightAltIcon style={{ color : "#01472A" }} /></button>
+              <button className={ footerButton }>SIGN OUR NEWSLETTER</button>
             </div>
           <Grid container spacing={0} style={{ marginTop : "30px" }}>
 

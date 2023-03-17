@@ -48,12 +48,21 @@ export const styles = (theme: Theme) => ({
     }
   },
   footerButton : {
-    width : "100px",
+    width : "100%",
+    color : "white",
     background : "rgb(0, 206, 76)",
-    borderRadius : "10px",
-    height : "60px",
-    marginLeft : "-100px",
+    borderRadius : "20px",
+    height : "70px",
     border : "none",
-
+    fontSize : "20px",
+    fontWeight : "700",
+    cursor : "pointer",
+    "&:hover" : {
+      background : "rgba(0, 71, 42, 0.6)",
+    },
+    "&:active" : {
+        color : "white",
+        background : "#01472A",
+    }
   }
 });
