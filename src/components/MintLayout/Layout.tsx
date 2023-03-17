@@ -52,7 +52,7 @@ export const MintLayout = () => {
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
 
   useEffect(() => {
-    const startTime = moment.utc('2023-03-19 16:00:00').local();
+    const startTime = moment.utc('2023-03-20 16:00:00').local();
     const remainTime = startTime.diff(moment(), 's');
     setRemainTime(remainTime);
   }, []);
