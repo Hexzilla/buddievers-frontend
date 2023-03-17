@@ -52,18 +52,17 @@ const ButtonContainer = styled.div`
   }
 `;
 
-enum WhiteState {
+export enum WhiteState {
   Registered,
   NotRegistered,
 }
 
 type Props = {
+  state: WhiteState;
   onNext: () => void;
 };
 
-export const Whitelist = ({ onNext }: Props) => {
-  const state: WhiteState = WhiteState.Registered;
-
+export const Whitelist = ({ state, onNext }: Props) => {
   return (
     <Grid container direction="column" spacing={1} alignItems="center">
       <Grid item>
@@ -85,7 +84,11 @@ export const Whitelist = ({ onNext }: Props) => {
         <ButtonContainer>
           <MintButton
             title="Take me to the lift off"
-            onClick={() => onNext()}
+            onClick={() => {
+              if (state === WhiteState.Registered) {
+                onNext();
+              }
+            }}
           ></MintButton>
         </ButtonContainer>
       </Grid>

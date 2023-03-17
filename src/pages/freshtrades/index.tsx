@@ -7,7 +7,7 @@ import { Video } from 'ui';
 import { MintComplete } from './MintComplete';
 import { TokenSales } from './TokenSales';
 import { Welcome } from './Welcome';
-import { Whitelist } from './Whitelist';
+import { Whitelist, WhiteState } from './Whitelist';
 
 const Container = styled.div`
   position: relative;
@@ -41,7 +41,7 @@ const MintContainer = styled.div`
   }
 `;
 
-const FreshTradesPage = ()=>{
+const FreshTradesPage = () => {
   const [stage, setStage] = useState(0);
 
   return (
@@ -52,8 +52,13 @@ const FreshTradesPage = ()=>{
         </Video>
       </VideoContainer>
       <MintContainer>
-        {stage === 0 && <Welcome onNext={() => setStage(2)} />}
-        {stage === 1 && <Whitelist onNext={() => setStage(2)} />}
+        {stage === 0 && <Welcome onNext={(state) => setStage(state)} />}
+        {stage === 1 && (
+          <Whitelist
+            state={WhiteState.NotRegistered}
+            onNext={() => setStage(2)}
+          />
+        )}
         {stage === 2 && <TokenSales onNext={() => setStage(3)} />}
         {stage === 3 && <MintComplete />};
       </MintContainer>

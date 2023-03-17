@@ -49,18 +49,23 @@ const ButtonContainer = styled.div`
   }
 `;
 
-export type MintState = 'soon' | 'online';
+enum MintState {
+  Soon,
+  Online,
+}
 
 type Props = {
-  onNext: () => void;
+  onNext: (state: number) => void;
 };
 
 export const Welcome = ({ onNext }: Props) => {
   const remainTime = useMintOnline();
 
-  const onlineState = useMemo(() => {
-    return remainTime > 0 ? 'soon' : 'online';
+  const mintState = useMemo(() => {
+    return remainTime > 0 ? MintState.Soon : MintState.Online;
   }, [remainTime]);
+
+  const isOnline = useMemo(() => mintState === MintState.Online, [mintState]);
 
   return (
     <Grid container direction="column" spacing={1} alignItems="center">
@@ -68,9 +73,7 @@ export const Welcome = ({ onNext }: Props) => {
         <Logo />
       </Grid>
       <Grid item>
-        <MainTitle>
-          {onlineState === 'soon' ? 'Mint Soon' : 'Mint Is Online'}
-        </MainTitle>
+        <MainTitle>{isOnline ? 'Mint Is Online' : 'Mint Soon'}</MainTitle>
       </Grid>
       <Grid item>
         <SubTitle>Check Your Whitelist Status</SubTitle>
@@ -79,7 +82,7 @@ export const Welcome = ({ onNext }: Props) => {
         <ButtonContainer>
           <MintButton
             title="Are you registered?"
-            onClick={() => onNext()}
+            onClick={() => onNext(isOnline ? 2 : 1)}
           ></MintButton>
         </ButtonContainer>
       </Grid>
