@@ -17,7 +17,7 @@ import AuctionListPage from './auctions';
 import MarketplacePage from './marketplace';
 import MarketBuddies from './marketbuddies';
 import MarketplaceDetail from './marketplacedetail';
-import MintSoon from './mintSoon';
+// import MintSoon from './mintSoon';
 import Seeds from './seeds';
 import CoffeeShop from './coffeeshop';
 

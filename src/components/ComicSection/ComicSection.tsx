@@ -99,7 +99,7 @@ export const ComicSection = () => {
                     {
                         Array(11).fill(0).map((item, i) => <img
                         key={`${i}`}
-                        src={`./comicImages/${i + 1}.png`}
+                        src={`./comicImages/${i + 1}.jpg`}
                         style={{width:"100%", height:"100%"}}
                         />)
                     }

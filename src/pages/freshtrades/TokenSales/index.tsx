@@ -190,7 +190,7 @@ export const TokenSales = ({ onNext }: Props) => {
                 <Grid item md={12}>
                   <ImageMarket
                     alt="complex"
-                    src="./moonbuddies marketplace.png"
+                    src="./B-BUDS2.png"
                   />
                 </Grid>
                 <Grid item md={12} alignItems="center">

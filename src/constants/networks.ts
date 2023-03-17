@@ -1,4 +1,4 @@
-import { ChainId } from "./index";
+import { ChainId, NETWORK_NAME, RPC_URLS } from "./index";
 
 export interface AddEthereumChainParameter {
     chainId: string; // A 0x-prefixed hexadecimal string
@@ -33,6 +33,17 @@ export const SUPPORTED_METAMASK_NETWORKS: {[key: number]: AddEthereumChainParame
         nativeCurrency: {
             name: 'Moonbeam',
             symbol: 'GLMR',
+            decimals: 18
+        }
+    },
+    [ChainId.EXOSAMA]: {
+        chainId: '0x83D',
+        chainName: NETWORK_NAME[ChainId.EXOSAMA],
+        rpcUrls: [RPC_URLS[ChainId.EXOSAMA]],
+        blockExplorerUrls: ['https://explorer.exosama.com/'],
+        nativeCurrency: {
+            name: 'Exosama',
+            symbol: 'SAMA',
             decimals: 18
         }
     },
