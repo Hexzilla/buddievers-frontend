@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { Grid, Typography, Checkbox } from '@mui/material';
 
 import { theme } from 'theme/Theme';
+import { useMintedTokenBalance } from 'hooks/useMintedTokenBalance';
+import { useTokenBalance } from 'hooks/useTokenBalance';
 
 import { LiftOffButton } from '../LiftOffButton';
 
@@ -36,7 +38,7 @@ const LiveContainer = styled.div`
   width: 260px;
   height: 337px;
 
-  background:  ${theme.palette.background.mintBlack} 80%;
+  background: ${theme.palette.background.mintBlack} 80%;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -57,7 +59,7 @@ const SubTitle = styled(Typography)`
   text-align: center;
   margin-top: 80px;
 
-  color:  ${theme.palette.text.mintWhite};
+  color: ${theme.palette.text.mintWhite};
   text-transform: uppercase;
 `;
 
@@ -69,7 +71,7 @@ const AgreementContainer = styled.div`
 
   width: 484px;
 
-  background:  ${theme.palette.background.mintBlack}80;
+  background: ${theme.palette.background.mintBlack}80;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -79,14 +81,14 @@ const AgreementContainer = styled.div`
 `;
 
 const AgreementFinal = styled.div`
-  color:  ${theme.palette.text.mintWhite};
+  color: ${theme.palette.text.mintWhite};
   padding-left: 13px;
 `;
 
 const AcceptTerms = styled.div`
   display: flex;
   align-items: center;
-  color:  ${theme.palette.text.mintWhite};
+  color: ${theme.palette.text.mintWhite};
 `;
 
 const ImageMarket = styled('img')`
@@ -121,7 +123,7 @@ const TotalMintNumber = styled.div`
   text-align: center;
   padding-left: 15px;
 
-  color:  ${theme.palette.text.mintWhite};
+  color: ${theme.palette.text.mintWhite};
 `;
 
 const LiveStatusDiv = styled.div`
@@ -130,9 +132,6 @@ const LiveStatusDiv = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 0px;
-
-  width: 180px;
-  height: 48px;
 `;
 
 const LiveStatus = styled(Typography)`
@@ -184,6 +183,9 @@ type Props = {
 };
 
 export const TokenSales = ({ onNext }: Props) => {
+  const mintedTokenBalance = useMintedTokenBalance();
+  const tokenBalance = useTokenBalance();
+
   return (
     <Grid container direction="column" spacing={1} alignItems="center">
       <Grid item md={12}>
@@ -192,10 +194,7 @@ export const TokenSales = ({ onNext }: Props) => {
             <MintContainer>
               <Grid container direction="row" spacing={1} alignItems="center">
                 <Grid item md={12}>
-                  <ImageMarket
-                    alt="complex"
-                    src="./B-BUDS2.png"
-                  />
+                  <ImageMarket alt="complex" src="./B-BUDS2.png" />
                 </Grid>
                 <Grid item md={12} alignItems="center">
                   <Grid
@@ -208,7 +207,7 @@ export const TokenSales = ({ onNext }: Props) => {
                       <TotalMintLabel>Total minted</TotalMintLabel>
                     </Grid>
                     <Grid item md={6}>
-                      <TotalMintNumber>16</TotalMintNumber>
+                      <TotalMintNumber>{mintedTokenBalance}</TotalMintNumber>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -227,10 +226,10 @@ export const TokenSales = ({ onNext }: Props) => {
               </LiveStatusDiv> */}
               <LiveStatusDiv>
                 <LiveStatus>
-                  Available to mint: <span>194</span>
+                  Available to mint: <span>{500 - mintedTokenBalance}</span>
                 </LiveStatus>
                 <LiveStatus>
-                  You've minted:<GreenSpan>11</GreenSpan>
+                  You've minted:<GreenSpan>{tokenBalance}</GreenSpan>
                 </LiveStatus>
               </LiveStatusDiv>
               <SubTitle>Start Mint.</SubTitle>
@@ -243,7 +242,9 @@ export const TokenSales = ({ onNext }: Props) => {
         <AgreementContainer>
           <AcceptTerms>
             <Checkbox checked={true} />
-            <div>I've read and accept the <GreenSpan>Terms & Conditions</GreenSpan></div>
+            <div>
+              I've read and accept the <GreenSpan>Terms & Conditions</GreenSpan>
+            </div>
           </AcceptTerms>
           <AgreementFinal>All sales are final.</AgreementFinal>
         </AgreementContainer>

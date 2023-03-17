@@ -58,9 +58,12 @@ export const MintLayout = () => {
   }, 1000);
 
   const countdown = useMemo(() => {
-    let time = moment.utc(remainTime * 1000).format('DD:HH:mm:ss');
-    let [day, hour, min, sec] = time.split(':');
-    return `${day}d ${hour}h ${min}m ${sec}s`;
+    if (remainTime > 0) {
+      let time = moment.utc(remainTime * 1000).format('DD:HH:mm:ss');
+      let [day, hour, min, sec] = time.split(':');
+      return `${day}d ${hour}h ${min}m ${sec}s`;
+    }
+    return `Online`
   }, [remainTime]);
 
   const countdownView = useMemo(
