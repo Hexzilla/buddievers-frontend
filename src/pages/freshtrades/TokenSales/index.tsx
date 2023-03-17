@@ -55,6 +55,7 @@ const SubTitle = styled(Typography)`
   line-height: 36px;
   align-items: center;
   text-align: center;
+  margin-top: 80px;
 
   color:  ${theme.palette.text.mintWhite};
   text-transform: uppercase;
@@ -216,20 +217,20 @@ export const TokenSales = ({ onNext }: Props) => {
           </Grid>
           <Grid item md={7} xs={12}>
             <LiveContainer>
-              <LiveStatusDiv>
+              {/* <LiveStatusDiv>
                 <LiveStatus>
                   Whitelisted to mint: <span>0</span>
                 </LiveStatus>
                 <LiveStatus>
                   Whitelisted minted: <GreenSpan>5</GreenSpan>
                 </LiveStatus>
-              </LiveStatusDiv>
+              </LiveStatusDiv> */}
               <LiveStatusDiv>
                 <LiveStatus>
-                  Available to mint:<span>194</span>
+                  Available to mint: <span>194</span>
                 </LiveStatus>
                 <LiveStatus>
-                  You´ve minted:<GreenSpan>11</GreenSpan>
+                  You've minted:<GreenSpan>11</GreenSpan>
                 </LiveStatus>
               </LiveStatusDiv>
               <SubTitle>Start Mint.</SubTitle>

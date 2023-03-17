@@ -9,7 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import { useMediaQuery } from 'beautiful-react-hooks';
 import { Account } from 'components';
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { ReactNode, useState, useEffect, useMemo } from 'react';
+import { useMintOnline } from 'hooks/useMintOnline';
+import { ReactNode, useState, useMemo } from 'react';
 import { Drawer, Footer, NavLink } from 'ui';
 import { useInterval } from 'hooks/useInterval';
 import { MAX_WIDTH_TO_SHOW_NAVIGATION } from '../../constants';
@@ -18,7 +19,8 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 
 export const MintLayout = () => {
-  const [remainTime, setRemainTime] = useState(0);
+  const mintRemainTime = useMintOnline();
+  const [remainTime, setRemainTime] = useState(mintRemainTime);
   const { account } = useActiveWeb3React();
 
   const {
@@ -50,12 +52,6 @@ export const MintLayout = () => {
   );
 
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
-
-  useEffect(() => {
-    const startTime = moment.utc('2023-03-19 16:00:00').local();
-    const remainTime = startTime.diff(moment(), 's');
-    setRemainTime(remainTime);
-  }, []);
 
   useInterval(() => {
     setRemainTime((time) => (time > 0 ? time - 1 : 0));

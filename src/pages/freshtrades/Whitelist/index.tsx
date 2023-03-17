@@ -36,7 +36,7 @@ const SubTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color:  ${theme.palette.text.mintWhite};
+  color: ${theme.palette.text.mintWhite};
   text-transform: uppercase;
 
   padding-top: 10px;
@@ -52,14 +52,17 @@ const ButtonContainer = styled.div`
   }
 `;
 
-export type MintState = 'soon' | 'online';
+enum WhiteState {
+  Registered,
+  NotRegistered,
+}
 
 type Props = {
   onNext: () => void;
 };
 
 export const Whitelist = ({ onNext }: Props) => {
-  const state: MintState = 'soon';
+  const state: WhiteState = WhiteState.Registered;
 
   return (
     <Grid container direction="column" spacing={1} alignItems="center">
@@ -67,13 +70,15 @@ export const Whitelist = ({ onNext }: Props) => {
         <Logo />
       </Grid>
       <Grid item>
-        <MainTitle>{state === 'soon' ? 'Sorry' : 'Mint Is Online'}</MainTitle>
+        <MainTitle>
+          {state === WhiteState.Registered ? 'Congratulations' : 'Sorry'}
+        </MainTitle>
       </Grid>
       <Grid item>
         <SubTitle>
-          {state === 'soon'
-            ? 'You are not whitelisted'
-            : 'Join us on the public mint'}
+          {state === WhiteState.Registered
+            ? 'You are whitelisted '
+            : 'You are not whitelisted'}
         </SubTitle>
       </Grid>
       <Grid item>
