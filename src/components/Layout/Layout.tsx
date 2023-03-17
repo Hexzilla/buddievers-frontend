@@ -50,14 +50,18 @@ export const Layout = () => {
                   >
                     <Grid container spacing={2}>
                       <Grid item md={5}>
-                        <NavLink href="/marketplace" className={navItem}>
-                          
+                        {/* <NavLink href="/marketplace" className={navItem}>
+                          MARKETPLACE
+                        </NavLink> */}
+                        <NavLink href="/" className={navItem}>
                           MARKETPLACE
                         </NavLink>
                       </Grid>
                       <Grid item md={5}>
-                        <NavLink href="/coffeeshop" className={navItem}>
-                            
+                        {/* <NavLink href="/coffeeshop" className={navItem}>
+                          COFFEE SHOP
+                        </NavLink> */}
+                        <NavLink href="/" className={navItem}>
                           COFFEE SHOP
                         </NavLink>
                       </Grid>
