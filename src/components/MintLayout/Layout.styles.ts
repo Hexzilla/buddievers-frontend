@@ -3,7 +3,7 @@ import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
     appBar: {
-      backgroundColor: theme.palette.background.darkGreen,
+      backgroundColor: theme.palette.background.mintSecondary,
        height: '65px',
     },
     toolBar: {

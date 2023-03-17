@@ -104,7 +104,7 @@ export const MintLayout = () => {
             )}
           </Grid>
           <Grid className={headerGrids} justifyContent="right" item md={2}>
-            <Account />
+            <Account root="mint" />
           </Grid>
         </Grid>
       </>
@@ -140,16 +140,16 @@ export const MintLayout = () => {
             >
               <Box>
                 <NavLink href="/" className={navItemDrawer}>
-                  HOME
-                </NavLink>
-                <NavLink href="/mint" className={navItemDrawer}>
-                  MINT NFT
-                </NavLink>
-                <NavLink href="/workbench" className={navItemDrawer}>
-                  BUDDIEVERSE
+                  Home
                 </NavLink>
                 <NavLink href="/freshoffers" className={navItemDrawer}>
-                  MARKETPLACE
+                  Marketplace
+                </NavLink>
+                <NavLink href="/coffeeshop" className={navItemDrawer}>
+                  CoffeeShop
+                </NavLink>
+                <NavLink href="/faqs" className={navItemDrawer}>
+                  Faq
                 </NavLink>
               </Box>
             </Drawer>

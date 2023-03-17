@@ -100,7 +100,7 @@ export const Layout = () => {
                           </NavLink>
                         </Grid>
                         <Grid item md={4} style={{ display : "flex", justifyContent : "end" }}>
-                            <Account />
+                            <Account root="home"  />
                         </Grid>
                       </Grid>
                       

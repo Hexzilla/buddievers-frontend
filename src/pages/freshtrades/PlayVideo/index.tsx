@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
-import MaterialButton from '@mui/material/Button';
+
+import { theme } from 'theme/Theme';
 
 const PlayVideoButton = styled.div`
     /* Buttons V2 */
@@ -27,7 +28,7 @@ const StyledTitle = styled(Typography)`
     text-transform : uppercase;
     /* Neutral/White */
 
-    color: #FFFFFF;
+    color: ${theme.palette.text.mintWhite};
     
 `;
 const ImageLift = styled('img')`

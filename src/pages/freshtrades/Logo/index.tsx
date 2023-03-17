@@ -1,8 +1,9 @@
 import { NavLink } from 'ui';
-import WhiteLogoNormal from 'assets/images/logo.png';
+import WhiteLogoPrimary from 'assets/images/logo.png';
+import WhiteLogoSecondary from 'assets/images/logo-2.png';
 
 export const Logo = () => (
   <NavLink href="/">
-    <img src={WhiteLogoNormal} width="100" height="100" alt="" />
+    <img src={WhiteLogoSecondary} style={{borderRadius: '50%'}} width="100" height="100" alt="" />
   </NavLink>
 );

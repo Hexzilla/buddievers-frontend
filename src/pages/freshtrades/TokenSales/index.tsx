@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import { Grid, Typography, Checkbox } from '@mui/material';
+
+import { theme } from 'theme/Theme';
+
 import { LiftOffButton } from '../LiftOffButton';
 
 const MintContainer = styled.div`
@@ -13,7 +16,7 @@ const MintContainer = styled.div`
   width: 190px;
   height: 337px;
 
-  background: rgba(6, 0, 64, 0.8);
+  background: ${theme.palette.background.mintDarkBlue} 80%;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -33,7 +36,7 @@ const LiveContainer = styled.div`
   width: 260px;
   height: 337px;
 
-  background: rgba(0, 0, 0, 0.8);
+  background:  ${theme.palette.background.mintBlack} 80%;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -53,7 +56,7 @@ const SubTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color:  ${theme.palette.text.mintWhite};
   text-transform: uppercase;
 `;
 
@@ -65,7 +68,7 @@ const AgreementContainer = styled.div`
 
   width: 484px;
 
-  background: rgba(0, 0, 0, 0.8);
+  background:  ${theme.palette.background.mintBlack}80;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -75,14 +78,14 @@ const AgreementContainer = styled.div`
 `;
 
 const AgreementFinal = styled.div`
-  color: #ffffff;
+  color:  ${theme.palette.text.mintWhite};
   padding-left: 13px;
 `;
 
 const AcceptTerms = styled.div`
   display: flex;
   align-items: center;
-  color: #ffffff;
+  color:  ${theme.palette.text.mintWhite};
 `;
 
 const ImageMarket = styled('img')`
@@ -103,7 +106,7 @@ const TotalMintLabel = styled(Typography)`
   text-align: left;
   padding-left: 20px;
 
-  color: #ffffff;
+  color: ${theme.palette.text.mintWhite};
 `;
 const TotalMintNumber = styled.div`
   font-family: 'Poppins';
@@ -117,7 +120,7 @@ const TotalMintNumber = styled.div`
   text-align: center;
   padding-left: 15px;
 
-  color: #ffffff;
+  color:  ${theme.palette.text.mintWhite};
 `;
 
 const LiveStatusDiv = styled.div`
@@ -150,11 +153,11 @@ const LiveStatus = styled(Typography)`
 
   /* Neutral/White */
 
-  color: #ffffff;
+  color: ${theme.palette.background.mintWhite};
 `;
 
 const GreenSpan = styled('span')`
-  color: #00ce4c;
+  color: ${theme.palette.background.mintPrimary};
 `;
 
 // const StyledCheckbox = styled(Checkbox)`
@@ -229,8 +232,8 @@ export const TokenSales = ({ onNext }: Props) => {
                   You´ve minted:<GreenSpan>11</GreenSpan>
                 </LiveStatus>
               </LiveStatusDiv>
-              <SubTitle>Start Mint</SubTitle>
-              <LiftOffButton title="LiftOff" onClick={() => onNext()} />
+              <SubTitle>Start Mint.</SubTitle>
+              <LiftOffButton title="Lift Off" onClick={() => onNext()} />
             </LiveContainer>
           </Grid>
         </Grid>

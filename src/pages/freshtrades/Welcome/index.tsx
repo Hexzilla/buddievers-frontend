@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
+
+import { theme } from 'theme/Theme';
+
 import { MintButton } from '../MintButton';
 import { Logo } from '../Logo';
 
@@ -14,7 +17,7 @@ const MainTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color:  ${theme.palette.text.mintWhite};
   text-transform: uppercase;
 
   padding-top: 30px;
@@ -30,7 +33,7 @@ const SubTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color:  ${theme.palette.text.mintWhite};
   text-transform: uppercase;
   @media (max-width: 1020px) {
     

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
+import { theme } from 'theme/Theme';
 import { Video } from 'ui';
 
 import { MintComplete } from './MintComplete';
@@ -10,7 +11,7 @@ import { Whitelist } from './Whitelist';
 
 const Container = styled.div`
   position: relative;
-  background-color: black;
+  background-color: ${theme.palette.background.mintBlack};
 `;
 
 const VideoContainer = styled.div`
@@ -46,9 +47,9 @@ const FreshTradesPage = ()=>{
   return (
     <Container>
       <VideoContainer>
-        {/* <Video id="background-video" loop autoPlay>
+        <Video id="background-video" loop autoPlay>
           <source src="./background.mp4" type="video/mp4" />
-        </Video> */}
+        </Video>
       </VideoContainer>
       <MintContainer>
         {stage === 0 && <Welcome onNext={() => setStage(1)} />}

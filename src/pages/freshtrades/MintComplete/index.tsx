@@ -2,12 +2,14 @@ import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
 import MaterialButton from '@mui/material/Button';
 
+import { theme } from 'theme/Theme';
+
 const Container = styled.div`
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: #FFFFFF;
+  color: ${theme.palette.text.mintWhite};
 `;
 
 const LeftPanel = styled.div`
@@ -48,7 +50,7 @@ const MoonBuddiesContainer = styled.div`
   margin-bottom: 49px;
 
   width: 100%;
-  background: rgba(0, 206, 76, 0.2);
+  background: ${theme.palette.background.mintPrimary}20;
   border-radius: 10px;
 `;
 
@@ -59,7 +61,7 @@ const MoonBuddle = styled(Typography)`
   display: flex;
   align-items: center;
   text-align: center;
-  color: #00CE4C;
+  color: ${theme.palette.text.mintPrimary};
 `;
 
 const MoonBuddleDetail = styled(Typography)`
@@ -72,7 +74,7 @@ const MoonBuddleDetail = styled(Typography)`
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: ${theme.palette.text.mintWhite};
 
   @media (max-width: 1020px) {
     width: 230px;
@@ -102,7 +104,7 @@ const MintingComplete = styled(Typography)`
 `;
 
 const GreenSpan = styled('span')`
-  color: #00CE4C;
+  color: ${theme.palette.text.mintPrimary};
 `;
 
 const CongrateDesktop = styled(Typography)`
@@ -143,6 +145,7 @@ const MintingSubDetail = styled(Typography)`
   line-height: 24px;
   text-align: left;
   margin-bottom: 24px;
+  padding: 8px;
 `;
 
 const MintButtonContainer = styled(Grid)`
@@ -155,14 +158,16 @@ const MintButtonContainer = styled(Grid)`
 `;
 
 const MintButton = styled(MaterialButton)`
+
+  height: 64px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 0px;
-  margin: 0px;
+  margin: 10px;
 
-  background: rgba(0, 206, 76, 0.6);
+  background: ${theme.palette.text.mintPrimary}60;
   border-radius: 20px;
 
   @media (max-width: 1020px) {
@@ -175,7 +180,7 @@ const MintButtonText = styled(Typography)`
   line-height: 24px;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: ${theme.palette.text.mintWhite};
   text-transform: uppercase;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -204,7 +209,7 @@ export const MintComplete = () => {
                     </MintingComplete>
                     <CongrateDesktop>
                       CONGRATS, YOU'VE MINTED{' '}
-                      <span style={{ color: '#00CE4C' }}> &nbsp;12&nbsp; </span>
+                      <span style={{ color:`${theme.palette.text.mintPrimary}` }}> &nbsp;12&nbsp; </span>
                       /&nbsp;500
                     </CongrateDesktop>
                     <CongrateMobile>Congratulations.</CongrateMobile>
