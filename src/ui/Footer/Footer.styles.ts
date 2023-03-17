@@ -9,6 +9,10 @@ export const styles = (theme: Theme) => ({
     paddingTop: "1vw",
     paddingBottom: "1vw",
     position: "relative",
+    "@media (max-width : 980px)" : {
+      // paddingLeft: '2.5vw',
+      // paddingRight: '2.5vw',
+    }
    },
   title:{
     fontWeight: "900",

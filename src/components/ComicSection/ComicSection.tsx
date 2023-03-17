@@ -97,7 +97,7 @@ export const ComicSection = () => {
                         itemClass="carousel-item-padding-40-px"
                     >
                     {
-                        Array(15).fill(0).map((item, i) => <img
+                        Array(11).fill(0).map((item, i) => <img
                         key={`${i}`}
                         src={`./comicImages/${i + 1}.png`}
                         style={{width:"100%", height:"100%"}}

@@ -19,7 +19,7 @@ export const Footer = () => {
   return (
     <Container maxWidth={false} className={footerWrapper}>
       <Grid container spacing={0}>
-        <Grid item md={5} sm={12}>
+        <Grid item lg={5} sm={12}>
           <p className={title}>QUICK LINKS</p>
           <Grid container spacing={0}>
             <Grid item md={6}>
@@ -34,7 +34,7 @@ export const Footer = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item md={2} sm={12}
+        <Grid item lg={2} sm={12}
           style={{ alignSelf: "center", textAlign: "center" }}
         >
           <img
@@ -42,7 +42,7 @@ export const Footer = () => {
             style={{ width: "40%", height: "30%" }}
           />
         </Grid>
-        <Grid item md={5} sm={12}
+        <Grid item lg={5} sm={12}
           style={{ alignSelf: "center", textAlign: "center" }}
         >
           <p className={title}>SIGN OUR NEWSLETTER</p>
