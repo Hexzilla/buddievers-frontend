@@ -3,7 +3,7 @@ name: Buddies-web
 on: 
   push:
     branches:
-      - main1
+      - main
   workflow_dispatch:   
 jobs:
   deploy:
@@ -21,9 +21,5 @@ jobs:
             git checkout main
             git fetch
             git pull
-            pm2 stop buddies
             rm -rf build
             yarn build
-            cd build
-            pm2 restart buddies
-
