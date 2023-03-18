@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
+
+import { theme } from 'theme/Theme';
+
 import { MintButton } from '../MintButton';
 import { Logo } from '../Logo';
 
@@ -14,7 +17,7 @@ const MainTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color: ${theme.palette.text.mintWhite};
   text-transform: uppercase;
 
   padding-top: 30px;
@@ -33,7 +36,7 @@ const SubTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color: ${theme.palette.text.mintWhite};
   text-transform: uppercase;
 
   padding-top: 10px;
@@ -49,35 +52,43 @@ const ButtonContainer = styled.div`
   }
 `;
 
-export type MintState = 'soon' | 'online';
+export enum WhiteState {
+  Registered,
+  NotRegistered,
+}
 
 type Props = {
+  state: WhiteState;
   onNext: () => void;
 };
 
-export const Whitelist = ({ onNext }: Props) => {
-  const state: MintState = 'soon';
-
+export const Whitelist = ({ state, onNext }: Props) => {
   return (
     <Grid container direction="column" spacing={1} alignItems="center">
       <Grid item>
         <Logo />
       </Grid>
       <Grid item>
-        <MainTitle>{state === 'soon' ? 'Sorry' : 'Mint Is Online'}</MainTitle>
+        <MainTitle>
+          {state === WhiteState.Registered ? 'Congratulations' : 'Sorry'}
+        </MainTitle>
       </Grid>
       <Grid item>
         <SubTitle>
-          {state === 'soon'
-            ? 'You are not whitelisted'
-            : 'Join us on the public mint'}
+          {state === WhiteState.Registered
+            ? 'You are whitelisted '
+            : 'You are not whitelisted'}
         </SubTitle>
       </Grid>
       <Grid item>
         <ButtonContainer>
           <MintButton
             title="Take me to the lift off"
-            onClick={() => onNext()}
+            onClick={() => {
+              if (state === WhiteState.Registered) {
+                onNext();
+              }
+            }}
           ></MintButton>
         </ButtonContainer>
       </Grid>

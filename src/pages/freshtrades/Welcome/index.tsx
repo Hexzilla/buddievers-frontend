@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
+import React, { useMemo } from 'react';
+
+import { theme } from 'theme/Theme';
+import { useMintOnline } from 'hooks/useMintOnline';
+
 import { MintButton } from '../MintButton';
 import { Logo } from '../Logo';
 
@@ -14,7 +19,7 @@ const MainTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color: ${theme.palette.text.mintWhite};
   text-transform: uppercase;
 
   padding-top: 30px;
@@ -25,15 +30,14 @@ const SubTitle = styled(Typography)`
   font-style: normal;
   font-weight: 900;
   font-size: 24px;
-  
+
   line-height: 36px;
   align-items: center;
   text-align: center;
 
-  color: #ffffff;
+  color: ${theme.palette.text.mintWhite};
   text-transform: uppercase;
   @media (max-width: 1020px) {
-    
     padding: 20px 50px;
   }
 `;
@@ -45,14 +49,23 @@ const ButtonContainer = styled.div`
   }
 `;
 
-export type MintState = 'soon' | 'online';
+enum MintState {
+  Soon,
+  Online,
+}
 
 type Props = {
-  onNext: () => void;
+  onNext: (state: number) => void;
 };
 
 export const Welcome = ({ onNext }: Props) => {
-  const state: MintState = 'soon';
+  const remainTime = useMintOnline();
+
+  const mintState = useMemo(() => {
+    return remainTime > 0 ? MintState.Soon : MintState.Online;
+  }, [remainTime]);
+
+  const isOnline = useMemo(() => mintState === MintState.Online, [mintState]);
 
   return (
     <Grid container direction="column" spacing={1} alignItems="center">
@@ -60,9 +73,7 @@ export const Welcome = ({ onNext }: Props) => {
         <Logo />
       </Grid>
       <Grid item>
-        <MainTitle>
-          {state === 'soon' ? 'Mint Soon' : 'Mint Is Online'}
-        </MainTitle>
+        <MainTitle>{isOnline ? 'Mint Is Online' : 'Mint Soon'}</MainTitle>
       </Grid>
       <Grid item>
         <SubTitle>Check Your Whitelist Status</SubTitle>
@@ -71,7 +82,7 @@ export const Welcome = ({ onNext }: Props) => {
         <ButtonContainer>
           <MintButton
             title="Are you registered?"
-            onClick={() => onNext()}
+            onClick={() => onNext(isOnline ? 2 : 1)}
           ></MintButton>
         </ButtonContainer>
       </Grid>

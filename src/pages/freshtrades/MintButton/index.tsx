@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import MaterialButton from '@mui/material/Button';
+import { theme } from 'theme/Theme';
 
 const StyledButton = styled(MaterialButton)`
   display: flex;
@@ -9,7 +10,7 @@ const StyledButton = styled(MaterialButton)`
   padding: 20px 40px;
   width: 344px;
   height: 76px;
-  background: #f5e2b3;
+  background: ${theme.palette.background.mintBtnBack};
   border-radius: 20px;
   flex: none;
   flex-grow: 0;
@@ -24,7 +25,7 @@ const StyledSpan = styled.span`
   display: flex;
   align-items: center;
   text-align: center;
-  color: #01472a;
+  color: ${theme.palette.text.mintBtnColor};
   flex: none;
   flex-grow: 0;
   text-transform: uppercase;

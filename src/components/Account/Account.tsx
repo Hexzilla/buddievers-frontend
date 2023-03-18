@@ -2,15 +2,19 @@ import { Button } from 'ui';
 import { HeaderBalance } from 'components/HeaderBalance/HeaderBalance';
 import { UnsupportedChainIdError } from '@web3-react/core';
 import { useAccountDialog, useActiveWeb3React, useClasses } from 'hooks';
-import { shortenAddress } from 'utils';
+// import { shortenAddress } from 'utils';
 import Identicon from 'components/Identicon/Identicon';
 import { Activity } from 'react-feather';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWalletSharp';
+// import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWalletSharp';
 import { styles } from './Account.styles';
 
-export const Account = () => {
+type props = {
+  root: string
+}
+
+export const Account = ({root}:props) => {
   const { account, error } = useActiveWeb3React();
   const { setAccountDialogOpen } = useAccountDialog();
   const theme = useTheme()
@@ -23,31 +27,17 @@ export const Account = () => {
   const errMessage =
     error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error';
 
-  const { button } = useClasses(styles);
+  const { buttonHome, buttonMint } = useClasses(styles);
 
   return (
       <Button
-        className={button}
+        className={`${root === 'home' ? buttonHome : buttonMint}`}
         size="medium"
         disableRipple
         onClick={() => setAccountDialogOpen(true)}
         style={{ marginTop : "-10px" }}
       > 
-        {account && !isSm && <HeaderBalance />}
-
-        {showError ? (
-          <Activity />
-        ) : account ? (
-          !hideAddress && (
-            <div style={{ fontSize: 0, margin: '0 8px' /*, maxWidth:'16px', maxHeight:'16px'*/ }}>
-              <Identicon />
-            </div>
-          )
-        ) : (
-          <div style={{ fontSize: 0, margin: '0 8px 0 0' }}>
-            {/* <AccountBalanceWalletIcon /> */}
-          </div>
-        )}
+        {/* {account && !isSm && <HeaderBalance />} */}
 
         {showError ? (
           errMessage
@@ -57,7 +47,8 @@ export const Account = () => {
               <Identicon />
             </div>
           ) : (
-            shortenAddress(account, 3)
+            // 
+            'DISCONNECT'
           )
         ) : (
           !isSm ? (

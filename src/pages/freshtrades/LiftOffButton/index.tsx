@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
 import MaterialButton from '@mui/material/Button';
 
+import { theme } from 'theme/Theme';
+
 const StyledButton = styled(MaterialButton)`
     /* Buttons V2 */
 
@@ -19,7 +21,7 @@ const StyledButton = styled(MaterialButton)`
 
     /* Main/Beige */
 
-    background: #F5E2B3;
+    background: ${theme.palette.background.mintBtnBack};;
     border-radius: 20px;
 
 `;
@@ -41,7 +43,7 @@ const StyledTitle = styled(Typography)`
 
     /* Main/Dark Green */
 
-    color: #01472A;
+    color: ${theme.palette.text.mintBtnColor};
 
     text-transform: uppercase;
 `;
