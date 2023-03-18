@@ -48,6 +48,10 @@ export const styles = (theme: Theme) => ({
     }
   },
   footerButton : {
+    textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     width : "100%",
     color : "white",
     background : "rgb(0, 206, 76)",
