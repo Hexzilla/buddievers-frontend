@@ -14,6 +14,7 @@ export const Footer = () => {
     <Container maxWidth={false} className={footerWrapper}>
       <Grid container spacing={0}>
         <Grid item lg={5} sm={12}>
+          {/* <iframe src="https://buddies.substack.com/embed" width="480" height="320" style={{ border:"1px solid #EEE", background:"white"}} scrolling="no"></iframe> */}
           <p className={title}>QUICK LINKS</p>
           <Grid container spacing={0}>
             <Grid item md={6}>
