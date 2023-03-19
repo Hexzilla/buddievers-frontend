@@ -8,7 +8,7 @@ export const styles = (theme: Theme) => ({
         paddingBottom: "4vh"
     },
     titleText: {
-        fontSize: "90px",
+        fontSize: "120px",
         fontWeight: "900",
         color: "#00CE4C",
     },

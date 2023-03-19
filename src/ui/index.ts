@@ -23,6 +23,4 @@ export { Placeholder } from './MediaPlaceholder/MediaPlaceholder';
 export { Drawer } from './Drawer/Drawer';
 export { Loader } from './Loader/Loader';
 export { Filters } from './Filters/Filters';
-export { PondsamaFilter } from './PondsamaFilter/PondsamaFilter';
-export { MoonsamaFilter } from './MoonsamaFilter/MoonsamaFilter';
 export { Sort } from './Sort/Sort';

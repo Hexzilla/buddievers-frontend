@@ -128,10 +128,10 @@ export const Layout = () => {
                     <NavLink href="/" className={navItemDrawer}>
                       HOME
                     </NavLink>
-                    <NavLink href="/coffeeshop" className={navItemDrawer}>
+                    <NavLink href="/" className={navItemDrawer}>
                       COFFEE SHOP
                     </NavLink>
-                    <NavLink href="/mint" className={navItemDrawer}>
+                    <NavLink href="/" className={navItemDrawer}>
                       MINT
                     </NavLink>
                     <NavLink href="/faqs" className={navItemDrawer}>
