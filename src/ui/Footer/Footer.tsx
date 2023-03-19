@@ -56,10 +56,10 @@ export const Footer = () => {
           sm={12}
           style={{ alignSelf: 'center', textAlign: 'center' }}
         >
-          <p className={title}>KEEP UPDATE TO THE LATEST NEWS</p>
+          <p className={title}>Keep up to date on the latest news</p>
           <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
             <a href="https://buddies.substack.com/" className={footerButton}>
-              SIGN OUR NEWSLETTER
+            Sign up for our newsletter
             </a>
           </div>
           <Grid container spacing={0} style={{ marginTop: '30px' }}>
