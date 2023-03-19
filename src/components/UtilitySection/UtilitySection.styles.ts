@@ -8,7 +8,7 @@ export const styles = (theme: Theme) => ({
         paddingBottom: "4vh"
     },
     titleText: {
-        fontSize: "120px",
+        fontSize: "90px",
         fontWeight: "900",
         color: "#00CE4C",
     },
@@ -21,14 +21,14 @@ export const styles = (theme: Theme) => ({
         marginTop : "80px",
         marginBottom : "20px",
         fontWeight: "900",
-        fontSize: "40px",
+        fontSize: "45px",
         "@media (max-width : 1910px)" : {
             marginTop : "0px",
         }
     },
     mainText: {
         fontWeight: "700",
-        fontSize: "17px",
+        fontSize: "24px",
         margin: "0px",
         marginTop : "50px",
         "@media (max-width : 1910px)" : {
