@@ -125,3 +125,13 @@ query getUserActiveOrders {
 }
 `;
 
+export const QUERY_OWNED_TOKENS = (contract: string, account: string) => gql`
+query MyQuery {
+  tokens(orderBy: numericId_ASC, where: {contract: {id_eq: "${contract.toLowerCase()}"}, owner: {id_eq: "${account.toLowerCase()}"}}) {
+    metadata {
+      image
+    }
+    numericId
+  }
+}
+`;

@@ -67,13 +67,8 @@ export const NETWORK_ICONS: { [chainId: number]: string } = {
 };
 
 export const MARKETPLACE_SUBGRAPH_URLS: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'https://moonriver-subgraph.moonsama.com/subgraphs/name/moonsama/marketplacev8',
+  [ChainId.MOONRIVER]: 'https://squid.subsquid.io/raresama-nft-exosama/v/v2/graphql',
   [ChainId.MOONBEAM]: 'https://moonbeam-subgraph.moonsama.com/subgraphs/name/moonsama/marketplacev4'
-};
-
-export const TOKEN_SUBSQUID_URLS: { [chainId: number]: string } = {
-  [ChainId.MOONRIVER]: 'https://squid.subsquid.io/moonsama-marketplace/v/all-v4/graphql',
-  [ChainId.MOONBEAM]: 'https://squid.subsquid.io/moonsama-marketplace/v/all-v3/graphql'
 };
 
 export const MULTICALL_NETWORKS: { [chainId: number]: string } = {
@@ -115,10 +110,6 @@ export const MINT1_ADDRESS: { [chainId in ChainId]?: string } = {
 export const MINT_PRICE = 100000000000000;
 export const GAS_LIMIT = 1485000;
 
-export const MINT2_ADDRESS: { [chainId in ChainId]?: string } = {
-  [ChainId.MOONRIVER]: '0x4FBFc1aB4720A6e6da2237e73f950faa080065a0',
-};
-
 export const WAREHOUSE_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.VOLTA]: '0xE796e4CC54856b5d88E44aAca85e3B7D633c34a1',
   [ChainId.MOONRIVER]: '0xe41509E3034f3f1C7Ea918423Da60B2bA6F14087',
@@ -136,20 +127,9 @@ export const WMOVR_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.MOONRIVER]: '0x98878B06940aE243284CA214f92Bb71a2b032B8A',
 };
 
-export const EXPLORER_URL: { [chainId in ChainId]?: string } = {
-  [ChainId.VOLTA]: 'https://volta-explorer.energyweb.org',
-  [ChainId.MOONRIVER]: 'https://moonriver.moonscan.io',
-  [ChainId.MOONBEAM]: 'https://blockscout.moonbeam.network',
-  [ChainId.EXOSAMA]: 'https://explorer.exosama.com/',
-  [ChainId.BSC]: 'https://bscscan.com',
-  [ChainId.BSC_TESTNET]: 'https://testnet.bscscan.com'
-};
-
 export const PROTOCOL_FEE_BPS = '200';
 export const FRACTION_TO_BPS = '10000';
 
-export const STRATEGY_SIMPLE =
-  '0xb4c34ccd96d70009be083eaea45c708dff031622381acfcf6e3d07039aca39bb';
 
 export const IPFS_GATEWAYS = [
   'https://moonsama.mypinata.cloud',
