@@ -71,11 +71,8 @@ export const Layout = () => {
                         <Grid item md={5}>
                           {/* <NavLink href="/coffeeshop" className={navItem}>
                           COFFEE SHOP
-                        </NavLink> */}
-                          {/* <NavLink href="/" className={navItem}>
-                          COFFEE SHOP
-                        </NavLink> */}
-                          <NavLink href="/builder" className={navItem}>
+                          </NavLink> */}
+                          <NavLink href="/" className={navItem}>
                             COFFEE SHOP
                           </NavLink>
                         </Grid>
@@ -110,7 +107,10 @@ export const Layout = () => {
                     >
                       <Grid container>
                         <Grid item md={4}>
-                          <NavLink href="#" className={navItem}>
+                          {/* <NavLink href="#" className={navItem}>
+                            MINT
+                          </NavLink> */}
+                          <NavLink href="/builder" className={navItem}>
                             MINT
                           </NavLink>
                         </Grid>
