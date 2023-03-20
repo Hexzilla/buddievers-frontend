@@ -1,7 +1,7 @@
 import { Tab, Tabs as MaterialTabs } from '@mui/material';
 import { useClasses } from 'hooks';
 import React, { Fragment, ReactNode } from 'react';
-import SwipeableViews from 'react-swipeable-views';
+// import SwipeableViews from 'react-swipeable-views';
 import { styles } from './Tabs.styles';
 
 const a11yProps = (index: number) => {
@@ -66,11 +66,11 @@ export const Tabs = ({
           />
         ))}
       </MaterialTabs>
-      <SwipeableViews index={currentTab} onChangeIndex={handleChangeIndex}>
+      {/* <SwipeableViews index={currentTab} onChangeIndex={handleChangeIndex}>
         {tabs.map(({ view }, index) => (
           <Fragment key={index}>{view}</Fragment>
         ))}
-      </SwipeableViews>
+      </SwipeableViews> */}
     </div>
   );
 };

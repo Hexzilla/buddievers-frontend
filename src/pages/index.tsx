@@ -9,6 +9,7 @@ import MarketplaceDetail from './marketplacedetail';
 // import MintSoon from './mintSoon';
 import Seeds from './seeds';
 import CoffeeShop from './coffeeshop';
+import MoonBuilder from './moonbuilder';
 
 export const Routing = () => (
   <Routes>
@@ -21,6 +22,7 @@ export const Routing = () => (
       <Route path="/buddieDetail" element={<MarketplaceDetail />} />
       <Route path="/seeds" element={<Seeds />} />
       <Route path="/coffeeshop" element={<CoffeeShop />} />
+      <Route path="/builder" element={<MoonBuilder index={2} />} />
     </Route>
     <Route element={<MintLayout />}>
       <Route path="/mint" element={<FreshTradesPage />} />

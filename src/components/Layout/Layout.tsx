@@ -16,16 +16,23 @@ import { MAX_WIDTH_TO_SHOW_NAVIGATION } from '../../constants';
 import { styles } from './Layout.styles';
 
 export const Layout = () => {
-  const { headerWrapper, logo, logoAlt, navItem, buttonContainer, navItemDrawer, headerGrids, navLinkContainer, navItemMobile } =
-    useClasses(styles);
+  const {
+    headerWrapper,
+    logo,
+    logoAlt,
+    navItem,
+    buttonContainer,
+    navItemDrawer,
+    headerGrids,
+    navLinkContainer,
+    navItemMobile,
+  } = useClasses(styles);
 
   const showRegularMenu = useMediaQuery(
     `(max-width: ${MAX_WIDTH_TO_SHOW_NAVIGATION}px)`
   );
-  const isXs = useMediaQuery(
-    `(max-width: 400px)`
-  );
-  console.log('xs', isXs)
+  const isXs = useMediaQuery(`(max-width: 400px)`);
+  console.log('xs', isXs);
 
   const [isDrawerOpened, setIsDrawerOpened] = useState<boolean>(false);
 
@@ -33,42 +40,49 @@ export const Layout = () => {
     <>
       <Header>
         <Container className={headerWrapper} maxWidth={false}>
-        {showRegularMenu && (
-          <IconButton onClick={() => setIsDrawerOpened(true)}>
-            <MenuIcon />
-          </IconButton>
-        )}
-          <Stack direction='row' justifyContent='center' className={buttonContainer}>
+          {showRegularMenu && (
+            <IconButton onClick={() => setIsDrawerOpened(true)}>
+              <MenuIcon />
+            </IconButton>
+          )}
+          <Stack
+            direction="row"
+            justifyContent="center"
+            className={buttonContainer}
+          >
             {!showRegularMenu ? (
               <>
-              <Grid container spacing={2}>
-                <Grid className={headerGrids} item md={5}>
-                  <Stack
-                    className={navLinkContainer}
-                    direction={'row'}
-                    onClick={() => setIsDrawerOpened(false)}
-                  >
-                    <Grid container spacing={2}>
-                      <Grid item md={5}>
-                        {/* <NavLink href="/marketplace" className={navItem}>
+                <Grid container spacing={2}>
+                  <Grid className={headerGrids} item md={5}>
+                    <Stack
+                      className={navLinkContainer}
+                      direction={'row'}
+                      onClick={() => setIsDrawerOpened(false)}
+                    >
+                      <Grid container spacing={2}>
+                        <Grid item md={5}>
+                          {/* <NavLink href="/marketplace" className={navItem}>
                           MARKETPLACE
                         </NavLink> */}
-                        <NavLink href="/" className={navItem}>
-                          MARKETPLACE
-                        </NavLink>
-                      </Grid>
-                      <Grid item md={5}>
-                        {/* <NavLink href="/coffeeshop" className={navItem}>
+                          <NavLink href="/" className={navItem}>
+                            MARKETPLACE
+                          </NavLink>
+                        </Grid>
+                        <Grid item md={5}>
+                          {/* <NavLink href="/coffeeshop" className={navItem}>
                           COFFEE SHOP
                         </NavLink> */}
-                        <NavLink href="/" className={navItem}>
+                          {/* <NavLink href="/" className={navItem}>
                           COFFEE SHOP
-                        </NavLink>
+                        </NavLink> */}
+                          <NavLink href="/builder" className={navItem}>
+                            COFFEE SHOP
+                          </NavLink>
+                        </Grid>
+                        <Grid item md={2}></Grid>
                       </Grid>
-                      <Grid item md={2}></Grid>
-                    </Grid>
-                  </Stack>
-                </Grid>
+                    </Stack>
+                  </Grid>
                   {showRegularMenu && (
                     <IconButton onClick={() => setIsDrawerOpened(true)}>
                       <MenuIcon />
@@ -76,12 +90,16 @@ export const Layout = () => {
                   )}
                   <Grid className={headerGrids} item md={1}>
                     <NavLink href="/" className={navItem}>
-                      {!isXs && <div className={logo}>
-                        <img src={WhiteLogoNormal} alt="" />
-                      </div>}
-                      {isXs && <div className={logoAlt}>
-                        <img src={WhiteLogoAlt} alt="" />
-                      </div>}
+                      {!isXs && (
+                        <div className={logo}>
+                          <img src={WhiteLogoNormal} alt="" />
+                        </div>
+                      )}
+                      {isXs && (
+                        <div className={logoAlt}>
+                          <img src={WhiteLogoAlt} alt="" />
+                        </div>
+                      )}
                     </NavLink>
                   </Grid>
                   <Grid className={headerGrids} item md={5}>
@@ -99,23 +117,30 @@ export const Layout = () => {
                             MINT
                           </NavLink>
                         </Grid>
-                        <Grid item md={4} style={{ display : "flex", justifyContent : "center" }}>
+                        <Grid
+                          item
+                          md={4}
+                          style={{ display: 'flex', justifyContent: 'center' }}
+                        >
                           <NavLink href="/faqs" className={navItem}>
-                          
                             FAQ
                           </NavLink>
                         </Grid>
-                        <Grid item md={4} style={{ display : "flex", justifyContent : "end" }}>
-                            <Account root="home"  />
+                        <Grid
+                          item
+                          md={4}
+                          style={{ display: 'flex', justifyContent: 'end' }}
+                        >
+                          <Account root="home" />
                         </Grid>
                       </Grid>
-                      
                     </Stack>
                   </Grid>
                 </Grid>
               </>
             ) : (
-              <><Drawer
+              <>
+                <Drawer
                   open={isDrawerOpened}
                   onClose={() => setIsDrawerOpened(false)}
                   onOpen={() => setIsDrawerOpened(true)}
@@ -123,8 +148,8 @@ export const Layout = () => {
                 >
                   <Box>
                     {/*<NavLink href="/auctions" className={navItemDrawer}>
-      Auctions
-    </NavLink>*/}
+                      Auctions
+                    </NavLink>*/}
                     <NavLink href="/" className={navItemDrawer}>
                       HOME
                     </NavLink>
@@ -140,19 +165,23 @@ export const Layout = () => {
                   </Box>
                 </Drawer>
                 <NavLink href="/" className={navItemMobile}>
-                    {!isXs && <div className={logo}>
+                  {!isXs && (
+                    <div className={logo}>
                       <img src={WhiteLogoNormal} alt="" />
-                    </div>}
-                    {isXs && <div className={logoAlt}>
+                    </div>
+                  )}
+                  {isXs && (
+                    <div className={logoAlt}>
                       <img src={WhiteLogoAlt} alt="" />
-                    </div>}
-                  </NavLink></>
+                    </div>
+                  )}
+                </NavLink>
+              </>
             )}
-            
           </Stack>
         </Container>
       </Header>
-      <Container maxWidth="xl" style={{padding: "0px"}}>
+      <Container maxWidth="xl" style={{ padding: '0px' }}>
         <Outlet />
       </Container>
       <Footer />

@@ -63,7 +63,7 @@ export const MintLayout = () => {
       let [day, hour, min, sec] = time.split(':');
       return `${day}d ${hour}h ${min}m ${sec}s`;
     }
-    return `Online`
+    return `Online`;
   }, [remainTime]);
 
   const countdownView = useMemo(
