@@ -9,6 +9,10 @@ export const styles = (theme: Theme) => ({
     paddingTop: "1vw",
     paddingBottom: "1vw",
     position: "relative",
+    "@media (max-width : 980px)" : {
+      // paddingLeft: '2.5vw',
+      // paddingRight: '2.5vw',
+    }
    },
   title:{
     fontWeight: "900",
@@ -44,12 +48,25 @@ export const styles = (theme: Theme) => ({
     }
   },
   footerButton : {
-    width : "100px",
+    textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width : "100%",
+    color : "white",
     background : "rgb(0, 206, 76)",
-    borderRadius : "10px",
-    height : "60px",
-    marginLeft : "-100px",
+    borderRadius : "20px",
+    height : "70px",
     border : "none",
-
+    fontSize : "20px",
+    fontWeight : "700",
+    cursor : "pointer",
+    "&:hover" : {
+      background : "rgba(0, 71, 42, 0.6)",
+    },
+    "&:active" : {
+        color : "white",
+        background : "#01472A",
+    }
   }
 });
