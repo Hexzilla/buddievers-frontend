@@ -60,16 +60,16 @@ export const RoadSection = () => {
                 >
                     <div>
                         <Grid container spacing={4}  className={ carouselItems }>
-                            <Grid item md={2} sm={12}>
+                            <Grid item lg={2} sm={12}>
                                 <img src="./charactor (1).png" className={ roadImg } />
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
+                            <Grid item lg={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
                                     <h1>01</h1>
                                     <p>LAUNCH</p>
                                 </div>
                             </Grid>
-                            <Grid item md={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
+                            <Grid item lg={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
                                     <li>Launch Twitter and Discord</li>
                                     <li>BUDDIES NFTs listing start</li>
@@ -82,16 +82,16 @@ export const RoadSection = () => {
 
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
-                            <Grid item md={2} sm={12}>
+                            <Grid item lg={2} sm={12}>
                                 <img src="./charactor (2).png" className={ roadImg } />
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
+                            <Grid item lg={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
                                     <h1>02</h1>
                                     <p>MID COLLECTION</p>
                                 </div>
                             </Grid>
-                            <Grid item md={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
+                            <Grid item lg={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
                                     <li>Free merchandise for holders</li>
                                     <li>New tool: Buddies Alpha Trading</li>
@@ -104,16 +104,16 @@ export const RoadSection = () => {
 
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
-                            <Grid item md={2} sm={12}>
+                            <Grid item lg={2} sm={12}>
                                 <img src="./charactor (3).png" className={ roadImg } />
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
+                            <Grid item lg={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
                                     <h1>03</h1>
                                     <p>LAUNCH</p>
                                 </div>
                             </Grid>
-                            <Grid item md={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
+                            <Grid item lg={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
                                     <li>BUDDIES Bank starts working</li>
                                     <li>Free BONG NFT airdrop</li>
@@ -127,16 +127,16 @@ export const RoadSection = () => {
 
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
-                            <Grid item md={2} sm={12}>
+                            <Grid item lg={2} sm={12}>
                                 <img src="./charactor (4).png" className={ roadImg } />
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
+                            <Grid item lg={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
                                     <h1>04</h1>
                                     <p>DEVELOPMENT PHASE</p>
                                 </div>
                             </Grid>
-                            <Grid item md={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
+                            <Grid item lg={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
                                     <li>New BUDDIES brand</li>
                                     <li>BUDDIES Economy Bible creation</li>
@@ -150,16 +150,16 @@ export const RoadSection = () => {
 
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
-                            <Grid item md={2} sm={12}>
+                            <Grid item lg={2} sm={12}>
                                 <img src="./charactor (5).png" className={ roadImg } />
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
+                            <Grid item lg={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
                                     <h1>05</h1>
                                     <p>MOONBUDDIES</p>
                                 </div>
                             </Grid>
-                            <Grid item md={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
+                            <Grid item lg={4} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
                                     <li>Collection launch in Exosama Network</li>
                                     <li>Launching Buddies web3</li>
@@ -173,23 +173,23 @@ export const RoadSection = () => {
 
                     <div>
                         <Grid container spacing={4} className={ carouselItems }>
-                            <Grid item md={2} sm={12}>
+                            <Grid item lg={2} sm={12}>
                                 <img src="./charactor (6).png" className={ roadImg } />
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
+                            <Grid item lg={3} sm={12} style={{ display : "flex", flexDirection : "column", }}>
                                 <div className={roadNumbers}>
                                     <h1>06</h1>
                                     <p>MOON AND BEYOND</p>
                                 </div>
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", alignItems : "center", }} >
+                            <Grid item lg={3} sm={12} style={{ display : "flex", alignItems : "center", }} >
                                 <ul className={ roadExp }>
                                     <li>BUDDIES labs</li>
                                     <li>High Buddies</li>
                                     <li>New utilities inside The Buddieverse</li>
                                 </ul>
                             </Grid>
-                            <Grid item md={3} sm={12} style={{ display : "flex", alignItems : "center", }}>
+                            <Grid item lg={3} sm={12} style={{ display : "flex", alignItems : "center", }}>
                                 <div></div>
                                 <div className={ roadEnd }>
                                     <p>THERE IS NO END OF THE ROAD</p>

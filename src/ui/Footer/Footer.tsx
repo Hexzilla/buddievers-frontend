@@ -5,6 +5,7 @@ import { Telegram, Twitter } from 'icons';
 import React from 'react';
 import { styles } from './Footer.styles';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   const { footerWrapper, title, text, hypers, footerInput, footerButton } =
@@ -57,12 +58,11 @@ export const Footer = () => {
           style={{ alignSelf: 'center', textAlign: 'center' }}
         >
           <p className={title}>Keep up to date on the latest news</p>
-          <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
-            <a href="https://buddies.substack.com/" className={footerButton}>
-            Sign up for our newsletter
-            </a>
-          </div>
-          <Grid container spacing={0} style={{ marginTop: '30px' }}>
+            <div style={{ display : 'flex', width : "80%", margin : "auto" }}>
+              <button className={ footerButton } onClick={() => window.open('https://buddies.substack.com/') } >Sign up for our newsletter</button>
+            </div>
+          <Grid container spacing={0} style={{ marginTop : "30px" }}>
+
             <Grid item md={3}>
               <p className={title}>JOIN US</p>
             </Grid>
