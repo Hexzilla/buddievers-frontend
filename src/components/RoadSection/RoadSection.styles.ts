@@ -110,6 +110,10 @@ export const styles = (theme: Theme) => ({
         },
         "& .react-multi-carousel-dot-list .react-multi-carousel-dot--active button" : {
             background : "rgba(0, 255, 0, 1)"
+        },
+        "@media (max-width : 991px)" : {
+            width : "90%",
+            margin: "auto"
         }
     }
 });

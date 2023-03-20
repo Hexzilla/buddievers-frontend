@@ -92,10 +92,7 @@ export const Layout = () => {
                     >
                       <Grid container>
                         <Grid item md={4}>
-                          {/* <NavLink href="/mint" className={navItem}>                        
-                            MINT
-                          </NavLink> */}
-                          <NavLink href="/" className={navItem}>
+                          <NavLink href="#" className={navItem}>
                             MINT
                           </NavLink>
                         </Grid>
