@@ -45,19 +45,19 @@ export const ComicSection = () => {
     return (
         <div className={container}>
             <Grid container>
-                <Grid item md={7} sm={12}>
+                <Grid item lg={7} sm={12}>
                     <div style={{flex:1}}>
                         <p className={title}>BUDDIES COMIC</p>
                         <p className={description}>Incredible stories every month!</p>
                     </div>
                 </Grid>
-                <Grid item md={3} sm={ 0 }>
+                <Grid item lg={3} sm={ 0 }>
                     <img
                         className={comicImage}
                         src="./budscomics.png"
                     />
                 </Grid>
-                <Grid item md={2} sm={12} style={{ display : "flex", flexDirection : "column" }}>
+                <Grid item lg={2} sm={12} style={{ display : "flex", flexDirection : "column" }}>
                     <Button
                         disableRipple
                         className={button}
