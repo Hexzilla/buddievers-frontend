@@ -137,7 +137,7 @@ export const MintLayout = () => {
               onClick={() => setIsDrawerOpened(false)}
               anchor="right"
             >
-              <Box>
+              <>
                 <NavLink href="/" className={navItemDrawer}>
                   Home
                 </NavLink>
@@ -150,7 +150,7 @@ export const MintLayout = () => {
                 <NavLink href="/faqs" className={navItemDrawer}>
                   Faq
                 </NavLink>
-              </Box>
+              </>
             </Drawer>
           </Grid>
         </Grid>

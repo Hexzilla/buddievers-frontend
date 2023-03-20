@@ -143,7 +143,7 @@ export const Layout = () => {
                   onOpen={() => setIsDrawerOpened(true)}
                   onClick={() => setIsDrawerOpened(false)}
                 >
-                  <Box>
+                  <>
                     {/*<NavLink href="/auctions" className={navItemDrawer}>
                       Auctions
                     </NavLink>*/}
@@ -159,7 +159,7 @@ export const Layout = () => {
                     <NavLink href="/faqs" className={navItemDrawer}>
                       FAQ
                     </NavLink>
-                  </Box>
+                  </>
                 </Drawer>
                 <NavLink href="/" className={navItemMobile}>
                   {!isXs && (
