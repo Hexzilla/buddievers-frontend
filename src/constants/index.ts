@@ -138,3 +138,9 @@ export const IPFS_GATEWAYS = [
 ];
 
 export const MAX_WIDTH_TO_SHOW_NAVIGATION = 1194;
+
+export const CONTRACT_ADDRESS = '0xbaf909886c0a0cc195fd36ea24f21f93abc23c2c';
+
+export const RARESAMA_SUBGRAPH_URLS: { [chainId: number]: string } = {
+  [ChainId.EXOSAMA]: 'https://squid.subsquid.io/raresama-nft-exosama/v/v2/graphql'
+};

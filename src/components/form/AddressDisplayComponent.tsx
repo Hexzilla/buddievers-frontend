@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import Button from '@mui/material/Button';
-import { Box, Tooltip, Typography } from '@mui/material';
+import { Tooltip, Typography } from '@mui/material';
 import FileCopyOutlinedIcon from '@mui/icons-material/FileCopyOutlined';
 import { styles } from './AddressDisplayComponent.styles';
 import { getExplorerLink } from 'utils';
@@ -76,7 +76,7 @@ export const AddressDisplayComponent = (props: {
 
   return (
     <React.Fragment>
-      <Box display="flex" alignItems="center">
+      <div>
         <Tooltip title={text}>
           {!props.dontShowLink ? (
             <Typography className={props.className}>
@@ -101,7 +101,7 @@ export const AddressDisplayComponent = (props: {
             <FileCopyOutlinedIcon color="secondary" />
           </Button>
         </Tooltip>
-      </Box>
+      </div>
     </React.Fragment>
   );
 };

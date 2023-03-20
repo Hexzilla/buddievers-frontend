@@ -22,7 +22,7 @@ export const Routing = () => (
       <Route path="/buddieDetail" element={<MarketplaceDetail />} />
       <Route path="/seeds" element={<Seeds />} />
       <Route path="/coffeeshop" element={<CoffeeShop />} />
-      <Route path="/builder" element={<MoonBuilder index={2} />} />
+      <Route path="/builder" element={<MoonBuilder />} />
     </Route>
     <Route element={<MintLayout />}>
       <Route path="/mint" element={<FreshTradesPage />} />
