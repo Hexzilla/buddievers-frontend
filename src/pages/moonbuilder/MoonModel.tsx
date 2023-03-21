@@ -33,6 +33,7 @@ const MoonModel = ({ paths }: Props) => {
   console.log('window.innerWidth / window.innerHeight', window.innerWidth / window.innerHeight)
   return (
     <Canvas
+      gl={{ antialias: 'smaa' }}
       color="#000000"
       camera={{
         fov: 50,
