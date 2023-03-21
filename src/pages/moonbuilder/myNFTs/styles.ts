@@ -8,7 +8,8 @@ export const styles = () => ({
         paddingRight : '5vw',
         background : "#016B43",
         paddingBottom : "50px",
-        marginTop : "100px"
+        marginTop : "100px",
+        minHeight: '800px',
     },
     stakedNFTs : {
         marginTop : "60px",
