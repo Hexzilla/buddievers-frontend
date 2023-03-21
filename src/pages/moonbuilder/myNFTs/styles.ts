@@ -38,7 +38,8 @@ export const styles = () => ({
         background: 'rgba(0, 206, 76, 0.6)',
         borderRadius: '20px',
         width : "100%",
-        cursor : "pointer"
+        cursor : "pointer",
+        textDecoration: 'none',
     },
     cardMiddle : {
         width : '100%',

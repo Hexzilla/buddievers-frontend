@@ -1,16 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
-import request from 'graphql-request';
 import MoonModel from './MoonModel';
 import { groupUrls, traits } from './config';
 import metadata from './meta.json';
-import { useActiveWeb3React } from 'hooks';
-import { QUERY_OWNED_TOKENS } from 'subgraph/erc721Queries';
-import {
-  ChainId,
-  CONTRACT_ADDRESS,
-  RARESAMA_SUBGRAPH_URLS,
-} from '../../constants';
 
 const StyledContainer = styled.div`
   width: 100vw;
@@ -21,40 +14,14 @@ const StyledContainer = styled.div`
   background: black;
 `;
 
-export type OwnedToken = {
-  numericId: string;
-};
-
-export type OwnedTokenPayload = {
-  tokens: OwnedToken[];
-};
-
 const MoonBuilder = () => {
-  const { account } = useActiveWeb3React();
-  const [tokenId, setTokenId] = useState(10);
-
-  useEffect(() => {
-    const getTokens = async () => {
-      if (account) {
-        const address = account; //'0xdfe055245ab0b67fb0b5ae3ea28cd1fee40299df'; //account;
-        const result: any = await request<OwnedTokenPayload>(
-          RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
-          QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
-        );
-        console.log('tokens-result', result);
-        if (result?.tokens && result.tokens.length > 0) {
-          const token = result.tokens[0];
-          //setTokenId(Number(token.numericId));
-        }
-      }
-    };
-    getTokens();
-  }, [account]);
+  const { tokenId } = useParams();
 
   const paths = useMemo(() => {
-    const paths: string[] = ['resources/environment/stars.glb'];
-    if (tokenId > 0) {
-      const meta = metadata[tokenId];
+    const paths: string[] = ['/resources/environment/stars.glb'];
+    if (tokenId && Number(tokenId) > 0) {
+      const index = Number(tokenId);
+      const meta = metadata[index];
       const attributesArray = meta.attributes;
       for (let i = 0; i < attributesArray.length; i++) {
         const attribute = attributesArray[i];
@@ -72,10 +39,11 @@ const MoonBuilder = () => {
             trait.hasOwnProperty(value)
           )[value];
 
-          paths.push(groupUrls[i] + fileName);
+          paths.push('/' + groupUrls[i] + fileName);
         }
       }
     }
+    console.log('paths', paths)
     return paths;
   }, [tokenId]);
 
