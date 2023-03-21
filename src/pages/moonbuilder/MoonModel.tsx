@@ -35,7 +35,7 @@ const MoonModel = ({ paths }: Props) => {
     <Canvas
       color="#000000"
       camera={{
-        fov: 60,
+        fov: 50,
         near: 0.1,
         far: 2000,
         position: [-5, 100, 20],
@@ -45,8 +45,23 @@ const MoonModel = ({ paths }: Props) => {
         <ambientLight color="white" intensity={0.5} />
         <directionalLight
           color="white"
-          intensity={0.8}
+          intensity={0.6}
           position={[0, 15, 10]}
+        />
+        <directionalLight
+          color="white"
+          intensity={0.6}
+          position={[0, 15, -10]}
+        />
+        <directionalLight
+          color="white"
+          intensity={0.2}
+          position={[-10, 15, 0]}
+        />
+        <directionalLight
+          color="white"
+          intensity={0.2}
+          position={[0, 15, 0]}
         />
         <hemisphereLight
           color="#FFFFBB"
@@ -62,7 +77,7 @@ const MoonModel = ({ paths }: Props) => {
           enableDamping={true}
           dampingFactor={0.3}
         />
-        <group position={[0, -4, 0]}>
+        <group position={[0, -6, 0]}>
           {paths.map((path: string, index: number) => (
             <Model key={index} path={path} />
           ))}

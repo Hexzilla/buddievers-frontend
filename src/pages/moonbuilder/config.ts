@@ -1,14 +1,15 @@
 export const groupUrls = [
-  '/resources/bodies/',
-  '/resources/tops/',
-  '/resources/pants/',
-  '/resources/suits/',
-  '/resources/hair/',
-  '/resources/eyewear/',
-  '/resources/facewear/',
-  '/resources/items/',
-  '/resources/footwear/',
-  '/resources/headwear/',
+  'resources/bodies/',
+  'resources/tops/',
+  'resources/pants/',
+  'resources/suits/',
+  'resources/hair/',
+  'resources/eyewear/',
+  'resources/facewear/',
+  'resources/items/',
+  'resources/footwear/',
+  'resources/headwear/',
+  'resources/transcended/',
 ];
 
 const bodies = [
@@ -123,6 +124,13 @@ const headwear = [
   { 'Rebel Helmet': 'rebel_helmet.glb' },
 ];
 
+const transcended = [
+  { Astronaut: 'astronaut.glb' },
+  { Ape: 'ape.glb' },
+  { 'Plague Doctor': 'plague_doctor.glb' },
+  { Samurai: 'samurai.glb' },
+];
+
 export const traits: any[] = [
   bodies,
   tops,
@@ -134,4 +142,5 @@ export const traits: any[] = [
   items,
   footwear,
   headwear,
+  transcended,
 ];

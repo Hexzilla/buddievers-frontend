@@ -31,12 +31,12 @@ export type OwnedTokenPayload = {
 
 const MoonBuilder = () => {
   const { account } = useActiveWeb3React();
-  const [tokenId, setTokenId] = useState(0);
+  const [tokenId, setTokenId] = useState(10);
 
   useEffect(() => {
     const getTokens = async () => {
       if (account) {
-        const address = account;//'0xdfe055245ab0b67fb0b5ae3ea28cd1fee40299df'; //account;
+        const address = account; //'0xdfe055245ab0b67fb0b5ae3ea28cd1fee40299df'; //account;
         const result = await request<OwnedTokenPayload>(
           RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
           QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
@@ -44,7 +44,7 @@ const MoonBuilder = () => {
         console.log('tokens-result', result);
         if (result?.tokens && result.tokens.length > 0) {
           const token = result.tokens[0];
-          setTokenId(Number(token.numericId));
+          //setTokenId(Number(token.numericId));
         }
       }
     };
@@ -52,7 +52,7 @@ const MoonBuilder = () => {
   }, [account]);
 
   const paths = useMemo(() => {
-    const paths: string[] = [];
+    const paths: string[] = ['resources/environment/stars.glb'];
     if (tokenId > 0) {
       const meta = metadata[tokenId];
       const attributesArray = meta.attributes;
@@ -61,7 +61,13 @@ const MoonBuilder = () => {
         const key = attribute.traitType;
         const value = attribute.value;
 
-        if (value !== 'None' && key !== 'Transcended') {
+        if (key === 'Top') {
+          if (value === 'Cyber Hoodie White' || value === 'Cyber Hoodie Green') {
+            continue;
+          }
+        }
+
+        if (value !== 'None' && value !== 'False') {
           const fileName = traits[i].find((trait: any) =>
             trait.hasOwnProperty(value)
           )[value];
