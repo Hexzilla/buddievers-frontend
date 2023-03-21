@@ -1,14 +1,10 @@
-import { Typography, Grid, TextField } from '@mui/material';
+import { Grid } from '@mui/material';
 import Container from '@mui/material/Container';
 import { useClasses } from 'hooks';
-import { Telegram, Twitter } from 'icons';
-import React from 'react';
 import { styles } from './Footer.styles';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { Link } from 'react-router-dom';
 
 export const Footer = () => {
-  const { footerWrapper, title, text, hypers, footerInput, footerButton } =
+  const { footerWrapper, title, text, hypers, footerButton } =
     useClasses(styles);
 
   return (
@@ -22,14 +18,13 @@ export const Footer = () => {
               <a
                 className={hypers}
                 href="https://singular.app/collectibles/kusama/5225293d2cbb586654-BUDDIES"
-                target={'_blank'}
               >
                 <p className={text}>BUDDIES</p>
               </a>
-              <a className={hypers} href="#" target={'_blank'}>
+              <a className={hypers} href="#">
                 <p className={text}>MOON BUDDIES</p>
               </a>
-              <a className={hypers} href="/faqs" target={'_blank'}>
+              <a className={hypers} href="/faqs">
                 <p className={text}>FAQ</p>
               </a>
             </Grid>
@@ -46,10 +41,7 @@ export const Footer = () => {
           sm={12}
           style={{ alignSelf: 'center', textAlign: 'center' }}
         >
-          <img
-            src="./logo.png"
-            style={{ width: '40%', height: '30%' }}
-          />
+          <img src="./logo.png" style={{ width: '40%', height: '30%' }} alt=""/>
         </Grid>
         <Grid
           item
@@ -58,27 +50,31 @@ export const Footer = () => {
           style={{ alignSelf: 'center', textAlign: 'center' }}
         >
           <p className={title}>Keep up to date on the latest news</p>
-            <div style={{ display : 'flex', width : "80%", margin : "auto" }}>
-              <button className={ footerButton } onClick={() => window.open('https://buddies.substack.com/') } >Sign up for our newsletter</button>
-            </div>
-          <Grid container spacing={0} style={{ marginTop : "30px" }}>
-
+          <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
+            <button
+              className={footerButton}
+              onClick={() => window.open('https://buddies.substack.com/')}
+            >
+              Sign up for our newsletter
+            </button>
+          </div>
+          <Grid container spacing={0} style={{ marginTop: '30px' }}>
             <Grid item md={3}>
               <p className={title}>JOIN US</p>
             </Grid>
             <Grid item md={2} style={{ alignSelf: 'center' }}>
-              <a href="https://twitter.com/Buddies_St" target={'_blank'}>
-                <img src="./twitter.png" />
+              <a href="https://twitter.com/Buddies_St">
+                <img src="./twitter.png" alt=""/>
               </a>
             </Grid>
             <Grid item md={2} style={{ alignSelf: 'center' }}>
-              <a href="https://discord.gg/9HSbQQ7gpw" target={'_blank'}>
-                <img src="./discord.png" />
+              <a href="https://discord.gg/9HSbQQ7gpw">
+                <img src="./discord.png" alt=""/>
               </a>
             </Grid>
             <Grid item md={2} style={{ alignSelf: 'center' }}>
-              <a href="https://t.me/MoonBUDDIES" target={'_blank'}>
-                <img src="./telegram.png" />
+              <a href="https://t.me/MoonBUDDIES">
+                <img src="./telegram.png" alt=""/>
               </a>
             </Grid>
           </Grid>
