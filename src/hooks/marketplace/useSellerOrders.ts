@@ -19,7 +19,7 @@ export const useSellerOrders = (onlyActive = false) => {
       return;
     }
 
-    const result = await request(
+    const result: any = await request(
       MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN],
       onlyActive ? QUERY_ACTIVE_ORDERS : QUERY_ORDERS,
       {

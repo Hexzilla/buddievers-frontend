@@ -15,7 +15,7 @@ export const useLatestOrdersCallback = () => {
   const fetchLatestOrders = useCallback(
     async (from = 0, num = DEFAULT_ORDERBOOK_PAGINATION): Promise<Order[]> => {
       const query = QUERY_LATEST_ORDERS(from, num as number);
-      const response = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
+      const response: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
 
       console.debug('YOLO useLatestOrders', response);
 

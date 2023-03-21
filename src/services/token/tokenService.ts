@@ -1,4 +1,4 @@
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import { getRandomInt } from 'dev';
 import { StringAssetType } from 'utils/subgraph';
 
@@ -18,13 +18,13 @@ export interface Token {
   assetType?: StringAssetType;
 }
 
-const mediaUrl = [
-  'QmcT2MkFi6tubGvp9ho6wcFhkLfa6c2WGECXcttoZjr3Y9',
-  'Qmdbu7Qx82pp1jTu8Tb7dynxbewCcRNksd9rPtSZr4YhdJ',
-  'QmVTXagQiAaKt8NGkPZTNkLarqtRecLWFGh2X3DnRJXeux',
-  'QmXF5LQ7yizoDG8UmtUyPZJrn6vay8maMjTzLeM9vRQ1Wi',
-  'QmRJ9syjrzqPuFur8MSTgHftnoCVvf5VuD9SNNKb83eAmK',
-];
+// const mediaUrl = [
+//   'QmcT2MkFi6tubGvp9ho6wcFhkLfa6c2WGECXcttoZjr3Y9',
+//   'Qmdbu7Qx82pp1jTu8Tb7dynxbewCcRNksd9rPtSZr4YhdJ',
+//   'QmVTXagQiAaKt8NGkPZTNkLarqtRecLWFGh2X3DnRJXeux',
+//   'QmXF5LQ7yizoDG8UmtUyPZJrn6vay8maMjTzLeM9vRQ1Wi',
+//   'QmRJ9syjrzqPuFur8MSTgHftnoCVvf5VuD9SNNKb83eAmK',
+// ];
 
 export const getTokenById = async (
   address: string,
@@ -33,13 +33,13 @@ export const getTokenById = async (
 ): Promise<Token | null> => {
   return {
     id: id || faker.datatype.number(10),
-    name: faker.name.title(),
+    name: faker.name.fullName(),
     bid: faker.datatype.number(10),
     stock: faker.datatype.number(10),
     description: faker.lorem.sentence(25),
     media: {
       type: 'image',
-      src: faker.helpers.randomize(mediaUrl),
+      src: faker.datatype.string(20),
     },
     bidder: faker.finance.ethereumAddress(),
     price: faker.datatype.number(10),

@@ -12,7 +12,7 @@ const fetchOrderFromSubgraph = async (
   blockNumber: number | undefined,
   chainId?: number
 ) => {
-  const result = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_ORDER, { orderHash });
+  const result: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_ORDER, { orderHash });
 
   console.debug('YOLO getOrder', result);
 

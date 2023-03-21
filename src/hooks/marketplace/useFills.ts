@@ -18,7 +18,7 @@ export const useFills = () => {
       return;
     }
 
-    const result = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_FILLS, {
+    const result: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_FILLS, {
       buyer: account.toLowerCase(),
     });
 

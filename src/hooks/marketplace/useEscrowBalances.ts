@@ -23,7 +23,7 @@ export const useEscrowBalances = (nonzero: boolean = false) => {
     if (!account) {
       return;
     }
-    const result = await request(
+    const result: any = await request(
       MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN],
       nonzero
         ? QUERY_NONZERO_ESCROW_BALANCES_OF_USER

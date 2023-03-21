@@ -15,7 +15,7 @@ import { Transaction } from './Transaction';
 import { clearAllTransactions } from 'state/transactions/actions';
 import { AppDispatch } from 'state';
 import { useSortedRecentTransactions } from 'state/transactions/hooks';
-import { shortenAddress, truncateAddress, truncateHexString } from 'utils';
+import { /*shortenAddress, truncateAddress,*/ truncateHexString } from 'utils';
 import { AbstractConnector } from '@web3-react/abstract-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
@@ -205,10 +205,7 @@ export const AccountDialog = () => {
     setWalletView(WALLET_VIEWS.PENDING);
 
     // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
-    if (
-      connector instanceof WalletConnectConnector &&
-      connector.walletConnectProvider?.wc?.uri
-    ) {
+    if (connector instanceof WalletConnectConnector) {
       connector.walletConnectProvider = undefined;
     }
 

@@ -47,7 +47,7 @@ export const escrowBalanceCore = async (
   const id = `${tokenAddress.toLowerCase()}-${tId.toString()}-${userAddress.toLowerCase()}`;
   console.log({ blockNumber, tId, id });
 
-  const result = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_ESCROW_BALANCE, { id });
+  const result: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_ESCROW_BALANCE, { id });
 
   const eb = result?.escrowBalance;
 

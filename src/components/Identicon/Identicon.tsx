@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { styles as style } from './Identicon.styles';
 import { useActiveWeb3React, useClasses } from '../../hooks';
 import Jazzicon from 'jazzicon';
-import { useMediaQuery } from 'beautiful-react-hooks';
+import useMediaQuery from 'beautiful-react-hooks/useMediaQuery';
 
 export default function Identicon() {
   const styles = useClasses(style);

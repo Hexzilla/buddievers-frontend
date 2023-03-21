@@ -21,7 +21,7 @@ export const useAssetOrders = (
 
   const fetchAssetOrders = useCallback(async () => {
     const assetEntityId = getAssetEntityId(assetAddress, assetId);
-    const result = await request(
+    const result: any = await request(
       MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN],
       QUERY_ASSET_ORDERS(isBuy, onlyActive, assetEntityId)
     );
@@ -64,7 +64,7 @@ export const useAssetOrdersCallback = (
   const fetchAssetOrders = useCallback(async () => {
     const assetEntityId = getAssetEntityId(assetAddress, assetId);
 
-    const result = await request(
+    const result: any = await request(
       MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN],
       QUERY_ASSET_ORDERS(isBuy, onlyActive, assetEntityId)
     );

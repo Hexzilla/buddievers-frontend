@@ -40,7 +40,7 @@ export const useUserOrders = ({
       from,
       num as number
     );
-    const response = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
+    const response: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
 
     console.debug('YOLO useUserOrders', response);
 

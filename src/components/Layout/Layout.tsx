@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import WhiteLogoNormal from 'assets/images/logo.png';
 import WhiteLogoAlt from 'assets/images/logo.png';
-import { useMediaQuery } from 'beautiful-react-hooks';
+import useMediaQuery from 'beautiful-react-hooks/useMediaQuery';
 import { Account } from 'components';
 import { useClasses } from 'hooks';
 import { useState } from 'react';

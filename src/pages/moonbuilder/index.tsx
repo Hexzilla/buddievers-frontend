@@ -37,7 +37,7 @@ const MoonBuilder = () => {
     const getTokens = async () => {
       if (account) {
         const address = account; //'0xdfe055245ab0b67fb0b5ae3ea28cd1fee40299df'; //account;
-        const result = await request<OwnedTokenPayload>(
+        const result: any = await request<OwnedTokenPayload>(
           RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
           QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
         );

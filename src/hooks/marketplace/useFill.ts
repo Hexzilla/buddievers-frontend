@@ -12,7 +12,7 @@ export const useFill = (transactionHash: string) => {
   const {chainId} = useActiveWeb3React()
 
   const fetchFill = useCallback(async () => {
-    const result = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_FILL, { transactionHash });
+    const result: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], QUERY_FILL, { transactionHash });
     console.debug('YOLO getFill', result);
 
     if (!result) {

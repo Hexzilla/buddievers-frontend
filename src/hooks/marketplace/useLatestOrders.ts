@@ -37,7 +37,7 @@ export const useLatestOrders = ({
 
   const fetchAssetOrders = useCallback(async () => {
     const query = QUERY_LATEST_ORDERS(from, num as number);
-    const response = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
+    const response: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
 
     //console.debug('YOLO useLatestOrders', response);
 

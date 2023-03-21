@@ -27,7 +27,7 @@ export const useLastTradedPrice = ({
     //console.log({assetEntityId});
 
     const query = QUERY_LAST_TRADED_PRICE(assetEntityId);
-    const response = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
+    const response: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
 
     //console.error('YOLO useLastTradedPrice', response);
 
@@ -71,7 +71,7 @@ export const useLastTradedPriceOnce = ({
     //console.log({assetEntityId});
 
     const query = QUERY_LAST_TRADED_PRICE(assetEntityId);
-    const response = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
+    const response: any = await request(MARKETPLACE_SUBGRAPH_URLS[chainId ?? DEFAULT_CHAIN], query);
 
     //console.error('YOLO useLastTradedPrice', response);
 

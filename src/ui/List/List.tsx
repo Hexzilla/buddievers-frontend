@@ -7,11 +7,8 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 
 import { useClasses, useThemeOptions } from 'hooks';
-
 import { styles } from './List.styles';
 
-import WhiteLogo from 'assets/images/logo_white.svg';
-import Logo from 'assets/images/logo.svg';
 
 type ListProps = {
   listItems: {
@@ -30,7 +27,7 @@ export const List = ({ listItems }: ListProps) => {
         <Fragment key={primaryText}>
           <ListItem>
             <ListItemAvatar>
-              <Avatar src={image || isDarkTheme ? WhiteLogo : Logo} />
+              <Avatar src={image || isDarkTheme ? 'assets/images/logo_white.svg' : 'assets/images/logo.svg'} />
             </ListItemAvatar>
             <ListItemText primary={primaryText} secondary={secondaryText} />
           </ListItem>

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-import { useMediaQuery } from 'beautiful-react-hooks';
+import useMediaQuery from 'beautiful-react-hooks/useMediaQuery';
 import { Account } from 'components';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { useMintOnline } from 'hooks/useMintOnline';
