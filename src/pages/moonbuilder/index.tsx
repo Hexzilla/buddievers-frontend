@@ -1,10 +1,9 @@
 import { useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import MoonModel from './MoonModel';
 import { groupUrls, traits } from './config';
 import metadata from './meta.json';
-import { useActiveWeb3React } from 'hooks';
 
 const StyledContainer = styled.div`
   width: 100vw;
@@ -15,23 +14,14 @@ const StyledContainer = styled.div`
   background: black;
 `;
 
-export type OwnedToken = {
-  numericId: string;
-};
-
-export type OwnedTokenPayload = {
-  tokens: OwnedToken[];
-};
-
 const MoonBuilder = () => {
- const { state } = useLocation();
-  const { account } = useActiveWeb3React();
-  const {tokenId} = state.tokenId;
+  const { tokenId } = useParams();
 
   const paths = useMemo(() => {
-    const paths: string[] = ['./resources/environment/stars.glb'];
-    if (tokenId > 0) {
-      const meta = metadata[tokenId];
+    const paths: string[] = ['/resources/environment/stars.glb'];
+    if (tokenId && Number(tokenId) > 0) {
+      const index = Number(tokenId);
+      const meta = metadata[index];
       const attributesArray = meta.attributes;
       for (let i = 0; i < attributesArray.length; i++) {
         const attribute = attributesArray[i];
@@ -49,10 +39,11 @@ const MoonBuilder = () => {
             trait.hasOwnProperty(value)
           )[value];
 
-          paths.push(groupUrls[i] + fileName);
+          paths.push('/' + groupUrls[i] + fileName);
         }
       }
     }
+    console.log('paths', paths)
     return paths;
   }, [tokenId]);
 

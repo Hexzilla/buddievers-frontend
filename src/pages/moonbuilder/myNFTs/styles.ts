@@ -8,12 +8,11 @@ export const styles = () => ({
         paddingRight : '5vw',
         background : "#016B43",
         paddingBottom : "50px",
-        marginTop : "100px"
+        marginTop : "100px",
+        minHeight: '800px',
     },
     stakedNFTs : {
         marginTop : "60px",
-        minHeight: "400px",
-
     },
     stakeTitleLeft  :{
         fontSize : "40px",
@@ -40,7 +39,8 @@ export const styles = () => ({
         background: 'rgba(0, 206, 76, 0.6)',
         borderRadius: '20px',
         width : "100%",
-        cursor : "pointer"
+        cursor : "pointer",
+        textDecoration: 'none',
     },
     cardMiddle : {
         width : '100%',

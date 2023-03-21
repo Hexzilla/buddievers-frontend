@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Stack } from '@mui/material';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
@@ -110,8 +109,8 @@ export const Layout = () => {
                           {/* <NavLink href="#" className={navItem}>
                             MINT
                           </NavLink> */}
-                          <NavLink href="/myNFTs" className={navItem}>
-                            My NFTs
+                          <NavLink href="/inventory" className={navItem}>
+                            MY NFTs
                           </NavLink>
                         </Grid>
                         <Grid
@@ -150,11 +149,14 @@ export const Layout = () => {
                     <NavLink href="/" className={navItemDrawer}>
                       HOME
                     </NavLink>
+                    <NavLink href="/inventory" className={navItemDrawer}>
+                        MY NFTs
+                    </NavLink>
                     <NavLink href="/" className={navItemDrawer}>
                       COFFEE SHOP
                     </NavLink>
-                    <NavLink href="/myNFTs" className={navItemDrawer}>
-                            My NFTs
+                    <NavLink href="/" className={navItemDrawer}>
+                      MINT
                     </NavLink>
                     <NavLink href="/faqs" className={navItemDrawer}>
                       FAQ

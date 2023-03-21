@@ -1,23 +1,17 @@
 import { useClasses, useActiveWeb3React } from 'hooks';
-import { useNavigate } from 'react-router-dom';
 import { styles } from './styles';
 import request from 'graphql-request';
 import { Grid } from '@mui/material';
 import { QUERY_OWNED_TOKENS } from 'subgraph/erc721Queries';
 import { useState, useEffect } from 'react';
+import { NavLink } from 'ui';
 import {
   ChainId,
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
-} from '../../constants';
-
-export type OwnedToken = {
-  numericId: string;
-};
-
-export type OwnedTokenPayload = {
-  tokens: OwnedToken[];
-};
+} from '../../../constants';
+import { OwnedToken, OwnedTokenPayload } from '../types';
+import uriToHttp from 'utils/uriToHttp';
 
 const MyNFTs = () => {
   const {
@@ -29,15 +23,7 @@ const MyNFTs = () => {
     cardMiddle,
   } = useClasses(styles);
   const { account } = useActiveWeb3React();
-  const [tokenIds, setTokenId] = useState<Number[]>([]);
-  const navigate = useNavigate();
-  const toDetail = (tokenId: any) => {
-    navigate('/builder', {
-      state: {
-        tokenId: tokenId,
-      },
-    });
-  };
+  const [tokens, setTokens] = useState<OwnedToken[]>([]);
 
   useEffect(() => {
     const getTokens = async () => {
@@ -47,22 +33,29 @@ const MyNFTs = () => {
           RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
           QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
         );
-        setTokenId([]);
         console.log('tokens-result', result);
+
+        setTokens([]);
         if (result?.tokens && result.tokens.length > 0) {
-          result.tokens.map((token: any) => {
-            setTokenId((prevArray) => [...prevArray, Number(token.numericId)]);
+          const tokens = result.tokens.map((token: OwnedToken) => {
+            if (token.metadata?.image) {
+              const urls = uriToHttp(token.metadata.image, true);
+              token.metadata.image = urls[1];
+            }
+            return token;
           });
+          console.log('tokens', tokens);
+          setTokens(tokens);
         }
       }
     };
     getTokens();
   }, [account]);
 
-  const NFTCards = tokenIds.map((tokenId) => (
-    <Grid item md={3} sm={6} key={tokenId.toString()}>
+  const NFTCards = tokens.map((token) => (
+    <Grid item md={3} sm={6} key={token.numericId.toString()}>
       <img
-        src="./charactor (3).png"
+        src={token.metadata?.image}
         style={{ width: '100%', height: '400px', borderRadius: '20px' }}
         alt=""
       />
@@ -75,7 +68,7 @@ const MyNFTs = () => {
             marginBottom: 0,
           }}
         >
-          BUDDIE #{tokenId.toString()}
+          BUDDIE #{token.numericId.toString()}
         </p>
         <p
           style={{
@@ -88,11 +81,12 @@ const MyNFTs = () => {
           BUDDIES
         </p>
       </div>
-      <button onClick={() => toDetail({ tokenId })} className={btnUnStake}>
+      <NavLink href={`/builder/${token.numericId}`} className={btnUnStake}>
         View
-      </button>
+      </NavLink>
     </Grid>
   ));
+
   return account ? (
     <div className={container}>
       <div className={stakedNFTs}>
@@ -101,7 +95,7 @@ const MyNFTs = () => {
             <p className={stakeTitleLeft}>My NFTS</p>
           </Grid>
           <Grid item sm={6} style={{ textAlign: 'right' }}>
-            <p className={stakeTitleRight}>TOTAL NFTS : {tokenIds.length} </p>
+            <p className={stakeTitleRight}>TOTAL NFTS : {tokens.length} </p>
           </Grid>
         </Grid>
         <Grid container spacing={2}>
@@ -113,7 +107,7 @@ const MyNFTs = () => {
     <div className={container}>
       <div className={stakedNFTs}>
         <Grid container>
-          <Grid item >
+          <Grid item>
             <p className={stakeTitleLeft}>Please Connect Your Wallet</p>
           </Grid>
         </Grid>
