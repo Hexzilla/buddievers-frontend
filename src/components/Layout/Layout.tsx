@@ -110,8 +110,8 @@ export const Layout = () => {
                           {/* <NavLink href="#" className={navItem}>
                             MINT
                           </NavLink> */}
-                          <NavLink href="/builder" className={navItem}>
-                            MINT
+                          <NavLink href="/myNFTs" className={navItem}>
+                            My NFTs
                           </NavLink>
                         </Grid>
                         <Grid
@@ -153,8 +153,8 @@ export const Layout = () => {
                     <NavLink href="/" className={navItemDrawer}>
                       COFFEE SHOP
                     </NavLink>
-                    <NavLink href="/" className={navItemDrawer}>
-                      MINT
+                    <NavLink href="/myNFTs" className={navItemDrawer}>
+                            My NFTs
                     </NavLink>
                     <NavLink href="/faqs" className={navItemDrawer}>
                       FAQ

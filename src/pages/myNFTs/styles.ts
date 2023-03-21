@@ -12,6 +12,8 @@ export const styles = () => ({
     },
     stakedNFTs : {
         marginTop : "60px",
+        minHeight: "400px",
+
     },
     stakeTitleLeft  :{
         fontSize : "40px",
