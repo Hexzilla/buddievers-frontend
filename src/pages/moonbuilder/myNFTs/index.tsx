@@ -40,7 +40,7 @@ const MyNFTs = () => {
           const tokens = result.tokens.map((token: OwnedToken) => {
             if (token.metadata?.image) {
               const urls = uriToHttp(token.metadata.image, true);
-              token.metadata.image = urls[1];
+              token.metadata.image = urls[0];
             }
             return token;
           });
