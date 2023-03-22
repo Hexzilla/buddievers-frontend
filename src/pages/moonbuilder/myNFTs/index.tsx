@@ -26,6 +26,10 @@ const MyNFTs = () => {
   const [tokens, setTokens] = useState<OwnedToken[]>([]);
 
   useEffect(() => {
+    setTimeout(() => window.scrollTo(0, 0), 10);
+  }, []);
+
+  useEffect(() => {
     const getTokens = async () => {
       if (account) {
         const address = account;

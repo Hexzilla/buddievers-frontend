@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import MoonModel from './MoonModel';
@@ -16,6 +16,10 @@ const StyledContainer = styled.div`
 
 const MoonBuilder = () => {
   const { tokenId } = useParams();
+
+  useEffect(() => {
+    setTimeout(() => window.scrollTo(0, 0), 10);
+  }, []);
 
   const paths = useMemo(() => {
     const paths: string[] = ['/resources/environment/stars.glb'];
