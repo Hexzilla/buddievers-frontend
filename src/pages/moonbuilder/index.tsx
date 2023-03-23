@@ -11,7 +11,7 @@ const StyledContainer = styled.div`
   min-height: 100vh;
   margin-top: 120px;
   padding-top: 100px;
-  background: black;
+  background: #16121e;
 `;
 
 const MoonBuilder = () => {

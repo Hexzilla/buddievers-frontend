@@ -5,6 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
+import { group } from 'console';
 
 extend(THREE);
 
@@ -42,29 +43,29 @@ const MoonModel = ({ paths }: Props) => {
       }}
     >
       <Suspense fallback={null}>
-        <ambientLight color="white" intensity={0.5} />
+        <ambientLight color="white" intensity={0.1} />
         <directionalLight
-          color="white"
-          intensity={0.6}
+          color='#d8d8d8'
+          intensity={0.2}
           position={[0, 15, 10]}
         />
         <directionalLight
-          color="white"
-          intensity={0.6}
+          color='#d8d8d8'
+          intensity={0.2}
           position={[0, 15, -10]}
         />
         <directionalLight
-          color="white"
+          color='#d8d8d8'
           intensity={0.2}
           position={[-10, 15, 0]}
         />
         <directionalLight
-          color="white"
+          color='#d8d8d8'
           intensity={0.2}
           position={[0, 15, 0]}
         />
         <hemisphereLight
-          color="#FFFFBB"
+          color='#d8d8d8'
           groundColor="#080820"
           intensity={0.2}
         />
