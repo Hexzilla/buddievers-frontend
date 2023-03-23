@@ -37,7 +37,8 @@ const MoonBuilder = () => {
       const attributesArray = meta.attributes;
 
       const traitPaths: Record<string, string> = {};
-      let removeHairTrait = false;
+      let removeHair = false;
+      let transcended = false;
 
       for (let i = 0; i < attributesArray.length; i++) {
         const attribute = attributesArray[i];
@@ -46,11 +47,14 @@ const MoonBuilder = () => {
 
         if (key === 'Top') {
           if (value === 'Cyber Hoodie White' || value === 'Cyber Hoodie Green') {
-            removeHairTrait = true;
+            removeHair = true;
           }
         }
         if (key === 'Headwear' && value !== 'None') {
-          removeHairTrait = true;
+          removeHair = true;
+        }
+        if (key === 'Transcended' && value !== 'None' ){
+          transcended = true;
         }
 
         if (value !== 'None' && value !== 'False') {
@@ -63,12 +67,20 @@ const MoonBuilder = () => {
         }
       }
 
-      if (removeHairTrait) {
+      if (removeHair) {
         delete traitPaths['Hair'];
       }
 
-      paths.push(...Object.values<string>(traitPaths));
+      if (transcended) {
+        const trait = traitPaths['Transcended'];
+        if (trait) {
+          paths.push(trait);
+        }
+      } else {
+        paths.push(...Object.values<string>(traitPaths));
+      }
     }
+
     return paths;
   }, [tokenId]);
 
