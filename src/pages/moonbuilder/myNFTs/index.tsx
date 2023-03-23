@@ -60,7 +60,7 @@ const MyNFTs = () => {
     <Grid item md={3} sm={6} key={token.numericId.toString()}>
       <img
         src={token.metadata?.image}
-        style={{ width: '100%', height: '400px', borderRadius: '20px' }}
+        style={{ width: '100%', height: 'auto', borderRadius: '20px' }}
         alt=""
       />
       <div className={cardMiddle}>
