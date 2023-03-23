@@ -31,7 +31,7 @@ export const styles = () => ({
         justifyContent: 'center',
         alignItems: 'center',
         padding: '20px 40px',
-        height: '76px',
+        height: '50px',
         color : "white",
         fontSize : "20px",
         fontWeight : "400",
