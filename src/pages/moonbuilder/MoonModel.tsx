@@ -46,7 +46,7 @@ const MoonModel = ({ paths }: Props) => {
         <ambientLight color="white" intensity={0.1} />
         <directionalLight
           color='#d8d8d8'
-          intensity={0.2}
+          intensity={0.3}
           position={[0, 15, 10]}
         />
         <directionalLight

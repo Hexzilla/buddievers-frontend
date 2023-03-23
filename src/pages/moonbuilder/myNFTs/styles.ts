@@ -12,7 +12,7 @@ export const styles = () => ({
         minHeight: '800px',
     },
     stakedNFTs : {
-        marginTop : "60px",
+        marginTop : "0px",
     },
     stakeTitleLeft  :{
         fontSize : "40px",
@@ -44,8 +44,8 @@ export const styles = () => ({
     },
     cardMiddle : {
         width : '100%',
-        paddingTop : "20px",
-        paddingBottom : "20px",
+        paddingTop : "0px",
+        paddingBottom : "0px",
         paddingLeft : "50px",
         marginTop : "-6px",
     }  
