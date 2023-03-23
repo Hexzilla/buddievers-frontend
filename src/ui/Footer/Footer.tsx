@@ -41,7 +41,7 @@ export const Footer = () => {
           sm={12}
           style={{ alignSelf: 'center', textAlign: 'center' }}
         >
-          <img src="./logo.png" style={{ width: '40%', height: '30%' }} alt=""/>
+          <img src="/logo.png" style={{ width: '40%', height: '30%' }} alt=""/>
         </Grid>
         <Grid
           item
@@ -64,17 +64,17 @@ export const Footer = () => {
             </Grid>
             <Grid item md={2} style={{ alignSelf: 'center' }}>
               <a href="https://twitter.com/Buddies_St">
-                <img src="./twitter.png" alt=""/>
+                <img src="/twitter.png" alt=""/>
               </a>
             </Grid>
             <Grid item md={2} style={{ alignSelf: 'center' }}>
               <a href="https://discord.gg/9HSbQQ7gpw">
-                <img src="./discord.png" alt=""/>
+                <img src="/discord.png" alt=""/>
               </a>
             </Grid>
             <Grid item md={2} style={{ alignSelf: 'center' }}>
               <a href="https://t.me/MoonBUDDIES">
-                <img src="./telegram.png" alt=""/>
+                <img src="/telegram.png" alt=""/>
               </a>
             </Grid>
           </Grid>
