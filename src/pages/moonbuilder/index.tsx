@@ -17,7 +17,7 @@ const StyledContainer = styled.div`
   background: black;
 `;
 
-const isOnline = false;
+const isOnline = true;
 
 const MoonBuilder = () => {
   const { container, stakedNFTs, stakeTitleLeft } = useClasses(styles);
