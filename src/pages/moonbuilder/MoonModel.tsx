@@ -31,7 +31,7 @@ export const Model = ({ path }: { path: string }) => {
 
 const MoonModel = ({ paths }: Props) => {
   const controlRef = useRef<any>();
-  console.log('window.innerWidth / window.innerHeight', window.innerWidth / window.innerHeight)
+
   return (
     <Canvas
       color="#000000"

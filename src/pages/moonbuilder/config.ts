@@ -125,10 +125,15 @@ const headwear = [
 ];
 
 const transcended = [
-  { Astronaut: 'astronaut.glb' },
-  { Ape: 'ape.glb' },
+  { 'Astronaut': 'astronaut.glb' },
+  { 'Ape': 'ape.glb' },
   { 'Plague Doctor': 'plague_doctor.glb' },
-  { Samurai: 'samurai.glb' },
+  { 'Samurai': 'samurai.glb' },
+  { 'Ninja': 'ninja.glb' },
+  { 'Screen Head': 'screenhead.glb' },
+  { 'Unicorn': 'unicorn.glb' },
+  { 'Skull': 'skull.glb' },
+  { 'Anubis': 'anubis.glb' },
 ];
 
 export const traits: any[] = [

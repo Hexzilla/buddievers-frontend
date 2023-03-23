@@ -1,8 +1,10 @@
 ## Getting Started
 
-First, create a .env file
+First, npm install
 ```bash
-
+npm install
+# or
+yarn install
 ```
 
 Second, run the development server:
