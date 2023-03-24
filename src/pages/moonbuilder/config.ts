@@ -46,7 +46,7 @@ const pants = [
 const suits = [
   { 'Rough Rider': 'rider.glb' },
   { 'Space Force': 'spaceforce.glb' },
-  { 'Space Rebel': 'spacesuit.glb' },
+  { 'Space Rebel': 'spacerebel.glb' },
 ];
 
 const hair = [

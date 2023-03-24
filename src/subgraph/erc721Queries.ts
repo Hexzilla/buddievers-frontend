@@ -129,7 +129,46 @@ export const QUERY_OWNED_TOKENS = (contract: string, account: string) => gql`
 query MyQuery {
   tokens(orderBy: numericId_ASC, where: {contract: {id_eq: "${contract.toLowerCase()}"}, owner: {id_eq: "${account.toLowerCase()}"}}) {
     metadata {
+      attributes {
+        displayType
+        traitType
+        value
+      }
+      composite
+      description
+      externalUrl
+      id
+      layers
       image
+      name
+      type
+      artist
+      artistUrl
+    }
+    numericId
+  }
+}
+`;
+
+export const QUERY_TOKEN_BY_ID = (contract: string, id: string) => gql`
+query MyQuery {
+  tokens(orderBy: numericId_ASC, where: {contract: {id_eq: "${contract.toLowerCase()}"}, numericId_eq: "${id.toLowerCase()}"}) {
+    metadata {
+      attributes {
+        displayType
+        traitType
+        value
+      }
+      composite
+      description
+      externalUrl
+      id
+      layers
+      image
+      name
+      type
+      artist
+      artistUrl
     }
     numericId
   }

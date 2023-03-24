@@ -37,7 +37,6 @@ const MyNFTs = () => {
           RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
           QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
         );
-        // console.log('tokens-result', result);
 
         setTokens([]);
         if (result?.tokens && result.tokens.length > 0) {
@@ -48,7 +47,6 @@ const MyNFTs = () => {
             }
             return token;
           });
-          // console.log('tokens', tokens);
           setTokens(tokens);
         }
       }
