@@ -5,79 +5,107 @@ import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
 import { styles } from './styles';
 
+const NONE = '-1';
+
+console.log('traits, ', traits)
+
 const Work = () => {
   const { container, formControlStyle } = useClasses(styles);
   const [values, setValues] = useState<StringObject>({
-    bodies: '-1',
-    tops: '-1',
-    pants: '-1',
-    suits: '-1',
-    hair: '-1',
-    eyewear: '-1',
-    facewear: '-1',
-    items: '-1',
-    footwear: '-1',
-    headwear: '-1',
-    transcended: '-1',
+    Body: NONE,
+    Top: NONE,
+    Pants: NONE,
+    Suit: NONE,
+    Hair: NONE,
+    Eyewear: NONE,
+    Facewear: NONE,
+    Item: NONE,
+    Footwear: NONE,
+    Headwear: NONE,
+    Transcended: NONE,
   });
 
   const paths = useMemo((): string[] => {
     const keys = Object.keys(values);
     return keys
-      .filter((key) => values[key] !== '-1')
-      .map((key) => groupUrls[key] + values[key]);
+      .filter((key) => values[key] !== NONE)
+      .map((key) => groupUrls[key] + traits[key][values[key]]);
   }, [values]);
 
   const handleValueChange = (name: string, value: string) => {
-    console.log('handleValueChange', name, value);
-
     const update_values = { ...values, [name]: value };
 
-    if (name === 'suits') {
-      // If adding ‘suit’ remove pants and top
-      update_values['tops'] = '-1';
-      update_values['pants'] = '-1';
-    } else if (name === 'tops' || name === 'pants') {
-      // If suit and adding pants or top, remove suit
-      update_values['suits'] = '-1';
-    } else if (name === 'headwear') {
-      // If adding ‘headwear’, remove ‘hair’
-      update_values['hair'] = '-1';
-    } else if (name === 'hair') {
-      // If adding ‘hair’ remove ‘headwear’
-      update_values['headwear'] = '-1';
+    if (name === 'Suit') {
+      update_values['Top'] = NONE;
+      update_values['Pants'] = NONE;
+    } else if (name === 'Top' || name === 'Pants') {
+      update_values['Suit'] = NONE;
+    }
+    
+    if (name === 'Headwear') {
+      update_values['Hair'] = NONE;
+    } else if (name === 'Hair') {
+      update_values['Headwear'] = NONE;
     }
 
-    if (name === 'tops') {
+    if (name === 'Top') {
       if (value === 'Cyber Hoodie White' || value === 'Cyber Hoodie Green') {
-        update_values['hair'] = '-1';
-        update_values['headwear'] = '-1';
+        update_values['Hair'] = NONE;
+        update_values['Headwear'] = NONE;
       }
-    } else if (name === 'hair' || name === 'headwear') {
-      const tops = update_values['tops'];
-      if (tops === 'Cyber Hoodie White' || tops === 'Cyber Hoodie Green') {
-        update_values['tops'] = '-1';
+    } else if (name === 'Hair' || name === 'Headwear') {
+      const top = update_values['Top'];
+      if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
+        update_values['Top'] = NONE;
       }
-    } else if (name === 'headwear') {
+    }
+    
+    if (name === 'Headwear') {
+      if (value === 'Cyber Helmet' || value === 'Rebel Helmet' || value === 'Punk Helmet') {
+        update_values['Footwear'] = NONE;
+      }
+    } else if (name === 'Footwear') {
+      const headwear = update_values['Headwear'];
+      if (headwear === 'Cyber Helmet' || headwear === 'Rebel Helmet' || headwear === 'Punk Helmet') {
+        update_values['Headwear'] = '';
+      }
     }
 
-    console.log('update_values', update_values);
+    if (name === 'Body' && value === 'Squid') {
+      update_values['Facewear'] = NONE;
+      if (update_values['Headwear'] === 'Punk Helmet') {
+        update_values['Headwear'] = NONE;
+      }
+    }
+
     setValues(update_values);
   };
 
-  const optionView = (trait: StringObject) => {
+  const checkDisabled = (name: string, value: string) => {
+    if (values['Body'].startsWith('squid')) {
+      if (name === 'Headwear' && value === 'Punk Helmet') {
+        return true;
+      }
+      if (name === 'Facewear') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const optionView = (_name: string) => {
+    const trait = traits[_name];
     return Object.keys(trait).map((trait_name: string, index: number) => (
       <MenuItem
         key={index}
-        value={trait[trait_name]}
+        value={trait_name}
         style={{ color: 'white' }}
+        disabled={checkDisabled(_name, trait_name)}
       >
         {trait_name}
       </MenuItem>
     ));
   };
-
-  console.log('values', values['Body'], values, Object.keys(traits));
 
   const itemSelect = Object.keys(traits).map(
     (_name: string, _index: number) => (
@@ -93,7 +121,7 @@ const Work = () => {
           <MenuItem value="-1" style={{ color: 'white' }}>
             None
           </MenuItem>
-          {optionView(traits[_name])}
+          {optionView(_name)}
         </Select>
       </FormControl>
     )

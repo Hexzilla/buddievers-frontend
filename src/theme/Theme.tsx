@@ -34,6 +34,7 @@ const getDefaultOptions = (colors: PaletteOptions): ThemeOptions => ({
           "&:hover": {
             background: "#602",
           },
+          '&.Mui-disabled': { opacity: 1 },
         }
       }
     },
