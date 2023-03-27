@@ -13,7 +13,4 @@ export const styles = () => ({
     formControlStyle: {
         marginTop: "20px",
     },
-    selectCustomStyle:{
-        background: "white"
-    },
 })

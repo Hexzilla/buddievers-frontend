@@ -6,13 +6,11 @@ import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import { group } from 'console';
-import styled from '@emotion/styled';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import {
-  groupUrls_,
+  groupUrls,
   StringObject,
-  traits_,
-  typeNames,
+  traits,
 } from '../moonbuilder/config';
 import { styles } from './styles';
 
@@ -35,7 +33,7 @@ export const Model = ({ path }: { path: string }) => {
 };
 
 const Work = () => {
-  const { container, formControlStyle, selectCustomStyle } = useClasses(styles);
+  const { container, formControlStyle } = useClasses(styles);
   const controlRef = useRef<any>();
   const [values, setValues] = useState<StringObject>({
     bodies: '',
@@ -59,7 +57,7 @@ const Work = () => {
         //   return null;
         // })
         .map((key) => {
-          if (values[key]) return groupUrls_[key] + values[key];
+          if (values[key]) return groupUrls[key] + values[key];
           return null;
         })
         .filter((path) => path != null)
@@ -69,13 +67,11 @@ const Work = () => {
     // }, {});
   }, [values]);
 
-  useEffect(() => console.log(paths), [paths]);
-
   const handleValueChange = (_name: string, _value: string) => {
     setValues({ ...values, [_name]: _value });
   };
 
-  const itemSelect = Object.keys(traits_).map(
+  const itemSelect = Object.keys(traits).map(
     (_name: string, _index: number) => (
       <FormControl fullWidth key={_name} className={formControlStyle}>
         <InputLabel id="demo-simple-select-label">{_name}</InputLabel>
@@ -87,7 +83,7 @@ const Work = () => {
           onChange={(event) => handleValueChange(_name, event.target.value)}
         >
           {(() => {
-            const trait = traits_[_name];
+            const trait = traits[_name];
             return Object.keys(trait).map(
               (trait_name: string, index: number) => (
                 <MenuItem

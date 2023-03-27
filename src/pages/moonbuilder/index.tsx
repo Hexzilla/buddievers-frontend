@@ -5,7 +5,6 @@ import styled from '@emotion/styled';
 import MoonModel from './MoonModel';
 import request from 'graphql-request';
 import { groupUrls, traits } from './config';
-import metadata from './meta.json';
 import { Grid } from '@mui/material';
 import { styles } from './myNFTs/styles';
 import {
@@ -89,11 +88,7 @@ const MoonBuilder = () => {
         }
 
         if (value !== 'None' && value !== 'False') {
-          const fileName = traits[i].find((trait: any) =>
-            trait.hasOwnProperty(value)
-          )[value];
-
-          const path = '/' + groupUrls[i] + fileName;
+          const path = '/' + groupUrls[key] + traits[key][value];
           traitPaths[key] = path;
         }
       }
