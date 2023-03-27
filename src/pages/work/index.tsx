@@ -1,34 +1,34 @@
 import { useState, useMemo } from 'react';
 import { useClasses } from 'hooks';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Button } from 'ui';
 import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
 import { styles } from './styles';
 
-const NONE = '-1';
+const None = '-1';
 
-console.log('traits, ', traits)
+console.log('traits, ', traits);
 
 const Work = () => {
   const { container, formControlStyle } = useClasses(styles);
   const [values, setValues] = useState<StringObject>({
-    Body: NONE,
-    Top: NONE,
-    Pants: NONE,
-    Suit: NONE,
-    Hair: NONE,
-    Eyewear: NONE,
-    Facewear: NONE,
-    Item: NONE,
-    Footwear: NONE,
-    Headwear: NONE,
-    Transcended: NONE,
+    Body: None,
+    Top: None,
+    Pants: None,
+    Suit: None,
+    Hair: None,
+    Eyewear: None,
+    Facewear: None,
+    Item: None,
+    Footwear: None,
+    Headwear: None,
+    Transcended: None,
   });
 
   const paths = useMemo((): string[] => {
-    const keys = Object.keys(values);
-    return keys
-      .filter((key) => values[key] !== NONE)
+    return Object.keys(values)
+      .filter((key) => values[key] !== None)
       .map((key) => groupUrls[key] + traits[key][values[key]]);
   }, [values]);
 
@@ -36,45 +36,53 @@ const Work = () => {
     const update_values = { ...values, [name]: value };
 
     if (name === 'Suit') {
-      update_values['Top'] = NONE;
-      update_values['Pants'] = NONE;
+      update_values['Top'] = None;
+      update_values['Pants'] = None;
     } else if (name === 'Top' || name === 'Pants') {
-      update_values['Suit'] = NONE;
+      update_values['Suit'] = None;
     }
-    
+
     if (name === 'Headwear') {
-      update_values['Hair'] = NONE;
+      update_values['Hair'] = None;
     } else if (name === 'Hair') {
-      update_values['Headwear'] = NONE;
+      update_values['Headwear'] = None;
     }
 
     if (name === 'Top') {
       if (value === 'Cyber Hoodie White' || value === 'Cyber Hoodie Green') {
-        update_values['Hair'] = NONE;
-        update_values['Headwear'] = NONE;
+        update_values['Hair'] = None;
+        update_values['Headwear'] = None;
       }
     } else if (name === 'Hair' || name === 'Headwear') {
       const top = update_values['Top'];
       if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
-        update_values['Top'] = NONE;
+        update_values['Top'] = None;
       }
     }
-    
+
     if (name === 'Headwear') {
-      if (value === 'Cyber Helmet' || value === 'Rebel Helmet' || value === 'Punk Helmet') {
-        update_values['Footwear'] = NONE;
+      if (
+        value === 'Cyber Helmet' ||
+        value === 'Rebel Helmet' ||
+        value === 'Punk Helmet'
+      ) {
+        update_values['Footwear'] = None;
       }
     } else if (name === 'Footwear') {
       const headwear = update_values['Headwear'];
-      if (headwear === 'Cyber Helmet' || headwear === 'Rebel Helmet' || headwear === 'Punk Helmet') {
+      if (
+        headwear === 'Cyber Helmet' ||
+        headwear === 'Rebel Helmet' ||
+        headwear === 'Punk Helmet'
+      ) {
         update_values['Headwear'] = '';
       }
     }
 
     if (name === 'Body' && value === 'Squid') {
-      update_values['Facewear'] = NONE;
+      update_values['Facewear'] = None;
       if (update_values['Headwear'] === 'Punk Helmet') {
-        update_values['Headwear'] = NONE;
+        update_values['Headwear'] = None;
       }
     }
 
@@ -91,7 +99,7 @@ const Work = () => {
       }
     }
     return false;
-  }
+  };
 
   const optionView = (_name: string) => {
     const trait = traits[_name];
@@ -127,10 +135,19 @@ const Work = () => {
     )
   );
 
+  const onReset = () => {
+    for (let key of Object.keys(values)) {
+      values[key] = None;
+    }
+    setValues({ ...values });
+  };
+
+  console.log('paths', paths);
   return (
     <div className={container}>
       <Grid container>
         <Grid item sm={4} md={4}>
+          <Button onClick={onReset}>Reset</Button>
           {itemSelect}
         </Grid>
         <Grid item sm={8} md={8}>
