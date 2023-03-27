@@ -11,6 +11,7 @@ import Seeds from './seeds';
 import CoffeeShop from './coffeeshop';
 import Inventory from './moonbuilder/myNFTs';
 import MoonBuilder from './moonbuilder';
+import Work from './work';
 
 export const Routing = () => (
   <Routes>
@@ -25,6 +26,7 @@ export const Routing = () => (
       <Route path="/coffeeshop" element={<CoffeeShop />} />
       <Route path="/inventory" element={<Inventory />} />
       <Route path="/builder/:tokenId" element={<MoonBuilder />} />
+      <Route path="/work" element={<Work />} />
     </Route>
     <Route element={<MintLayout />}>
       <Route path="/mint" element={<FreshTradesPage />} />
