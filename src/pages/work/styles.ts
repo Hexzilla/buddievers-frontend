@@ -15,4 +15,7 @@ export const styles = () => ({
     formControlStyle: {
         marginTop: "20px",
     },
+    resetButtonStyle:{
+        fontSize: "24px",
+    }
 })
