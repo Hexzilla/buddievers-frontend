@@ -11,7 +11,7 @@ const None = '-1';
 console.log('traits, ', traits);
 
 const Work = () => {
-  const { container, formControlStyle } = useClasses(styles);
+  const { container, formControlStyle, resetButtonStyle } = useClasses(styles);
   const [values, setValues] = useState<StringObject>({
     Body: None,
     Top: None,
@@ -147,7 +147,7 @@ const Work = () => {
     <div className={container}>
       <Grid container>
         <Grid item sm={4} md={4}>
-          <Button onClick={onReset}>Reset</Button>
+          <Button onClick={onReset} variant="contained" className={resetButtonStyle}>Reset Items</Button>
           {itemSelect}
         </Grid>
         <Grid item sm={8} md={8}>
