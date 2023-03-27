@@ -5,7 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { group } from 'console';
+// import { group } from 'console';
 
 extend(THREE);
 

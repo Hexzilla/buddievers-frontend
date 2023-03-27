@@ -1,75 +1,83 @@
-import { Suspense, useRef, useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useClasses } from 'hooks';
-import { extend, Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
-import { useGLTF } from '@react-three/drei';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-import { group } from 'console';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import {
-  groupUrls,
-  StringObject,
-  traits,
-} from '../moonbuilder/config';
+import { groupUrls, StringObject, traits } from '../moonbuilder/config';
+import MoonModel from '../moonbuilder/MoonModel';
 import { styles } from './styles';
-
-extend(THREE);
-
-const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath(
-  'https://www.gstatic.com/draco/versioned/decoders/1.4.1/'
-);
-
-const useLoader = (path: string) => {
-  return useGLTF(path, true, false, (loader: any) => {
-    loader.setDRACOLoader(dracoLoader);
-  });
-};
-
-export const Model = ({ path }: { path: string }) => {
-  const { scene } = useLoader(path);
-  return <primitive object={scene} />;
-};
 
 const Work = () => {
   const { container, formControlStyle } = useClasses(styles);
-  const controlRef = useRef<any>();
   const [values, setValues] = useState<StringObject>({
-    bodies: '',
-    tops: '',
-    pants: '',
-    suits: '',
-    hair: '',
-    eyewear: '',
-    facewear: '',
-    items: '',
-    footwear: '',
-    headwear: '',
-    transcended: '',
+    bodies: '-1',
+    tops: '-1',
+    pants: '-1',
+    suits: '-1',
+    hair: '-1',
+    eyewear: '-1',
+    facewear: '-1',
+    items: '-1',
+    footwear: '-1',
+    headwear: '-1',
+    transcended: '-1',
   });
 
-  const paths = useMemo(() => {
-    return (
-      Object.keys(values)
-        // .map((key) => {
-        //   if (values[key]) return { key, path: groupUrls_[key] };
-        //   return null;
-        // })
-        .map((key) => {
-          if (values[key]) return groupUrls[key] + values[key];
-          return null;
-        })
-        .filter((path) => path != null)
-    );
-    // .reduce((prev, cur) => {
-    //   return { ...prev, [cur?.key!]: cur?.path };
-    // }, {});
+  const paths = useMemo((): string[] => {
+    const keys = Object.keys(values);
+    return keys
+      .filter((key) => values[key] !== '-1')
+      .map((key) => groupUrls[key] + values[key]);
   }, [values]);
 
-  const handleValueChange = (_name: string, _value: string) => {
-    setValues({ ...values, [_name]: _value });
+  const handleValueChange = (name: string, value: string) => {
+    console.log('handleValueChange', name, value);
+
+    const update_values = { ...values, [name]: value };
+
+    if (name === 'suits') {
+      // If adding ‘suit’ remove pants and top
+      update_values['tops'] = '-1';
+      update_values['pants'] = '-1';
+    } else if (name === 'tops' || name === 'pants') {
+      // If suit and adding pants or top, remove suit
+      update_values['suits'] = '-1';
+    } else if (name === 'headwear') {
+      // If adding ‘headwear’, remove ‘hair’
+      update_values['hair'] = '-1';
+    } else if (name === 'hair') {
+      // If adding ‘hair’ remove ‘headwear’
+      update_values['headwear'] = '-1';
+    }
+
+    if (name === 'tops') {
+      if (value === 'Cyber Hoodie White' || value === 'Cyber Hoodie Green') {
+        update_values['hair'] = '-1';
+        update_values['headwear'] = '-1';
+      }
+    } else if (name === 'hair' || name === 'headwear') {
+      const tops = update_values['tops'];
+      if (tops === 'Cyber Hoodie White' || tops === 'Cyber Hoodie Green') {
+        update_values['tops'] = '-1';
+      }
+    } else if (name === 'headwear') {
+    }
+
+    console.log('update_values', update_values);
+    setValues(update_values);
   };
+
+  const optionView = (trait: StringObject) => {
+    return Object.keys(trait).map((trait_name: string, index: number) => (
+      <MenuItem
+        key={index}
+        value={trait[trait_name]}
+        style={{ color: 'white' }}
+      >
+        {trait_name}
+      </MenuItem>
+    ));
+  };
+
+  console.log('values', values['Body'], values, Object.keys(traits));
 
   const itemSelect = Object.keys(traits).map(
     (_name: string, _index: number) => (
@@ -82,83 +90,23 @@ const Work = () => {
           label="Age"
           onChange={(event) => handleValueChange(_name, event.target.value)}
         >
-          {(() => {
-            const trait = traits[_name];
-            return Object.keys(trait).map(
-              (trait_name: string, index: number) => (
-                <MenuItem
-                  value={trait[trait_name]}
-                  style={{ color: 'white' }}
-                  key={trait_name + index.toString()}
-                >
-                  {trait_name}
-                </MenuItem>
-              )
-            );
-          })()}
+          <MenuItem value="-1" style={{ color: 'white' }}>
+            None
+          </MenuItem>
+          {optionView(traits[_name])}
         </Select>
       </FormControl>
     )
   );
+
   return (
     <div className={container}>
       <Grid container>
-        <Grid item sm={6} md={6}>
+        <Grid item sm={4} md={4}>
           {itemSelect}
         </Grid>
-        <Grid item sm={6} md={6}>
-          <Canvas
-            color="#000000"
-            camera={{
-              fov: 50,
-              near: 0.1,
-              far: 2000,
-              position: [-5, 100, 20],
-            }}
-          >
-            <Suspense fallback={null}>
-              <ambientLight color="white" intensity={0.1} />
-              <directionalLight
-                color="#d8d8d8"
-                intensity={0.3}
-                position={[0, 15, 10]}
-              />
-              <directionalLight
-                color="#d8d8d8"
-                intensity={0.2}
-                position={[0, 15, -10]}
-              />
-              <directionalLight
-                color="#d8d8d8"
-                intensity={0.2}
-                position={[-10, 15, 0]}
-              />
-              <directionalLight
-                color="#d8d8d8"
-                intensity={0.2}
-                position={[0, 15, 0]}
-              />
-              <hemisphereLight
-                color="#d8d8d8"
-                groundColor="#080820"
-                intensity={0.2}
-              />
-              <OrbitControls
-                ref={controlRef}
-                minPolarAngle={1.0}
-                maxPolarAngle={1.74}
-                minDistance={12}
-                maxDistance={20}
-                enableDamping={true}
-                dampingFactor={0.3}
-              />
-              <group position={[0, -6, 0]}>
-                {paths.map((path, index) => (
-                  <Model key={index} path={path!} />
-                ))}
-              </group>
-            </Suspense>
-          </Canvas>
+        <Grid item sm={8} md={8}>
+          <MoonModel paths={paths} />
         </Grid>
       </Grid>
     </div>

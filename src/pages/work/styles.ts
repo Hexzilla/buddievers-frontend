@@ -8,6 +8,8 @@ export const styles = () => ({
         minHeight: "100vh",
         marginTop: "120px",
         paddingTop: "100px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
         background: "#16121e",
     },
     formControlStyle: {
