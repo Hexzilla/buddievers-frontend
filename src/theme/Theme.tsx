@@ -28,11 +28,11 @@ const getDefaultOptions = (colors: PaletteOptions): ThemeOptions => ({
     MuiMenuItem: {
       styleOverrides: {
         root: { 
-          "&.Mui-selected": { backgroundColor: "rgb(210, 2, 62) !important" },
-          "&.Mui-selected:hover": { backgroundColor: "rgb(210, 2, 62)" },
+          "&.Mui-selected": { backgroundColor: "rgb(24, 108, 67) !important" },
+          "&.Mui-selected:hover": { backgroundColor: "rgb(24, 108, 67)" },
           "backgroundColor": "#000",
           "&:hover": {
-            background: "#602",
+            background: "rgb(24, 108, 67)",
           },
           '&.Mui-disabled': { opacity: 1 },
         }
@@ -48,7 +48,7 @@ const getDefaultOptions = (colors: PaletteOptions): ThemeOptions => ({
           '*WebkitBoxShadow': 'inset 0 0 6px rgba(0, 0, 0, 0)',
         },
         '*::-webkit-scrollbar-thumb': {
-          backgroundColor: 'rgba(210, 2, 62, 1)',
+          backgroundColor: 'rgb(24, 108, 67, 1)',
           outline: '0',
         },
       },

@@ -203,6 +203,7 @@ const Work = () => {
     <div className={container}>
       <Grid container>
         <Grid item sm={4} md={4}>
+          {itemSelect}
           <Button
             onClick={onReset}
             variant="contained"
@@ -210,7 +211,6 @@ const Work = () => {
           >
             Reset Items
           </Button>
-          {itemSelect}
         </Grid>
         <Grid item sm={8} md={8}>
           <MoonModel paths={paths} />

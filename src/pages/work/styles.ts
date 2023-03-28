@@ -7,15 +7,21 @@ export const styles = () => ({
         height: "100vh",
         minHeight: "100vh",
         marginTop: "120px",
-        paddingTop: "100px",
+        paddingTop: "40px",
         paddingLeft: "40px",
         paddingRight: "40px",
         background: "#16121e",
     },
     formControlStyle: {
-        marginTop: "20px",
+        marginTop: "10px",
     },
     resetButtonStyle:{
-        fontSize: "24px",
+        fontSize: "16px",
+        background: "#F5E2B2",
+        height: "30px",
+        color: "#000",
+        marginTop: "10px",
+        borderRadius: "10px"
+
     }
 })
