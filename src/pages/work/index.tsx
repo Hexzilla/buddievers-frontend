@@ -86,6 +86,12 @@ const Work = () => {
       }
     }
 
+    if (name === 'Transcended') {
+      for (let key of Object.keys(update_values)) {
+        if (key !== name) update_values[key] = None;
+      }
+    }
+
     setValues(update_values);
   };
 
