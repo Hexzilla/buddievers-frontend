@@ -77,8 +77,9 @@ const MoonModel = ({ paths }: Props) => {
           maxDistance={20}
           enableDamping={true}
           dampingFactor={0.3}
+          target={new THREE.Vector3(0, 8, 0)}
         />
-        <group position={[0, -6, 0]}>
+        <group position={[0, 2, 0]}>
           {paths.map((path: string, index: number) => (
             <Model key={index} path={path} />
           ))}
