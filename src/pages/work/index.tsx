@@ -66,9 +66,9 @@ const Work = () => {
         value === 'Rebel Helmet' ||
         value === 'Punk Helmet'
       ) {
-        update_values['Eyewear'] = None;
+        update_values['Facewear'] = None;
       }
-    } else if (name === 'Eyewear') {
+    } else if (name === 'Facewear') {
       const headwear = update_values['Headwear'];
       if (
         headwear === 'Cyber Helmet' ||
@@ -96,7 +96,7 @@ const Work = () => {
   };
 
   const checkDisabled = (name: string, value: string) => {
-    if (values['Body'].startsWith('squid')) {
+    if (values['Body'].startsWith('Squid')) {
       if (name === 'Headwear' && value === 'Punk Helmet') {
         return true;
       }
