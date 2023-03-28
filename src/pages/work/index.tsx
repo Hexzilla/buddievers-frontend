@@ -12,6 +12,7 @@ console.log('traits, ', traits);
 
 const Work = () => {
   const { container, formControlStyle, resetButtonStyle } = useClasses(styles);
+  const [traitNames, setTraitNames] = useState<string[]>([]);
   const [values, setValues] = useState<StringObject>({
     Body: None,
     Top: None,
@@ -27,10 +28,10 @@ const Work = () => {
   });
 
   const paths = useMemo((): string[] => {
-    return Object.keys(values)
+    return traitNames
       .filter((key) => values[key] !== None)
       .map((key) => groupUrls[key] + traits[key][values[key]]);
-  }, [values]);
+  }, [traitNames, values]);
 
   const handleValueChange = (name: string, value: string) => {
     const update_values = { ...values, [name]: value };
@@ -93,10 +94,30 @@ const Work = () => {
     }
 
     setValues(update_values);
+
+    /// The trait order is important for rendering.
+    {
+      const index = traitNames.indexOf(name);
+      if (index >= 0) {
+        traitNames.splice(index, 1);
+      }
+      traitNames.push(name);
+
+      const updatedNames = [...traitNames];
+      for (let key of traitNames) {
+        if (update_values[key] === None) {
+          const index = updatedNames.indexOf(key);
+          updatedNames.splice(index, 1);
+        }
+      }
+
+      console.log('updatedNames', updatedNames);
+      setTraitNames(updatedNames);
+    }
   };
 
   const checkDisabled = (name: string, value: string) => {
-    if (values['Body'].startsWith('Squid')) {
+    if (values['Body'].startsWith('squid')) {
       if (name === 'Headwear' && value === 'Punk Helmet') {
         return true;
       }
