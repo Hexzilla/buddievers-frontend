@@ -91,6 +91,8 @@ const Work = () => {
       for (let key of Object.keys(update_values)) {
         if (key !== name) update_values[key] = None;
       }
+    } else if (update_values['Transcended'] !== None) {
+      update_values['Transcended'] = None;
     }
 
     setValues(update_values);
