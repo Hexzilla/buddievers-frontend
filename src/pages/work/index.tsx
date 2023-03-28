@@ -54,9 +54,9 @@ const Work = () => {
         update_values['Headwear'] = None;
       }
     } else if (name === 'Hair' || name === 'Headwear') {
-      const top = update_values['Top'];
-      if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
-        update_values['Top'] = None;
+        const top = update_values['Top'];
+        if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
+          update_values['Top'] = None;
       }
     }
 
@@ -66,17 +66,17 @@ const Work = () => {
         value === 'Rebel Helmet' ||
         value === 'Punk Helmet'
       ) {
-        update_values['Footwear'] = None;
+          update_values['Eyewear'] = None;
       }
-    } else if (name === 'Footwear') {
-      const headwear = update_values['Headwear'];
-      if (
-        headwear === 'Cyber Helmet' ||
-        headwear === 'Rebel Helmet' ||
-        headwear === 'Punk Helmet'
-      ) {
-        update_values['Headwear'] = '';
-      }
+    } else if (name === 'Eyewear') {
+        const headwear = update_values['Headwear'];
+        if (
+          headwear === 'Cyber Helmet' ||
+          headwear === 'Rebel Helmet' ||
+          headwear === 'Punk Helmet'
+        ) {
+            update_values['Headwear'] = None;
+        }
     }
 
     if (name === 'Body' && value === 'Squid') {
