@@ -54,9 +54,9 @@ const Work = () => {
         update_values['Headwear'] = None;
       }
     } else if (name === 'Hair' || name === 'Headwear') {
-        const top = update_values['Top'];
-        if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
-          update_values['Top'] = None;
+      const top = update_values['Top'];
+      if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
+        update_values['Top'] = None;
       }
     }
 
@@ -66,17 +66,17 @@ const Work = () => {
         value === 'Rebel Helmet' ||
         value === 'Punk Helmet'
       ) {
-          update_values['Eyewear'] = None;
+        update_values['Eyewear'] = None;
       }
     } else if (name === 'Eyewear') {
-        const headwear = update_values['Headwear'];
-        if (
-          headwear === 'Cyber Helmet' ||
-          headwear === 'Rebel Helmet' ||
-          headwear === 'Punk Helmet'
-        ) {
-            update_values['Headwear'] = None;
-        }
+      const headwear = update_values['Headwear'];
+      if (
+        headwear === 'Cyber Helmet' ||
+        headwear === 'Rebel Helmet' ||
+        headwear === 'Punk Helmet'
+      ) {
+        update_values['Headwear'] = None;
+      }
     }
 
     if (name === 'Body' && value === 'Squid') {
@@ -153,7 +153,13 @@ const Work = () => {
     <div className={container}>
       <Grid container>
         <Grid item sm={4} md={4}>
-          <Button onClick={onReset} variant="contained" className={resetButtonStyle}>Reset Items</Button>
+          <Button
+            onClick={onReset}
+            variant="contained"
+            className={resetButtonStyle}
+          >
+            Reset Items
+          </Button>
           {itemSelect}
         </Grid>
         <Grid item sm={8} md={8}>
