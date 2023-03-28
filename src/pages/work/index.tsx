@@ -67,17 +67,19 @@ const Work = () => {
         value === 'Rebel Helmet' ||
         value === 'Punk Helmet'
       ) {
-        update_values['Facewear'] = None;
-      }
+          update_values['Facewear'] = None;
+          update_values['Hair'] = None;
+          update_values['Eyewear'] = None;
+        }
     } else if (name === 'Facewear') {
-      const headwear = update_values['Headwear'];
-      if (
-        headwear === 'Cyber Helmet' ||
-        headwear === 'Rebel Helmet' ||
-        headwear === 'Punk Helmet'
-      ) {
-        update_values['Headwear'] = None;
-      }
+        const headwear = update_values['Headwear'];
+        if (
+          headwear === 'Cyber Helmet' ||
+          headwear === 'Rebel Helmet' ||
+          headwear === 'Punk Helmet'
+        ) {
+            update_values['Headwear'] = None;
+          }
     }
 
     if (name === 'Body' && value === 'Squid') {
@@ -87,9 +89,17 @@ const Work = () => {
       }
     }
 
+    // if alien selected remove optics or scanner
+    if (name === 'Body' && value === 'Alien') {
+      if (update_values['Eyewear'] === 'Cyborg Optics' || update_values['Eyewear'] === 'Biometric Scanner') {
+        update_values['Eyewear'] = None;
+      }
+    }
+
     if (name === 'Transcended') {
       for (let key of Object.keys(update_values)) {
         if (key !== name) update_values[key] = None;
+        console.log("paths", paths)
       }
     } else if (update_values['Transcended'] !== None) {
       update_values['Transcended'] = None;
@@ -119,11 +129,28 @@ const Work = () => {
   };
 
   const checkDisabled = (name: string, value: string) => {
-    if (values['Body'].startsWith('squid')) {
+    if (values['Body'].startsWith('Squid')) {
       if (name === 'Headwear' && value === 'Punk Helmet') {
         return true;
       }
       if (name === 'Facewear') {
+        return true;
+      }
+    }
+    
+    // disable cyborg optic and biometric scanner if alien
+    if (values['Body'].startsWith('Alien')) {
+      if (name === 'Eyewear' && value === 'Cyborg Optic') {
+        return true;
+      }
+      if (name === 'Eyewear' && value === 'Biometric Scanner') {
+        return true;
+      }
+    }
+
+    // disable eyewear if wearing helmets
+    if (values['Headwear'].startsWith('Cyber Helmet') || values['Headwear'].startsWith('Punk Helmet') || values['Headwear'].startsWith('Rebel Helmet')) {
+      if (name === 'Eyewear'){
         return true;
       }
     }
