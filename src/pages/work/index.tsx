@@ -4,11 +4,11 @@ import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Button } from 'ui';
 import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
+import useOwnedTokens from '../moonbuilder/myNFTs/useOwnedTokens';
+import { Attributes } from '../moonbuilder/types';
 import { styles } from './styles';
 
 const None = '-1';
-
-console.log('traits, ', traits);
 
 const Work = () => {
   const { container, formControlStyle, resetButtonStyle } = useClasses(styles);
@@ -26,6 +26,16 @@ const Work = () => {
     Headwear: None,
     Transcended: None,
   });
+  const ownedTokens = useOwnedTokens();
+
+  const attributes = useMemo(() => {
+    return ownedTokens.reduce((attributes, token) => {
+      if (token.metadata?.attributes) {
+        attributes.push(...token.metadata.attributes);
+      }
+      return attributes;
+    }, [] as Attributes[]);
+  }, [ownedTokens]);
 
   const paths = useMemo((): string[] => {
     return traitNames
@@ -67,19 +77,19 @@ const Work = () => {
         value === 'Rebel Helmet' ||
         value === 'Punk Helmet'
       ) {
-          update_values['Facewear'] = None;
-          update_values['Hair'] = None;
-          update_values['Eyewear'] = None;
-        }
+        update_values['Facewear'] = None;
+        update_values['Hair'] = None;
+        update_values['Eyewear'] = None;
+      }
     } else if (name === 'Facewear') {
-        const headwear = update_values['Headwear'];
-        if (
-          headwear === 'Cyber Helmet' ||
-          headwear === 'Rebel Helmet' ||
-          headwear === 'Punk Helmet'
-        ) {
-            update_values['Headwear'] = None;
-          }
+      const headwear = update_values['Headwear'];
+      if (
+        headwear === 'Cyber Helmet' ||
+        headwear === 'Rebel Helmet' ||
+        headwear === 'Punk Helmet'
+      ) {
+        update_values['Headwear'] = None;
+      }
     }
 
     if (name === 'Body' && value === 'Squid') {
@@ -91,7 +101,10 @@ const Work = () => {
 
     // if alien selected remove optics or scanner
     if (name === 'Body' && value === 'Alien') {
-      if (update_values['Eyewear'] === 'Cyborg Optics' || update_values['Eyewear'] === 'Biometric Scanner') {
+      if (
+        update_values['Eyewear'] === 'Cyborg Optics' ||
+        update_values['Eyewear'] === 'Biometric Scanner'
+      ) {
         update_values['Eyewear'] = None;
       }
     }
@@ -99,7 +112,7 @@ const Work = () => {
     if (name === 'Transcended') {
       for (let key of Object.keys(update_values)) {
         if (key !== name) update_values[key] = None;
-        console.log("paths", paths)
+        console.log('paths', paths);
       }
     } else if (update_values['Transcended'] !== None) {
       update_values['Transcended'] = None;
@@ -137,7 +150,7 @@ const Work = () => {
         return true;
       }
     }
-    
+
     // disable cyborg optic and biometric scanner if alien
     if (values['Body'].startsWith('Alien')) {
       if (name === 'Eyewear' && value === 'Cyborg Optic') {
@@ -149,8 +162,12 @@ const Work = () => {
     }
 
     // disable eyewear if wearing helmets
-    if (values['Headwear'].startsWith('Cyber Helmet') || values['Headwear'].startsWith('Punk Helmet') || values['Headwear'].startsWith('Rebel Helmet')) {
-      if (name === 'Eyewear'){
+    if (
+      values['Headwear'].startsWith('Cyber Helmet') ||
+      values['Headwear'].startsWith('Punk Helmet') ||
+      values['Headwear'].startsWith('Rebel Helmet')
+    ) {
+      if (name === 'Eyewear') {
         return true;
       }
     }
@@ -159,16 +176,22 @@ const Work = () => {
 
   const optionView = (_name: string) => {
     const trait = traits[_name];
-    return Object.keys(trait).map((trait_name: string, index: number) => (
-      <MenuItem
-        key={index}
-        value={trait_name}
-        style={{ color: 'white' }}
-        disabled={checkDisabled(_name, trait_name)}
-      >
-        {trait_name}
-      </MenuItem>
-    ));
+    return Object.keys(trait)
+      .filter((trait_name) =>
+        attributes.find(
+          (attr) => attr.traitType === _name && attr.value === trait_name
+        )
+      )
+      .map((trait_name: string, index: number) => (
+        <MenuItem
+          key={index}
+          value={trait_name}
+          style={{ color: 'white' }}
+          disabled={checkDisabled(_name, trait_name)}
+        >
+          {trait_name}
+        </MenuItem>
+      ));
   };
 
   const itemSelect = Object.keys(traits).map(
