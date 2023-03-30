@@ -38,9 +38,12 @@ const Work = () => {
   }, [ownedTokens]);
 
   const paths = useMemo((): string[] => {
-    return traitNames
+    const paths = traitNames
       .filter((key) => values[key] !== None)
       .map((key) => groupUrls[key] + traits[key][values[key]]);
+
+      paths.splice(0, 0, '/resources/environment/stars.glb');
+      return paths;
   }, [traitNames, values]);
 
   const handleValueChange = (name: string, value: string) => {
