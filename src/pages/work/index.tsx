@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useClasses } from 'hooks';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { isMobile } from 'react-device-detect';
 import { Button } from 'ui';
 import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
@@ -42,8 +43,8 @@ const Work = () => {
       .filter((key) => values[key] !== None)
       .map((key) => groupUrls[key] + traits[key][values[key]]);
 
-      paths.splice(0, 0, '/resources/environment/stars.glb');
-      return paths;
+    paths.splice(0, 0, '/resources/environment/stars.glb');
+    return paths;
   }, [traitNames, values]);
 
   const handleValueChange = (name: string, value: string) => {
@@ -227,8 +228,8 @@ const Work = () => {
   console.log('paths', paths);
   return (
     <div className={container}>
-      <Grid container>
-        <Grid item sm={4} md={4}>
+      <Grid container direction={isMobile ? 'column-reverse' : 'row'}>
+        <Grid item xs={12} sm={4} md={4}>
           {itemSelect}
           <Button
             onClick={onReset}
@@ -238,7 +239,7 @@ const Work = () => {
             Reset Items
           </Button>
         </Grid>
-        <Grid item sm={8} md={8}>
+        <Grid item xs={12} sm={8} md={8}>
           <MoonModel paths={paths} />
         </Grid>
       </Grid>

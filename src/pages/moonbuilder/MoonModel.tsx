@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { Suspense, useRef } from 'react';
 import { extend, Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -20,6 +21,16 @@ const useLoader = (path: string) => {
   });
 };
 
+const Container = styled.div`
+  height: 100%;
+  margin-bottom: 0;
+
+  @media (max-width: 768px) {
+    height: 420px;
+    margin-bottom: 20px;
+  }
+`;
+
 type Props = {
   paths: string[];
 };
@@ -33,59 +44,61 @@ const MoonModel = ({ paths }: Props) => {
   const controlRef = useRef<any>();
 
   return (
-    <Canvas
-      color="#000000"
-      camera={{
-        fov: 50,
-        near: 0.1,
-        far: 2000,
-        position: [-5, 100, 20],
-      }}
-    >
-      <Suspense fallback={null}>
-        <ambientLight color="white" intensity={0.1} />
-        <directionalLight
-          color='#d8d8d8'
-          intensity={0.3}
-          position={[0, 15, 10]}
-        />
-        <directionalLight
-          color='#d8d8d8'
-          intensity={0.2}
-          position={[0, 15, -10]}
-        />
-        <directionalLight
-          color='#d8d8d8'
-          intensity={0.2}
-          position={[-10, 15, 0]}
-        />
-        <directionalLight
-          color='#d8d8d8'
-          intensity={0.2}
-          position={[0, 15, 0]}
-        />
-        <hemisphereLight
-          color='#d8d8d8'
-          groundColor="#080820"
-          intensity={0.2}
-        />
-        <OrbitControls
-          ref={controlRef}
-          minPolarAngle={1.0}
-          maxPolarAngle={1.74}
-          minDistance={12}
-          maxDistance={20}
-          enableDamping={true}
-          dampingFactor={0.3}
-          target={new THREE.Vector3(0, 8, 0)}
-        />
-        <group position={[0, 2, 0]}>
-          {paths.map((path: string, index: number) => (
-            <Model key={index} path={path} />
-          ))}
-        </group>
-      </Suspense>
-    </Canvas>
+    <Container>
+      <Canvas
+        color="#000000"
+        camera={{
+          fov: 50,
+          near: 0.1,
+          far: 2000,
+          position: [-5, 100, 20],
+        }}
+      >
+        <Suspense fallback={null}>
+          <ambientLight color="white" intensity={0.1} />
+          <directionalLight
+            color="#d8d8d8"
+            intensity={0.3}
+            position={[0, 15, 10]}
+          />
+          <directionalLight
+            color="#d8d8d8"
+            intensity={0.2}
+            position={[0, 15, -10]}
+          />
+          <directionalLight
+            color="#d8d8d8"
+            intensity={0.2}
+            position={[-10, 15, 0]}
+          />
+          <directionalLight
+            color="#d8d8d8"
+            intensity={0.2}
+            position={[0, 15, 0]}
+          />
+          <hemisphereLight
+            color="#d8d8d8"
+            groundColor="#080820"
+            intensity={0.2}
+          />
+          <OrbitControls
+            ref={controlRef}
+            minPolarAngle={1.0}
+            maxPolarAngle={1.74}
+            minDistance={12}
+            maxDistance={20}
+            enableDamping={true}
+            dampingFactor={0.3}
+            target={new THREE.Vector3(0, 8, 0)}
+          />
+          <group position={[0, 2, 0]}>
+            {paths.map((path: string, index: number) => (
+              <Model key={index} path={path} />
+            ))}
+          </group>
+        </Suspense>
+      </Canvas>
+    </Container>
   );
 };
 

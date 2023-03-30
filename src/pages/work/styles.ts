@@ -11,6 +11,10 @@ export const styles = () => ({
         paddingLeft: "40px",
         paddingRight: "40px",
         background: "#16121e",
+
+        "@media (max-width : 768px)": {
+            marginTop : "100px"
+        },
     },
     formControlStyle: {
         marginTop: "10px",
