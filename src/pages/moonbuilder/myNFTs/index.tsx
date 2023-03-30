@@ -1,17 +1,9 @@
-import { useClasses, useActiveWeb3React } from 'hooks';
-import { styles } from './styles';
-import request from 'graphql-request';
+import { useEffect } from 'react';
 import { Grid } from '@mui/material';
-import { QUERY_OWNED_TOKENS } from 'subgraph/erc721Queries';
-import { useState, useEffect } from 'react';
+import { useClasses, useActiveWeb3React } from 'hooks';
 import { NavLink } from 'ui';
-import {
-  ChainId,
-  CONTRACT_ADDRESS,
-  RARESAMA_SUBGRAPH_URLS,
-} from '../../../constants';
-import { OwnedToken, OwnedTokenPayload } from '../types';
-import uriToHttp from 'utils/uriToHttp';
+import useOwnedTokens from './useOwnedTokens';
+import { styles } from './styles';
 
 const MyNFTs = () => {
   const {
@@ -23,38 +15,13 @@ const MyNFTs = () => {
     cardMiddle,
   } = useClasses(styles);
   const { account } = useActiveWeb3React();
-  const [tokens, setTokens] = useState<OwnedToken[]>([]);
+  const ownedTokens = useOwnedTokens();
 
   useEffect(() => {
     setTimeout(() => window.scrollTo(0, 0), 10);
   }, []);
 
-  useEffect(() => {
-    const getTokens = async () => {
-      if (account) {
-        const address = account;
-        const result: any = await request<OwnedTokenPayload>(
-          RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
-          QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
-        );
-
-        setTokens([]);
-        if (result?.tokens && result.tokens.length > 0) {
-          const tokens = result.tokens.map((token: OwnedToken) => {
-            if (token.metadata?.image) {
-              const urls = uriToHttp(token.metadata.image, true);
-              token.metadata.image = urls[0];
-            }
-            return token;
-          });
-          setTokens(tokens);
-        }
-      }
-    };
-    getTokens();
-  }, [account]);
-
-  const NFTCards = tokens.map((token) => (
+  const NFTCards = ownedTokens.map((token) => (
     <Grid item md={3} sm={6} key={token.numericId.toString()}>
       <img
         src={token.metadata?.image}
@@ -97,7 +64,9 @@ const MyNFTs = () => {
             <p className={stakeTitleLeft}>My NFTS</p>
           </Grid>
           <Grid item sm={6} style={{ textAlign: 'right' }}>
-            <p className={stakeTitleRight}>TOTAL NFTS : {tokens.length} </p>
+            <p className={stakeTitleRight}>
+              TOTAL NFTS : {ownedTokens.length}{' '}
+            </p>
           </Grid>
         </Grid>
         <Grid container spacing={2}>
