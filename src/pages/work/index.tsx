@@ -34,9 +34,44 @@ const ResetButton = styled(Button)`
 `;
 
 const None = '-1';
+type OwnedTraitItem = Record<string, Array<TraitItem>>;
+
+const checkDisabled = (values: StringObject, name: string, value: string) => {
+  if (values['Body'].startsWith('Squid')) {
+    if (name === 'Headwear' && value === 'Punk Helmet') {
+      return true;
+    }
+    if (name === 'Facewear') {
+      return true;
+    }
+  }
+
+  // disable cyborg optic and biometric scanner if alien
+  if (values['Body'].startsWith('Alien')) {
+    if (name === 'Eyewear' && value === 'Cyborg Optic') {
+      return true;
+    }
+    if (name === 'Eyewear' && value === 'Biometric Scanner') {
+      return true;
+    }
+  }
+
+  // disable eyewear if wearing helmets
+  if (
+    values['Headwear'].startsWith('Cyber Helmet') ||
+    values['Headwear'].startsWith('Punk Helmet') ||
+    values['Headwear'].startsWith('Rebel Helmet')
+  ) {
+    if (name === 'Eyewear') {
+      return true;
+    }
+  }
+  return false;
+};
 
 const Work = () => {
   const [traitNames, setTraitNames] = useState<string[]>([]);
+  const [ownedTraits, setOwnedTraits] = useState<OwnedTraitItem>({});
   const [values, setValues] = useState<StringObject>({
     Body: None,
     Top: None,
@@ -61,32 +96,29 @@ const Work = () => {
     }, [] as Attributes[]);
   }, [ownedTokens]);
 
-  const ownedTraits = useMemo(() => {
-    const result: Record<string, Array<TraitItem>> = {};
+  useEffect(() => {
+    const traitItems: OwnedTraitItem = {};
     for (let attr of attributes) {
       if (attr.value !== 'False' && attr.value !== 'None') {
         const item: TraitItem = {
           value: attr.value,
           disabled: false,
         };
-        if (result[attr.traitType]) {
-          result[attr.traitType].push(item);
+        if (traitItems[attr.traitType]) {
+          traitItems[attr.traitType].push(item);
         } else {
-          result[attr.traitType] = [item];
+          traitItems[attr.traitType] = [item];
         }
       }
     }
-    return result;
+    console.log('ownedTraits', traitItems);
+    setOwnedTraits(traitItems);
   }, [attributes]);
-  console.log('ownedTraits', ownedTraits);
 
   useEffect(() => {
+    
 
-  }, [])
-
-
-
-
+  }, [ownedTraits, values]);
 
   const paths = useMemo((): string[] => {
     const paths = traitNames
@@ -195,39 +227,6 @@ const Work = () => {
     }
   };
 
-  const checkDisabled = (name: string, value: string) => {
-    if (values['Body'].startsWith('Squid')) {
-      if (name === 'Headwear' && value === 'Punk Helmet') {
-        return true;
-      }
-      if (name === 'Facewear') {
-        return true;
-      }
-    }
-
-    // disable cyborg optic and biometric scanner if alien
-    if (values['Body'].startsWith('Alien')) {
-      if (name === 'Eyewear' && value === 'Cyborg Optic') {
-        return true;
-      }
-      if (name === 'Eyewear' && value === 'Biometric Scanner') {
-        return true;
-      }
-    }
-
-    // disable eyewear if wearing helmets
-    if (
-      values['Headwear'].startsWith('Cyber Helmet') ||
-      values['Headwear'].startsWith('Punk Helmet') ||
-      values['Headwear'].startsWith('Rebel Helmet')
-    ) {
-      if (name === 'Eyewear') {
-        return true;
-      }
-    }
-    return false;
-  };
-
   const optionView = (_name: string) => {
     const trait = traits[_name];
     return Object.keys(trait)
@@ -241,7 +240,7 @@ const Work = () => {
           key={index}
           value={trait_name}
           style={{ color: 'white' }}
-          disabled={checkDisabled(_name, trait_name)}
+          disabled={checkDisabled(values, _name, trait_name)}
         >
           {trait_name}
         </MenuItem>
