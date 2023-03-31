@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { isMobile } from 'react-device-detect';
 import { Button } from 'ui';
@@ -62,19 +62,31 @@ const Work = () => {
   }, [ownedTokens]);
 
   const ownedTraits = useMemo(() => {
-    const result: Record<string, Array<string>> = {};
+    const result: Record<string, Array<TraitItem>> = {};
     for (let attr of attributes) {
       if (attr.value !== 'False' && attr.value !== 'None') {
+        const item: TraitItem = {
+          value: attr.value,
+          disabled: false,
+        };
         if (result[attr.traitType]) {
-          result[attr.traitType].push(attr.value);
+          result[attr.traitType].push(item);
         } else {
-          result[attr.traitType] = [attr.value];
+          result[attr.traitType] = [item];
         }
       }
     }
     return result;
   }, [attributes]);
   console.log('ownedTraits', ownedTraits);
+
+  useEffect(() => {
+
+  }, [])
+
+
+
+
 
   const paths = useMemo((): string[] => {
     const paths = traitNames
@@ -273,17 +285,30 @@ const Work = () => {
     ];
   }, []);
 
-  const itemSelect = Object.keys(traits).map(
-    (_name: string, _index: number) => (
-      <SelectTrait
-        key={_index}
-        name={_name}
-        value={values[_name]}
-        items={optionItems}
-        onChange={onChange}
-      ></SelectTrait>
-    )
-  );
+  // const optionItems_ = useMemo(() => {
+  //   Object.keys(ownedTraits).map((name: string) => {
+  //     const values = ownedTraits[name];
+  //     const items = values.map(value => {
+
+  //     })
+  //   });
+  //   return [
+  //     {
+  //       value: 'Text',
+  //       disabled: false,
+  //     },
+  //   ];
+  // }, [ownedTraits]);
+
+  const itemSelect = Object.keys(traits).map((name: string, index: number) => (
+    <SelectTrait
+      key={index}
+      name={name}
+      value={values[name]}
+      items={optionItems}
+      onChange={onChange}
+    ></SelectTrait>
+  ));
 
   const onReset = () => {
     for (let key of Object.keys(values)) {
