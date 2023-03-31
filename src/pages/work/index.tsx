@@ -190,7 +190,6 @@ const Work = () => {
         }
       }
     }
-    console.log('ownedTraits', traitItems);
     setOwnedTraits(traitItems);
   }, [attributes]);
 
@@ -211,28 +210,27 @@ const Work = () => {
       }
       if (changed) {
         ownedTraits = { ...ownedTraits };
-        console.log('ownedTraits-updated', ownedTraits);
       }
       return ownedTraits;
     });
   }, [ownedTraits, values]);
 
-  const onChangeValue = useCallback((name: string, value: string) => {
-    console.log('onChangeValue', name, value);
-    setValues((values) => {
-      const updated = { ...values, [name]: value };
-      const result = updateSelectValues(updated, name, value);
-      console.log('setValues~~~~~~~~~~~~~', result)
-      return result;
-    });
+  const onChangeValue = useCallback(
+    (name: string, value: string) => {
+      setValues((values) => {
+        const updated = { ...values, [name]: value };
+        const result = updateSelectValues(updated, name, value);
+        return result;
+      });
 
-    setTraitNames((traitNames) => {
-      const index = traitNames.indexOf(name);
-      index >= 0 && traitNames.splice(index, 1);
-      console.log('traitNames-v1~~~~~~~~~~~~~', [...traitNames, name])
-      return [...traitNames, name];
-    });
-  }, [setValues, setTraitNames]);
+      setTraitNames((traitNames) => {
+        const index = traitNames.indexOf(name);
+        index >= 0 && traitNames.splice(index, 1);
+        return [...traitNames, name];
+      });
+    },
+    [setValues, setTraitNames]
+  );
 
   useEffect(() => {
     setTraitNames((traitNames) => {
@@ -243,7 +241,6 @@ const Work = () => {
           updatedNames.splice(index, 1);
         }
       }
-      console.log('traitNames-v2~~~~~~~~~~~~~', updatedNames)
       return updatedNames;
     });
   }, [values, setTraitNames]);
@@ -280,7 +277,6 @@ const Work = () => {
     });
   }, []);
 
-  // console.log('paths~~~~~~~~~~~~~', traitPaths);
   return (
     <Container>
       <Grid container direction={isMobile ? 'column-reverse' : 'row'}>
