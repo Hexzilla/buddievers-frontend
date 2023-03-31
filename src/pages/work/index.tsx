@@ -61,6 +61,21 @@ const Work = () => {
     }, [] as Attributes[]);
   }, [ownedTokens]);
 
+  const ownedTraits = useMemo(() => {
+    const result: Record<string, Array<string>> = {};
+    for (let attr of attributes) {
+      if (attr.value !== 'False' && attr.value !== 'None') {
+        if (result[attr.traitType]) {
+          result[attr.traitType].push(attr.value);
+        } else {
+          result[attr.traitType] = [attr.value];
+        }
+      }
+    }
+    return result;
+  }, [attributes]);
+  console.log('ownedTraits', ownedTraits);
+
   const paths = useMemo((): string[] => {
     const paths = traitNames
       .filter((key) => values[key] !== None)
