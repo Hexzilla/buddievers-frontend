@@ -48,7 +48,7 @@ const checkDisabled = (values: StringObject, name: string, value: string) => {
 
   // disable cyborg optic and biometric scanner if alien
   if (values['Body'].startsWith('Alien')) {
-    if (name === 'Eyewear' && value === 'Cyborg Optic') {
+    if (name === 'Eyewear' /*&& value === 'Cyborg Optic'*/) {
       return true;
     }
     if (name === 'Eyewear' && value === 'Biometric Scanner') {
@@ -116,8 +116,26 @@ const Work = () => {
   }, [attributes]);
 
   useEffect(() => {
-    
+    setOwnedTraits((ownedTraits) => {
+      let changed = false;
+      for (let name of Object.keys(ownedTraits)) {
+        const traitItems = ownedTraits[name];
 
+        for (let trait of traitItems) {
+          const disabled = checkDisabled(values, name, trait.value);
+          if (trait.disabled !== disabled) {
+            trait.disabled = disabled;
+            ownedTraits[name] = [...traitItems];
+            changed = true;
+          }
+        }
+      }
+      if (changed) {
+        ownedTraits = { ...ownedTraits };
+        console.log('ownedTraits-updated', ownedTraits);
+      }
+      return ownedTraits;
+    });
   }, [ownedTraits, values]);
 
   const paths = useMemo((): string[] => {
@@ -304,7 +322,7 @@ const Work = () => {
       key={index}
       name={name}
       value={values[name]}
-      items={optionItems}
+      items={ownedTraits[name]}
       onChange={onChange}
     ></SelectTrait>
   ));
