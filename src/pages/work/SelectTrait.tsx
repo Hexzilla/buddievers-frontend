@@ -14,7 +14,7 @@ type Props = {
 };
 
 const SelectTrait = React.memo(({ name, value, items, onChange }: Props) => {
-  console.log('SelectTrait', name, value, items);
+  // console.log('SelectTrait', name, value, items);
 
   return (
     <FormControl fullWidth style={{ marginTop: '10px' }}>

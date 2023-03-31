@@ -41,6 +41,7 @@ export const Model = ({ path }: { path: string }) => {
 };
 
 const MoonModel = ({ paths }: Props) => {
+  console.log('MoonModel~~~~~~~~~~~', paths)
   const controlRef = useRef<any>();
 
   return (

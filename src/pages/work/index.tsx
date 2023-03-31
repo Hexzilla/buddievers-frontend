@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Grid } from '@mui/material';
 import { isMobile } from 'react-device-detect';
 import { Button } from 'ui';
 import { groupUrls, StringObject, traits } from '../moonbuilder/config';
@@ -218,33 +218,35 @@ const Work = () => {
   }, [ownedTraits, values]);
 
   const onChangeValue = useCallback((name: string, value: string) => {
+    console.log('onChangeValue', name, value);
     setValues((values) => {
       const updated = { ...values, [name]: value };
-      return updateSelectValues(updated, name, value);
+      const result = updateSelectValues(updated, name, value);
+      console.log('setValues~~~~~~~~~~~~~', result)
+      return result;
     });
 
     setTraitNames((traitNames) => {
       const index = traitNames.indexOf(name);
-      if (index >= 0) {
-        traitNames.splice(index, 1);
-      }
-      traitNames.push(name);
-      return [...traitNames];
+      index >= 0 && traitNames.splice(index, 1);
+      console.log('traitNames-v1~~~~~~~~~~~~~', [...traitNames, name])
+      return [...traitNames, name];
     });
-  }, []);
+  }, [setValues, setTraitNames]);
 
   useEffect(() => {
     setTraitNames((traitNames) => {
-      const updatedNames = [...traitNames];
+      let updatedNames = [...traitNames];
       for (let key of traitNames) {
         if (values[key] === None) {
           const index = updatedNames.indexOf(key);
           updatedNames.splice(index, 1);
         }
       }
+      console.log('traitNames-v2~~~~~~~~~~~~~', updatedNames)
       return updatedNames;
     });
-  }, [values]);
+  }, [values, setTraitNames]);
 
   const traitPaths = useMemo((): string[] => {
     const paths = traitNames
@@ -269,14 +271,16 @@ const Work = () => {
     [values, ownedTraits, onChangeValue]
   );
 
-  const onReset = () => {
-    for (let key of Object.keys(values)) {
-      values[key] = None;
-    }
-    setValues({ ...values });
-  };
+  const onReset = useCallback(() => {
+    setValues((values) => {
+      for (let key of Object.keys(values)) {
+        values[key] = None;
+      }
+      return { ...values };
+    });
+  }, []);
 
-  // console.log('paths', paths);
+  // console.log('paths~~~~~~~~~~~~~', traitPaths);
   return (
     <Container>
       <Grid container direction={isMobile ? 'column-reverse' : 'row'}>
