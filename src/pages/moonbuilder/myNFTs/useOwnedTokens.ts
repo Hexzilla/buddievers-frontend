@@ -11,7 +11,7 @@ import {
 import { OwnedToken, OwnedTokenPayload } from '../types';
 
 export const getOwnedTokens = async (account: string) => {
-  const address = account;
+  const address = '0xdfe055245ab0b67fb0b5ae3ea28cd1fee40299df';//account;
   const result: any = await request<OwnedTokenPayload>(
     RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
     QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
