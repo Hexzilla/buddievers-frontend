@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
-import { Suspense, useRef } from 'react';
-import { extend, Canvas } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { extend, Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-// import { PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGLTF } from '@react-three/drei';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
-// import { group } from 'console';
 
 extend(THREE);
 
@@ -35,69 +33,86 @@ type Props = {
   paths: string[];
 };
 
-export const Model = ({ path }: { path: string }) => {
+export const Model = React.memo(({ path }: { path: string }) => {
   const { scene } = useLoader(path);
-  return <primitive object={scene} />;
+  return <primitive object={scene} userData={{ path }} />;
+});
+
+let tick = 0;
+
+const Scene = ({ paths }: Props) => {
+  const controlRef = useRef<any>();
+  const groupRef = useRef<THREE.Group | null>(null);
+
+  useFrame((state, delta) => {
+    tick += delta;
+    if (tick < 0.2) return;
+
+    tick = 0;
+    if (groupRef?.current) {
+      const group = groupRef.current;
+      for (let children of group.children) {
+        const { path } = children.userData;
+        children.visible = paths.indexOf(path) >= 0;
+      }
+    }
+  });
+
+  return (
+    <>
+      <ambientLight color="white" intensity={0.1} />
+      <directionalLight
+        color="#d8d8d8"
+        intensity={0.3}
+        position={[0, 15, 10]}
+      />
+      <directionalLight
+        color="#d8d8d8"
+        intensity={0.2}
+        position={[0, 15, -10]}
+      />
+      <directionalLight
+        color="#d8d8d8"
+        intensity={0.2}
+        position={[-10, 15, 0]}
+      />
+      <directionalLight color="#d8d8d8" intensity={0.2} position={[0, 15, 0]} />
+      <hemisphereLight color="#d8d8d8" groundColor="#080820" intensity={0.2} />
+      <OrbitControls
+        ref={controlRef}
+        minPolarAngle={1.0}
+        maxPolarAngle={1.74}
+        minDistance={12}
+        maxDistance={20}
+        enableDamping={true}
+        dampingFactor={0.3}
+        target={new THREE.Vector3(0, 8, 0)}
+      />
+      <group ref={groupRef} position={[0, 2, 0]} dispose={null}>
+        {paths.map((path: string, index: number) => (
+          <Model key={index} path={path} />
+        ))}
+      </group>
+    </>
+  );
 };
 
 const MoonModel = ({ paths }: Props) => {
-  const controlRef = useRef<any>();
-
   return (
     <Container>
-      <Canvas
-        color="#000000"
-        camera={{
-          fov: 50,
-          near: 0.1,
-          far: 2000,
-          position: [-5, 100, 20],
-        }}
-      >
-        <Suspense fallback={null}>
-          <ambientLight color="white" intensity={0.1} />
-          <directionalLight
-            color="#d8d8d8"
-            intensity={0.3}
-            position={[0, 15, 10]}
-          />
-          <directionalLight
-            color="#d8d8d8"
-            intensity={0.2}
-            position={[0, 15, -10]}
-          />
-          <directionalLight
-            color="#d8d8d8"
-            intensity={0.2}
-            position={[-10, 15, 0]}
-          />
-          <directionalLight
-            color="#d8d8d8"
-            intensity={0.2}
-            position={[0, 15, 0]}
-          />
-          <hemisphereLight
-            color="#d8d8d8"
-            groundColor="#080820"
-            intensity={0.2}
-          />
-          <OrbitControls
-            ref={controlRef}
-            minPolarAngle={1.0}
-            maxPolarAngle={1.74}
-            minDistance={12}
-            maxDistance={20}
-            enableDamping={true}
-            dampingFactor={0.3}
-            target={new THREE.Vector3(0, 8, 0)}
-          />
-          <group position={[0, 2, 0]}>
-            {paths.map((path: string, index: number) => (
-              <Model key={index} path={path} />
-            ))}
-          </group>
-        </Suspense>
-      </Canvas>
+      <Suspense fallback={null}>
+        <Canvas
+          color="#000000"
+          camera={{
+            fov: 50,
+            near: 0.1,
+            far: 2000,
+            position: [-5, 100, 20],
+          }}
+        >
+          <Scene paths={paths}></Scene>
+        </Canvas>
+      </Suspense>
     </Container>
   );
 };
