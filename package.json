@@ -72,6 +72,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/three": "^0.149.0",
     "@types/yup": "^0.32.0",
+    "husky": "^8.0.3",
     "yup": "^1.0.2"
   },
   "eslintConfig": {
