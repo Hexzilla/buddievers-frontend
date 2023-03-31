@@ -48,7 +48,7 @@ const checkDisabled = (values: StringObject, name: string, value: string) => {
 
   // disable cyborg optic and biometric scanner if alien
   if (values['Body'].startsWith('Alien')) {
-    if (name === 'Eyewear' /*&& value === 'Cyborg Optic'*/) {
+    if (name === 'Eyewear' && value === 'Cyborg Optic') {
       return true;
     }
     if (name === 'Eyewear' && value === 'Biometric Scanner') {
@@ -67,6 +67,85 @@ const checkDisabled = (values: StringObject, name: string, value: string) => {
     }
   }
   return false;
+};
+
+const updateSelectValues = (
+  values: StringObject,
+  name: string,
+  value: string
+) => {
+  if (name === 'Suit') {
+    values['Top'] = None;
+    values['Pants'] = None;
+  } else if (name === 'Top' || name === 'Pants') {
+    values['Suit'] = None;
+  }
+
+  if (name === 'Headwear') {
+    values['Hair'] = None;
+  } else if (name === 'Hair') {
+    values['Headwear'] = None;
+  }
+
+  if (name === 'Top') {
+    if (value === 'Cyber Hoodie White' || value === 'Cyber Hoodie Green') {
+      values['Hair'] = None;
+      values['Headwear'] = None;
+    }
+  } else if (name === 'Hair' || name === 'Headwear') {
+    const top = values['Top'];
+    if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
+      values['Top'] = None;
+    }
+  }
+
+  if (name === 'Headwear') {
+    if (
+      value === 'Cyber Helmet' ||
+      value === 'Rebel Helmet' ||
+      value === 'Punk Helmet'
+    ) {
+      values['Facewear'] = None;
+      values['Hair'] = None;
+      values['Eyewear'] = None;
+    }
+  } else if (name === 'Facewear') {
+    const headwear = values['Headwear'];
+    if (
+      headwear === 'Cyber Helmet' ||
+      headwear === 'Rebel Helmet' ||
+      headwear === 'Punk Helmet'
+    ) {
+      values['Headwear'] = None;
+    }
+  }
+
+  if (name === 'Body' && value === 'Squid') {
+    values['Facewear'] = None;
+    if (values['Headwear'] === 'Punk Helmet') {
+      values['Headwear'] = None;
+    }
+  }
+
+  // if alien selected remove optics or scanner
+  if (name === 'Body' && value === 'Alien') {
+    if (
+      values['Eyewear'] === 'Cyborg Optics' ||
+      values['Eyewear'] === 'Biometric Scanner'
+    ) {
+      values['Eyewear'] = None;
+    }
+  }
+
+  if (name === 'Transcended') {
+    for (let key of Object.keys(values)) {
+      if (key !== name) values[key] = None;
+    }
+  } else if (values['Transcended'] !== None) {
+    values['Transcended'] = None;
+  }
+
+  return values;
 };
 
 const Work = () => {
@@ -138,7 +217,36 @@ const Work = () => {
     });
   }, [ownedTraits, values]);
 
-  const paths = useMemo((): string[] => {
+  const onChangeValue = useCallback((name: string, value: string) => {
+    setValues((values) => {
+      const updated = { ...values, [name]: value };
+      return updateSelectValues(updated, name, value);
+    });
+
+    setTraitNames((traitNames) => {
+      const index = traitNames.indexOf(name);
+      if (index >= 0) {
+        traitNames.splice(index, 1);
+      }
+      traitNames.push(name);
+      return [...traitNames];
+    });
+  }, []);
+
+  useEffect(() => {
+    setTraitNames((traitNames) => {
+      const updatedNames = [...traitNames];
+      for (let key of traitNames) {
+        if (values[key] === None) {
+          const index = updatedNames.indexOf(key);
+          updatedNames.splice(index, 1);
+        }
+      }
+      return updatedNames;
+    });
+  }, [values]);
+
+  const traitPaths = useMemo((): string[] => {
     const paths = traitNames
       .filter((key) => values[key] !== None)
       .map((key) => groupUrls[key] + traits[key][values[key]]);
@@ -147,185 +255,19 @@ const Work = () => {
     return paths;
   }, [traitNames, values]);
 
-  const handleValueChange = (name: string, value: string) => {
-    const update_values = { ...values, [name]: value };
-
-    if (name === 'Suit') {
-      update_values['Top'] = None;
-      update_values['Pants'] = None;
-    } else if (name === 'Top' || name === 'Pants') {
-      update_values['Suit'] = None;
-    }
-
-    if (name === 'Headwear') {
-      update_values['Hair'] = None;
-    } else if (name === 'Hair') {
-      update_values['Headwear'] = None;
-    }
-
-    if (name === 'Top') {
-      if (value === 'Cyber Hoodie White' || value === 'Cyber Hoodie Green') {
-        update_values['Hair'] = None;
-        update_values['Headwear'] = None;
-      }
-    } else if (name === 'Hair' || name === 'Headwear') {
-      const top = update_values['Top'];
-      if (top === 'Cyber Hoodie White' || top === 'Cyber Hoodie Green') {
-        update_values['Top'] = None;
-      }
-    }
-
-    if (name === 'Headwear') {
-      if (
-        value === 'Cyber Helmet' ||
-        value === 'Rebel Helmet' ||
-        value === 'Punk Helmet'
-      ) {
-        update_values['Facewear'] = None;
-        update_values['Hair'] = None;
-        update_values['Eyewear'] = None;
-      }
-    } else if (name === 'Facewear') {
-      const headwear = update_values['Headwear'];
-      if (
-        headwear === 'Cyber Helmet' ||
-        headwear === 'Rebel Helmet' ||
-        headwear === 'Punk Helmet'
-      ) {
-        update_values['Headwear'] = None;
-      }
-    }
-
-    if (name === 'Body' && value === 'Squid') {
-      update_values['Facewear'] = None;
-      if (update_values['Headwear'] === 'Punk Helmet') {
-        update_values['Headwear'] = None;
-      }
-    }
-
-    // if alien selected remove optics or scanner
-    if (name === 'Body' && value === 'Alien') {
-      if (
-        update_values['Eyewear'] === 'Cyborg Optics' ||
-        update_values['Eyewear'] === 'Biometric Scanner'
-      ) {
-        update_values['Eyewear'] = None;
-      }
-    }
-
-    if (name === 'Transcended') {
-      for (let key of Object.keys(update_values)) {
-        if (key !== name) update_values[key] = None;
-        console.log('paths', paths);
-      }
-    } else if (update_values['Transcended'] !== None) {
-      update_values['Transcended'] = None;
-    }
-
-    setValues(update_values);
-
-    /// The trait order is important for rendering.
-    {
-      const index = traitNames.indexOf(name);
-      if (index >= 0) {
-        traitNames.splice(index, 1);
-      }
-      traitNames.push(name);
-
-      const updatedNames = [...traitNames];
-      for (let key of traitNames) {
-        if (update_values[key] === None) {
-          const index = updatedNames.indexOf(key);
-          updatedNames.splice(index, 1);
-        }
-      }
-
-      console.log('updatedNames', updatedNames);
-      setTraitNames(updatedNames);
-    }
-  };
-
-  const optionView = (_name: string) => {
-    const trait = traits[_name];
-    return Object.keys(trait)
-      .filter((trait_name) =>
-        attributes.find(
-          (attr) => attr.traitType === _name && attr.value === trait_name
-        )
-      )
-      .map((trait_name: string, index: number) => (
-        <MenuItem
+  const itemSelect = useMemo(
+    () =>
+      Object.keys(traits).map((name: string, index: number) => (
+        <SelectTrait
           key={index}
-          value={trait_name}
-          style={{ color: 'white' }}
-          disabled={checkDisabled(values, _name, trait_name)}
-        >
-          {trait_name}
-        </MenuItem>
-      ));
-  };
-
-  /*const itemSelect = Object.keys(traits).map(
-    (_name: string, _index: number) => (
-      <FormControl fullWidth key={_name} style={{ marginTop: '10px' }}>
-        <InputLabel id="demo-simple-select-label">{_name}</InputLabel>
-        <Select
-          value={values[_name]}
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          label="Age"
-          onChange={(event) => handleValueChange(_name, event.target.value)}
-        >
-          <MenuItem value="-1" style={{ color: 'white' }}>
-            None
-          </MenuItem>
-          {optionView(_name)}
-        </Select>
-      </FormControl>
-    )
-  );*/
-
-  const onChange = useCallback((name: string, value: string) => {
-    console.log('onChange', name, value);
-    setValues((values) => {
-      values[name] = value;
-      return { ...values };
-    });
-  }, []);
-
-  const optionItems = useMemo(() => {
-    return [
-      {
-        value: 'Text',
-        disabled: false,
-      },
-    ];
-  }, []);
-
-  // const optionItems_ = useMemo(() => {
-  //   Object.keys(ownedTraits).map((name: string) => {
-  //     const values = ownedTraits[name];
-  //     const items = values.map(value => {
-
-  //     })
-  //   });
-  //   return [
-  //     {
-  //       value: 'Text',
-  //       disabled: false,
-  //     },
-  //   ];
-  // }, [ownedTraits]);
-
-  const itemSelect = Object.keys(traits).map((name: string, index: number) => (
-    <SelectTrait
-      key={index}
-      name={name}
-      value={values[name]}
-      items={ownedTraits[name]}
-      onChange={onChange}
-    ></SelectTrait>
-  ));
+          name={name}
+          value={values[name]}
+          items={ownedTraits[name]}
+          onChange={onChangeValue}
+        ></SelectTrait>
+      )),
+    [values, ownedTraits, onChangeValue]
+  );
 
   const onReset = () => {
     for (let key of Object.keys(values)) {
@@ -345,7 +287,7 @@ const Work = () => {
           </ResetButton>
         </Grid>
         <Grid item xs={12} sm={8} md={8}>
-          <MoonModel paths={paths} />
+          <MoonModel paths={traitPaths} />
         </Grid>
       </Grid>
     </Container>
