@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { useState, useMemo } from 'react';
-import { useClasses } from 'hooks';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { isMobile } from 'react-device-detect';
 import { Button } from 'ui';
@@ -7,12 +7,34 @@ import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
 import useOwnedTokens from '../moonbuilder/myNFTs/useOwnedTokens';
 import { Attributes } from '../moonbuilder/types';
-import { styles } from './styles';
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  margin-top: 120px;
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background: #16121e;
+
+  @media (max-width: 768px) {
+    margin-top: 100px;
+  },
+`;
+
+const ResetButton = styled(Button)`
+  font-size: 16px;
+  background: #f5e2b2;
+  height: 30px;
+  color: #000;
+  margin-top: 10px;
+  border-radius: 10px;
+`;
 
 const None = '-1';
 
 const Work = () => {
-  const { container, formControlStyle, resetButtonStyle } = useClasses(styles);
   const [traitNames, setTraitNames] = useState<string[]>([]);
   const [values, setValues] = useState<StringObject>({
     Body: None,
@@ -200,7 +222,7 @@ const Work = () => {
 
   const itemSelect = Object.keys(traits).map(
     (_name: string, _index: number) => (
-      <FormControl fullWidth key={_name} className={formControlStyle}>
+      <FormControl fullWidth key={_name} style={{ marginTop: '10px' }}>
         <InputLabel id="demo-simple-select-label">{_name}</InputLabel>
         <Select
           value={values[_name]}
@@ -227,23 +249,19 @@ const Work = () => {
 
   console.log('paths', paths);
   return (
-    <div className={container}>
+    <Container>
       <Grid container direction={isMobile ? 'column-reverse' : 'row'}>
         <Grid item xs={12} sm={4} md={4}>
           {itemSelect}
-          <Button
-            onClick={onReset}
-            variant="contained"
-            className={resetButtonStyle}
-          >
+          <ResetButton onClick={onReset} variant="contained">
             Reset Items
-          </Button>
+          </ResetButton>
         </Grid>
         <Grid item xs={12} sm={8} md={8}>
           <MoonModel paths={paths} />
         </Grid>
       </Grid>
-    </div>
+    </Container>
   );
 };
 
