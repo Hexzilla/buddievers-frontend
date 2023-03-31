@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { isMobile } from 'react-device-detect';
 import { Button } from 'ui';
@@ -7,6 +7,7 @@ import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
 import useOwnedTokens from '../moonbuilder/myNFTs/useOwnedTokens';
 import { Attributes } from '../moonbuilder/types';
+import SelectTrait, { TraitItem } from './SelectTrait';
 
 const Container = styled.div`
   width: 100vw;
@@ -220,7 +221,7 @@ const Work = () => {
       ));
   };
 
-  const itemSelect = Object.keys(traits).map(
+  /*const itemSelect = Object.keys(traits).map(
     (_name: string, _index: number) => (
       <FormControl fullWidth key={_name} style={{ marginTop: '10px' }}>
         <InputLabel id="demo-simple-select-label">{_name}</InputLabel>
@@ -238,6 +239,35 @@ const Work = () => {
         </Select>
       </FormControl>
     )
+  );*/
+
+  const onChange = useCallback((name: string, value: string) => {
+    console.log('onChange', name, value);
+    setValues((values) => {
+      values[name] = value;
+      return { ...values };
+    });
+  }, []);
+
+  const optionItems = useMemo(() => {
+    return [
+      {
+        value: 'Text',
+        disabled: false,
+      },
+    ];
+  }, []);
+
+  const itemSelect = Object.keys(traits).map(
+    (_name: string, _index: number) => (
+      <SelectTrait
+        key={_index}
+        name={_name}
+        value={values[_name]}
+        items={optionItems}
+        onChange={onChange}
+      ></SelectTrait>
+    )
   );
 
   const onReset = () => {
@@ -247,7 +277,7 @@ const Work = () => {
     setValues({ ...values });
   };
 
-  console.log('paths', paths);
+  // console.log('paths', paths);
   return (
     <Container>
       <Grid container direction={isMobile ? 'column-reverse' : 'row'}>
