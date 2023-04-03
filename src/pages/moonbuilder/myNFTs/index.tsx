@@ -12,6 +12,8 @@ import {
 import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
 import { OwnedToken, OwnedTokenPayload } from '../types';
 import request from 'graphql-request';
+import Pagination from '@mui/material/Pagination';
+
 const MyNFTs = () => {
   const {
     container,
@@ -20,7 +22,9 @@ const MyNFTs = () => {
     stakeTitleRight,
     btnUnStake,
     cardMiddle,
-    attributeCard
+    attributeCard,
+    paginationStyle, 
+    paginationContainer
   } = useClasses(styles);
   const [open, setOpen] = useState(false);
   const [attributes, setAttributes] = useState<Array<any>>([]);
@@ -118,6 +122,9 @@ const MyNFTs = () => {
           {NFTCards}
         </Grid>
       </div>
+      <div className={ paginationContainer }>
+          <Pagination count={8} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
+      </div>
 
       <Dialog
           open={open}
@@ -150,6 +157,7 @@ const MyNFTs = () => {
               </Button>
           </DialogActions>
       </Dialog>
+
     </div>
   ) : (
     <div className={container}>
