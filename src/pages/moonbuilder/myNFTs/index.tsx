@@ -28,6 +28,9 @@ const MyNFTs = () => {
   } = useClasses(styles);
   const [open, setOpen] = useState(false);
   const [attributes, setAttributes] = useState<Array<any>>([]);
+  const [countTokens, setCountTokens] = useState<any>(0);
+  const [pageNumber, setPageNumber] = useState<any>(1);
+  const [tokensPage, setTokensPage] = useState<Array<any>>([]);
 
   const handleClickOpen = (tokenId : String) => {
       setOpen(true);
@@ -54,6 +57,10 @@ const MyNFTs = () => {
   const ownedTokens = useOwnedTokens();
 
   useEffect(() => {
+    setCountTokens( ownedTokens.length % 20 == 0 ? ownedTokens.length / 20 : ownedTokens.length / 20 + 1 );
+  });
+
+  useEffect(() => {
     setTimeout(() => window.scrollTo(0, 0), 10);
   }, []);
 
@@ -67,8 +74,8 @@ const MyNFTs = () => {
             alt=""
           />
           <div className={cardMiddle}>
-            <Grid container spacing={2}>
-              <Grid item sm={6}>
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
                 <p
                   style={{
                     fontWeight: 900,
@@ -90,7 +97,7 @@ const MyNFTs = () => {
                   BUDDIES
                 </p>
               </Grid>
-              <Grid item sm={6}>
+              <Grid item xs={5}>
                 <button style={{ marginTop : "25px", letterSpacing : "1px" }} className={btnUnStake} onClick={() => handleClickOpen(token.numericId.toString())}>
                   Attributes
                 </button>
@@ -123,7 +130,7 @@ const MyNFTs = () => {
         </Grid>
       </div>
       <div className={ paginationContainer }>
-          <Pagination count={8} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
+          <Pagination count={countTokens} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
       </div>
 
       <Dialog
@@ -140,7 +147,7 @@ const MyNFTs = () => {
               <Grid container spacing={2}>
                 {
                   attributes.map((attribute : any) => (
-                    <Grid item lg={4} sm={6}>
+                    <Grid item xs={12} lg={4}>
                       <div className={attributeCard}>
                         <p>{ attribute.traitType }</p>
                         <h4>{ attribute.value }</h4>

@@ -150,6 +150,31 @@ query MyQuery {
 }
 `;
 
+export const QUERY_ALL_TOKENS = (contract : string) => gql`
+query MyQuery {
+  tokens(orderBy: numericId_ASC, where: {contract: {id_eq: "${contract.toLowerCase()}"}}) {
+    metadata {
+      attributes {
+        displayType
+        traitType
+        value
+      }
+      composite
+      description
+      externalUrl
+      id
+      layers
+      image
+      name
+      type
+      artist
+      artistUrl
+    }
+    numericId
+  }
+}
+`;
+
 export const QUERY_TOKEN_BY_ID = (contract: string, id: string) => gql`
 query MyQuery {
   tokens(orderBy: numericId_ASC, where: {contract: {id_eq: "${contract.toLowerCase()}"}, numericId_eq: "${id.toLowerCase()}"}) {

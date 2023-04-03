@@ -48,6 +48,9 @@ export const styles = () => ({
         paddingBottom : "0px",
         paddingLeft : "50px",
         marginTop : "-6px",
+        "@media (max-width : 1192px)" : {
+            paddingLeft : "0px"
+        }
     },
     attributeCard : {
         padding : "10px",
