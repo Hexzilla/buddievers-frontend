@@ -9,10 +9,11 @@ import {
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
 } from '../../../constants';
-import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
-import { OwnedToken, OwnedTokenPayload } from '../types';
+import { QUERY_TOKEN_BY_ID, QUERY_PAGE_TOKENS } from 'subgraph/erc721Queries';
+import { OwnedToken, OwnedTokenPayload, PageTokens } from '../types';
 import request from 'graphql-request';
 import Pagination from '@mui/material/Pagination';
+import { useWeb3React } from '@web3-react/core';
 
 const MyNFTs = () => {
   const {
@@ -26,12 +27,12 @@ const MyNFTs = () => {
     paginationStyle, 
     paginationContainer
   } = useClasses(styles);
+  
   const [open, setOpen] = useState(false);
   const [attributes, setAttributes] = useState<Array<any>>([]);
   const [countTokens, setCountTokens] = useState<any>(0);
-  const [pageNumber, setPageNumber] = useState<any>(1);
-  const [tokensPage, setTokensPage] = useState<Array<any>>([]);
-
+  const [tokensPage, setTokensPage] = useState<OwnedToken[]>([]);
+  const { account } = useActiveWeb3React();
   const handleClickOpen = (tokenId : String) => {
       setOpen(true);
       getTokens(tokenId)
@@ -39,6 +40,19 @@ const MyNFTs = () => {
   const handleClose = () => {
       setOpen(false);
   };
+  const getPageTokens = async (pageNumber : number, address : string) => {
+    const result: any = await request<PageTokens>(
+      RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
+      QUERY_PAGE_TOKENS(CONTRACT_ADDRESS, address, (pageNumber-1) * 20, 20)
+    );
+    setTokensPage(result.tokens);
+  }
+  const pageChangeHandler = async (event : any, pageNumber : number) => {
+    if(account){
+      getPageTokens(pageNumber, account);
+    }
+    
+  }
   const getTokens = async (tokenId : any) => {
     if (tokenId) {
       const result: any = await request<OwnedTokenPayload>(
@@ -53,8 +67,14 @@ const MyNFTs = () => {
       }
     }
   };
-  const { account } = useActiveWeb3React();
   const ownedTokens = useOwnedTokens();
+  
+  useEffect(() => {
+    if(account){
+      getPageTokens(1, account);
+    }
+    
+  }, []);
 
   useEffect(() => {
     setCountTokens( ownedTokens.length % 20 == 0 ? ownedTokens.length / 20 : ownedTokens.length / 20 + 1 );
@@ -66,7 +86,7 @@ const MyNFTs = () => {
 
   const NFTCards = useMemo(
     () =>
-      ownedTokens.map((token) => (
+      tokensPage.map((token) => (
         <Grid item md={3} sm={6} key={token.numericId.toString()}>
           <img
             src={token.metadata?.image}
@@ -109,7 +129,7 @@ const MyNFTs = () => {
           </NavLink>
         </Grid>
       )),
-    [ownedTokens, btnUnStake, cardMiddle]
+    [tokensPage, ownedTokens, btnUnStake, cardMiddle]
   );
 
   return account ? (
@@ -130,7 +150,7 @@ const MyNFTs = () => {
         </Grid>
       </div>
       <div className={ paginationContainer }>
-          <Pagination count={countTokens} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
+          <Pagination count={countTokens} onChange={(event, pageNumber) => pageChangeHandler(event, pageNumber)} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
       </div>
 
       <Dialog

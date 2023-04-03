@@ -26,3 +26,7 @@ export type OwnedToken = {
 export type OwnedTokenPayload = {
   tokens: OwnedToken[];
 };
+
+export type PageTokens = {
+  tokens : OwnedToken;
+}
