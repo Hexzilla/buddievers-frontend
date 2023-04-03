@@ -48,18 +48,5 @@ export const styles = () => ({
         paddingBottom : "0px",
         paddingLeft : "50px",
         marginTop : "-6px",
-    },
-    attributeCard : {
-        padding : "10px",
-        textAlign : "center",
-        boxShadow : "1px 1px 1px 1px rgba(0,0,0,0.1)",
-        border : "1px solid rgba(0,0,0,0.5)",
-        borderRadius : "20px",
-        "& > p" : {
-            color : "black",
-        },
-        "& > h4" : {
-            color : "green",
-        }
-    },
+    }  
 })

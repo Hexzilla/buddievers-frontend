@@ -31,7 +31,7 @@ export const getOwnedTokens = async (account: string) => {
 };
 
 const useOwnedTokens = () => {
-  const account = '0xdfe055245ab0b67fb0b5ae3ea28cd1fee40299df';
+  const { account } = useActiveWeb3React();
   const [tokens, setTokens] = useState<OwnedToken[]>([]);
 
   useEffect(() => {
