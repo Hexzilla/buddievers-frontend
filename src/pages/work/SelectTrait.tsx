@@ -1,3 +1,4 @@
+import { styled } from '@mui/material';
 import React from 'react';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
@@ -5,6 +6,11 @@ export type TraitItem = {
   value: string;
   disabled: boolean;
 };
+
+const StyledInputLabel = styled(InputLabel)`
+  background-color: #16121e;
+  padding-right: 4px;
+`;
 
 type Props = {
   name: string;
@@ -14,11 +20,9 @@ type Props = {
 };
 
 const SelectTrait = React.memo(({ name, value, items, onChange }: Props) => {
-  // console.log('SelectTrait', name, value, items);
-
   return (
     <FormControl fullWidth style={{ marginTop: '10px' }}>
-      <InputLabel id="demo-simple-select-label">{name}</InputLabel>
+      <StyledInputLabel id="demo-simple-select-label">{name}</StyledInputLabel>
       <Select
         value={value}
         labelId="demo-simple-select-label"
