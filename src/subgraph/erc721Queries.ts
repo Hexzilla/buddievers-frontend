@@ -150,9 +150,34 @@ query MyQuery {
 }
 `;
 
-export const QUERY_PAGE_TOKENS = (contract : string, address : string, offset : number, limit : number) => gql`
+export const QUERY_OWNED_PAGE_TOKENS = (contract : string, address : string, offset : number, limit : number) => gql`
 query MyQuery {
   tokens(orderBy: numericId_ASC, limit : ${limit}, offset : ${offset},  where: {contract: {id_eq: "${contract.toLowerCase()}"}, owner: {id_eq: "${address.toLowerCase()}"}}) {
+    metadata {
+      attributes {
+        displayType
+        traitType
+        value
+      }
+      composite
+      description
+      externalUrl
+      id
+      layers
+      image
+      name
+      type
+      artist
+      artistUrl
+    }
+    numericId
+  }
+}
+`;
+
+export const QUERY_PAGE_TOKENS = (contract : string, offset : number, limit : number) => gql`
+query MyQuery {
+  tokens(orderBy: numericId_ASC, limit : ${limit}, offset : ${offset},  where: {contract: {id_eq: "${contract.toLowerCase()}"}}) {
     metadata {
       attributes {
         displayType

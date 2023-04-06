@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 import request from 'graphql-request';
 import { useActiveWeb3React } from 'hooks';
-import { QUERY_OWNED_TOKENS } from 'subgraph/erc721Queries';
+import { QUERY_OWNED_TOKENS, QUERY_ALL_TOKENS } from 'subgraph/erc721Queries';
 import uriToHttp from 'utils/uriToHttp';
 import {
   ChainId,
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
-} from '../../../constants';
-import { OwnedToken, OwnedTokenPayload } from '../types';
+} from '../../constants';
+import { OwnedToken, OwnedTokenPayload } from './types';
 
-export const getOwnedTokens = async (account: string) => {
-  const address = account;//account;
-  // const address = "0xDFE055245aB0b67fB0B5AE3EA28CD1fee40299df";
+export const getAllTokens = async (account: string) => {
   const result: any = await request<OwnedTokenPayload>(
     RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
-    QUERY_OWNED_TOKENS(CONTRACT_ADDRESS, address)
+    QUERY_ALL_TOKENS(CONTRACT_ADDRESS)
   );
 
   if (result?.tokens && result.tokens.length > 0) {
@@ -31,17 +29,17 @@ export const getOwnedTokens = async (account: string) => {
   return [];
 };
 
-const useOwnedTokens = () => {
+const useAllTokens = () => {
   const { account } = useActiveWeb3React();
   const [tokens, setTokens] = useState<OwnedToken[]>([]);
 
   useEffect(() => {
     if (account) {
-      getOwnedTokens(account).then((tokens) => setTokens(tokens));
+      getAllTokens(account).then((tokens) => setTokens(tokens));
     }
   }, [account]);
 
   return tokens;
 };
 
-export default useOwnedTokens;
+export default useAllTokens;

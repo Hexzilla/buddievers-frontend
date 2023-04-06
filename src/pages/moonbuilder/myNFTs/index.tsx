@@ -9,11 +9,12 @@ import {
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
 } from '../../../constants';
-import { QUERY_TOKEN_BY_ID, QUERY_PAGE_TOKENS } from 'subgraph/erc721Queries';
+import { QUERY_TOKEN_BY_ID, QUERY_OWNED_PAGE_TOKENS } from 'subgraph/erc721Queries';
 import { OwnedToken, OwnedTokenPayload, PageTokens } from '../types';
 import request from 'graphql-request';
 import Pagination from '@mui/material/Pagination';
 import { useWeb3React } from '@web3-react/core';
+import uriToHttp from 'utils/uriToHttp';
 
 const MyNFTs = () => {
   const {
@@ -43,9 +44,19 @@ const MyNFTs = () => {
   const getPageTokens = async (pageNumber : number, address : string) => {
     const result: any = await request<PageTokens>(
       RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
-      QUERY_PAGE_TOKENS(CONTRACT_ADDRESS, address, (pageNumber-1) * 20, 20)
+      QUERY_OWNED_PAGE_TOKENS(CONTRACT_ADDRESS, address, (pageNumber-1) * 20, 20)
     );
-    setTokensPage(result.tokens);
+    if (result?.tokens && result.tokens.length > 0) {
+      const tokens = result.tokens.map((token: OwnedToken) => {
+        if (token.metadata?.image) {
+          const urls = uriToHttp(token.metadata.image, true);
+          token.metadata.image = urls[0];
+        }
+        return token;
+      });
+      setTokensPage(tokens);
+    }
+    
   }
   const pageChangeHandler = async (event : any, pageNumber : number) => {
     if(account){

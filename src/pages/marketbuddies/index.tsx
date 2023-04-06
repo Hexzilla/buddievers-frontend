@@ -1,13 +1,61 @@
 import { styles } from "./styles";
-import { useClasses } from 'hooks';
+import { useEffect, useMemo, useState } from 'react';
+import { useClasses, useActiveWeb3React } from 'hooks';
 import { Grid } from "@mui/material";
-import { Link } from "react-router-dom";
+import useAllTokens from './useAllTokens';
+import {
+    ChainId,
+    CONTRACT_ADDRESS,
+    RARESAMA_SUBGRAPH_URLS,
+  } from '../../constants';
+import { QUERY_PAGE_TOKENS } from 'subgraph/erc721Queries';
+import { OwnedToken, PageTokens } from './types';
+import request from 'graphql-request';
+import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Pagination from '@mui/material/Pagination';
 // import { TextField } from "@mui/material";
+import uriToHttp from 'utils/uriToHttp';
 
 const MarketBuddies = () => {
-    const { container, bannerContainer, cardImg, cardMiddle, cardBottom, btnBuy, bannerTxtContainer, paginationStyle, paginationContainer,searchWrapper, searchTitle, searchFields, searchById, sortSelect } = useClasses(styles);
+    const { container, bannerContainer, cardImg, cardMiddle, cardBottom, btnBuy, bannerTxtContainer, paginationStyle, paginationContainer,searchWrapper, searchTitle, searchFields, searchById, sortSelect, btnCheckNow } = useClasses(styles);
+    const [countTokens, setCountTokens] = useState<any>(0);
+    const [tokensPage, setTokensPage] = useState<OwnedToken[]>([]);
+    const { account } = useActiveWeb3React();
+    const getPageTokens = async (pageNumber : number, address : string) => {
+        const result: any = await request<PageTokens>(
+            RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
+            QUERY_PAGE_TOKENS(CONTRACT_ADDRESS, (pageNumber-1) * 20, 20)
+        );
+        if (result?.tokens && result.tokens.length > 0) {
+            const tokens = result.tokens.map((token: OwnedToken) => {
+                if (token.metadata?.image) {
+                    const urls = uriToHttp(token.metadata.image, true);
+                    token.metadata.image = urls[0];
+                }
+                return token;
+            });
+            setTokensPage(tokens);
+        }
+    }
+    const pageChangeHandler = async (event : any, pageNumber : number) => {
+        if(account){
+            getPageTokens(pageNumber, account);
+        }
+    
+    }
+    const ownedTokens = useAllTokens();
+  
+    useEffect(() => {
+        if(account){
+            getPageTokens(1, account);
+        }
+        
+    }, []);
+
+    useEffect(() => {
+        setCountTokens( ownedTokens.length % 20 == 0 ? ownedTokens.length / 20 : ownedTokens.length / 20 + 1 );
+    });
     const navigate = useNavigate();
     const toDetail = (imgName: any, Price: any, Name: any) => {
         navigate('/buddieDetail', {
@@ -18,6 +66,28 @@ const MarketBuddies = () => {
             }
         });
     }
+    const NFTCards = useMemo(
+        () =>
+        tokensPage.map((token) => (
+            <Grid item md={3} sm={6} key={token.numericId.toString()}>
+                <img src={token.metadata?.image} style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                <Grid container>
+                    <Grid item md={6}>
+                        <p style={{ fontWeight : "900", color : "white" }}>Buddie</p>
+                        <p style={{ fontWeight : "900", fontSize : "24px", color : "white" }}>#{token.numericId.toString()}</p>
+                        <p style={{ color : "#00CE4C" }}>BUDDIES</p>
+                    </Grid>
+                    <Grid item md={6} style={{ textAlign : "right" }}>
+                        <p style={{ color : "white" }}>PRICE</p>
+                        <p style={{ fontWeight : "900", fontSize : "24px", color : "white" }}>2500</p>
+                        <p style={{ color : "#00CE4C" }}>SAMA</p>
+                    </Grid>
+                </Grid>
+                <button className={btnCheckNow} onClick={() => toDetail(`${token.metadata?.image}`, "1300", `BUDDIE #${token.numericId.toString()}`)}>CHECK IT NOW</button>
+            </Grid>
+        )),
+    [tokensPage, ownedTokens, cardMiddle]
+    );
     return (
         <div className={container}>
             <div className={ bannerContainer }>
@@ -72,240 +142,10 @@ const MarketBuddies = () => {
                 </Grid>
             </div>
             <Grid container spacing={4} style={{ marginTop : 80 }}>
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (1).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #70</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                1300 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (1).png", "1300", "BUDDIE #70")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (2).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #192</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                1000 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (2).png", "1000", "BUDDIE #192")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (3).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #230</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                2700 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (3).png", "2700", "BUDDIE #230")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (4).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #247</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                900 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (4).png", "900", "BUDDIE #247")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={4} style={{ marginTop : 50 }}>
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (1).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #70</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                1300 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (1).png", "1300", "BUDDIE #70")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (2).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #192</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                1000 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (2).png", "1000", "BUDDIE #192")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (3).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #230</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                2700 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (3).png", "2700", "BUDDIE #230")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (4).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #247</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                900 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (4).png", "900", "BUDDIE #247")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={4} style={{ marginTop : 50 }}>
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (1).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #70</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                1300 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (1).png", "1300", "BUDDIE #70")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (2).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #192</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                1000 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (2).png", "1000", "BUDDIE #192")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (3).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #230</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                2700 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (3).png", "2700", "BUDDIE #230")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
-
-                <Grid item md={3} sm={12}>
-                    <img src="./charactor (4).png" className={cardImg} />
-                    <div className={ cardMiddle }>
-                        <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #247</p>
-                        <p style={{ fontWeight: 400, fontSize: 16, color: "white", marginTop : 0 }}>BUDDIEVERSE</p>
-                    </div>
-                    <div className={cardBottom}>
-                        <Grid container>
-                            <Grid style={{ color: "white", textAlign : "initial" }} item md={6}>
-                                LAST SALE: < br/>
-                                900 SAMA
-                            </Grid>
-                            <Grid style={{ color: "white", textAlign : "center" }} item md={6}>
-                                <button className={btnBuy} onClick={() => toDetail("charactor (4).png", "900", "BUDDIE #247")}>BUY</button>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Grid>
+                { NFTCards }
             </Grid>
             <div className={ paginationContainer }>
-                <Pagination count={8} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
+                <Pagination count={countTokens} onChange={(event, pageNumber) => pageChangeHandler(event, pageNumber)} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
             </div>
         </div>
     );

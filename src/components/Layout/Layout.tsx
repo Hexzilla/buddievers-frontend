@@ -63,7 +63,7 @@ export const Layout = () => {
                           {/* <NavLink href="/marketplace" className={navItem}>
                           MARKETPLACE
                         </NavLink> */}
-                          <NavLink href="/" className={navItem}>
+                          <NavLink href="/marketplace" className={navItem}>
                             MARKETPLACE
                           </NavLink>
                         </Grid>

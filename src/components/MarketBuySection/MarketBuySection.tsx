@@ -7,7 +7,7 @@ export const MarketBuySection = ({imgName, price, name} : any) => {
         <div className={container}>
             <Grid container spacing={4}>
                 <Grid item md={4} sm={12}>
-                    <img src={`./${imgName}`} style={{ maxWidth : "100%", height : "100%", borderRadius : "20px" }} />
+                    <img src={`${imgName}`} style={{ maxWidth : "100%", height : "100%", borderRadius : "20px" }} />
                 </Grid>
                 <Grid item md={8} sm={12}>
                     <div>
