@@ -1,0 +1,25 @@
+
+name: Buddies-web
+on: 
+  push:
+    branches:
+      - test
+  workflow_dispatch:   
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.Buddeis_Host }}
+          username: ${{ secrets.Buddeis_UserName }}
+          password: ${{ secrets.Buddeis_Password }}
+          port: "22"
+          script: |
+            cd /home/buddies/test/Buddies-web
+            git checkout test
+            git fetch
+            git pull
+            rm -rf build
+            yarn build
