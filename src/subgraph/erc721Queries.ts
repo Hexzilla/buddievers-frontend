@@ -247,6 +247,9 @@ query MyQuery {
       artistUrl
     }
     numericId
+    owner {
+      id
+    }
   }
 }
 `;

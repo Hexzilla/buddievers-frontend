@@ -103,10 +103,12 @@ const MarketplaceDetail = () => {
   }
   */
  const { state } = useLocation();
+ const [ numericId, setNumericId ] = useState(state.numericId);
  const [ imgName, setImgName ] = useState(state.imgName);
  const [ price, setPrice ] = useState(state.Price);
  const [ name, setName ] = useState(state.Name);
- const getCheckNowEvent = (imageName : any, nftName : any, nftPrice : any) => {
+ const getCheckNowEvent = (numericId : any, imageName : any, nftName : any, nftPrice : any) => {
+  setNumericId(numericId);
   setImgName(imageName);
   setPrice(nftPrice);
   setName(nftName);
@@ -115,7 +117,7 @@ const MarketplaceDetail = () => {
   return (
     <div className={container}>
       <MarketIntroSection />
-      <MarketBuySection imgName={imgName} price={price} name={name} />
+      <MarketBuySection numericId={numericId} imgName={imgName} price={price} name={name} />
       <MarketplaceTrade />
       <MarketMoreSection getCheckNowEvent={getCheckNowEvent} />
     </div>

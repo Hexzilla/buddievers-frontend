@@ -36,10 +36,8 @@ export const MarketMoreSection = ({getCheckNowEvent} : any) => {
         }
     }
     useEffect(() => {
-        if(account){
             getRandomTokens();
-        }
-        
+
     }, []);
     const NFTCards = useMemo(
         () =>
