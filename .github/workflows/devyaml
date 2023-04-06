@@ -3,7 +3,7 @@ name: Buddies-web
 on: 
   push:
     branches:
-      - test
+      - development
   workflow_dispatch:   
 jobs:
   deploy:
@@ -18,7 +18,7 @@ jobs:
           port: "22"
           script: |
             cd /home/buddies/test/Buddies-web
-            git checkout test
+            git checkout development
             git fetch
             git pull
             rm -rf build

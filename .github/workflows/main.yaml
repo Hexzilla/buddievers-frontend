@@ -3,7 +3,7 @@ name: Buddies-web
 on: 
   push:
     branches:
-      - main
+      - development
   workflow_dispatch:   
 jobs:
   deploy:
@@ -17,8 +17,8 @@ jobs:
           password: ${{ secrets.Buddeis_Password }}
           port: "22"
           script: |
-            cd /home/buddies/Buddies-web
-            git checkout main
+            cd /home/buddies/test/Buddies-web
+            git checkout development
             git fetch
             git pull
             rm -rf build
