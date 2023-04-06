@@ -9,7 +9,7 @@ export type TraitItem = {
 
 const StyledInputLabel = styled(InputLabel)`
   background-color: #16121e;
-  padding-right: 4px;
+  padding-right: 8px;
 `;
 
 type Props = {
