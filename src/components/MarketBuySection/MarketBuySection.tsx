@@ -1,8 +1,64 @@
+import { useState, useEffect, useMemo } from 'react';
 import { useClasses } from 'hooks';
 import { styles } from './MarketBuySection.styles';
 import { Grid } from '@mui/material';
-export const MarketBuySection = ({imgName, price, name} : any) => {
+import {
+    ChainId,
+    CONTRACT_ADDRESS,
+    RARESAMA_SUBGRAPH_URLS,
+  } from '../../constants';
+import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
+import { ViewToken } from './types';
+import request from 'graphql-request';
+import uriToHttp from 'utils/uriToHttp';
+
+export const MarketBuySection = ({numericId, imgName, price, name} : any) => {
     const { container, overViewItem, btnBuy, btnOffer } = useClasses(styles);
+    const [ tokens, setTokens ] = useState<ViewToken[]>([]);
+
+    const getToken = async () => {
+        const result: any = await request<ViewToken>(
+            RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
+            QUERY_TOKEN_BY_ID(CONTRACT_ADDRESS, numericId)
+        );
+        if (result?.tokens && result.tokens.length > 0) {
+            const tokens = result.tokens.map((token: ViewToken) => {
+                if (token.metadata?.image) {
+                    const urls = uriToHttp(token.metadata.image, true);
+                    token.metadata.image = urls[0];
+                }
+                return token;
+            });
+            setTokens(tokens);
+        }
+    }
+
+    useEffect(() => {
+        getToken();
+    }, []);
+
+    const description = useMemo(
+        () => 
+        <p>
+            { tokens[0]?.metadata?.description }
+        </p>,
+        [tokens]
+    );
+
+    const owner = useMemo(
+        () =>
+            <p style={{ color : "white", margin : 0, fontSize : "16px", fontWeight : "700" }}>{tokens[0]?.owner.id}</p>
+        ,
+        [tokens]
+    );
+
+    const artist = useMemo(
+        () =>
+            <p style={{ color : "white", margin : 0, fontSize : "16px", fontWeight : "700" }}>{tokens[0]?.metadata?.artist}</p>
+        ,
+        [tokens]
+    );
+
     return (
         <div className={container}>
             <Grid container spacing={4}>
@@ -52,27 +108,27 @@ export const MarketBuySection = ({imgName, price, name} : any) => {
                     </div>
                     <div style={{ marginTop : "20px" }}>
                         <Grid container spacing={3}>
-                            <Grid item md={3} sm={6} style={{ display : "flex" }}>
+                            <Grid item md={6} sm={6} style={{ display : "flex" }}>
                                 <img src="./market (2).png" style={{ height : "50px", width : "50px" }} />
                                 <div style={{ display : "block", marginLeft : "20px" }}>
                                     <p style={{ margin : 0, fontSize : "16px", color : "#00CE4C", fontWeight : "900" }}>CREATOR</p>
-                                    <p style={{ color : "white", margin : 0, fontSize : "24px", fontWeight : "700" }}>MR KILT MASTER</p>
+                                    { artist }
                                 </div>
                             </Grid>
-                            <Grid item md={3} sm={6} style={{ display : "flex" }}>
+                            <Grid item md={6} sm={6} style={{ display : "flex" }}>
                                 <img src="./market (1).png" style={{ height : "50px", width : "50px" }} />
                                 <div style={{ display : "block", marginLeft : "20px" }}>
                                     <p style={{ margin : 0, fontSize : "16px", color : "#00CE4C", fontWeight : "900" }}>OWNER</p>
-                                    <p style={{ color : "white", margin : 0, fontSize : "24px", fontWeight : "700" }}>ANON01927</p>
+                                    { owner }
                                 </div>
                             </Grid>
-                            <Grid item md={3} sm={6} style={{ display : "flex" }}></Grid>
-                            <Grid item md={3} sm={6} style={{ display : "flex" }}></Grid>
+                            {/* <Grid item md={3} sm={6} style={{ display : "flex" }}></Grid>
+                            <Grid item md={3} sm={6} style={{ display : "flex" }}></Grid> */}
                         </Grid>
                     </div>
                     <div style={{ color : "white", marginTop : "20px" }}>
                         <p style={{ fontSize : "16px", fontWeight : "900" }}>DESCRIPTION</p>
-                        <p style={{ fontSize : "16px" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit massa in est pulvinar mattis. Sed malesuada bibendum sapien, quis ultricies mi lacinia vitae. </p>
+                        <p style={{ fontSize : "16px" }}>{ description }</p>
                     </div>
                     <div style={{ marginTop : "6vh" }}>
                         <Grid container spacing={2}>

@@ -22,7 +22,7 @@ const MarketBuddies = () => {
     const [countTokens, setCountTokens] = useState<any>(0);
     const [tokensPage, setTokensPage] = useState<OwnedToken[]>([]);
     const { account } = useActiveWeb3React();
-    const getPageTokens = async (pageNumber : number, address : string) => {
+    const getPageTokens = async (pageNumber : number) => {
         const result: any = await request<PageTokens>(
             RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
             QUERY_PAGE_TOKENS(CONTRACT_ADDRESS, (pageNumber-1) * 20, 20)
@@ -39,27 +39,22 @@ const MarketBuddies = () => {
         }
     }
     const pageChangeHandler = async (event : any, pageNumber : number) => {
-        if(account){
-            getPageTokens(pageNumber, account);
-        }
-    
+            getPageTokens(pageNumber);
     }
     const ownedTokens = useAllTokens();
   
     useEffect(() => {
-        if(account){
-            getPageTokens(1, account);
-        }
-        
+        getPageTokens(1);
     }, []);
 
     useEffect(() => {
         setCountTokens( ownedTokens.length % 20 == 0 ? ownedTokens.length / 20 : ownedTokens.length / 20 + 1 );
     });
     const navigate = useNavigate();
-    const toDetail = (imgName: any, Price: any, Name: any) => {
+    const toDetail = (numericId : any, imgName: any, Price: any, Name: any) => {
         navigate('/buddieDetail', {
             state : {
+                numericId : numericId,
                 imgName : imgName,
                 Price : Price,
                 Name : Name
@@ -83,7 +78,7 @@ const MarketBuddies = () => {
                         <p style={{ color : "#00CE4C" }}>SAMA</p>
                     </Grid>
                 </Grid>
-                <button className={btnCheckNow} onClick={() => toDetail(`${token.metadata?.image}`, "1300", `BUDDIE #${token.numericId.toString()}`)}>CHECK IT NOW</button>
+                <button className={btnCheckNow} onClick={() => toDetail(token.numericId ,`${token.metadata?.image}`, "1300", `BUDDIE #${token.numericId.toString()}`)}>CHECK IT NOW</button>
             </Grid>
         )),
     [tokensPage, ownedTokens, cardMiddle]
