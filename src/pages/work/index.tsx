@@ -184,8 +184,10 @@ const Work = () => {
           value: attr.value,
           disabled: false,
         };
-        if (traitItems[attr.traitType]) {
-          traitItems[attr.traitType].push(item);
+        const itemList = traitItems[attr.traitType];
+        if (itemList) {
+          const exists = itemList.find(i => i.value === item.value);
+          !exists && itemList.push(item);
         } else {
           traitItems[attr.traitType] = [item];
         }

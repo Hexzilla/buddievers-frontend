@@ -50,10 +50,16 @@ const Scene = ({ paths }: Props) => {
 
     tick = 0;
     if (groupRef?.current) {
-      const group = groupRef.current;
-      for (let children of group.children) {
-        const { path } = children.userData;
-        children.visible = paths.indexOf(path) >= 0;
+      for (let children of groupRef.current.children) {
+        children.visible = false;
+      }
+      for (let path of paths) {
+        const children = groupRef.current.children.find(
+          (i) => i.userData.path === path
+        );
+        if (children) {
+          children.visible = true;
+        }
       }
     }
   });

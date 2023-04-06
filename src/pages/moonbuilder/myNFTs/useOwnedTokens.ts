@@ -38,6 +38,8 @@ const useOwnedTokens = () => {
   useEffect(() => {
     if (account) {
       getOwnedTokens(account).then((tokens) => setTokens(tokens));
+    } else {
+      setTokens([]);
     }
   }, [account]);
 
