@@ -5,7 +5,7 @@ import { isMobile } from 'react-device-detect';
 import { Button } from 'ui';
 import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
-import useOwnedTokens from '../moonbuilder/myNFTs/useOwnedTokens';
+import useOwnedTokens from '../myNFTs/useOwnedTokens';
 import { Attributes } from '../moonbuilder/types';
 import SelectTrait, { TraitItem } from './SelectTrait';
 

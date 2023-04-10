@@ -6,7 +6,7 @@ import MoonModel from './MoonModel';
 import request from 'graphql-request';
 import { groupUrls, traits } from './config';
 import { Grid } from '@mui/material';
-import { styles } from './myNFTs/styles';
+import { styles } from '../myNFTs/styles';
 import {
   ChainId,
   CONTRACT_ADDRESS,

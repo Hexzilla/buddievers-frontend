@@ -8,9 +8,9 @@ import {
   ChainId,
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
-} from '../../../constants';
+} from '../../constants';
 import { QUERY_TOKEN_BY_ID, QUERY_OWNED_PAGE_TOKENS } from 'subgraph/erc721Queries';
-import { OwnedToken, OwnedTokenPayload, PageTokens } from '../types';
+import { OwnedToken, OwnedTokenPayload, PageTokens } from '../moonbuilder/types';
 import request from 'graphql-request';
 import Pagination from '@mui/material/Pagination';
 import { useWeb3React } from '@web3-react/core';

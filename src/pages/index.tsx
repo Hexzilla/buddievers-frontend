@@ -9,7 +9,7 @@ import MarketplaceDetail from './marketplacedetail';
 // import MintSoon from './mintSoon';
 import Seeds from './seeds';
 import CoffeeShop from './coffeeshop';
-import Inventory from './moonbuilder/myNFTs';
+import Inventory from './myNFTs';
 import MoonBuilder from './moonbuilder';
 import Work from './work';
 

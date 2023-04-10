@@ -71,7 +71,7 @@ export const Layout = () => {
                           {/* <NavLink href="/coffeeshop" className={navItem}>
                           COFFEE SHOP
                           </NavLink> */}
-                          <NavLink href="/" className={navItem}>
+                          <NavLink href="/coffeeshop" className={navItem}>
                             COFFEE SHOP
                           </NavLink>
                         </Grid>
@@ -149,11 +149,14 @@ export const Layout = () => {
                     <NavLink href="/" className={navItemDrawer}>
                       HOME
                     </NavLink>
+                    <NavLink href="/marketplace" className={navItem}>
+                            MARKETPLACE
+                    </NavLink>
+                    <NavLink href="/coffeeshop" className={navItemDrawer}>
+                      COFFEE SHOP
+                    </NavLink>
                     <NavLink href="/inventory" className={navItemDrawer}>
                         MY NFTs
-                    </NavLink>
-                    <NavLink href="/" className={navItemDrawer}>
-                      COFFEE SHOP
                     </NavLink>
                     <NavLink href="/" className={navItemDrawer}>
                       MINT

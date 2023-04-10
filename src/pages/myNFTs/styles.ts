@@ -4,12 +4,6 @@
 export const styles = () => ({
     container : {
         paddingTop : "50px",
-        paddingLeft : '5vw',
-        paddingRight : '5vw',
-        background : "#016B43",
-        paddingBottom : "50px",
-        marginTop : "100px",
-        minHeight: '800px',
     },
     stakedNFTs : {
         marginTop : "0px",
