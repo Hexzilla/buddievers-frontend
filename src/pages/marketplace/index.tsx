@@ -30,16 +30,17 @@ const MarketPlacePage = () => {
                     <p className={cardTitle}>MOONBUDDIES</p>
                     <p className={cardSubTitle}>GENERATION2</p>
                     <p className={cardText}>3D NFT project with 500 NFTs allocated in Exosama Network</p><br /><br />
-                    <Link to={{ pathname : "/moonbuddies" }}><button className={cardButton}>SEE COLLECTION</button></Link>
+                    {/* <Link to={{ pathname : "/moonbuddies" }}><button className={cardButton}>SEE COLLECTION</button></Link> */}
+                    <Link to="https://raresama.com/collections/2109/0xbaf909886c0a0cc195fd36ea24f21f93abc23c2c" target={"_blank"}><button className={cardButton}>SEE COLLECTION</button></Link>
                 </Grid>
 
-                {/* <Grid item md={4} sm={12}>
+                <Grid item md={4} sm={12}>
                     <img src="./B-BUDS3.png" className={cardImg} /><br /><br />
                     <p className={cardTitle}>$SEEDS</p>
                     <p className={cardSubTitle}>BUDDIES ECONOMY</p>
                     <p className={cardText}>Buddieverse alpha resource that let you to participate in events, to buy composable items and more</p><br />
                     <Link to={{ pathname : "/seeds" }}><button className={cardButton}>SEE COLLECTION</button></Link>
-                </Grid> */}
+                </Grid>
             </Grid>
         </div>
     );
