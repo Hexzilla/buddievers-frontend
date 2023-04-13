@@ -72,9 +72,9 @@ export const useStaking = () => {
       const signer = provider.getSigner();
 
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      const result = await contract.stake(tokenIds);
-
-      console.log('staking', result);
+      const tx = await contract.stake(tokenIds);
+      console.log('stake', tx);
+      return tx;      
     } catch (err) {
       console.error(err);
     }
@@ -88,15 +88,15 @@ export const useStaking = () => {
       const signer = provider.getSigner();
 
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      const result = await contract.withdraw(tokenIds);
-
-      console.log('withdraw', result);
+      const tx = await contract.withdraw(tokenIds);
+      console.log('withdraw', tx);
+      return tx;
     } catch (err) {
       console.error(err);
     }
   }, []);
 
-  const claimRewards = useCallback(async (tokenIds: number[]) => {
+  const claimRewards = useCallback(async () => {
     if (!window.ethereum) return;
 
     try {
@@ -104,9 +104,9 @@ export const useStaking = () => {
       const signer = provider.getSigner();
 
       const contract = new ethers.Contract(contractAddress, abi, signer);
-      const result = await contract.claimRewards(tokenIds);
-
-      console.log('claimRewards', result);
+      const tx = await contract.claimRewards();
+      console.log('claimRewards', tx);
+      return tx;
     } catch (err) {
       console.error(err);
     }
@@ -121,8 +121,8 @@ export const useStaking = () => {
 
       const contract = new ethers.Contract(contractAddress, abi, signer);
       const result = await contract.userStakeInfo(address);
-
       console.log('userStakeInfo', result);
+      return result;
     } catch (err) {
       console.error(err);
     }

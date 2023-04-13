@@ -25,14 +25,14 @@ export enum ChainId {
   BSC_TESTNET = 97,
   EWC = 246,
   VOLTA = 73799,
-  MOONRIVER = 97,
+  MOONRIVER = 97000,
   MOONBEAM= 1284,
   EXOSAMA = 2109,
 }
 
-export const PERMISSIONED_CHAINS = [ChainId.EXOSAMA]
+export const PERMISSIONED_CHAINS = [ChainId.BSC_TESTNET]
 
-export const DEFAULT_CHAIN = ChainId.EXOSAMA
+export const DEFAULT_CHAIN = ChainId.BSC_TESTNET
 
 export const RPC_URLS: { [chainId: number]: string } = {
   [ChainId.MOONRIVER]: 'https://bsc-testnet.public.blastapi.io',
@@ -139,7 +139,7 @@ export const IPFS_GATEWAYS = [
 
 export const MAX_WIDTH_TO_SHOW_NAVIGATION = 1194;
 
-export const CONTRACT_ADDRESS = '0xbaf909886c0a0cc195fd36ea24f21f93abc23c2c';
+export const CONTRACT_ADDRESS = '0xAAf9E0613910916f55c0d648F26127b6901Ce471';
 
 export const RARESAMA_SUBGRAPH_URLS: { [chainId: number]: string } = {
   [ChainId.EXOSAMA]: 'https://squid.subsquid.io/raresama-nft-exosama/graphql'
