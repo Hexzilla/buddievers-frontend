@@ -67,65 +67,47 @@ export const useStaking = () => {
   const stake = useCallback(async (tokenIds: number[]) => {
     if (!window.ethereum) return;
 
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
 
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      const tx = await contract.stake(tokenIds);
-      console.log('stake', tx);
-      return tx;      
-    } catch (err) {
-      console.error(err);
-    }
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const tx = await contract.stake(tokenIds);
+    console.log('stake', tx);
+    return tx.waitForTransaction();
   }, []);
 
   const withdraw = useCallback(async (tokenIds: number[]) => {
     if (!window.ethereum) return;
 
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
 
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      const tx = await contract.withdraw(tokenIds);
-      console.log('withdraw', tx);
-      return tx;
-    } catch (err) {
-      console.error(err);
-    }
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const tx = await contract.withdraw(tokenIds);
+    console.log('withdraw', tx);
+    return tx.waitForTransaction();
   }, []);
 
   const claimRewards = useCallback(async () => {
     if (!window.ethereum) return;
 
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
 
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      const tx = await contract.claimRewards();
-      console.log('claimRewards', tx);
-      return tx;
-    } catch (err) {
-      console.error(err);
-    }
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const tx = await contract.claimRewards();
+    console.log('claimRewards', tx);
+    return tx.waitForTransaction();
   }, []);
 
   const userStakeInfo = useCallback(async (address: string) => {
     if (!window.ethereum) return;
 
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
 
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      const result = await contract.userStakeInfo(address);
-      console.log('userStakeInfo', result);
-      return result;
-    } catch (err) {
-      console.error(err);
-    }
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    return await contract.userStakeInfo(address);
   }, []);
 
   return {
