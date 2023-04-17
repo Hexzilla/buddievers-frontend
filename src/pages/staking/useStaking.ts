@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { ethers } from 'ethers';
 import { CONTRACT_ADDRESS } from '../../constants';
+import { useCollection } from './useCollection';
 
 const contractAddress = CONTRACT_ADDRESS;
 const abi = [
@@ -64,8 +65,17 @@ const abi = [
 ];
 
 export const useStaking = () => {
-  const stake = useCallback(async (tokenIds: number[]) => {
+  const { setApprovalForAll, isApprovedForAll } = useCollection();
+
+  const stake = useCallback(async (address: string, tokenIds: number[]) => {
     if (!window.ethereum) return;
+
+    const approved = await isApprovedForAll(address);
+    console.log('approved', approved, Boolean(approved))
+    if (!approved) {
+      await setApprovalForAll();
+      return;
+    }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -73,8 +83,8 @@ export const useStaking = () => {
     const contract = new ethers.Contract(contractAddress, abi, signer);
     const tx = await contract.stake(tokenIds);
     console.log('stake', tx);
-    return tx.waitForTransaction();
-  }, []);
+    return tx.wait();
+  }, [isApprovedForAll, setApprovalForAll]);
 
   const withdraw = useCallback(async (tokenIds: number[]) => {
     if (!window.ethereum) return;
@@ -85,7 +95,7 @@ export const useStaking = () => {
     const contract = new ethers.Contract(contractAddress, abi, signer);
     const tx = await contract.withdraw(tokenIds);
     console.log('withdraw', tx);
-    return tx.waitForTransaction();
+    return tx.wait();
   }, []);
 
   const claimRewards = useCallback(async () => {
@@ -97,7 +107,7 @@ export const useStaking = () => {
     const contract = new ethers.Contract(contractAddress, abi, signer);
     const tx = await contract.claimRewards();
     console.log('claimRewards', tx);
-    return tx.waitForTransaction();
+    return tx.wait();
   }, []);
 
   const userStakeInfo = useCallback(async (address: string) => {

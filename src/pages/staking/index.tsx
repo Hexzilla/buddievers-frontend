@@ -57,9 +57,13 @@ const BudStaking = () => {
       return;
     }
 
-    stake([Number(tokenId)])
+    stake(account, [Number(tokenId)])
       .then((result) => {
         console.log('stake-result', result);
+        if (!result) {
+          toast.error('Something went wrong!');
+          return;
+        }
         toast.success('Staked successfully!');
       })
       .catch((err) => {
