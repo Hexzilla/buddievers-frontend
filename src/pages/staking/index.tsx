@@ -82,7 +82,7 @@ const BudStaking = () => {
     withdraw([Number(tokenId)])
       .then((result) => {
         console.log('withdraw-result', result);
-        toast.success('Staked successfully!');
+        toast.success('Unstake successfully!');
       })
       .catch((err) => {
         console.error(err);
@@ -159,7 +159,7 @@ const BudStaking = () => {
             onChange={(e) => setTokenId(e.target.value)}
           ></Input>
         </div>
-        <Button onClick={handleWithdraw}>Withdraw</Button>
+        <Button onClick={handleWithdraw}>Unstake</Button>
         <Button onClick={handleClaimRewards}>Claim Rewards</Button>
         <Button onClick={handleRefresh}>Refresh</Button>
 
