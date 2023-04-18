@@ -42,9 +42,21 @@ const abi = [
     "name": "userStakeInfo",
     "outputs": [
       {
-        "internalType": "uint256[]",
-        "name": "_stakedTokenIds",
-        "type": "uint256[]"
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "tokenId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct BudStaking.StakedToken[]",
+        "name": "_stakedTokens",
+        "type": "tuple[]"
       },
       {
         "internalType": "uint256",
@@ -62,10 +74,35 @@ const abi = [
     "stateMutability": "nonpayable",
     "type": "function"
   },
+  {
+    "inputs": [],
+    "name": "startTime",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
 ];
 
 export const useStaking = () => {
   const { setApprovalForAll, isApprovedForAll } = useCollection();
+
+  const getStartTime = useCallback(async () => {
+    if (!window.ethereum) return;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const result = await contract.startTime();
+    console.log('startTime', result);
+    return result;
+  }, []);
 
   const stake = useCallback(async (address: string, tokenIds: number[]) => {
     if (!window.ethereum) return;
@@ -121,6 +158,7 @@ export const useStaking = () => {
   }, []);
 
   return {
+    getStartTime,
     stake,
     withdraw,
     claimRewards,

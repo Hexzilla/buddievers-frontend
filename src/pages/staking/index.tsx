@@ -1,8 +1,8 @@
-import { useMemo, useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { BigNumber, utils } from 'ethers';
 import { ToastContainer, toast } from 'react-toastify';
 import styled from '@emotion/styled';
-import { useActiveWeb3React, useClasses } from 'hooks';
+import { useActiveWeb3React } from 'hooks';
 import { Button, Input } from 'ui';
 import { useStaking } from './useStaking';
 import 'react-toastify/dist/ReactToastify.css';
@@ -123,11 +123,11 @@ const BudStaking = () => {
         console.log('userStakeInfo', result);
         if (result) {
           setStakedTokens([]);
-          if (result._stakedTokenIds?.length) {
-            const stakedTokens = result._stakedTokenIds.map((i: BigNumber) => {
+          if (result._stakedTokens?.length) {
+            const stakedTokens = result._stakedTokens.map((item: any) => {
               return {
-                tokenId: i.toNumber(),
-                timestamp: 0,
+                tokenId: item.tokenId.toNumber(),
+                timestamp: item.timestamp.toNumber(),
               };
             });
             setStakedTokens(stakedTokens);
@@ -173,7 +173,7 @@ const BudStaking = () => {
               </div>
             ))}
           </div>
-          <div>Rewards: {rewards}</div>
+          <div>Rewards: {rewards ? Number(rewards).toFixed(2) : ''}</div>
         </div>
       </ActionButtons>
       <ToastContainer />
