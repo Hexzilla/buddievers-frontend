@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { BigNumber, utils } from 'ethers';
 import { ToastContainer, toast } from 'react-toastify';
+import moment from 'moment';
 import styled from '@emotion/styled';
 import { useActiveWeb3React } from 'hooks';
 import { Button, Input } from 'ui';
@@ -25,7 +26,7 @@ const ActionButtons = styled.div`
 
 type StakedToken = {
   tokenId: number;
-  timestamp: string;
+  timestamp: number;
 };
 
 const BudStaking = () => {
@@ -169,7 +170,7 @@ const BudStaking = () => {
             {stakedTokens.map((token, index) => (
               <div key={index} style={{marginLeft: '20px'}}>
                 Token ID: {token.tokenId} {',  '}
-                Timestamp: {token.timestamp}
+                Timestamp: {moment(new Date(token.timestamp * 1000)).format('YYYY-MM-DD HH:mm:ss')}
               </div>
             ))}
           </div>
