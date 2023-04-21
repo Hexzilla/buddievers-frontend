@@ -43,6 +43,10 @@ const TokenStaked = ({ tokenId }: Props) => {
     }
   }, [tokenId]);
 
+  useEffect(() => {
+    account && getTokenInfo();
+  }, [account, getTokenInfo]);
+
   const handleUnstake = (tokenId: number) => {
     console.log('handleWithdraw');
     if (!account) {
