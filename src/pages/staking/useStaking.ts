@@ -123,7 +123,7 @@ export const useStaking = () => {
     return tx.wait();
   }, [isApprovedForAll, setApprovalForAll]);
 
-  const withdraw = useCallback(async (tokenIds: number[]) => {
+  const unstake = useCallback(async (tokenIds: number[]) => {
     if (!window.ethereum) return;
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -160,7 +160,7 @@ export const useStaking = () => {
   return {
     getStartTime,
     stake,
-    withdraw,
+    unstake,
     claimRewards,
     userStakeInfo,
   };

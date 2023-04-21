@@ -31,7 +31,7 @@ type StakedToken = {
 
 const BudStaking = () => {
   const { account } = useActiveWeb3React();
-  const { stake, withdraw, claimRewards, userStakeInfo } = useStaking();
+  const { stake, unstake, claimRewards, userStakeInfo } = useStaking();
   const [tokenId, setTokenId] = useState('1');
   const [rewards, setRewards] = useState('0');
   const [stakedTokens, setStakedTokens] = useState<StakedToken[]>([]);
@@ -80,9 +80,9 @@ const BudStaking = () => {
       return;
     }
 
-    withdraw([Number(tokenId)])
+    unstake([Number(tokenId)])
       .then((result) => {
-        console.log('withdraw-result', result);
+        console.log('unstake-result', result);
         toast.success('Unstake successfully!');
       })
       .catch((err) => {

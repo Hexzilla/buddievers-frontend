@@ -5,8 +5,10 @@ import { Grid } from '@mui/material';
 import { NavLink, Button } from 'ui';
 import Pagination from '@mui/material/Pagination';
 import MyNFTs from 'pages/myNFTs';
+import { useStaking } from '../staking/useStaking';
 
 const CoffeeShop = () => {
+const { unstake, claimRewards, userStakeInfo } = useStaking();
   const {
     container,
     introContainer,
