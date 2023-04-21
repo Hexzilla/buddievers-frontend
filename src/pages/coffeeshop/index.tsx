@@ -83,7 +83,6 @@ const CoffeeShop = () => {
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>PERIOD</h3>
-                {/* <p>20d 04h 20m 15s</p> */}
                 <p>{period}</p>
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>

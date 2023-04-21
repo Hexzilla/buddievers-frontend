@@ -23,7 +23,7 @@ const StakedTokenList = ({ stakedTokens }: Props) => {
   return (
     <Grid container spacing={2}>
       {stakedTokens.map((token, index) => (
-        <StakedToken key={index} tokenId={token.tokenId.toString()}></StakedToken>
+        <StakedToken key={index} stakedToken={token}></StakedToken>
       ))}
       {stakedTokens.length === 0 && (
         <EmptyTokens>
