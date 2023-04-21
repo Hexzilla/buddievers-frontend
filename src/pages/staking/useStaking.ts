@@ -130,8 +130,8 @@ export const useStaking = () => {
     const signer = provider.getSigner();
 
     const contract = new ethers.Contract(contractAddress, abi, signer);
-    const tx = await contract.withdraw(tokenIds);
-    console.log('withdraw', tx);
+    const tx = await contract.unstake(tokenIds);
+    console.log('unstake', tx);
     return tx.wait();
   }, []);
 

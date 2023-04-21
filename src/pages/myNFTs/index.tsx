@@ -1,5 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Grid, Dialog, DialogActions, DialogTitle, DialogContent } from '@mui/material';
+import {
+  Grid,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  DialogContent,
+} from '@mui/material';
 import { useClasses, useActiveWeb3React } from 'hooks';
 import { NavLink, Button } from 'ui';
 import useOwnedTokens from './useOwnedTokens';
@@ -9,14 +15,24 @@ import {
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
 } from '../../constants';
-import { QUERY_TOKEN_BY_ID, QUERY_OWNED_PAGE_TOKENS } from 'subgraph/erc721Queries';
-import { OwnedToken, OwnedTokenPayload, PageTokens } from '../moonbuilder/types';
+import {
+  QUERY_TOKEN_BY_ID,
+  QUERY_OWNED_PAGE_TOKENS,
+} from 'subgraph/erc721Queries';
+import {
+  OwnedToken,
+  OwnedTokenPayload,
+  PageTokens,
+} from '../moonbuilder/types';
 import request from 'graphql-request';
 import Pagination from '@mui/material/Pagination';
-import { useWeb3React } from '@web3-react/core';
 import uriToHttp from 'utils/uriToHttp';
 
-const MyNFTs = () => {
+type Props = {
+  onStake?: (tokenId: string) => void;
+};
+
+const MyNFTs = ({ onStake }: Props) => {
   const {
     container,
     stakedNFTs,
@@ -25,26 +41,32 @@ const MyNFTs = () => {
     btnUnStake,
     cardMiddle,
     attributeCard,
-    paginationStyle, 
-    paginationContainer
+    paginationStyle,
+    paginationContainer,
   } = useClasses(styles);
-  
+
   const [open, setOpen] = useState(false);
   const [attributes, setAttributes] = useState<Array<any>>([]);
   const [countTokens, setCountTokens] = useState<any>(0);
   const [tokensPage, setTokensPage] = useState<OwnedToken[]>([]);
   const { account } = useActiveWeb3React();
-  const handleClickOpen = (tokenId : String) => {
-      setOpen(true);
-      getTokens(tokenId)
+
+  const handleClickOpen = (tokenId: String) => {
+    setOpen(true);
+    getTokens(tokenId);
   };
   const handleClose = () => {
-      setOpen(false);
+    setOpen(false);
   };
-  const getPageTokens = async (pageNumber : number, address : string) => {
+  const getPageTokens = async (pageNumber: number, address: string) => {
     const result: any = await request<PageTokens>(
       RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
-      QUERY_OWNED_PAGE_TOKENS(CONTRACT_ADDRESS, address, (pageNumber-1) * 20, 20)
+      QUERY_OWNED_PAGE_TOKENS(
+        CONTRACT_ADDRESS,
+        address,
+        (pageNumber - 1) * 20,
+        20
+      )
     );
     if (result?.tokens && result.tokens.length > 0) {
       const tokens = result.tokens.map((token: OwnedToken) => {
@@ -56,15 +78,15 @@ const MyNFTs = () => {
       });
       setTokensPage(tokens);
     }
-    
-  }
-  const pageChangeHandler = async (event : any, pageNumber : number) => {
-    if(account){
+  };
+  
+  const pageChangeHandler = async (event: any, pageNumber: number) => {
+    if (account) {
       getPageTokens(pageNumber, account);
     }
-    
-  }
-  const getTokens = async (tokenId : any) => {
+  };
+
+  const getTokens = async (tokenId: any) => {
     if (tokenId) {
       const result: any = await request<OwnedTokenPayload>(
         RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
@@ -73,22 +95,27 @@ const MyNFTs = () => {
 
       if (result?.tokens && result.tokens.length > 0) {
         result.tokens.map((token: OwnedToken) => {
-          setAttributes(token.metadata?.attributes ? token.metadata?.attributes : [])
+          setAttributes(
+            token.metadata?.attributes ? token.metadata?.attributes : []
+          );
         });
       }
     }
   };
   const ownedTokens = useOwnedTokens();
-  
+
   useEffect(() => {
-    if(account){
+    if (account) {
       getPageTokens(1, account);
     }
-    
   }, []);
 
   useEffect(() => {
-    setCountTokens( ownedTokens.length % 20 == 0 ? ownedTokens.length / 20 : ownedTokens.length / 20 + 1 );
+    setCountTokens(
+      ownedTokens.length % 20 == 0
+        ? ownedTokens.length / 20
+        : ownedTokens.length / 20 + 1
+    );
   });
 
   useEffect(() => {
@@ -129,18 +156,43 @@ const MyNFTs = () => {
                 </p>
               </Grid>
               <Grid item xs={5}>
-                <button style={{ marginTop : "25px", letterSpacing : "1px" }} className={btnUnStake} onClick={() => handleClickOpen(token.numericId.toString())}>
+                <button
+                  style={{ marginTop: '25px', letterSpacing: '1px' }}
+                  className={btnUnStake}
+                  onClick={() => handleClickOpen(token.numericId.toString())}
+                >
                   Attributes
                 </button>
               </Grid>
             </Grid>
           </div>
-          <NavLink href={`/builder/${token.numericId}`} className={btnUnStake}>
-            View
-          </NavLink>
+          {onStake ? (
+            <Grid container spacing={1}>
+              <Grid item xs={6}>
+                <NavLink
+                  href={`/builder/${token.numericId}`}
+                  className={btnUnStake}
+                >
+                  View
+                </NavLink>
+              </Grid>
+              <Grid item xs={6}>
+                <div onClick={() => onStake(token.numericId)} className={btnUnStake}>
+                  Stake
+                </div>
+              </Grid>
+            </Grid>
+          ) : (
+            <NavLink
+              href={`/builder/${token.numericId}`}
+              className={btnUnStake}
+            >
+              View
+            </NavLink>
+          )}
         </Grid>
       )),
-    [tokensPage, ownedTokens, btnUnStake, cardMiddle]
+    [tokensPage, btnUnStake, cardMiddle, handleClickOpen, onStake]
   );
 
   return account ? (
@@ -160,42 +212,44 @@ const MyNFTs = () => {
           {NFTCards}
         </Grid>
       </div>
-      <div className={ paginationContainer }>
-          <Pagination count={countTokens} onChange={(event, pageNumber) => pageChangeHandler(event, pageNumber)} size="large" shape="circular" showFirstButton showLastButton className={ paginationStyle } />
+      <div className={paginationContainer}>
+        <Pagination
+          count={countTokens}
+          onChange={(event, pageNumber) => pageChangeHandler(event, pageNumber)}
+          size="large"
+          shape="circular"
+          showFirstButton
+          showLastButton
+          className={paginationStyle}
+        />
       </div>
 
       <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="dialog-title"
-          aria-describedby="dialog-description"
-          maxWidth='lg'
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-description"
+        maxWidth="lg"
       >
-          <DialogTitle id="dialog-title">
-          {"Attributes"}
-          </DialogTitle>
-          <DialogContent>
-              <Grid container spacing={2}>
-                {
-                  attributes.map((attribute : any) => (
-                    <Grid item xs={12} lg={4}>
-                      <div className={attributeCard}>
-                        <p>{ attribute.traitType }</p>
-                        <h4>{ attribute.value }</h4>
-                      </div>
-                    </Grid>
-                  ))
-                }
-                
+        <DialogTitle id="dialog-title">{'Attributes'}</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={2}>
+            {attributes.map((attribute: any) => (
+              <Grid item xs={12} lg={4}>
+                <div className={attributeCard}>
+                  <p>{attribute.traitType}</p>
+                  <h4>{attribute.value}</h4>
+                </div>
               </Grid>
-          </DialogContent>
-          <DialogActions>
-              <Button disableRipple onClick={handleClose} autoFocus>
-                  Close
-              </Button>
-          </DialogActions>
+            ))}
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button disableRipple onClick={handleClose} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
       </Dialog>
-
     </div>
   ) : (
     <div className={container}>

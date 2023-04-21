@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { styles } from './styles';
-import { NavLink, Button } from 'ui';
 import MyNFTs from 'pages/myNFTs';
 import StakedTokenList from './StakedTokenList';
 import { StakedTokenItem } from '../staking/types';
@@ -14,7 +13,7 @@ import { useStaking } from '../staking/useStaking';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();
-  const { unstake, claimRewards, userStakeInfo } = useStaking();
+  const { stake, claimRewards, userStakeInfo } = useStaking();
   const [rewards, setRewards] = useState('0');
   const [stakedTokens, setStakedTokens] = useState<StakedTokenItem[]>([]);
   const {
@@ -27,10 +26,6 @@ const CoffeeShop = () => {
     stakedNFTs,
     stakeTitleLeft,
     stakeTitleRight,
-    btnUnStake,
-    cardMiddle,
-    paginationContainer,
-    paginationStyle,
   } = useClasses(styles);
 
   const getRewards = useCallback(async () => {
@@ -101,6 +96,29 @@ const CoffeeShop = () => {
         toast.error(err?.data?.message || 'Something went wrong!');
       });
   }, [account, userStakeInfo]);
+
+  const handleStakeToken = (tokenId: string) => {
+    console.log('handleStake', tokenId);
+    if (!account) {
+      toast.warn('Please connect your wallet');
+      return;
+    }
+
+    stake(account, [Number(tokenId)])
+      .then((result) => {
+        console.log('stake-result', result);
+        if (!result) {
+          toast.error('Something went wrong!');
+          return;
+        }
+        refreshStakeInfo();
+        toast.success('Staked successfully!');
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(err?.data?.message || 'Something went wrong!');
+      });
+  };
 
   useEffect(() => {
     account && refreshStakeInfo();
@@ -280,7 +298,7 @@ const CoffeeShop = () => {
         </Grid> */}
       </div>
       <div className={stakedNFTs}>
-        <MyNFTs />
+        <MyNFTs onStake={handleStakeToken} />
       </div>
       <ToastContainer />
     </div>
