@@ -47,7 +47,8 @@ export const styles = () => ({
         border : "none",
         borderRadius : "20px",
         fontSize : "24px",
-        width : "100%"
+        width : "100%",
+        cursor: "pointer"
     },
     rewardMiddleItem: {
         color : "white",

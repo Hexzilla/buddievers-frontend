@@ -1,14 +1,17 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
+import Pagination from '@mui/material/Pagination';
+import { Grid } from '@mui/material';
+import { BigNumber, utils } from 'ethers';
+import { ToastContainer, toast } from 'react-toastify';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { styles } from './styles';
-import { Grid } from '@mui/material';
 import { NavLink, Button } from 'ui';
-import Pagination from '@mui/material/Pagination';
 import MyNFTs from 'pages/myNFTs';
 import { useStaking } from '../staking/useStaking';
 
 const CoffeeShop = () => {
-const { unstake, claimRewards, userStakeInfo } = useStaking();
+  const { account } = useActiveWeb3React();
+  const { unstake, claimRewards, userStakeInfo } = useStaking();
   const {
     container,
     introContainer,
@@ -25,8 +28,46 @@ const { unstake, claimRewards, userStakeInfo } = useStaking();
     paginationStyle,
   } = useClasses(styles);
 
+  const getRewards = useCallback(async () => {
+    return userStakeInfo(account!)
+      .then((result) => {
+        console.log('getRewards', result);
+        if (result && result._availableRewards.gt(BigNumber.from(0))) {
+          return Number(utils.formatEther(result._availableRewards));
+        }
+        return 0;
+      })
+      .catch((err) => {
+        console.error(err);
+        return 0;
+      });
+  }, [account, userStakeInfo]);
+
+  const handleClaimRewards = async () => {
+    console.log('handleClaimRewards');
+    if (!account) {
+      toast.warn('Please connect your wallet');
+      return;
+    }
+
+    const rewards = await getRewards();
+    console.log('rewards', rewards);
+    if (!rewards) {
+      toast.error('You have no rewards!');
+      return;
+    }
+
+    claimRewards()
+      .then((tx) => console.log('claimRewards-result', tx))
+      .catch((err) => {
+        console.error(err);
+        toast.error(err?.data?.message || 'Something went wrong!');
+      });
+  };
+
   return (
     <div className={container}>
+      <ToastContainer />
       <div className={introContainer}>
         <div className={bannerTxtContainer}>
           <p>COFFEE SHOP</p>
@@ -61,7 +102,7 @@ const { unstake, claimRewards, userStakeInfo } = useStaking();
             </Grid>
           </Grid>
           <Grid item md={3} sm={12}>
-            <button className={claimButton}>CLAIM REWARDS</button>
+            <button className={claimButton} onClick={handleClaimRewards}>CLAIM REWARDS</button>
           </Grid>
         </Grid>
       </div>
