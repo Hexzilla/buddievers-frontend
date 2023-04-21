@@ -27,6 +27,7 @@ import {
 import request from 'graphql-request';
 import Pagination from '@mui/material/Pagination';
 import uriToHttp from 'utils/uriToHttp';
+import { useStakeContext } from '../coffeeshop/StakeContext';
 
 type Props = {
   onStake?: (tokenId: string) => void;
@@ -50,14 +51,17 @@ const MyNFTs = ({ onStake }: Props) => {
   const [countTokens, setCountTokens] = useState<any>(0);
   const [tokensPage, setTokensPage] = useState<OwnedToken[]>([]);
   const { account } = useActiveWeb3React();
+  const { stakedTokens } = useStakeContext();
 
   const handleClickOpen = (tokenId: String) => {
     setOpen(true);
     getTokens(tokenId);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
+
   const getPageTokens = async (pageNumber: number, address: string) => {
     const result: any = await request<PageTokens>(
       RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
@@ -108,7 +112,7 @@ const MyNFTs = ({ onStake }: Props) => {
     if (account) {
       getPageTokens(1, account);
     }
-  }, []);
+  }, [account, stakedTokens, getPageTokens]);
 
   useEffect(() => {
     setCountTokens(

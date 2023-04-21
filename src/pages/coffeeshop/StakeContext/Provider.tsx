@@ -1,6 +1,11 @@
 import { ReactElement, useCallback, useState } from 'react';
 import { BigNumber, utils } from 'ethers';
-import { ToastContainer, toast } from 'react-toastify';
+import {
+  Id as ToastId,
+  ToastContainer,
+  UpdateOptions,
+  toast,
+} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useActiveWeb3React } from 'hooks';
@@ -10,6 +15,22 @@ import { useStaking } from './useStaking';
 
 interface Props {
   children: ReactElement;
+}
+
+const updateToast = (id: ToastId, message: string, type: string = 'error') => {
+  const options = {
+    render: message,
+    type,
+    isLoading: false,
+    autoClose: 2000,
+  } as UpdateOptions;
+  toast.update(id, options);
+};
+
+const handleException = (err: any, toastId: ToastId) => {
+  console.error(err);
+  const message = err?.data?.message || 'Something went wrong!';
+  updateToast(toastId, message);
 }
 
 export const StakeProvider = ({ children }: Props) => {
@@ -52,23 +73,24 @@ export const StakeProvider = ({ children }: Props) => {
   const _stake = useCallback(
     async (tokenId: string) => {
       if (!account) {
-        toast.warn('Please connect your wallet');
+        toast.warn('Please connect your wallet!');
         return;
       }
+
+      const toastId = toast.loading('Staking...');
 
       try {
         const result = await stake(account, [Number(tokenId)]);
         console.log('stake-result', result);
         if (!result) {
-          toast.error('Something went wrong!');
+          updateToast(toastId, 'Staking failed!');
           return;
         }
 
         _refresh();
-        toast.success('Staked successfully!');
+        updateToast(toastId, 'Staked successfully!', 'success');
       } catch (err: any) {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong!');
+        handleException(err, toastId);
       }
     },
     [account, stake, _refresh]
@@ -77,23 +99,23 @@ export const StakeProvider = ({ children }: Props) => {
   const _unstake = useCallback(
     async (tokenId: string) => {
       if (!account) {
-        toast.warn('Please connect your wallet');
+        toast.warn('Please connect your wallet!');
         return;
       }
 
+      const toastId = toast.loading('Unstaking...');
       try {
         const result = await unstake([Number(tokenId)]);
         console.log('unstake-result', result);
         if (!result) {
-          toast.error('Something went wrong!');
+          updateToast(toastId, 'Unstaking failed!');
           return;
         }
 
         _refresh();
-        toast.success('Unstake successfully!');
+        updateToast(toastId, 'Unstaked successfully!', 'success');
       } catch (err: any) {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong!');
+        handleException(err, toastId);
       }
     },
     [account, unstake, _refresh]
@@ -118,22 +140,22 @@ export const StakeProvider = ({ children }: Props) => {
       return;
     }
 
+    const toastId = toast.loading('Claim rewards...');
     try {
       const rewards = await _getRewards();
       console.log('rewards', rewards);
       if (!rewards) {
-        toast.warning('You have no rewards!');
+        updateToast(toastId, 'You have no rewards!', 'warning');
         return;
       }
 
       const result = await claimRewards();
       if (!result) {
-        toast.error('Something went wrong!');
+        updateToast(toastId, 'Claim reward failed', 'warning');
         return;
       }
     } catch (err: any) {
-      console.error(err);
-      toast.error(err?.data?.message || 'Something went wrong!');
+      handleException(err, toastId);
     }
   }, [account, _getRewards, claimRewards]);
 
@@ -151,7 +173,11 @@ export const StakeProvider = ({ children }: Props) => {
       }}
     >
       {children}
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={true}
+      />
     </StakeContextProvider>
   );
 };
