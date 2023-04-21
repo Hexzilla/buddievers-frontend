@@ -3,18 +3,20 @@ import Pagination from '@mui/material/Pagination';
 import { Grid } from '@mui/material';
 import { BigNumber, utils } from 'ethers';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { styles } from './styles';
 import { NavLink, Button } from 'ui';
 import MyNFTs from 'pages/myNFTs';
-import { StakedToken } from '../staking/types';
+import StakedTokenList from './StakedTokenList';
+import { StakedTokenItem } from '../staking/types';
 import { useStaking } from '../staking/useStaking';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();
   const { unstake, claimRewards, userStakeInfo } = useStaking();
   const [rewards, setRewards] = useState('0');
-  const [stakedTokens, setStakedTokens] = useState<StakedToken[]>([]);
+  const [stakedTokens, setStakedTokens] = useState<StakedTokenItem[]>([]);
   const {
     container,
     introContainer,
@@ -68,24 +70,6 @@ const CoffeeShop = () => {
       });
   };
 
-  const handleUnstake = (tokenId: number) => {
-    console.log('handleWithdraw');
-    if (!account) {
-      toast.warn('Please connect your wallet');
-      return;
-    }
-
-    unstake([tokenId])
-      .then((result) => {
-        console.log('unstake-result', result);
-        toast.success('Unstake successfully!');
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong!');
-      });
-  };
-
   const refreshStakeInfo = useCallback(async () => {
     if (!account) {
       toast.warn('Please connect your wallet');
@@ -124,7 +108,6 @@ const CoffeeShop = () => {
 
   return (
     <div className={container}>
-      <ToastContainer />
       <div className={introContainer}>
         <div className={bannerTxtContainer}>
           <p>COFFEE SHOP</p>
@@ -172,7 +155,8 @@ const CoffeeShop = () => {
             <p className={stakeTitleRight}>TOTAL STAKED : {stakedTokens.length}</p>
           </Grid>
         </Grid>
-        <Grid container spacing={2}>
+        <StakedTokenList stakedTokens={stakedTokens}/>
+        {/* <Grid container spacing={2}>
           <Grid item md={3} sm={6}>
             <img
               src="./charactor (3).png"
@@ -293,11 +277,12 @@ const CoffeeShop = () => {
             </div>
             <button className={btnUnStake}>UNSTAKE</button>
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
       <div className={stakedNFTs}>
         <MyNFTs />
       </div>
+      <ToastContainer />
     </div>
   );
 };

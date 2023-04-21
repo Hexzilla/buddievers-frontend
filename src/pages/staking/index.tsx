@@ -6,7 +6,7 @@ import styled from '@emotion/styled';
 import { useActiveWeb3React } from 'hooks';
 import { Button, Input } from 'ui';
 import { useStaking } from './useStaking';
-import { StakedToken } from './types';
+import { StakedTokenItem } from './types';
 import 'react-toastify/dist/ReactToastify.css';
 
 const StyledContainer = styled.div`
@@ -30,7 +30,7 @@ const BudStaking = () => {
   const { stake, unstake, claimRewards, userStakeInfo } = useStaking();
   const [tokenId, setTokenId] = useState('1');
   const [rewards, setRewards] = useState('0');
-  const [stakedTokens, setStakedTokens] = useState<StakedToken[]>([]);
+  const [stakedTokens, setStakedTokens] = useState<StakedTokenItem[]>([]);
 
   const getRewards = useCallback(async () => {
     return userStakeInfo(account!)

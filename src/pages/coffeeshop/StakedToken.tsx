@@ -18,7 +18,7 @@ type Props = {
   tokenId: number;
 };
 
-const TokenStaked = ({ tokenId }: Props) => {
+const StakedToken = ({ tokenId }: Props) => {
   const { account } = useActiveWeb3React();
   const { unstake } = useStaking();
   const [token, setToken] = useState<OwnedToken>({} as OwnedToken);
@@ -101,4 +101,4 @@ const TokenStaked = ({ tokenId }: Props) => {
   );
 };
 
-export default TokenStaked;
+export default StakedToken;
