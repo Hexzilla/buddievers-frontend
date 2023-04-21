@@ -50,11 +50,11 @@ const CoffeeShop = () => {
             <Grid container spacing={4}>
               {/* <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>FUNDS</h3>
-                <p>170K SEED</p>
+                <p>170K $SEEDS</p>
               </Grid> */}
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>REWARDS</h3>
-                <p>{rewards} SEED</p>
+                <p>{rewards} $SEEDS</p>
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>STAKED</h3>
