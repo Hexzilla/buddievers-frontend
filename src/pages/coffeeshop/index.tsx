@@ -1,15 +1,14 @@
-import { useEffect, useMemo, useState, useCallback } from 'react';
-import Pagination from '@mui/material/Pagination';
+import { useEffect, useState, useCallback } from 'react';
 import { Grid } from '@mui/material';
 import { BigNumber, utils } from 'ethers';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { styles } from './styles';
+import { useStaking } from '../staking/useStaking';
+import { StakedTokenItem } from '../staking/types';
 import MyNFTs from 'pages/myNFTs';
 import StakedTokenList from './StakedTokenList';
-import { StakedTokenItem } from '../staking/types';
-import { useStaking } from '../staking/useStaking';
+import { styles } from './styles';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();

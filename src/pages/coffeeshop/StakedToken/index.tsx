@@ -3,16 +3,16 @@ import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
 import request from 'graphql-request';
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { styles } from './styles';
+import { styles } from '../styles';
 import {
   ChainId,
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
-} from '../../constants';
+} from '../../../constants';
 import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
 import uriToHttp from 'utils/uriToHttp';
-import { OwnedToken, OwnedTokenPayload } from '../moonbuilder/types';
-import { useStaking } from '../staking/useStaking';
+import { OwnedToken, OwnedTokenPayload } from '../../moonbuilder/types';
+import { useStaking } from '../../staking/useStaking';
 
 type Props = {
   tokenId: number;

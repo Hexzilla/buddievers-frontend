@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Grid } from '@mui/material';
-import { StakedTokenItem } from '../staking/types';
-import StakedToken from './StakedToken';
+import { StakedTokenItem } from '../../staking/types';
+import StakedToken from '../StakedToken';
 
 const EmptyTokens = styled.div`
   display: flex;
