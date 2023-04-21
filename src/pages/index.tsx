@@ -12,12 +12,11 @@ import CoffeeShop from './coffeeshop';
 import Inventory from './myNFTs';
 import MoonBuilder from './moonbuilder';
 import Work from './work';
-import BudStaking from './staking';
 
 export const Routing = () => (
   <Routes>
     <Route element={<Layout />}>
-      <Route path="/" element={<BudStaking />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/faqs" element={<FAQs />} />
       {/* <Route path="/mint" element={<MintSoon />} /> */}
       <Route path="/marketplace" element={<MarketplacePage />} />

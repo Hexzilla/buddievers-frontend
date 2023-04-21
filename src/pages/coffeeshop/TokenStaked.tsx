@@ -21,7 +21,7 @@ type Props = {
 const TokenStaked = ({ tokenId }: Props) => {
   const { account } = useActiveWeb3React();
   const { unstake } = useStaking();
-  const [token, setToken] = useState({});
+  const [token, setToken] = useState<OwnedToken>({} as OwnedToken);
   const { btnUnStake, cardMiddle } = useClasses(styles);
 
   const getTokenInfo = useCallback(async () => {
@@ -68,7 +68,7 @@ const TokenStaked = ({ tokenId }: Props) => {
   return (
     <Grid item md={3} sm={6}>
       <img
-        src="./charactor (3).png"
+        src={token.metadata?.image}
         style={{ width: '100%', height: '400px', borderRadius: '20px' }}
         alt="nft"
       />
@@ -81,7 +81,7 @@ const TokenStaked = ({ tokenId }: Props) => {
             marginBottom: 0,
           }}
         >
-          BUDDIE #08
+          BUDDIE #{token.numericId?.toString()}
         </p>
         <p
           style={{

@@ -399,16 +399,16 @@ export const AccountDialog = () => {
           {error instanceof UnsupportedChainIdError && (
             <>
               <div>Wrong Network</div>
-              <h5>Please connect to the appropriate Binance Test network.</h5>
+              <h5>Please connect to the appropriate Exosama network.</h5>
               <Button
                 //className={formButton}
                 onClick={() => {
-                  addNetwork(ChainId.BSC_TESTNET);
+                  addNetwork(ChainId.EXOSAMA);
                 }}
-                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.BSC_TESTNET]} alt='' />}
+                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.EXOSAMA]} alt='' />}
                 color="primary"
               >
-                Switch to Binance Test Network
+                Switch to Exosama Network
               </Button>
               {/* <Button
                 //className={formButton}
