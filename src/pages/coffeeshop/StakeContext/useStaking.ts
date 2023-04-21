@@ -100,8 +100,8 @@ export const useStaking = () => {
 
     const contract = new ethers.Contract(contractAddress, abi, signer);
     const result = await contract.startTime();
-    console.log('startTime', result);
-    return result;
+    console.log('startTime', result?.toNumber());
+    return result.toNumber();
   }, []);
 
   const stake = useCallback(async (address: string, tokenIds: number[]) => {

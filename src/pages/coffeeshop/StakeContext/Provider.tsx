@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { BigNumber, utils } from 'ethers';
 import {
   Id as ToastId,
@@ -31,14 +31,26 @@ const handleException = (err: any, toastId: ToastId) => {
   console.error(err);
   const message = err?.data?.message || 'Something went wrong!';
   updateToast(toastId, message);
-}
+};
 
 export const StakeProvider = ({ children }: Props) => {
   const { account } = useActiveWeb3React();
-  const { stake, unstake, claimRewards, userStakeInfo } = useStaking();
+  const { stake, unstake, claimRewards, userStakeInfo, getStartTime } =
+    useStaking();
 
+  const [startTime, setStartTime] = useState(0);
   const [rewards, setRewards] = useState('0');
   const [stakedTokens, setStakedTokens] = useState<StakedTokenItem[]>([]);
+
+  useEffect(() => {
+    getStartTime()
+      .then((startTime) => {
+        setStartTime(startTime);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [getStartTime]);
 
   const _refresh = useCallback(async () => {
     if (!account) {
@@ -163,6 +175,7 @@ export const StakeProvider = ({ children }: Props) => {
     <StakeContextProvider
       value={{
         account,
+        startTime,
         rewards,
         stakedTokens,
         stake: _stake,

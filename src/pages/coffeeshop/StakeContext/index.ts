@@ -7,6 +7,7 @@ export type StakedTokenItem = {
 
 export interface StakeContext {
   account?: string | null;
+  startTime: number;
   rewards: string;
   stakedTokens: StakedTokenItem[];
   refresh: () => Promise<void>;
