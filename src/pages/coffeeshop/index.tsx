@@ -169,7 +169,7 @@ const CoffeeShop = () => {
             <p className={stakeTitleLeft}>STAKED NFTS</p>
           </Grid>
           <Grid sm={6} style={{ textAlign: 'right' }}>
-            <p className={stakeTitleRight}>TOTAL STAKED : 4</p>
+            <p className={stakeTitleRight}>TOTAL STAKED : {stakedTokens.length}</p>
           </Grid>
         </Grid>
         <Grid container spacing={2}>
