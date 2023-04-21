@@ -19,7 +19,6 @@ import moment from 'moment';
 const StyledTokenImage = styled.img`
   width: 100%;
   height: 400px;
-  min-height: 400px;
   border-radius: 20px;
 `;
 
@@ -109,7 +108,7 @@ const StakedToken = ({ stakedToken }: Props) => {
   }, [stakedToken]);
 
   return (
-    <Grid item md={3} sm={6} style={{ marginBottom: '40px' }}>
+    <Grid item lg={3} md={6} sm={12} xs={24} style={{ marginBottom: '40px' }}>
       <StyledTokenImage src={token.metadata?.image} alt="nft" />
       <CardMiddle>
         <StyledTokenName>Buddie #{token.numericId?.toString()}</StyledTokenName>
