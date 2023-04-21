@@ -49,10 +49,10 @@ const CoffeeShop = () => {
           </Grid>
           <Grid item md={6} sm={12}>
             <Grid container spacing={4}>
-              <Grid item md={3} sm={6} className={rewardMiddleItem}>
+              {/* <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>FUNDS</h3>
                 <p>170K SEED</p>
-              </Grid>
+              </Grid> */}
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>REWARDS</h3>
                 <p>{rewards} SEED</p>
@@ -63,7 +63,7 @@ const CoffeeShop = () => {
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>STAKED</h3>
-                <p>4 BUDDIES</p>
+                <p>{stakedTokens.length} BUDDIES</p>
               </Grid>
             </Grid>
           </Grid>
