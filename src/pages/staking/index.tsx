@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { useActiveWeb3React } from 'hooks';
 import { Button, Input } from 'ui';
 import { useStaking } from './useStaking';
+import { StakedToken } from './types';
 import 'react-toastify/dist/ReactToastify.css';
 
 const StyledContainer = styled.div`
@@ -23,11 +24,6 @@ const ActionButtons = styled.div`
   margin-top: 40px;
   align-items: flex-start;
 `;
-
-export type StakedToken = {
-  tokenId: number;
-  timestamp: number;
-};
 
 const BudStaking = () => {
   const { account } = useActiveWeb3React();

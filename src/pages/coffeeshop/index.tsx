@@ -7,7 +7,7 @@ import { useActiveWeb3React, useClasses } from 'hooks';
 import { styles } from './styles';
 import { NavLink, Button } from 'ui';
 import MyNFTs from 'pages/myNFTs';
-import { StakedToken } from '../staking';
+import { StakedToken } from '../staking/types';
 import { useStaking } from '../staking/useStaking';
 
 const CoffeeShop = () => {

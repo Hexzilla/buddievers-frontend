@@ -9,7 +9,7 @@ type Props = {
   tokenId: number;
 };
 
-const StakedToken = ({ tokenId }: Props) => {
+const TokenStaked = ({ tokenId }: Props) => {
   const { account } = useActiveWeb3React();
   const { unstake } = useStaking();
   const { btnUnStake, cardMiddle } = useClasses(styles);
@@ -68,4 +68,4 @@ const StakedToken = ({ tokenId }: Props) => {
   );
 };
 
-export default StakedToken;
+export default TokenStaked;
