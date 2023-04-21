@@ -129,7 +129,7 @@ const MyNFTs = ({ onStake }: Props) => {
   const NFTCards = useMemo(
     () =>
       tokensPage.map((token) => (
-        <Grid item md={3} sm={6} key={token.numericId.toString()}>
+        <Grid item lg={3} md={6} sm={12} xs={24} key={token.numericId.toString()}>
           <img
             src={token.metadata?.image}
             style={{ width: '100%', height: 'auto', borderRadius: '20px' }}
