@@ -119,8 +119,8 @@ const CoffeeShop = () => {
   }, [account, userStakeInfo]);
 
   useEffect(() => {
-    refreshStakeInfo();
-  }, [refreshStakeInfo])
+    account && refreshStakeInfo();
+  }, [account, refreshStakeInfo])
 
   return (
     <div className={container}>
