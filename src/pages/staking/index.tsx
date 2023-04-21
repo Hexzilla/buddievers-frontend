@@ -24,7 +24,7 @@ const ActionButtons = styled.div`
   align-items: flex-start;
 `;
 
-type StakedToken = {
+export type StakedToken = {
   tokenId: number;
   timestamp: number;
 };

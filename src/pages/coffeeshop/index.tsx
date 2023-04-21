@@ -7,11 +7,14 @@ import { useActiveWeb3React, useClasses } from 'hooks';
 import { styles } from './styles';
 import { NavLink, Button } from 'ui';
 import MyNFTs from 'pages/myNFTs';
+import { StakedToken } from '../staking';
 import { useStaking } from '../staking/useStaking';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();
   const { unstake, claimRewards, userStakeInfo } = useStaking();
+  const [rewards, setRewards] = useState('0');
+  const [stakedTokens, setStakedTokens] = useState<StakedToken[]>([]);
   const {
     container,
     introContainer,
@@ -65,6 +68,60 @@ const CoffeeShop = () => {
       });
   };
 
+  const handleUnstake = (tokenId: number) => {
+    console.log('handleWithdraw');
+    if (!account) {
+      toast.warn('Please connect your wallet');
+      return;
+    }
+
+    unstake([tokenId])
+      .then((result) => {
+        console.log('unstake-result', result);
+        toast.success('Unstake successfully!');
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(err?.data?.message || 'Something went wrong!');
+      });
+  };
+
+  const refreshStakeInfo = useCallback(async () => {
+    if (!account) {
+      toast.warn('Please connect your wallet');
+      return;
+    }
+
+    userStakeInfo(account)
+      .then((result) => {
+        console.log('userStakeInfo', result);
+        if (result) {
+          setStakedTokens([]);
+          if (result._stakedTokens?.length) {
+            const stakedTokens = result._stakedTokens.map((item: any) => {
+              return {
+                tokenId: item.tokenId.toNumber(),
+                timestamp: item.timestamp.toNumber(),
+              };
+            });
+            setStakedTokens(stakedTokens);
+          }
+          if (result._availableRewards) {
+            let rewards = utils.formatEther(result._availableRewards);
+            setRewards(Number(rewards).toFixed(2));
+          }
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error(err?.data?.message || 'Something went wrong!');
+      });
+  }, [account, userStakeInfo]);
+
+  useEffect(() => {
+    refreshStakeInfo();
+  }, [refreshStakeInfo])
+
   return (
     <div className={container}>
       <ToastContainer />
@@ -89,7 +146,7 @@ const CoffeeShop = () => {
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>REWARDS</h3>
-                <p>20000 SEED</p>
+                <p>{rewards} SEED</p>
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>PERIOD</h3>
