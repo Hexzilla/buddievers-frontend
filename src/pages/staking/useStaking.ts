@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { ethers } from 'ethers';
-import { CONTRACT_ADDRESS } from '../../constants';
+import { CONTRACT_STAKING_ADDRESS } from '../../constants';
 import { useCollection } from './useCollection';
 
-const contractAddress = CONTRACT_ADDRESS;
+const contractAddress = CONTRACT_STAKING_ADDRESS;
 const abi = [
   {
     "inputs": [

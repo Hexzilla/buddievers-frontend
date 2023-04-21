@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
 import { toast } from 'react-toastify';
+import request from 'graphql-request';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { styles } from './styles';
+import {
+  ChainId,
+  CONTRACT_ADDRESS,
+  RARESAMA_SUBGRAPH_URLS,
+} from '../../constants';
+import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
+import uriToHttp from 'utils/uriToHttp';
+import { OwnedToken, OwnedTokenPayload } from '../moonbuilder/types';
 import { useStaking } from '../staking/useStaking';
 
 type Props = {
@@ -12,7 +21,27 @@ type Props = {
 const TokenStaked = ({ tokenId }: Props) => {
   const { account } = useActiveWeb3React();
   const { unstake } = useStaking();
+  const [token, setToken] = useState({});
   const { btnUnStake, cardMiddle } = useClasses(styles);
+
+  const getTokenInfo = useCallback(async () => {
+    const result: any = await request<OwnedTokenPayload>(
+      RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
+      QUERY_TOKEN_BY_ID(CONTRACT_ADDRESS, tokenId.toString())
+    );
+
+    if (result?.tokens && result.tokens.length > 0) {
+      const tokens = result.tokens.map((token: OwnedToken) => {
+        if (token.metadata?.image) {
+          const urls = uriToHttp(token.metadata.image, true);
+          token.metadata.image = urls[0];
+        }
+        return token;
+      });
+      console.log('tokens', tokens)
+      setToken(tokens[0]);
+    }
+  }, [tokenId]);
 
   const handleUnstake = (tokenId: number) => {
     console.log('handleWithdraw');

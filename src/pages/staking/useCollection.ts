@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { ethers } from 'ethers';
-import { CONTRACT_ADDRESS, CONTRACT_NFT_COLLECTION } from '../../constants';
+import { CONTRACT_STAKING_ADDRESS, CONTRACT_NFT_COLLECTION } from '../../constants';
 
 const abi = [
   {
@@ -55,7 +55,7 @@ export const useCollection = () => {
     const signer = provider.getSigner();
 
     const contract = new ethers.Contract(CONTRACT_NFT_COLLECTION, abi, signer);
-    const tx = await contract.setApprovalForAll(CONTRACT_ADDRESS, true);
+    const tx = await contract.setApprovalForAll(CONTRACT_STAKING_ADDRESS, true);
     console.log('setApprovalForAll', tx);
     return tx.wait();
   }, []);
@@ -67,7 +67,7 @@ export const useCollection = () => {
     const signer = provider.getSigner();
 
     const contract = new ethers.Contract(CONTRACT_NFT_COLLECTION, abi, signer);
-    const result = await contract.isApprovedForAll(address, CONTRACT_ADDRESS);
+    const result = await contract.isApprovedForAll(address, CONTRACT_STAKING_ADDRESS);
     console.log('isApprovedForAll', result);
     return result;
   }, []);
