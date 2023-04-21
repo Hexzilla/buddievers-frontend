@@ -59,7 +59,7 @@ const CoffeeShop = () => {
                 </Grid>
                 <Grid container spacing={2}>
                     <Grid item md={3} sm={6} >
-                        <img src="./charactor (3).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                        <img src="./charactor (3).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} alt="nft" />
                         <div className={ cardMiddle }>
                             <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #08</p>
                             <p style={{ fontWeight: 400, fontSize: 16, color: "#00CE4C", marginTop : 0 }}>BUDDIES</p>
@@ -67,7 +67,7 @@ const CoffeeShop = () => {
                         <button className={btnUnStake}>UNSTAKE</button>
                     </Grid>
                     <Grid item md={3} sm={6} >
-                        <img src="./charactor (4).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                        <img src="./charactor (4).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} alt="nft" />
                         <div className={ cardMiddle }>
                             <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #010</p>
                             <p style={{ fontWeight: 400, fontSize: 16, color: "#00CE4C", marginTop : 0 }}>BUDDIES</p>
@@ -75,7 +75,7 @@ const CoffeeShop = () => {
                         <button className={btnUnStake}>UNSTAKE</button>
                     </Grid>
                     <Grid item md={3} sm={6} >
-                        <img src="./charactor (5).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                        <img src="./charactor (5).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} alt="nft" />
                         <div className={ cardMiddle }>
                             <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #33</p>
                             <p style={{ fontWeight: 400, fontSize: 16, color: "#00CE4C", marginTop : 0 }}>BUDDIES</p>
@@ -83,7 +83,7 @@ const CoffeeShop = () => {
                         <button className={btnUnStake}>UNSTAKE</button>
                     </Grid>
                     <Grid item md={3} sm={6} >
-                        <img src="./charactor (6).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} />
+                        <img src="./charactor (6).png" style={{ width : "100%", height : "400px", borderRadius : "20px" }} alt="nft" />
                         <div className={ cardMiddle }>
                             <p style={{ fontWeight: 900, fontSize: 24, color: "white", marginBottom : 0 }}>BUDDIE #37</p>
                             <p style={{ fontWeight: 400, fontSize: 16, color: "#00CE4C", marginTop : 0 }}>BUDDIES</p>
