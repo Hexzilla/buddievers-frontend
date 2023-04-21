@@ -1,9 +1,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Grid } from '@mui/material';
-import { toast } from 'react-toastify';
 import request from 'graphql-request';
+
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { styles } from '../styles';
 import {
   ChainId,
   CONTRACT_ADDRESS,
@@ -11,16 +10,18 @@ import {
 } from '../../../constants';
 import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
 import uriToHttp from 'utils/uriToHttp';
+
 import { OwnedToken, OwnedTokenPayload } from '../../moonbuilder/types';
-import { useStaking } from '../../staking/useStaking';
+import { useStakeContext } from '../StakeContext';
+import { styles } from '../styles';
 
 type Props = {
-  tokenId: number;
+  tokenId: string;
 };
 
 const StakedToken = ({ tokenId }: Props) => {
   const { account } = useActiveWeb3React();
-  const { unstake } = useStaking();
+  const { unstake } = useStakeContext();
   const [token, setToken] = useState<OwnedToken>({} as OwnedToken);
   const { btnUnStake, cardMiddle } = useClasses(styles);
 
@@ -46,24 +47,6 @@ const StakedToken = ({ tokenId }: Props) => {
   useEffect(() => {
     account && getTokenInfo();
   }, [account, getTokenInfo]);
-
-  const handleUnstake = (tokenId: number) => {
-    console.log('handleWithdraw');
-    if (!account) {
-      toast.warn('Please connect your wallet');
-      return;
-    }
-
-    unstake([tokenId])
-      .then((result) => {
-        console.log('unstake-result', result);
-        toast.success('Unstake successfully!');
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong!');
-      });
-  };
 
   return (
     <Grid item md={3} sm={6}>
@@ -94,7 +77,7 @@ const StakedToken = ({ tokenId }: Props) => {
           BUDDIES
         </p>
       </div>
-      <button className={btnUnStake} onClick={() => handleUnstake(tokenId)}>
+      <button className={btnUnStake} onClick={() => unstake(tokenId)}>
         UNSTAKE
       </button>
     </Grid>

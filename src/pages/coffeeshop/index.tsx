@@ -1,20 +1,17 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Grid } from '@mui/material';
-import { BigNumber, utils } from 'ethers';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { useStaking } from '../staking/useStaking';
-import { StakedTokenItem } from '../staking/types';
+import { useStakeContext } from './StakeContext';
+import { StakeProvider } from './StakeContext/Provider';
 import MyNFTs from 'pages/myNFTs';
 import StakedTokenList from './StakedTokenList';
 import { styles } from './styles';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();
-  const { stake, claimRewards, userStakeInfo } = useStaking();
-  const [rewards, setRewards] = useState('0');
-  const [stakedTokens, setStakedTokens] = useState<StakedTokenItem[]>([]);
+  const { stakedTokens, rewards, stake, refresh, claimRewards } =
+    useStakeContext();
   const {
     container,
     introContainer,
@@ -27,101 +24,13 @@ const CoffeeShop = () => {
     stakeTitleRight,
   } = useClasses(styles);
 
-  const getRewards = useCallback(async () => {
-    return userStakeInfo(account!)
-      .then((result) => {
-        console.log('getRewards', result);
-        if (result && result._availableRewards.gt(BigNumber.from(0))) {
-          return Number(utils.formatEther(result._availableRewards));
-        }
-        return 0;
-      })
-      .catch((err) => {
-        console.error(err);
-        return 0;
-      });
-  }, [account, userStakeInfo]);
-
-  const handleClaimRewards = async () => {
-    console.log('handleClaimRewards');
-    if (!account) {
-      toast.warn('Please connect your wallet');
-      return;
-    }
-
-    const rewards = await getRewards();
-    console.log('rewards', rewards);
-    if (!rewards) {
-      toast.error('You have no rewards!');
-      return;
-    }
-
-    claimRewards()
-      .then((tx) => console.log('claimRewards-result', tx))
-      .catch((err) => {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong!');
-      });
-  };
-
-  const refreshStakeInfo = useCallback(async () => {
-    if (!account) {
-      toast.warn('Please connect your wallet');
-      return;
-    }
-
-    userStakeInfo(account)
-      .then((result) => {
-        console.log('userStakeInfo', result);
-        if (result) {
-          setStakedTokens([]);
-          if (result._stakedTokens?.length) {
-            const stakedTokens = result._stakedTokens.map((item: any) => {
-              return {
-                tokenId: item.tokenId.toNumber(),
-                timestamp: item.timestamp.toNumber(),
-              };
-            });
-            setStakedTokens(stakedTokens);
-          }
-          if (result._availableRewards) {
-            let rewards = utils.formatEther(result._availableRewards);
-            setRewards(Number(rewards).toFixed(2));
-          }
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong!');
-      });
-  }, [account, userStakeInfo]);
-
   const handleStakeToken = (tokenId: string) => {
-    console.log('handleStake', tokenId);
-    if (!account) {
-      toast.warn('Please connect your wallet');
-      return;
-    }
-
-    stake(account, [Number(tokenId)])
-      .then((result) => {
-        console.log('stake-result', result);
-        if (!result) {
-          toast.error('Something went wrong!');
-          return;
-        }
-        refreshStakeInfo();
-        toast.success('Staked successfully!');
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(err?.data?.message || 'Something went wrong!');
-      });
+    stake(tokenId);
   };
 
   useEffect(() => {
-    account && refreshStakeInfo();
-  }, [account, refreshStakeInfo])
+    account && refresh();
+  }, [account, refresh]);
 
   return (
     <div className={container}>
@@ -159,7 +68,9 @@ const CoffeeShop = () => {
             </Grid>
           </Grid>
           <Grid item md={3} sm={12}>
-            <button className={claimButton} onClick={handleClaimRewards}>CLAIM REWARDS</button>
+            <button className={claimButton} onClick={() => claimRewards()}>
+              CLAIM REWARDS
+            </button>
           </Grid>
         </Grid>
       </div>
@@ -169,139 +80,26 @@ const CoffeeShop = () => {
             <p className={stakeTitleLeft}>STAKED NFTS</p>
           </Grid>
           <Grid sm={6} style={{ textAlign: 'right' }}>
-            <p className={stakeTitleRight}>TOTAL STAKED : {stakedTokens.length}</p>
+            <p className={stakeTitleRight}>
+              TOTAL STAKED : {stakedTokens.length}
+            </p>
           </Grid>
         </Grid>
-        <StakedTokenList stakedTokens={stakedTokens}/>
-        {/* <Grid container spacing={2}>
-          <Grid item md={3} sm={6}>
-            <img
-              src="./charactor (3).png"
-              style={{ width: '100%', height: '400px', borderRadius: '20px' }}
-              alt="nft"
-            />
-            <div className={cardMiddle}>
-              <p
-                style={{
-                  fontWeight: 900,
-                  fontSize: 24,
-                  color: 'white',
-                  marginBottom: 0,
-                }}
-              >
-                BUDDIE #08
-              </p>
-              <p
-                style={{
-                  fontWeight: 400,
-                  fontSize: 16,
-                  color: '#00CE4C',
-                  marginTop: 0,
-                }}
-              >
-                BUDDIES
-              </p>
-            </div>
-            <button className={btnUnStake}>UNSTAKE</button>
-          </Grid>
-          <Grid item md={3} sm={6}>
-            <img
-              src="./charactor (4).png"
-              style={{ width: '100%', height: '400px', borderRadius: '20px' }}
-              alt="nft"
-            />
-            <div className={cardMiddle}>
-              <p
-                style={{
-                  fontWeight: 900,
-                  fontSize: 24,
-                  color: 'white',
-                  marginBottom: 0,
-                }}
-              >
-                BUDDIE #010
-              </p>
-              <p
-                style={{
-                  fontWeight: 400,
-                  fontSize: 16,
-                  color: '#00CE4C',
-                  marginTop: 0,
-                }}
-              >
-                BUDDIES
-              </p>
-            </div>
-            <button className={btnUnStake}>UNSTAKE</button>
-          </Grid>
-          <Grid item md={3} sm={6}>
-            <img
-              src="./charactor (5).png"
-              style={{ width: '100%', height: '400px', borderRadius: '20px' }}
-              alt="nft"
-            />
-            <div className={cardMiddle}>
-              <p
-                style={{
-                  fontWeight: 900,
-                  fontSize: 24,
-                  color: 'white',
-                  marginBottom: 0,
-                }}
-              >
-                BUDDIE #33
-              </p>
-              <p
-                style={{
-                  fontWeight: 400,
-                  fontSize: 16,
-                  color: '#00CE4C',
-                  marginTop: 0,
-                }}
-              >
-                BUDDIES
-              </p>
-            </div>
-            <button className={btnUnStake}>UNSTAKE</button>
-          </Grid>
-          <Grid item md={3} sm={6}>
-            <img
-              src="./charactor (6).png"
-              style={{ width: '100%', height: '400px', borderRadius: '20px' }}
-              alt="nft"
-            />
-            <div className={cardMiddle}>
-              <p
-                style={{
-                  fontWeight: 900,
-                  fontSize: 24,
-                  color: 'white',
-                  marginBottom: 0,
-                }}
-              >
-                BUDDIE #37
-              </p>
-              <p
-                style={{
-                  fontWeight: 400,
-                  fontSize: 16,
-                  color: '#00CE4C',
-                  marginTop: 0,
-                }}
-              >
-                BUDDIES
-              </p>
-            </div>
-            <button className={btnUnStake}>UNSTAKE</button>
-          </Grid>
-        </Grid> */}
+        <StakedTokenList stakedTokens={stakedTokens} />
       </div>
       <div className={stakedNFTs}>
         <MyNFTs onStake={handleStakeToken} />
       </div>
-      <ToastContainer />
     </div>
   );
 };
 
-export default CoffeeShop;
+const CoffeeShopWrapper = () => {
+  return (
+    <StakeProvider>
+      <CoffeeShop />
+    </StakeProvider>
+  );
+};
+
+export default CoffeeShopWrapper;

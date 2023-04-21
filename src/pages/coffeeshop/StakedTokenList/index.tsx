@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Grid } from '@mui/material';
-import { StakedTokenItem } from '../../staking/types';
+
+import { StakedTokenItem } from '../StakeContext';
 import StakedToken from '../StakedToken';
 
 const EmptyTokens = styled.div`
@@ -22,7 +23,7 @@ const StakedTokenList = ({ stakedTokens }: Props) => {
   return (
     <Grid container spacing={2}>
       {stakedTokens.map((token, index) => (
-        <StakedToken key={index} tokenId={token.tokenId}></StakedToken>
+        <StakedToken key={index} tokenId={token.tokenId.toString()}></StakedToken>
       ))}
       {stakedTokens.length === 0 && (
         <EmptyTokens>
