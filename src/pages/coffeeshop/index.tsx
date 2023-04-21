@@ -1,17 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Grid } from '@mui/material';
-import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment';
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { useStakeContext } from './StakeContext';
 import { StakeProvider } from './StakeContext/Provider';
 import MyNFTs from 'pages/myNFTs';
 import StakedTokenList from './StakedTokenList';
 import { styles } from './styles';
+import { useInterval } from 'hooks/useInterval';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();
-  const { stakedTokens, rewards, stake, refresh, claimRewards } =
+  const { startTime, stakedTokens, rewards, stake, refresh, claimRewards } =
     useStakeContext();
+  const [elaspedTime, setElaspedTime] = useState(0);
   const {
     container,
     introContainer,
@@ -31,6 +33,28 @@ const CoffeeShop = () => {
   useEffect(() => {
     account && refresh();
   }, [account, refresh]);
+
+  useEffect(() => {
+    if (startTime) {
+      const seconds = moment().diff(new Date(startTime * 1000), 'seconds');
+      setElaspedTime(seconds);
+    }
+  }, [startTime])
+
+  useInterval(() => {
+    if (elaspedTime > 0) {
+      setElaspedTime(value => value + 1);
+    }
+  }, 1000);
+
+  const period = useMemo(() => {
+    const day = Math.floor(elaspedTime / (3600 * 24));
+    const time = moment.utc(elaspedTime * 1000).format("HH\\h mm\\m ss\\s");
+    if (day > 0) {
+      return `${day}d ${time}`;
+    }
+    return time;
+  }, [elaspedTime]);
 
   return (
     <div className={container}>
@@ -59,7 +83,8 @@ const CoffeeShop = () => {
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>PERIOD</h3>
-                <p>20d 04h 20m 15s</p>
+                {/* <p>20d 04h 20m 15s</p> */}
+                <p>{period}</p>
               </Grid>
               <Grid item md={3} sm={6} className={rewardMiddleItem}>
                 <h3>STAKED</h3>

@@ -73,7 +73,8 @@ export const StakeProvider = ({ children }: Props) => {
         }
         if (result._availableRewards) {
           let rewards = utils.formatEther(result._availableRewards);
-          setRewards(Number(rewards).toFixed(2));
+          let value = Number(rewards);
+          setRewards(value > 0 ? value.toFixed(2) : value.toString());
         }
       }
     } catch (err: any) {
