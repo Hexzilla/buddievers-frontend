@@ -5,6 +5,7 @@ import request from 'graphql-request';
 import { useNavigate } from 'react-router-dom';
 
 import { useActiveWeb3React } from 'hooks';
+import { useToken } from 'hooks/useToken';
 import {
   ChainId,
   CONTRACT_ADDRESS,
@@ -16,7 +17,6 @@ import uriToHttp from 'utils/uriToHttp';
 import { OwnedToken, OwnedTokenPayload } from 'components/types';
 import { StakedTokenItem, useStakeContext } from '../StakeContext';
 import moment from 'moment';
-import { useToken } from 'hooks/useToken';
 
 const StyledTokenImage = styled.img`
   width: 100%;
