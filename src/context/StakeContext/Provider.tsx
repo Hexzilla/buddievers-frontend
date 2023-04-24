@@ -76,6 +76,7 @@ export const StakeProvider = ({ children }: Props) => {
           });
 
           setStakedTokens(stakedTokens);
+
           /*console.log('stakedTokens',stakedTokens)
           const items = [];
           for (let i = 0; i < 20; i++) {
