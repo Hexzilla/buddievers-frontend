@@ -18,7 +18,6 @@ const CoffeeShop = () => {
     rewards,
     token,
     setToken,
-    stake,
     refresh,
     claimRewards,
   } = useStakeContext();
@@ -33,10 +32,6 @@ const CoffeeShop = () => {
     stakeTitleLeft,
     stakeTitleRight,
   } = useClasses(styles);
-
-  const handleStakeToken = (tokenId: string) => {
-    stake(tokenId);
-  };
 
   useEffect(() => {
     account && refresh();
@@ -97,7 +92,7 @@ const CoffeeShop = () => {
         <AttributeDialog token={token} onClose={() => setToken(null)} />
       )}
       <div className={stakedNFTs}>
-        <MyNFTs onStake={handleStakeToken} />
+        <MyNFTs />
       </div>
     </div>
   );

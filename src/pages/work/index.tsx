@@ -5,9 +5,11 @@ import { isMobile } from 'react-device-detect';
 import { Button } from 'ui';
 import { groupUrls, StringObject, traits } from '../moonbuilder/config';
 import MoonModel from '../moonbuilder/MoonModel';
-import useOwnedTokens from '../myNFTs/useOwnedTokens';
+import useOwnedTokens from '../../hooks/useOwnedTokens';
 import { Attributes } from '../../components/types';
 import SelectTrait, { TraitItem } from './SelectTrait';
+import { OwnedToken } from 'pages/marketbuddies/types';
+import { useActiveWeb3React } from 'hooks';
 
 const Container = styled.div`
   width: 100vw;
@@ -165,7 +167,15 @@ const Work = () => {
     Headwear: None,
     Transcended: None,
   });
-  const ownedTokens = useOwnedTokens();
+  const [ownedTokens, setOwnedTokens] = useState<OwnedToken[]>([]);
+  const { account } = useActiveWeb3React();
+  const getOwnedTokens = useOwnedTokens();
+
+  useEffect(() => {
+    if (account) {
+      getOwnedTokens(account).then((tokens) => setOwnedTokens(tokens));
+    }
+  }, [account, getOwnedTokens]);
 
   const attributes = useMemo(() => {
     return ownedTokens.reduce((attributes, token) => {
