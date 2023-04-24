@@ -29,10 +29,10 @@ const TokenSection = ({ title, subTitle, children }: Props) => {
   return (
     <Container>
       <Grid container>
-        <Grid sm={6}>
+        <Grid xs={12} sm={6}>
           <Title>{title}</Title>
         </Grid>
-        <Grid sm={6} style={{ textAlign: 'right' }}>
+        <Grid xs={12} sm={6} style={{ textAlign: 'right' }}>
           <AmountText>{subTitle}</AmountText>
         </Grid>
       </Grid>
