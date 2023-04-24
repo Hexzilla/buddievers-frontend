@@ -6,6 +6,7 @@ import { useStakeContext } from 'context/StakeContext';
 import MyNFTs from 'pages/myNFTs';
 
 import AttributeDialog from 'components/AttributeDialog';
+import EmptyWallet from 'components/EmptyWallet';
 import TokenSection from 'components/TokenSection';
 
 import StatusBar from './StatusBar';
@@ -21,6 +22,14 @@ const CoffeeShop = () => {
   useEffect(() => {
     account && refresh();
   }, [account, refresh]);
+
+  if (!account) {
+    return (
+      <div className={container}>
+        <EmptyWallet />
+      </div>
+    );
+  }
 
   return (
     <div className={container}>
