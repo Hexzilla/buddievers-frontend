@@ -42,7 +42,7 @@ const OwnedTokenCard = ({ token }: Props) => {
           <StyledBuddies>BUDDIES</StyledBuddies>
         </>
       }
-      buttonTitle="Unstake"
+      buttonTitle="Stake"
       onClick={() => stake(token.numericId.toString())}
     />
   );

@@ -3,9 +3,8 @@ import styled from '@emotion/styled';
 import { Grid } from '@mui/material';
 
 import Pagination from 'components/Pagination';
-import TokenCard from 'components/TokenCard';
 import { OwnedToken } from 'components/types';
-import { useStakeContext } from 'context/StakeContext';
+import OwnedTokenCard from '../OwnedToken';
 
 const EmptyTokens = styled.div`
   display: flex;
@@ -26,7 +25,6 @@ type Props = {
 
 const OwnedTokenList = ({ ownedTokens, loading }: Props) => {
   const [pageNumber, setPageNumber] = useState(1);
-  const { unstake } = useStakeContext();
 
   const tokens = useMemo(() => {
     if (ownedTokens) {
@@ -43,36 +41,7 @@ const OwnedTokenList = ({ ownedTokens, loading }: Props) => {
     <>
       <Grid container spacing={2}>
         {tokens.map((token: OwnedToken, index) => (
-          <TokenCard
-            key={index}
-            token={token}
-            info={
-              <>
-                <p
-                  style={{
-                    fontWeight: 900,
-                    fontSize: 24,
-                    color: 'white',
-                    marginBottom: 0,
-                  }}
-                >
-                  BUDDIE #{token.numericId.toString()}
-                </p>
-                <p
-                  style={{
-                    fontWeight: 400,
-                    fontSize: 16,
-                    color: '#00CE4C',
-                    marginTop: 0,
-                  }}
-                >
-                  BUDDIES
-                </p>
-              </>
-            }
-            buttonTitle="Unstake"
-            onClick={() => unstake(token.numericId)}
-          />
+          <OwnedTokenCard key={index} token={token} />
         ))}
         {!!loading && (
           <EmptyTokens>
