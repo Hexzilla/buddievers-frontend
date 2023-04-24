@@ -74,8 +74,7 @@ type Props = {
 
 const StakedToken = ({ stakedToken }: Props) => {
   const navigate = useNavigate();
-  const { unstake } = useStakeContext();
-  const { setToken } = useStakeContext();
+  const { setToken, unstake } = useStakeContext();
   const { token } = useToken(stakedToken?.tokenId.toString());
 
   const stakedTime = useMemo(() => {
@@ -86,7 +85,6 @@ const StakedToken = ({ stakedToken }: Props) => {
     navigate(`/builder/${tokenId}`);
   }
 
-  console.log('token', token)
   if (!token) {
     return <></>;
   }

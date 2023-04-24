@@ -75,7 +75,8 @@ export const StakeProvider = ({ children }: Props) => {
             };
           });
 
-          console.log('stakedTokens',stakedTokens)
+          setStakedTokens(stakedTokens);
+          /*console.log('stakedTokens',stakedTokens)
           const items = [];
           for (let i = 0; i < 20; i++) {
             items.push({
@@ -83,7 +84,7 @@ export const StakeProvider = ({ children }: Props) => {
               timestamp: 1682055190,
             });
           }
-          setStakedTokens(items);
+          setStakedTokens(items);*/
         }
         if (result._availableRewards) {
           let rewards = utils.formatEther(result._availableRewards);
