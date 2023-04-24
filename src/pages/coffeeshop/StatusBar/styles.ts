@@ -36,6 +36,10 @@ export const styles = () => ({
             color : 'white'
         }
     },
+    claimSection : {
+        marginTop : "50px",
+        marginBottom : "50px"
+    },
     claimButton : {
         color : "white",
         padding: '20px 40px',
@@ -45,6 +49,15 @@ export const styles = () => ({
         fontSize : "24px",
         width : "100%",
         cursor: "pointer"
+    },
+    rewardMiddleItem: {
+        color : "white",
+        "& > h3" : {
+            fontSize : "24px",
+            fontWeight : "900",
+            marginTop : 0,
+            marginBottom : 0
+        },
     },
     btnUnStake : {
         display: 'flex',
@@ -61,6 +74,13 @@ export const styles = () => ({
         borderRadius: '20px',
         width : "100%",
         cursor : "pointer"
+    },
+    cardMiddle : {
+        width : '100%',
+        paddingTop : "20px",
+        paddingBottom : "20px",
+        paddingLeft : "50px",
+        marginTop : "-6px",
     },
     stakedNFTs : {
         marginTop : "60px",

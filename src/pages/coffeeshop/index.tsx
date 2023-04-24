@@ -1,37 +1,22 @@
 import { useEffect } from 'react';
-import { Grid } from '@mui/material';
 
 import { useActiveWeb3React, useClasses } from 'hooks';
 import { StakeProvider } from 'context/StakeContext/Provider';
 import { useStakeContext } from 'context/StakeContext';
 import MyNFTs from 'pages/myNFTs';
 
+import AttributeDialog from 'components/AttributeDialog';
+import TokenSection from 'components/TokenSection';
+
+import StatusBar from './StatusBar';
 import StakedTokenList from './StakedTokenList';
 import { styles } from './styles';
-import AttributeDialog from 'components/AttributeDialog';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();
-  const {
-    loading,
-    stakedTokens,
-    rewards,
-    token,
-    setToken,
-    refresh,
-    claimRewards,
-  } = useStakeContext();
-  const {
-    container,
-    introContainer,
-    bannerTxtContainer,
-    claimSection,
-    claimButton,
-    rewardMiddleItem,
-    stakedNFTs,
-    stakeTitleLeft,
-    stakeTitleRight,
-  } = useClasses(styles);
+  const { loading, stakedTokens, token, setToken, refresh } = useStakeContext();
+  const { container, introContainer, bannerTxtContainer, stakedNFTs } =
+    useClasses(styles);
 
   useEffect(() => {
     account && refresh();
@@ -44,50 +29,13 @@ const CoffeeShop = () => {
           <p>COFFEE SHOP</p>
         </div>
       </div>
-      <div className={claimSection}>
-        <Grid container spacing={2}>
-          <Grid item md={3} sm={12}>
-            <p style={{ color: 'white' }}>
-              Coffee Shop is the place where you can stake / unstake your NFTs
-              to earn $SEEDS
-            </p>
-          </Grid>
-          <Grid item md={6} sm={12}>
-            <Grid container spacing={4}>
-              {/* <Grid item md={3} sm={6} className={rewardMiddleItem}>
-                <h3>FUNDS</h3>
-                <p>170K $SEEDS</p>
-              </Grid> */}
-              <Grid item md={3} sm={6} className={rewardMiddleItem}>
-                <h3>REWARDS</h3>
-                <p>{rewards} $SEEDS</p>
-              </Grid>
-              <Grid item md={3} sm={6} className={rewardMiddleItem}>
-                <h3>STAKED</h3>
-                <p>{stakedTokens.length} BUDDIES</p>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item md={3} sm={12}>
-            <button className={claimButton} onClick={() => claimRewards()}>
-              CLAIM REWARDS
-            </button>
-          </Grid>
-        </Grid>
-      </div>
-      <div className={stakedNFTs}>
-        <Grid container>
-          <Grid sm={6}>
-            <p className={stakeTitleLeft}>STAKED NFTS</p>
-          </Grid>
-          <Grid sm={6} style={{ textAlign: 'right' }}>
-            <p className={stakeTitleRight}>
-              TOTAL STAKED : {stakedTokens.length}
-            </p>
-          </Grid>
-        </Grid>
+      <StatusBar />
+      <TokenSection
+        title="STAKED NFTS"
+        subTitle={`TOTAL STAKED : ${stakedTokens.length}`}
+      >
         <StakedTokenList loading={loading} stakedTokens={stakedTokens} />
-      </div>
+      </TokenSection>
       {!!token && (
         <AttributeDialog token={token} onClose={() => setToken(null)} />
       )}

@@ -6,19 +6,15 @@ import { styles } from './styles';
 import { OwnedToken } from '../../components/types';
 import { useStakeContext } from 'context/StakeContext';
 import Pagination from 'components/Pagination';
-import AttributeDialog from 'components/AttributeDialog';
 import TokenCard from 'components/TokenCard';
+import AttributeDialog from 'components/AttributeDialog';
+import TokenSection from 'components/TokenSection';
 
 const PageSize = 12;
 
 const MyNFTs = () => {
-  const {
-    container,
-    stakedNFTs,
-    stakeTitleLeft,
-    stakeTitleRight,
-    paginationContainer,
-  } = useClasses(styles);
+  const { container, stakedNFTs, stakeTitleLeft } =
+    useClasses(styles);
 
   const [pageNumber, setPageNumber] = useState(0);
   const { account } = useActiveWeb3React();
@@ -59,17 +55,10 @@ const MyNFTs = () => {
 
   return (
     <div className={container}>
-      <div className={stakedNFTs}>
-        <Grid container>
-          <Grid item sm={6}>
-            <p className={stakeTitleLeft}>My NFTS</p>
-          </Grid>
-          <Grid item sm={6} style={{ textAlign: 'right' }}>
-            <p className={stakeTitleRight}>
-              TOTAL NFTS : {ownedTokens.length}{' '}
-            </p>
-          </Grid>
-        </Grid>
+      <TokenSection
+        title="My NFTS"
+        subTitle={`TOTAL NFTS : ${ownedTokens.length}`}
+      >
         <Grid container spacing={2}>
           {tokens.map((token: OwnedToken, index) => (
             <TokenCard
@@ -104,14 +93,12 @@ const MyNFTs = () => {
             />
           ))}
         </Grid>
-      </div>
-      <div className={paginationContainer}>
-        <Pagination
-          totalCount={ownedTokens.length}
-          pageSize={PageSize}
-          onChange={(pageNumber) => setPageNumber(pageNumber)}
-        />
-      </div>
+      </TokenSection>
+      <Pagination
+        totalCount={ownedTokens.length}
+        pageSize={PageSize}
+        onChange={(pageNumber) => setPageNumber(pageNumber)}
+      />
 
       {!!token && (
         <AttributeDialog token={token} onClose={() => setToken(null)} />
