@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Grid } from '@mui/material';
 
 import Pagination from 'components/Pagination';
-import { StakedTokenItem } from '../StakeContext';
+import { StakedTokenItem } from 'context/StakeContext';
 import StakedToken from '../StakedToken';
 
 const EmptyTokens = styled.div`

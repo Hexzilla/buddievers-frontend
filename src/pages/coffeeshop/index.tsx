@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { Grid } from '@mui/material';
+
 import { useActiveWeb3React, useClasses } from 'hooks';
-import { useStakeContext } from './StakeContext';
-import { StakeProvider } from './StakeContext/Provider';
+import { StakeProvider } from 'context/StakeContext/Provider';
+import { useStakeContext } from 'context/StakeContext';
 import MyNFTs from 'pages/myNFTs';
+
 import StakedTokenList from './StakedTokenList';
 import { styles } from './styles';
 import AttributeDialog from 'components/AttributeDialog';

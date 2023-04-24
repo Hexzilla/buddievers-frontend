@@ -27,7 +27,7 @@ import {
 import request from 'graphql-request';
 import Pagination from '@mui/material/Pagination';
 import uriToHttp from 'utils/uriToHttp';
-import { useStakeContext } from '../coffeeshop/StakeContext';
+import { useStakeContext } from 'context/StakeContext';
 
 type Props = {
   onStake?: (tokenId: string) => void;

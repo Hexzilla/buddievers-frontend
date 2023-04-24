@@ -9,10 +9,10 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useActiveWeb3React } from 'hooks';
+import { useStaking } from 'hooks/useStaking';
 import { OwnedToken } from 'components/types';
 
 import StakeContextProvider, { StakedTokenItem } from '.';
-import { useStaking } from './useStaking';
 
 interface Props {
   children: ReactElement;

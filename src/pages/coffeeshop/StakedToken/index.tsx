@@ -1,18 +1,10 @@
 import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Grid } from '@mui/material';
 import styled from '@emotion/styled';
 import moment from 'moment';
 
 import { useToken } from 'hooks/useToken';
-
-import { StakedTokenItem, useStakeContext } from '../StakeContext';
-
-const StyledTokenImage = styled.img`
-  width: 100%;
-  height: 400px;
-  border-radius: 20px;
-`;
+import { StakedTokenItem, useStakeContext } from 'context/StakeContext';
+import TokenCard from 'components/TokenCard';
 
 const StyledTokenName = styled.p`
   font-weight: 900;
@@ -47,84 +39,37 @@ const StyledStakedTime = styled.div`
   text-transform: uppercase;
 `;*/
 
-const StyledButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  color: white;
-  font-size: 20px;
-  font-weight: 400;
-  border: none;
-  background: rgba(0, 206, 76, 0.6);
-  border-radius: 20px;
-  width: 100%;
-  cursor: pointer;
-`;
-
-const CardInformation = styled.div`
-  padding: 20px;
-  margin-top: -6px;
-`;
-
 type Props = {
   stakedToken: StakedTokenItem;
 };
 
 const StakedToken = ({ stakedToken }: Props) => {
-  const navigate = useNavigate();
-  const { setToken, unstake } = useStakeContext();
+  const { unstake } = useStakeContext();
   const { token } = useToken(stakedToken?.tokenId.toString());
 
   const stakedTime = useMemo(() => {
     return moment(new Date(stakedToken.timestamp * 1000)).format('L hh:mm:ss');
   }, [stakedToken]);
 
-  const handleViewToken = (tokenId: number) => {
-    navigate(`/builder/${tokenId}`);
-  }
-
   if (!token) {
     return <></>;
   }
 
   return (
-    <Grid item xs={12} sm={12} md={12} lg={3} style={{ marginBottom: '40px' }}>
-      <StyledTokenImage src={token.metadata?.image} alt="nft" />
-      <CardInformation>
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <StyledTokenName>
-              Buddie #{token.numericId?.toString()}
-            </StyledTokenName>
-            <StyledStakedAt>Staked at</StyledStakedAt>
-            <StyledStakedTime>{stakedTime}</StyledStakedTime>
-            {/* <StyledBuddies>Buddies</StyledBuddies> */}
-          </Grid>
-          <Grid item xs={6}>
-            <StyledButton
-              style={{ marginTop: '20px', letterSpacing: '1px' }}
-              onClick={() => setToken(token)}
-            >
-              Attributes
-            </StyledButton>
-          </Grid>
-        </Grid>
-      </CardInformation>
-      <Grid container spacing={1}>
-        <Grid item xs={24} sm={12} md={6}>
-          <StyledButton onClick={() => handleViewToken(stakedToken.tokenId)}>
-            VIEW
-          </StyledButton>
-        </Grid>
-        <Grid item xs={24} sm={12} md={6}>
-          <StyledButton onClick={() => unstake(stakedToken.tokenId.toString())}>
-            UNSTAKE
-          </StyledButton>
-        </Grid>
-      </Grid>
-    </Grid>
+    <TokenCard
+      token={token}
+      info={
+        <>
+          <StyledTokenName>
+            Buddie #{token.numericId?.toString()}
+          </StyledTokenName>
+          <StyledStakedAt>Staked at</StyledStakedAt>
+          <StyledStakedTime>{stakedTime}</StyledStakedTime>
+        </>
+      }
+      buttonTitle="Unstake"
+      onClick={() => unstake(stakedToken.tokenId.toString())}
+    />
   );
 };
 
