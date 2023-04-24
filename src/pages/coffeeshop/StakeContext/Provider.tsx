@@ -167,10 +167,13 @@ export const StakeProvider = ({ children }: Props) => {
         updateToast(toastId, 'Claim reward failed', 'warning');
         return;
       }
+
+      _refresh();
+      updateToast(toastId, 'You have get rewards successfully!', 'success');
     } catch (err: any) {
       handleException(err, toastId);
     }
-  }, [account, _getRewards, claimRewards]);
+  }, [account, _getRewards, _refresh, claimRewards]);
 
   return (
     <StakeContextProvider
