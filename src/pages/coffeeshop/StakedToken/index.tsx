@@ -16,7 +16,7 @@ const StyledTokenImage = styled.img`
 
 const StyledTokenName = styled.p`
   font-weight: 900;
-  font-size: 24;
+  font-size: 24px;
   color: white;
   margin-bottom: 0;
   text-transform: uppercase;
@@ -52,7 +52,7 @@ const StyledButton = styled.button`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 76px;
+  height: 50px;
   color: white;
   font-size: 20px;
   font-weight: 400;
