@@ -62,7 +62,7 @@ const StakedToken = ({ token, info, buttonTitle, onClick }: Props) => {
           </Grid>
           <Grid item xs={6}>
             <StyledButton
-              style={{ marginTop: '20px', letterSpacing: '1px' }}
+              style={{ marginTop: '30px', letterSpacing: '1px' }}
               onClick={() => setToken(token)}
             >
               Attributes

@@ -11,6 +11,7 @@ const Message = styled.div`
   font-size: 40px;
   font-weight: 900;
   color: white;
+  text-align: center;
 `;
 
 const EmptyWallet = () => {
