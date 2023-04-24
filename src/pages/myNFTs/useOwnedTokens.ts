@@ -8,7 +8,7 @@ import {
   CONTRACT_ADDRESS,
   RARESAMA_SUBGRAPH_URLS,
 } from '../../constants';
-import { OwnedToken, OwnedTokenPayload } from '../moonbuilder/types';
+import { OwnedToken, OwnedTokenPayload } from '../../components/types';
 
 export const getOwnedTokens = async (account: string) => {
   const address = account;//account;

@@ -6,7 +6,10 @@ export type StakedTokenItem = {
 };
 
 export interface StakeContext {
+  loading: boolean;
   account?: string | null;
+  tokenId: string | null;
+  setTokenId: (tokenId: string | null) => void;
   startTime: number;
   rewards: string;
   stakedTokens: StakedTokenItem[];

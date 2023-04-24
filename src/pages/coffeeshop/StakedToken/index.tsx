@@ -12,7 +12,7 @@ import {
 import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
 import uriToHttp from 'utils/uriToHttp';
 
-import { OwnedToken, OwnedTokenPayload } from '../../moonbuilder/types';
+import { OwnedToken, OwnedTokenPayload } from '../../../components/types';
 import { StakedTokenItem, useStakeContext } from '../StakeContext';
 import moment from 'moment';
 
@@ -30,28 +30,36 @@ const StyledTokenName = styled.p`
   text-transform: uppercase;
 `;
 
-const StyledStakedTime = styled.p`
+const StyledStakedAt = styled.div`
   font-weight: 400;
   font-size: 16;
+  color: #00ce4c;
+  margin-top: 8px;
+  margin-bottom: 0;
+  text-transform: uppercase;
+`;
+
+const StyledStakedTime = styled.div`
+  font-weight: 400;
+  font-size: 14;
   color: white;
   margin-bottom: 0;
   text-transform: uppercase;
 `;
 
-const StyledBuddies = styled.p`
+/*const StyledBuddies = styled.p`
   font-weight: 400;
   font-size: 16;
   color: #00ce4c;
   margin-top: 0;
   text-transform: uppercase;
-`;
+`;*/
 
-const UnstakeButton = styled.button`
+const StyledButton = styled.button`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 20px 40px;
   height: 76px;
   color: white;
   font-size: 20px;
@@ -63,11 +71,8 @@ const UnstakeButton = styled.button`
   cursor: pointer;
 `;
 
-const CardMiddle = styled.div`
-  width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 50px;
+const CardInformation = styled.div`
+  padding: 20px;
   margin-top: -6px;
 `;
 
@@ -78,6 +83,7 @@ type Props = {
 const StakedToken = ({ stakedToken }: Props) => {
   const { account } = useActiveWeb3React();
   const { unstake } = useStakeContext();
+  const { setTokenId } = useStakeContext();
   const [token, setToken] = useState<OwnedToken>({} as OwnedToken);
 
   const getTokenInfo = useCallback(async () => {
@@ -94,7 +100,6 @@ const StakedToken = ({ stakedToken }: Props) => {
         }
         return token;
       });
-      console.log('tokens', tokens);
       setToken(tokens[0]);
     }
   }, [stakedToken]);
@@ -108,16 +113,40 @@ const StakedToken = ({ stakedToken }: Props) => {
   }, [stakedToken]);
 
   return (
-    <Grid item lg={3} md={6} sm={12} xs={24} style={{ marginBottom: '40px' }}>
+    <Grid item xs={12} sm={12} md={12} lg={3} style={{ marginBottom: '40px' }}>
       <StyledTokenImage src={token.metadata?.image} alt="nft" />
-      <CardMiddle>
-        <StyledTokenName>Buddie #{token.numericId?.toString()}</StyledTokenName>
-        <StyledStakedTime>Staked at {stakedTime}</StyledStakedTime>
-        <StyledBuddies>Buddies</StyledBuddies>
-      </CardMiddle>
-      <UnstakeButton onClick={() => unstake(stakedToken.tokenId.toString())}>
-        UNSTAKE
-      </UnstakeButton>
+      <CardInformation>
+        <Grid container spacing={1}>
+          <Grid item xs={6}>
+            <StyledTokenName>
+              Buddie #{token.numericId?.toString()}
+            </StyledTokenName>
+            <StyledStakedAt>Staked at</StyledStakedAt>
+            <StyledStakedTime>{stakedTime}</StyledStakedTime>
+            {/* <StyledBuddies>Buddies</StyledBuddies> */}
+          </Grid>
+          <Grid item xs={6}>
+            <StyledButton
+              style={{ marginTop: '25px', letterSpacing: '1px' }}
+              onClick={() => setTokenId(token.numericId)}
+            >
+              Attributes
+            </StyledButton>
+          </Grid>
+        </Grid>
+      </CardInformation>
+      <Grid container spacing={1}>
+        <Grid item xs={24} sm={12} md={6}>
+          <StyledButton onClick={() => unstake(stakedToken.tokenId.toString())}>
+            VIEW
+          </StyledButton>
+        </Grid>
+        <Grid item xs={24} sm={12} md={6}>
+          <StyledButton onClick={() => unstake(stakedToken.tokenId.toString())}>
+            UNSTAKE
+          </StyledButton>
+        </Grid>
+      </Grid>
     </Grid>
   );
 };

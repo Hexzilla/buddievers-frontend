@@ -6,11 +6,20 @@ import { StakeProvider } from './StakeContext/Provider';
 import MyNFTs from 'pages/myNFTs';
 import StakedTokenList from './StakedTokenList';
 import { styles } from './styles';
+import AttributeDialog from 'components/AttributeDialog';
 
 const CoffeeShop = () => {
   const { account } = useActiveWeb3React();
-  const { stakedTokens, rewards, stake, refresh, claimRewards } =
-    useStakeContext();
+  const {
+    loading,
+    stakedTokens,
+    rewards,
+    tokenId,
+    setTokenId,
+    stake,
+    refresh,
+    claimRewards,
+  } = useStakeContext();
   const {
     container,
     introContainer,
@@ -80,8 +89,11 @@ const CoffeeShop = () => {
             </p>
           </Grid>
         </Grid>
-        <StakedTokenList stakedTokens={stakedTokens} />
+        <StakedTokenList loading={loading} stakedTokens={stakedTokens} />
       </div>
+      {!!tokenId && (
+        <AttributeDialog tokenId={tokenId} onClose={() => setTokenId(null)} />
+      )}
       <div className={stakedNFTs}>
         <MyNFTs onStake={handleStakeToken} />
       </div>

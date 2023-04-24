@@ -38,9 +38,11 @@ export const StakeProvider = ({ children }: Props) => {
   const { stake, unstake, claimRewards, userStakeInfo, getStartTime } =
     useStaking();
 
+  const [loading, setLoading] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [rewards, setRewards] = useState('0');
   const [stakedTokens, setStakedTokens] = useState<StakedTokenItem[]>([]);
+  const [tokenId, setTokenId] = useState<string | null>(null);
 
   useEffect(() => {
     getStartTime()
@@ -58,6 +60,8 @@ export const StakeProvider = ({ children }: Props) => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const result = await userStakeInfo(account);
       if (result) {
@@ -69,7 +73,16 @@ export const StakeProvider = ({ children }: Props) => {
               timestamp: item.timestamp.toNumber(),
             };
           });
-          setStakedTokens(stakedTokens);
+
+          console.log('stakedTokens',stakedTokens)
+          const items = [];
+          for (let i = 0; i < 20; i++) {
+            items.push({
+              tokenId: 180 + i,
+              timestamp: 1682055190,
+            });
+          }
+          setStakedTokens(items);
         }
         if (result._availableRewards) {
           let rewards = utils.formatEther(result._availableRewards);
@@ -80,6 +93,8 @@ export const StakeProvider = ({ children }: Props) => {
     } catch (err: any) {
       console.error(err);
       toast.error(err?.data?.message || 'Something went wrong!');
+    } finally {
+      setLoading(false);
     }
   }, [account, userStakeInfo]);
 
@@ -178,9 +193,12 @@ export const StakeProvider = ({ children }: Props) => {
   return (
     <StakeContextProvider
       value={{
+        loading,
         account,
         startTime,
         rewards,
+        tokenId,
+        setTokenId,
         stakedTokens,
         stake: _stake,
         unstake: _unstake,

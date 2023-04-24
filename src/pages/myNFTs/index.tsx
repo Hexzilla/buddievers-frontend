@@ -23,7 +23,7 @@ import {
   OwnedToken,
   OwnedTokenPayload,
   PageTokens,
-} from '../moonbuilder/types';
+} from '../../components/types';
 import request from 'graphql-request';
 import Pagination from '@mui/material/Pagination';
 import uriToHttp from 'utils/uriToHttp';

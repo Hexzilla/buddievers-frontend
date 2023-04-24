@@ -13,7 +13,7 @@ import {
   RARESAMA_SUBGRAPH_URLS,
 } from '../../constants';
 import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
-import { OwnedToken, OwnedTokenPayload } from './types';
+import { OwnedToken, OwnedTokenPayload } from 'components/types';
 import uriToHttp from 'utils/uriToHttp';
 
 const StyledContainer = styled.div`
