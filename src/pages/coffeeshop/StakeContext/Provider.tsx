@@ -9,6 +9,7 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useActiveWeb3React } from 'hooks';
+import { OwnedToken } from 'components/types';
 
 import StakeContextProvider, { StakedTokenItem } from '.';
 import { useStaking } from './useStaking';
@@ -42,7 +43,7 @@ export const StakeProvider = ({ children }: Props) => {
   const [startTime, setStartTime] = useState(0);
   const [rewards, setRewards] = useState('0');
   const [stakedTokens, setStakedTokens] = useState<StakedTokenItem[]>([]);
-  const [tokenId, setTokenId] = useState<string | null>(null);
+  const [token, setToken] = useState<OwnedToken | null>(null);
 
   useEffect(() => {
     getStartTime()
@@ -197,8 +198,8 @@ export const StakeProvider = ({ children }: Props) => {
         account,
         startTime,
         rewards,
-        tokenId,
-        setTokenId,
+        token,
+        setToken,
         stakedTokens,
         stake: _stake,
         unstake: _unstake,

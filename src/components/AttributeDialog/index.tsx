@@ -9,7 +9,7 @@ import {
 import styled from '@emotion/styled';
 
 import { Button } from 'ui';
-import { useToken } from 'hooks/useToken';
+import { OwnedToken } from 'components/types';
 
 const AttributeCard = styled.div`
   padding: 10px;
@@ -26,13 +26,11 @@ const AttributeCard = styled.div`
 `;
 
 type Props = {
-  tokenId: string;
+  token: OwnedToken;
   onClose: () => void;
 };
 
-const AttributeDialog = ({ tokenId, onClose }: Props) => {
-  const { token } = useToken(tokenId);
-
+const AttributeDialog = ({ token, onClose }: Props) => {
   const attributes = useMemo(() => {
     return token?.metadata?.attributes ? token.metadata.attributes : []
   }, [token]);

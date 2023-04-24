@@ -14,8 +14,8 @@ const CoffeeShop = () => {
     loading,
     stakedTokens,
     rewards,
-    tokenId,
-    setTokenId,
+    token,
+    setToken,
     stake,
     refresh,
     claimRewards,
@@ -91,8 +91,8 @@ const CoffeeShop = () => {
         </Grid>
         <StakedTokenList loading={loading} stakedTokens={stakedTokens} />
       </div>
-      {!!tokenId && (
-        <AttributeDialog tokenId={tokenId} onClose={() => setTokenId(null)} />
+      {!!token && (
+        <AttributeDialog token={token} onClose={() => setToken(null)} />
       )}
       <div className={stakedNFTs}>
         <MyNFTs onStake={handleStakeToken} />

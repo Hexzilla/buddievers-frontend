@@ -1,22 +1,12 @@
-import React, { useCallback, useState, useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import styled from '@emotion/styled';
-import request from 'graphql-request';
-import { useNavigate } from 'react-router-dom';
-
-import { useActiveWeb3React } from 'hooks';
-import { useToken } from 'hooks/useToken';
-import {
-  ChainId,
-  CONTRACT_ADDRESS,
-  RARESAMA_SUBGRAPH_URLS,
-} from '../../../constants';
-import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
-import uriToHttp from 'utils/uriToHttp';
-
-import { OwnedToken, OwnedTokenPayload } from 'components/types';
-import { StakedTokenItem, useStakeContext } from '../StakeContext';
 import moment from 'moment';
+
+import { useToken } from 'hooks/useToken';
+
+import { StakedTokenItem, useStakeContext } from '../StakeContext';
 
 const StyledTokenImage = styled.img`
   width: 100%;
@@ -85,7 +75,7 @@ type Props = {
 const StakedToken = ({ stakedToken }: Props) => {
   const navigate = useNavigate();
   const { unstake } = useStakeContext();
-  const { setTokenId } = useStakeContext();
+  const { setToken } = useStakeContext();
   const { token } = useToken(stakedToken?.tokenId.toString());
 
   const stakedTime = useMemo(() => {
@@ -96,6 +86,7 @@ const StakedToken = ({ stakedToken }: Props) => {
     navigate(`/builder/${tokenId}`);
   }
 
+  console.log('token', token)
   if (!token) {
     return <></>;
   }
@@ -115,8 +106,8 @@ const StakedToken = ({ stakedToken }: Props) => {
           </Grid>
           <Grid item xs={6}>
             <StyledButton
-              style={{ marginTop: '25px', letterSpacing: '1px' }}
-              onClick={() => setTokenId(token.numericId)}
+              style={{ marginTop: '20px', letterSpacing: '1px' }}
+              onClick={() => setToken(token)}
             >
               Attributes
             </StyledButton>

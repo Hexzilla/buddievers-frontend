@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import { OwnedToken } from 'components/types';
 
 export type StakedTokenItem = {
   tokenId: number;
@@ -8,8 +9,8 @@ export type StakedTokenItem = {
 export interface StakeContext {
   loading: boolean;
   account?: string | null;
-  tokenId: string | null;
-  setTokenId: (tokenId: string | null) => void;
+  token: OwnedToken | null;
+  setToken: (token: OwnedToken | null) => void;
   startTime: number;
   rewards: string;
   stakedTokens: StakedTokenItem[];
