@@ -110,8 +110,11 @@ export const useStaking = () => {
     const approved = await isApprovedForAll(address);
     console.log('approved', approved, Boolean(approved))
     if (!approved) {
-      await setApprovalForAll();
-      return;
+      const ar = await setApprovalForAll();
+      if (!ar) {
+        console.error("approve error");
+        return null;
+      }
     }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
