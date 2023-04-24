@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useEffect, useMemo } from 'react';
 import { Grid } from '@mui/material';
-import request from 'graphql-request';
 import styled from '@emotion/styled';
+import request from 'graphql-request';
+import { useNavigate } from 'react-router-dom';
 
 import { useActiveWeb3React } from 'hooks';
 import {
@@ -15,7 +16,7 @@ import uriToHttp from 'utils/uriToHttp';
 import { OwnedToken, OwnedTokenPayload } from 'components/types';
 import { StakedTokenItem, useStakeContext } from '../StakeContext';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
+import { useToken } from 'hooks/useToken';
 
 const StyledTokenImage = styled.img`
   width: 100%;
@@ -83,32 +84,9 @@ type Props = {
 
 const StakedToken = ({ stakedToken }: Props) => {
   const navigate = useNavigate();
-  const { account } = useActiveWeb3React();
   const { unstake } = useStakeContext();
   const { setTokenId } = useStakeContext();
-  const [token, setToken] = useState<OwnedToken>({} as OwnedToken);
-
-  const getTokenInfo = useCallback(async () => {
-    const result: any = await request<OwnedTokenPayload>(
-      RARESAMA_SUBGRAPH_URLS[ChainId.EXOSAMA],
-      QUERY_TOKEN_BY_ID(CONTRACT_ADDRESS, stakedToken.tokenId.toString())
-    );
-
-    if (result?.tokens && result.tokens.length > 0) {
-      const tokens = result.tokens.map((token: OwnedToken) => {
-        if (token.metadata?.image) {
-          const urls = uriToHttp(token.metadata.image, true);
-          token.metadata.image = urls[0];
-        }
-        return token;
-      });
-      setToken(tokens[0]);
-    }
-  }, [stakedToken]);
-
-  useEffect(() => {
-    account && getTokenInfo();
-  }, [account, getTokenInfo]);
+  const { token } = useToken(stakedToken?.tokenId.toString());
 
   const stakedTime = useMemo(() => {
     return moment(new Date(stakedToken.timestamp * 1000)).format('L hh:mm:ss');
@@ -116,6 +94,10 @@ const StakedToken = ({ stakedToken }: Props) => {
 
   const handleViewToken = (tokenId: number) => {
     navigate(`/builder/${tokenId}`);
+  }
+
+  if (!token) {
+    return <></>;
   }
 
   return (

@@ -1,12 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 import { Grid } from '@mui/material';
-import Pagination from '@mui/material/Pagination';
 
-import { useClasses } from 'hooks';
+import Pagination from 'components/Pagination';
 import { StakedTokenItem } from '../StakeContext';
 import StakedToken from '../StakedToken';
-import { styles } from './styles';
 
 const EmptyTokens = styled.div`
   display: flex;
@@ -18,13 +16,6 @@ const EmptyTokens = styled.div`
   min-height: 280px;
 `;
 
-const PagenationContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 20px;
-}`;
-
 const PageSize = 8;
 
 type Props = {
@@ -33,19 +24,9 @@ type Props = {
 };
 
 const StakedTokenList = ({ stakedTokens, loading }: Props) => {
-  const { paginationStyle } = useClasses(styles);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const pageChangeHandler = async (event: any, pageNumber: number) => {
-    setPageNumber(pageNumber);
-  };
-
-  const pageCount = useMemo(() => {
-    return 1 + Math.floor((stakedTokens.length - 1) / PageSize);
-  }, [stakedTokens])
-
   const tokens = useMemo(() => {
-    console.log('stakedTokens.length', pageNumber, stakedTokens.length)
     if (stakedTokens) {
       if (stakedTokens.length <= PageSize) {
         return stakedTokens;
@@ -54,7 +35,7 @@ const StakedTokenList = ({ stakedTokens, loading }: Props) => {
       return [...stakedTokens].slice(startIndex, startIndex + PageSize);
     }
     return [];
-  }, [stakedTokens, pageNumber])
+  }, [stakedTokens, pageNumber]);
 
   return (
     <>
@@ -74,17 +55,11 @@ const StakedTokenList = ({ stakedTokens, loading }: Props) => {
           </EmptyTokens>
         )}
       </Grid>
-      <PagenationContainer>
-        <Pagination
-          count={pageCount}
-          onChange={pageChangeHandler}
-          size="large"
-          shape="circular"
-          showFirstButton
-          showLastButton
-          className={paginationStyle}
-        />
-      </PagenationContainer>
+      <Pagination
+        totalCount={stakedTokens.length}
+        pageSize={PageSize}
+        onChange={(pageNumber) => setPageNumber(pageNumber)}
+      />
     </>
   );
 };
