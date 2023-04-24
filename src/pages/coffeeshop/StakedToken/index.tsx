@@ -12,9 +12,10 @@ import {
 import { QUERY_TOKEN_BY_ID } from 'subgraph/erc721Queries';
 import uriToHttp from 'utils/uriToHttp';
 
-import { OwnedToken, OwnedTokenPayload } from '../../../components/types';
+import { OwnedToken, OwnedTokenPayload } from 'components/types';
 import { StakedTokenItem, useStakeContext } from '../StakeContext';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTokenImage = styled.img`
   width: 100%;
@@ -81,6 +82,7 @@ type Props = {
 };
 
 const StakedToken = ({ stakedToken }: Props) => {
+  const navigate = useNavigate();
   const { account } = useActiveWeb3React();
   const { unstake } = useStakeContext();
   const { setTokenId } = useStakeContext();
@@ -112,6 +114,10 @@ const StakedToken = ({ stakedToken }: Props) => {
     return moment(new Date(stakedToken.timestamp * 1000)).format('L hh:mm:ss');
   }, [stakedToken]);
 
+  const handleViewToken = (tokenId: number) => {
+    navigate(`/builder/${tokenId}`);
+  }
+
   return (
     <Grid item xs={12} sm={12} md={12} lg={3} style={{ marginBottom: '40px' }}>
       <StyledTokenImage src={token.metadata?.image} alt="nft" />
@@ -137,7 +143,7 @@ const StakedToken = ({ stakedToken }: Props) => {
       </CardInformation>
       <Grid container spacing={1}>
         <Grid item xs={24} sm={12} md={6}>
-          <StyledButton onClick={() => unstake(stakedToken.tokenId.toString())}>
+          <StyledButton onClick={() => handleViewToken(stakedToken.tokenId)}>
             VIEW
           </StyledButton>
         </Grid>
