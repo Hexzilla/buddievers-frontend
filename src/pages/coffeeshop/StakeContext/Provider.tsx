@@ -169,7 +169,7 @@ export const StakeProvider = ({ children }: Props) => {
       }
 
       _refresh();
-      updateToast(toastId, 'You have get rewards successfully!', 'success');
+      updateToast(toastId, 'You have got rewards successfully!', 'success');
     } catch (err: any) {
       handleException(err, toastId);
     }
