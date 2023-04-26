@@ -18,7 +18,13 @@ const MyNFTs = () => {
 
   useEffect(() => {
     if (account) {
-      getOwnedTokens(account).then((tokens) => setOwnedTokens(tokens));
+      getOwnedTokens(account).then((tokens) => {
+        const ownedTokens = (tokens || []).filter(
+          (t: OwnedToken) =>
+            !(stakedTokens || []).find((s) => s.tokenId === Number(t.numericId))
+        );
+        setOwnedTokens(ownedTokens);
+      });
     }
   }, [account, getOwnedTokens, stakedTokens]);
 
