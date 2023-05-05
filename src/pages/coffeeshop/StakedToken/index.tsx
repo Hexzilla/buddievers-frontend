@@ -1,10 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import styled from '@emotion/styled';
 import moment from 'moment';
 
 import { useToken } from 'hooks/useToken';
 import { StakedTokenItem, useStakeContext } from 'context/StakeContext';
 import TokenCard from 'components/TokenCard';
+import ConfirmDialog from 'components/ConfirmDialog';
 
 const StyledTokenName = styled.p`
   font-weight: 900;
@@ -46,49 +47,87 @@ type Props = {
 const StakedToken = ({ stakedToken }: Props) => {
   const { startTime, unstake } = useStakeContext();
   const { token } = useToken(stakedToken?.tokenId.toString());
+  const [showWarning, setShowWarning] = useState(false);
 
   const stakedTime = useMemo(() => {
-    return moment(new Date(stakedToken.timestamp * 1000)).format('L hh:mm:ss');
+    return moment(new Date(stakedToken.timestamp * 1000)).format('L HH:mm:ss');
   }, [stakedToken]);
 
   const rewardTime = useMemo(() => {
     if (stakedToken) {
-      let stakedTime = moment(new Date(stakedToken.timestamp * 1000));
-
       let _startTime = moment(new Date(startTime * 1000));
       let elapsed = moment().diff(_startTime, 'd');
       let rewardTime = _startTime.add(Math.floor(elapsed) + 1, 'd');
 
+      let stakedTime = moment(new Date(stakedToken.timestamp * 1000));
       const diff = rewardTime.diff(stakedTime, 'd');
       if (diff < 1) {
         rewardTime = rewardTime.add(1, 'd');
       }
-      return rewardTime.format('L HH:mm:ss');
+      return rewardTime;
     }
-    return '';
-  }, [startTime, stakedToken]);
+    return null;
+  }, [stakedToken, startTime]);
+
+  const handleUnstake = useCallback(() => {
+    if (stakedToken) {
+      let _startTime = moment(new Date(startTime * 1000));
+      let elapsed = moment().diff(_startTime, 'd');
+      let rewardTime = _startTime.add(Math.floor(elapsed) + 1, 'd');
+
+      let stakedTime = moment(new Date(stakedToken.timestamp * 1000));
+      const diff = rewardTime.diff(stakedTime, 'd');
+      if (diff < 1) {
+        setShowWarning(true);
+      } else {
+        unstake(stakedToken.tokenId.toString());
+      }
+    }
+  }, [stakedToken, startTime]);
+
+  const confirmUnstake = useCallback(() => {
+    setShowWarning(false);
+    if (stakedToken) {
+      unstake(stakedToken.tokenId.toString());
+    }
+  }, [stakedTime]);
 
   if (!token) {
     return <></>;
   }
 
   return (
-    <TokenCard
-      token={token}
-      info={
-        <>
-          <StyledTokenName>
-            Buddie #{token.numericId?.toString()}
-          </StyledTokenName>
-          <StyledStakedAt>Staked at</StyledStakedAt>
-          <StyledStakedTime>{stakedTime}</StyledStakedTime>
-          <StyledStakedAt>Reward at</StyledStakedAt>
-          <StyledStakedTime>{rewardTime}</StyledStakedTime>
-        </>
-      }
-      buttonTitle="Unstake"
-      onClick={() => unstake(stakedToken.tokenId.toString())}
-    />
+    <>
+      <TokenCard
+        token={token}
+        info={
+          <>
+            <StyledTokenName>
+              Buddie #{token.numericId?.toString()}
+            </StyledTokenName>
+            <StyledStakedAt>Staked at</StyledStakedAt>
+            <StyledStakedTime>{stakedTime}</StyledStakedTime>
+            <StyledStakedAt>Reward at</StyledStakedAt>
+            <StyledStakedTime>
+              {rewardTime?.format('L HH:mm:ss')}
+            </StyledStakedTime>
+          </>
+        }
+        buttonTitle="Unstake"
+        onClick={handleUnstake}
+      />
+      {!!showWarning && (
+        <ConfirmDialog
+          title="Do you want to unstake this NFT"
+          onClose={() => setShowWarning(false)}
+          onConfirm={confirmUnstake}
+        >
+          <div style={{ color: 'black' }}>
+            You can not get rewards if you unstake this NFT now.
+          </div>
+        </ConfirmDialog>
+      )}
+    </>
   );
 };
 
