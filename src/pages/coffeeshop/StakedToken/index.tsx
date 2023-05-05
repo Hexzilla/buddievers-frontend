@@ -44,12 +44,29 @@ type Props = {
 };
 
 const StakedToken = ({ stakedToken }: Props) => {
-  const { unstake } = useStakeContext();
+  const { startTime, unstake } = useStakeContext();
   const { token } = useToken(stakedToken?.tokenId.toString());
 
   const stakedTime = useMemo(() => {
     return moment(new Date(stakedToken.timestamp * 1000)).format('L hh:mm:ss');
   }, [stakedToken]);
+
+  const rewardTime = useMemo(() => {
+    if (stakedToken) {
+      let stakedTime = moment(new Date(stakedToken.timestamp * 1000));
+
+      let _startTime = moment(new Date(startTime * 1000));
+      let elapsed = moment().diff(_startTime, 'd');
+      let rewardTime = _startTime.add(Math.floor(elapsed) + 1, 'd');
+
+      const diff = rewardTime.diff(stakedTime, 'd');
+      if (diff < 1) {
+        rewardTime = rewardTime.add(1, 'd');
+      }
+      return rewardTime.format('L HH:mm:ss');
+    }
+    return '';
+  }, [startTime, stakedToken]);
 
   if (!token) {
     return <></>;
@@ -65,6 +82,8 @@ const StakedToken = ({ stakedToken }: Props) => {
           </StyledTokenName>
           <StyledStakedAt>Staked at</StyledStakedAt>
           <StyledStakedTime>{stakedTime}</StyledStakedTime>
+          <StyledStakedAt>Reward at</StyledStakedAt>
+          <StyledStakedTime>{rewardTime}</StyledStakedTime>
         </>
       }
       buttonTitle="Unstake"
