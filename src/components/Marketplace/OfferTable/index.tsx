@@ -30,7 +30,7 @@ const FillButton = styled.button`
   background: rgba(0, 206, 76, 0.6);
   border-radius: 20px;
   border: none;
-  cursor: pointe;
+  cursor: pointer;
 `;
 
 const Message = styled.div`

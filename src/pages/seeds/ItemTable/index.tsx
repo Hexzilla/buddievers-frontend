@@ -113,10 +113,10 @@ const ItemTable = () => {
       </div>
 
       {!!offer && offerType == 0 && (
-        <BuyToken offer={offer} onClick={() => onTakeOffer(null)} />
+        <BuyToken offer={offer} onClose={() => onTakeOffer(null)} />
       )}
       {!!offer && offerType == 1 && (
-        <SellToken offer={offer} onClick={() => onTakeOffer(null)} />
+        <SellToken offer={offer} onClose={() => onTakeOffer(null)} />
       )}
     </Container>
   );
