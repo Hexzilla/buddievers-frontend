@@ -1,19 +1,58 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useClasses } from 'hooks';
 import { styles } from './styles';
-import { Grid } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import { Box, Grid, Tabs, Tab } from '@mui/material';
 import OfferTable from 'components/Marketplace/OfferTable';
-import TakeOffer from 'components/Marketplace/TakeOffer';
+import SellToken from 'components/Marketplace/SellToken';
+import BuyToken from 'components/Marketplace/BuyToken';
+
+function createData(ID: string, Price: string, Endsin: string, Seller: string, offerType: number = 0) {
+  return {
+    id: ID,
+    ID,
+    price: Price,
+    Price,
+    expiration: Endsin,
+    quantity: 140,
+    Endsin,
+    owner: Seller,
+    Seller,
+    offerType,
+  };
+}
+
+const test_offers = [
+  createData(
+    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
+    '25000',
+    '4 hours 2 min 10 sec',
+    '0x8f02063402eefae824b3a71c06da48fc51a4e8',
+    0,
+  ),
+  createData(
+    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
+    '15000',
+    '5 hours 10 min 50 sec',
+    '0x8812f12bf1b651b4c8231e033efc93b2cb8891fd',
+    1,
+  ),
+  createData(
+    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
+    '35000',
+    '17 hours 28 min 02 sec',
+    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
+    1,
+  ),
+  createData(
+    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
+    '45000',
+    '2 days 8hours 27 min 38 sec',
+    '0xebdabb5c42b0404c70ebfb77a75428715a6e82',
+    1,
+  ),
+];
 
 const Seeds = () => {
-  const [openDialog, setOpenDialog] = useState(false);
-
   const {
     container,
     overViewItem,
@@ -25,50 +64,19 @@ const Seeds = () => {
     tradeTable,
     tableWrapper,
   } = useClasses(styles);
-  function createData(
-    ID: string,
-    Price: string,
-    Endsin: string,
-    Seller: string
-  ) {
-    return {
-      id: ID,
-      ID,
-      price: Price,
-      Price,
-      expiration: Endsin,
-      Endsin,
-      owner: Seller,
-      Seller,
-    };
-  }
 
-  const rows = [
-    createData(
-      'BUDDIE #48',
-      '25000 SAMA',
-      '4 hours 2 min 10 sec',
-      '0x8f02063402eefae824b3a71c06da48fc51a4e8'
-    ),
-    createData(
-      'BUDDIE #59',
-      '15000 SAMA',
-      '5 hours 10 min 50 sec',
-      '0x8812f12bf1b651b4c8231e033efc93b2cb8891fd'
-    ),
-    createData(
-      'BUDDIE #148',
-      '35000 SAMA',
-      '17 hours 28 min 02 sec',
-      '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93'
-    ),
-    createData(
-      'BUDDIE #150',
-      '45000 SAMA',
-      '2 days 8hours 27 min 38 sec',
-      '0xebdabb5c42b0404c70ebfb77a75428715a6e82'
-    ),
-  ];
+  const [offers, setOffers] = useState(test_offers);
+  const [offer, setOffer] = useState(null);
+  const [offerType, setOfferType] = useState(0);
+
+  const datasource = useMemo(() => {
+    return offers.filter((item: any) => item.offerType === offerType);
+  }, [offers, offerType]);
+
+  const onTakeOffer = (offer: any) => {
+    setOffer(offer);
+  };
+
   return (
     <div>
       <div className={container}>
@@ -207,54 +215,39 @@ const Seeds = () => {
             <button
               id="btnBuy"
               className={tradeButton}
-              onClick={() => setOpenDialog(true)}
+              onClick={() => setOfferType(0)}
             >
               BUY
             </button>
-            <button id="btnSell" className={tradeButton}>
+            <button
+              id="btnSell"
+              className={tradeButton}
+              onClick={() => setOfferType(1)}
+            >
               SELL
             </button>
           </div>
-          {/* <TableContainer style={{ marginTop: '30px' }}>
-            <Table
-              sx={{ minWidth: 650 }}
-              className={tradeTable}
-              aria-label="simple table"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="right">Price</TableCell>
-                  <TableCell align="right">Ends In</TableCell>
-                  <TableCell align="right">Seller</TableCell>
-                  <TableCell align="right">Seller</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.ID}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.ID}
-                    </TableCell>
-                    <TableCell align="right">{row.Price}</TableCell>
-                    <TableCell align="right">{row.Endsin}</TableCell>
-                    <TableCell align="right">{row.Seller}</TableCell>
-                    <TableCell align="right">
-                      <button className={tableBtn}>FILL</button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer> */}
         </div>
+        <Tabs
+          value={offerType}
+          onChange={(e, value) => setOfferType(value)}
+          centered
+        >
+          <Tab label="BUY OFFERS" />
+          <Tab label="SELL OFFERS" />
+          <Tab label="YOUR  OFFERS" />
+        </Tabs>
+
         <div>
-          <OfferTable offers={rows} />
+          <OfferTable offers={datasource} onTakeOffer={onTakeOffer} />
         </div>
-        {openDialog && <TakeOffer onClose={() => setOpenDialog(false)} />}
+
+        {!!offer && offerType == 0 && (
+          <BuyToken offer={offer} onClick={() => onTakeOffer(null)} />
+        )}
+        {!!offer && offerType == 1 && (
+          <SellToken offer={offer} onClick={() => onTakeOffer(null)} />
+        )}
       </div>
     </div>
   );
