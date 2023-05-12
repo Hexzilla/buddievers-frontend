@@ -18,6 +18,7 @@ export interface MarketContext {
   ownedOrders: Order[];
   refresh: () => Promise<void>;
   addSellOrder: (quantity: number, price: number, expiration: number) => Promise<void>;
+  addBuyOrder: (quantity: number, price: number, expiration: number) => Promise<void>;
 }
 
 export const marketContext = createContext<MarketContext | null>(null);

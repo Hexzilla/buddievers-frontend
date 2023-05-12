@@ -35,7 +35,7 @@ const handleException = (err: any, toastId: ToastId) => {
 
 export const MarketProvider = ({ children }: Props) => {
   const { account } = useActiveWeb3React();
-  const { getOrders, addSellOrder } = useMarketplace();
+  const { getOrders, addSellOrder, addBuyOrder } = useMarketplace();
 
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -48,15 +48,17 @@ export const MarketProvider = ({ children }: Props) => {
 
     const orders = await getOrders();
 
-    setOrders((orders || []).map((order: any) => ({
-      id: order.id,
-      owner: order.owner,
-      price: utils.formatEther(order.price),
-      quantity: order.quantity.toNumber(),
-      orderType: order.orderType,
-      createdAt: order.createdAt.toNumber(),
-      expiration: order.expiration.toNumber(),
-    })));
+    setOrders(
+      (orders || []).map((order: any) => ({
+        id: order.id,
+        owner: order.owner,
+        price: utils.formatEther(order.price),
+        quantity: utils.formatEther(order.quantity),
+        orderType: order.orderType,
+        createdAt: order.createdAt.toNumber(),
+        expiration: order.expiration.toNumber(),
+      }))
+    );
   }, [account, getOrders]);
 
   const _addSellOrder = useCallback(
@@ -66,20 +68,20 @@ export const MarketProvider = ({ children }: Props) => {
         return;
       }
 
-      const toastId = toast.loading('Creating your sell order...');
+      const toastId = toast.loading('Creating your sell offer...');
 
       try {
         const result = await addSellOrder(account, quantity, price, expiration);
-        console.log('add-sell-order-result', result);
+        console.log('add-sell-offer-result', result);
         if (!result) {
-          updateToast(toastId, 'Failed to create sell order!');
+          updateToast(toastId, 'Failed to create sell offer!');
           return;
         }
 
         _refresh();
         updateToast(
           toastId,
-          'You have been created sell order successfully!',
+          'You have been created sell offer successfully!',
           'success'
         );
       } catch (err: any) {
@@ -87,6 +89,36 @@ export const MarketProvider = ({ children }: Props) => {
       }
     },
     [account, addSellOrder, _refresh]
+  );
+
+  const _addBuyOrder = useCallback(
+    async (quantity: number, price: number, expiration: number) => {
+      if (!account) {
+        toast.warn('Please connect your wallet!');
+        return;
+      }
+
+      const toastId = toast.loading('Creating your buy offer...');
+
+      try {
+        const result = await addBuyOrder(quantity, price, expiration);
+        console.log('add-buy-offer-result', result);
+        if (!result) {
+          updateToast(toastId, 'Failed to create buy offer!');
+          return;
+        }
+
+        _refresh();
+        updateToast(
+          toastId,
+          'You have been created buy order successfully!',
+          'success'
+        );
+      } catch (err: any) {
+        handleException(err, toastId);
+      }
+    },
+    [account, addBuyOrder, _refresh]
   );
 
   const ownedOrders = useMemo(() => {
@@ -102,6 +134,7 @@ export const MarketProvider = ({ children }: Props) => {
         ownedOrders,
         refresh: _refresh,
         addSellOrder: _addSellOrder,
+        addBuyOrder: _addBuyOrder,
       }}
     >
       {children}
