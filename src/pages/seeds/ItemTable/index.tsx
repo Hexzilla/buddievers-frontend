@@ -12,7 +12,7 @@ const Container = styled.div`
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 50px;
-  padding-bottom: 50px;
+  padding-bottom: 400px;
 `;
 
 const StyledButton = styled.button`
@@ -108,9 +108,7 @@ const ItemTable = () => {
         onChange={(e: any, value: number) => setOfferType(value)}
       />
 
-      <div>
-        <OfferTable offers={datasource} onTakeOffer={onTakeOffer} />
-      </div>
+      <OfferTable offers={datasource} onTakeOffer={onTakeOffer} />
 
       {!!offer && offerType == 0 && (
         <BuyToken offer={offer} onClose={() => onTakeOffer(null)} />
