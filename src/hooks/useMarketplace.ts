@@ -19,7 +19,7 @@ export const useMarketplace = () => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(contractAddress, abi, signer);
 
-    return await contract.orderArray();
+    return await contract.getOrderArray();
   }, []);
 
   const addSellOrder = useCallback(

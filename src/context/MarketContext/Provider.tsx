@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { BigNumber, utils } from 'ethers';
 import {
   Id as ToastId,
@@ -47,8 +47,16 @@ export const MarketProvider = ({ children }: Props) => {
     }
 
     const orders = await getOrders();
-    console.log('orders', orders);
-    setOrders(orders);
+
+    setOrders((orders || []).map((order: any) => ({
+      id: order.id,
+      owner: order.owner,
+      price: utils.formatEther(order.price),
+      quantity: order.quantity.toNumber(),
+      orderType: order.orderType,
+      createdAt: order.createdAt.toNumber(),
+      expiration: order.expiration.toNumber(),
+    })));
   }, [account, getOrders]);
 
   const _addSellOrder = useCallback(
@@ -81,12 +89,17 @@ export const MarketProvider = ({ children }: Props) => {
     [account, addSellOrder, _refresh]
   );
 
+  const ownedOrders = useMemo(() => {
+    return (orders || []).filter((order: any) => order.owner === account);
+  }, [account, orders]);
+
   return (
     <MarketContextProvider
       value={{
         loading,
         account,
         orders,
+        ownedOrders,
         refresh: _refresh,
         addSellOrder: _addSellOrder,
       }}

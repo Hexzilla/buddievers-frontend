@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { Box, Grid, Tabs, Tab } from '@mui/material';
 import styled from '@emotion/styled';
 
+import { useMarketContext } from 'context/MarketContext';
 import OfferTable from 'components/Marketplace/OfferTable';
 import SellToken from 'components/Marketplace/SellToken';
 import BuyToken from 'components/Marketplace/BuyToken';
@@ -13,18 +14,6 @@ const Container = styled.div`
   padding-right: 5%;
   padding-top: 50px;
   padding-bottom: 400px;
-`;
-
-const StyledButton = styled.button`
-  width: 70px;
-  height: 44px;
-  background: #00ce4c;
-  border-radius: 20px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  margin-left: 20px;
 `;
 
 function createData(
@@ -80,13 +69,17 @@ const test_offers = [
 ];
 
 const ItemTable = () => {
+  const { ownedOrders } = useMarketContext();
   const [offers, setOffers] = useState(test_offers);
   const [offer, setOffer] = useState(null);
   const [offerType, setOfferType] = useState(0);
 
   const datasource = useMemo(() => {
+    if (offerType === 2) {
+      return ownedOrders;
+    }
     return offers.filter((item: any) => item.offerType === offerType);
-  }, [offers, offerType]);
+  }, [ownedOrders, offers, offerType]);
 
   const onTakeOffer = (offer: any) => {
     setOffer(offer);
@@ -108,7 +101,7 @@ const ItemTable = () => {
         onChange={(e: any, value: number) => setOfferType(value)}
       />
 
-      <OfferTable offers={datasource} onTakeOffer={onTakeOffer} />
+      <OfferTable orders={datasource} onTakeOffer={onTakeOffer} />
 
       {!!offer && offerType == 0 && (
         <BuyToken offer={offer} onClose={() => onTakeOffer(null)} />

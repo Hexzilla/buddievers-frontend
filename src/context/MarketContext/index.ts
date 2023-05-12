@@ -4,8 +4,8 @@ import { OwnedToken } from 'components/types';
 export type Order = {
   id: string;
   owner: string;
-  price: number;
-  quantity: number;
+  price: any;
+  quantity: any;
   orderType: number;
   createdAt: number;
   expiration: number;
@@ -15,6 +15,7 @@ export interface MarketContext {
   loading: boolean;
   account?: string | null;
   orders: Order[];
+  ownedOrders: Order[];
   refresh: () => Promise<void>;
   addSellOrder: (quantity: number, price: number, expiration: number) => Promise<void>;
 }

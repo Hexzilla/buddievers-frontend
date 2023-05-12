@@ -37,7 +37,7 @@ const Message = styled.div`
   padding: 40px;
 `;
 
-const OfferTable = ({ offers, onTakeOffer }: any) => {
+const OfferTable = ({ orders, onTakeOffer }: any) => {
   return (
     <TableContainer style={{ marginTop: '30px', textAlign: 'center' }}>
       <StyledTable sx={{ minWidth: 650 }} aria-label="simple table">
@@ -52,9 +52,9 @@ const OfferTable = ({ offers, onTakeOffer }: any) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {offers.map((row: any) => (
+          {orders.map((row: any, index: number) => (
             <TableRow
-              key={row.ID}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
@@ -71,7 +71,7 @@ const OfferTable = ({ offers, onTakeOffer }: any) => {
           ))}
         </TableBody>
       </StyledTable>
-      {!offers.length && <Message>No records available...</Message>}
+      {!orders.length && <Message>No records available...</Message>}
     </TableContainer>
   );
 };
