@@ -16,70 +16,17 @@ const Container = styled.div`
   padding-bottom: 400px;
 `;
 
-function createData(
-  ID: string,
-  Price: string,
-  Endsin: string,
-  Seller: string,
-  offerType: number = 0
-) {
-  return {
-    id: ID,
-    ID,
-    price: Price,
-    Price,
-    expiration: Endsin,
-    quantity: 140,
-    Endsin,
-    owner: Seller,
-    Seller,
-    offerType,
-  };
-}
-
-const test_offers = [
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '25000',
-    '4 hours 2 min 10 sec',
-    '0x8f02063402eefae824b3a71c06da48fc51a4e8',
-    0
-  ),
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '15000',
-    '5 hours 10 min 50 sec',
-    '0x8812f12bf1b651b4c8231e033efc93b2cb8891fd',
-    1
-  ),
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '35000',
-    '17 hours 28 min 02 sec',
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    1
-  ),
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '45000',
-    '2 days 8hours 27 min 38 sec',
-    '0xebdabb5c42b0404c70ebfb77a75428715a6e82',
-    1
-  ),
-];
-
 const ItemTable = () => {
-  const { ownedOrders } = useMarketContext();
-  const [offers, setOffers] = useState(test_offers);
+  const { orders, ownedOrders } = useMarketContext();
   const [offer, setOffer] = useState(null);
-  const [offerType, setOfferType] = useState(0);
+  const [orderType, setOrderType] = useState(0);
 
   const datasource = useMemo(() => {
-    if (offerType === 2) {
+    if (orderType === 2) {
       return ownedOrders;
     }
-    return offers.filter((item: any) => item.offerType === offerType);
-  }, [ownedOrders, offers, offerType]);
+    return orders.filter((item: any) => item.orderType === orderType);
+  }, [ownedOrders, orders, orderType]);
 
   const onTakeOffer = (offer: any) => {
     setOffer(offer);
@@ -87,26 +34,17 @@ const ItemTable = () => {
 
   return (
     <Container>
-      {/* <Grid container spacing={0}>
-        <StyledButton id="btnBuy" onClick={() => setOfferType(0)}>
-          BUY
-        </StyledButton>
-        <StyledButton id="btnSell" onClick={() => setOfferType(1)}>
-          SELL
-        </StyledButton>
-      </Grid> */}
-
       <OfferTabs
-        value={offerType}
-        onChange={(e: any, value: number) => setOfferType(value)}
+        value={orderType}
+        onChange={(e: any, value: number) => setOrderType(value)}
       />
 
       <OfferTable orders={datasource} onTakeOffer={onTakeOffer} />
 
-      {!!offer && offerType == 0 && (
+      {!!offer && orderType == 0 && (
         <BuyToken offer={offer} onClose={() => onTakeOffer(null)} />
       )}
-      {!!offer && offerType == 1 && (
+      {!!offer && orderType == 1 && (
         <SellToken offer={offer} onClose={() => onTakeOffer(null)} />
       )}
     </Container>
