@@ -11,6 +11,7 @@ import { shortAddress } from 'utils/utils';
 const StyledTable = styled(Table)`
   background: transparent;
   color: white;
+  width: 100%;
 
   td,
   th {

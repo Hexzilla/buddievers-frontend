@@ -1,81 +1,11 @@
-import { useState, useMemo } from 'react';
 import { useClasses } from 'hooks';
 import { styles } from './styles';
-import { Box, Grid, Tabs, Tab } from '@mui/material';
-import OfferTable from 'components/Marketplace/OfferTable';
-import SellToken from 'components/Marketplace/SellToken';
-import BuyToken from 'components/Marketplace/BuyToken';
+import { Grid } from '@mui/material';
 
-function createData(ID: string, Price: string, Endsin: string, Seller: string, offerType: number = 0) {
-  return {
-    id: ID,
-    ID,
-    price: Price,
-    Price,
-    expiration: Endsin,
-    quantity: 140,
-    Endsin,
-    owner: Seller,
-    Seller,
-    offerType,
-  };
-}
-
-const test_offers = [
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '25000',
-    '4 hours 2 min 10 sec',
-    '0x8f02063402eefae824b3a71c06da48fc51a4e8',
-    0,
-  ),
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '15000',
-    '5 hours 10 min 50 sec',
-    '0x8812f12bf1b651b4c8231e033efc93b2cb8891fd',
-    1,
-  ),
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '35000',
-    '17 hours 28 min 02 sec',
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    1,
-  ),
-  createData(
-    '0xedf60951f0a8fecd036ae815dcdffcf1fc057e93',
-    '45000',
-    '2 days 8hours 27 min 38 sec',
-    '0xebdabb5c42b0404c70ebfb77a75428715a6e82',
-    1,
-  ),
-];
+import ItemTable from './ItemTable';
 
 const Seeds = () => {
-  const {
-    container,
-    overViewItem,
-    btnBuy,
-    btnOffer,
-    tradeButtons,
-    tradeButton,
-    tableBtn,
-    tradeTable,
-    tableWrapper,
-  } = useClasses(styles);
-
-  const [offers, setOffers] = useState(test_offers);
-  const [offer, setOffer] = useState(null);
-  const [offerType, setOfferType] = useState(0);
-
-  const datasource = useMemo(() => {
-    return offers.filter((item: any) => item.offerType === offerType);
-  }, [offers, offerType]);
-
-  const onTakeOffer = (offer: any) => {
-    setOffer(offer);
-  };
+  const { container, overViewItem, btnBuy } = useClasses(styles);
 
   return (
     <div>
@@ -209,46 +139,7 @@ const Seeds = () => {
         </Grid>
       </div>
 
-      <div className={tableWrapper}>
-        <div>
-          <div className={tradeButtons}>
-            <button
-              id="btnBuy"
-              className={tradeButton}
-              onClick={() => setOfferType(0)}
-            >
-              BUY
-            </button>
-            <button
-              id="btnSell"
-              className={tradeButton}
-              onClick={() => setOfferType(1)}
-            >
-              SELL
-            </button>
-          </div>
-        </div>
-        <Tabs
-          value={offerType}
-          onChange={(e, value) => setOfferType(value)}
-          centered
-        >
-          <Tab label="BUY OFFERS" />
-          <Tab label="SELL OFFERS" />
-          <Tab label="YOUR  OFFERS" />
-        </Tabs>
-
-        <div>
-          <OfferTable offers={datasource} onTakeOffer={onTakeOffer} />
-        </div>
-
-        {!!offer && offerType == 0 && (
-          <BuyToken offer={offer} onClick={() => onTakeOffer(null)} />
-        )}
-        {!!offer && offerType == 1 && (
-          <SellToken offer={offer} onClick={() => onTakeOffer(null)} />
-        )}
-      </div>
+      <ItemTable />
     </div>
   );
 };
