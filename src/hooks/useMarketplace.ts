@@ -12,6 +12,16 @@ export const useMarketplace = () => {
   const { setApprovalForAll, isApprovedForAll } = useCollection();
   const { approve, allowance } = useSeedToken();
 
+  const getOrders = useCallback(async () => {
+    if (!window.ethereum) return;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    return await contract.orderArray();
+  }, []);
+
   const addSellOrder = useCallback(
     async (
       address: string,
@@ -61,8 +71,8 @@ export const useMarketplace = () => {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-
     const contract = new ethers.Contract(contractAddress, abi, signer);
+
     const tx = await contract.unstake(tokenIds);
     console.log('unstake', tx);
     return tx.wait();
@@ -91,6 +101,7 @@ export const useMarketplace = () => {
   }, []);
 
   return {
+    getOrders,
     addSellOrder,
     unstake,
     claimRewards,

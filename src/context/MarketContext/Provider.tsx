@@ -35,7 +35,7 @@ const handleException = (err: any, toastId: ToastId) => {
 
 export const MarketProvider = ({ children }: Props) => {
   const { account } = useActiveWeb3React();
-  const { addSellOrder } = useMarketplace();
+  const { getOrders, addSellOrder } = useMarketplace();
 
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -45,7 +45,11 @@ export const MarketProvider = ({ children }: Props) => {
       toast.warn('Please connect your wallet');
       return;
     }
-  }, [account]);
+
+    const orders = await getOrders();
+    console.log('orders', orders);
+    setOrders(orders);
+  }, [account, getOrders]);
 
   const _addSellOrder = useCallback(
     async (quantity: number, price: number, expiration: number) => {
