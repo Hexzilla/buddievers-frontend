@@ -7,6 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import OfferTable from 'components/Marketplace/OfferTable';
 
 
 const Seeds = () => {
@@ -18,7 +19,7 @@ const Seeds = () => {
         Endsin: string,
         Seller: string,
     ) {
-        return { ID, Price, Endsin, Seller };
+        return { id: ID, ID, price: Price, Price, expiration: Endsin, Endsin, owner: Seller, Seller };
     }
 
     const rows = [
@@ -136,6 +137,9 @@ const Seeds = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                </div>
+                <div>
+                    <OfferTable offers={rows} />
                 </div>
             </div>
         </div>
