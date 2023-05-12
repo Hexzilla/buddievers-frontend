@@ -30,9 +30,9 @@ export enum ChainId {
   EXOSAMA = 2109,
 }
 
-export const PERMISSIONED_CHAINS = [ChainId.BSC_TESTNET]
+export const PERMISSIONED_CHAINS = [ChainId.EXOSAMA]
 
-export const DEFAULT_CHAIN = ChainId.BSC_TESTNET
+export const DEFAULT_CHAIN = ChainId.EXOSAMA
 
 export const RPC_URLS: { [chainId: number]: string } = {
   [ChainId.MOONRIVER]: 'https://bsc-testnet.public.blastapi.io',
