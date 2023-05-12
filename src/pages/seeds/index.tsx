@@ -3,6 +3,7 @@ import { styles } from './styles';
 import { Grid } from '@mui/material';
 
 import ItemTable from './ItemTable';
+import MarketToolbar from './Toolbar';
 
 const Seeds = () => {
   const { container, overViewItem, btnBuy } = useClasses(styles);
@@ -122,19 +123,7 @@ const Seeds = () => {
                 &nbsp;&nbsp;&nbsp; 100 000$SEEDS
               </p>
             </div>
-            <div style={{ marginTop: '6vh' }}>
-              <Grid container spacing={2}>
-                <Grid item md={4} sm={12}>
-                  <button className={btnBuy}>BUY $SEEDS</button>
-                </Grid>
-                <Grid item md={4} sm={12}>
-                  <button className={btnBuy}>SELL $SEEDS</button>
-                </Grid>
-                <Grid item md={4} sm={12}>
-                  <button className={btnBuy}>TRANSFER</button>
-                </Grid>
-              </Grid>
-            </div>
+            <MarketToolbar />
           </Grid>
         </Grid>
       </div>

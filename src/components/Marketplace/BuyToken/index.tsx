@@ -8,30 +8,12 @@ import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { Dialog } from 'ui';
 import { shortAddress } from 'utils/utils';
 import ItemRow from '../ItemRow';
+import ActionButton from '../ActionButton';
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 18px;
-`;
-
-const StyledButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  border: none;
-
-  width: 100%;
-  height: 52px;
-
-  font-size: 18px;
-  color: white;
-  background: #00ce4c;
-  border-radius: 20px;
-
-  cursor: pointer;
-  text-transform: uppercase;
 `;
 
 const SellToken = ({ offer, onClose }: any) => {
@@ -46,7 +28,7 @@ const SellToken = ({ offer, onClose }: any) => {
     >
       <DialogContent>
         <Content>
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <ItemRow heading="Address">
               {shortAddress(CONTRACT_MARKETPLACE)}
             </ItemRow>
@@ -59,7 +41,7 @@ const SellToken = ({ offer, onClose }: any) => {
 
           <Divider light />
 
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             <ItemRow heading="You buy">
               <Paper
                 component="form"
@@ -83,8 +65,8 @@ const SellToken = ({ offer, onClose }: any) => {
         </Content>
       </DialogContent>
       <DialogActions sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <StyledButton onClick={onClose}>Take offer</StyledButton>
-        <StyledButton onClick={onClose}>Close</StyledButton>
+        <ActionButton onClick={onClose}>Take offer</ActionButton>
+        <ActionButton onClick={onClose}>Close</ActionButton>
       </DialogActions>
     </Dialog>
   );
