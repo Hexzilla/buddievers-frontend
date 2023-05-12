@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import styled from '@emotion/styled';
+
 import AddSellOffer from 'components/Marketplace/AddSellOffer';
+import AddBuyOffer from 'components/Marketplace/AddBuyOffer';
 
 const StyledButton = styled.button`
   display: flex;
@@ -20,13 +22,16 @@ const StyledButton = styled.button`
 `;
 
 const Toolbar = () => {
+  const [showBuyOffer, setShowBuyOffer] = useState(false);
   const [showSellOffer, setShowSellOffer] = useState(false);
 
   return (
     <div style={{ marginTop: '6vh' }}>
       <Grid container spacing={2}>
         <Grid item md={4} sm={12}>
-          <StyledButton>BUY $SEEDS</StyledButton>
+          <StyledButton onClick={() => setShowBuyOffer(true)}>
+            BUY $SEEDS
+          </StyledButton>
         </Grid>
         <Grid item md={4} sm={12}>
           <StyledButton onClick={() => setShowSellOffer(true)}>
@@ -37,6 +42,7 @@ const Toolbar = () => {
           <StyledButton>TRANSFER</StyledButton>
         </Grid>
       </Grid>
+      {showBuyOffer && <AddBuyOffer onClose={() => setShowBuyOffer(false)} />}
       {showSellOffer && (
         <AddSellOffer onClose={() => setShowSellOffer(false)} />
       )}
