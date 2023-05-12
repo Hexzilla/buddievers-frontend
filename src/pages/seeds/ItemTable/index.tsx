@@ -1,5 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
-import { Box, Grid, Tabs, Tab } from '@mui/material';
+import { useState, useMemo } from 'react';
 import styled from '@emotion/styled';
 
 import { useMarketContext } from 'context/MarketContext';
