@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import OfferTable from 'components/Marketplace/OfferTable';
 import SellToken from 'components/Marketplace/SellToken';
 import BuyToken from 'components/Marketplace/BuyToken';
+import OfferTabs from '../OfferTabs';
 
 const Container = styled.div`
   background: #01472a;
@@ -93,23 +94,19 @@ const ItemTable = () => {
 
   return (
     <Container>
-      <Grid container spacing={0}>
+      {/* <Grid container spacing={0}>
         <StyledButton id="btnBuy" onClick={() => setOfferType(0)}>
           BUY
         </StyledButton>
         <StyledButton id="btnSell" onClick={() => setOfferType(1)}>
           SELL
         </StyledButton>
-      </Grid>
-      <Tabs
+      </Grid> */}
+
+      <OfferTabs
         value={offerType}
-        onChange={(e, value) => setOfferType(value)}
-        centered
-      >
-        <Tab label="BUY OFFERS" />
-        <Tab label="SELL OFFERS" />
-        <Tab label="YOUR  OFFERS" />
-      </Tabs>
+        onChange={(e: any, value: number) => setOfferType(value)}
+      />
 
       <div>
         <OfferTable offers={datasource} onTakeOffer={onTakeOffer} />

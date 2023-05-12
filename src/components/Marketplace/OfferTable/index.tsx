@@ -33,17 +33,23 @@ const FillButton = styled.button`
   cursor: pointe;
 `;
 
+const Message = styled.div`
+  color: white;
+  padding: 40px;
+`;
+
 const OfferTable = ({ offers, onTakeOffer }: any) => {
   return (
     <>
-      <TableContainer style={{ marginTop: '30px' }}>
+      <TableContainer style={{ marginTop: '30px', textAlign: 'center' }}>
         <StyledTable sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell align="right">Unit Price</TableCell>
+              <TableCell align="right">Quantity</TableCell>
               <TableCell align="right">Expiration</TableCell>
-              <TableCell align="right">Seller</TableCell>
+              <TableCell align="right">Maker</TableCell>
               <TableCell align="right"></TableCell>
             </TableRow>
           </TableHead>
@@ -57,17 +63,17 @@ const OfferTable = ({ offers, onTakeOffer }: any) => {
                   {shortAddress(row.id)}
                 </TableCell>
                 <TableCell align="right">{row.price}</TableCell>
+                <TableCell align="right">{row.quantity}</TableCell>
                 <TableCell align="right">{row.expiration}</TableCell>
                 <TableCell align="right">{shortAddress(row.owner)}</TableCell>
                 <TableCell align="right">
-                  <FillButton onClick={() => onTakeOffer(row)}>
-                    FILL
-                  </FillButton>
+                  <FillButton onClick={() => onTakeOffer(row)}>FILL</FillButton>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </StyledTable>
+        {!offers.length && <Message>No records available...</Message>}
       </TableContainer>
     </>
   );
