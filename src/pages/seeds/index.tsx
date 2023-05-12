@@ -2,6 +2,7 @@ import { useClasses } from 'hooks';
 import { styles } from './styles';
 import { Grid } from '@mui/material';
 
+import { MarketProvider } from 'context/MarketContext/Provider';
 import ItemTable from './ItemTable';
 import MarketToolbar from './Toolbar';
 
@@ -133,4 +134,10 @@ const Seeds = () => {
   );
 };
 
-export default Seeds;
+const SeedsWrapper = () => (
+  <MarketProvider>
+    <Seeds />
+  </MarketProvider>
+);
+
+export default SeedsWrapper;

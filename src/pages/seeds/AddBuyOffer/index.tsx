@@ -1,6 +1,4 @@
-import { Button, Grid } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
+import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled';
 

@@ -1,0 +1,26 @@
+import { createContext, useContext } from 'react';
+import { OwnedToken } from 'components/types';
+
+export type Order = {
+  id: string;
+  owner: string;
+  price: number;
+  quantity: number;
+  orderType: number;
+  createdAt: number;
+  expiration: number;
+};
+
+export interface MarketContext {
+  loading: boolean;
+  account?: string | null;
+  orders: Order[];
+  refresh: () => Promise<void>;
+  addSellOrder: (quantity: number, price: number, expiration: number) => Promise<void>;
+}
+
+export const marketContext = createContext<MarketContext | null>(null);
+
+export const useMarketContext = () => useContext(marketContext)!;
+
+export default marketContext.Provider;

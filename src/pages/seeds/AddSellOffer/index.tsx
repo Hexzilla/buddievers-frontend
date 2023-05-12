@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import { Button, Grid } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
+import { useState } from 'react';
+import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { shortAddress } from 'utils/utils';
-import { useActiveWeb3React } from 'hooks';
-import { useMarketplace } from 'hooks/useMarketplace';
+import { useMarketContext } from 'context/MarketContext/index';
 import ItemRow from 'components/Marketplace/ItemRow';
 import InputNumber from 'components/Marketplace/InputNumber';
 import ActionButton from 'components/Marketplace/ActionButton';
@@ -22,8 +19,7 @@ const Content = styled.div`
 `;
 
 const AddSellOffer = ({ onClose }: any) => {
-  const { account } = useActiveWeb3React();
-  const { addSellOrder } = useMarketplace();
+  const { addSellOrder } = useMarketContext();
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
 
@@ -42,9 +38,6 @@ const AddSellOffer = ({ onClose }: any) => {
   };
 
   const onSubmit = async () => {
-    if (!account) {
-      return;
-    }
     if (quantity <= 0) {
       return;
     }
@@ -52,7 +45,7 @@ const AddSellOffer = ({ onClose }: any) => {
       return;
     }
 
-    await addSellOrder(account, quantity, unitPrice, 0);
+    await addSellOrder(quantity, unitPrice, 0);
   };
 
   return (
