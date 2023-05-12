@@ -15,9 +15,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import styled from '@emotion/styled';
+
 import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { Dialog } from 'ui';
 import { shortAddress } from 'utils/utils';
+import ItemRow from '../ItemRow';
 
 const Content = styled.div`
   display: flex;
@@ -34,10 +36,10 @@ const StyledButton = styled.div`
 
   width: 100%;
   height: 52px;
-  
+
   font-size: 18px;
   color: white;
-  background: #00CE4C;
+  background: #00ce4c;
   border-radius: 20px;
 
   cursor: pointer;
@@ -51,49 +53,29 @@ const SellToken = ({ offer, onClose }: any) => {
   const royaltyFee = 0;
 
   return (
-    <Dialog open={true} onClose={() => onClose()} title="Take Offer - Sell $SEEDS">
+    <Dialog
+      open={true}
+      onClose={() => onClose()}
+      title="Take Offer - Sell $SEEDS"
+    >
       <DialogContent>
         <Content>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              Address
-            </Grid>
-            <Grid item xs={6}>
+            <ItemRow heading="Address">
               {shortAddress(CONTRACT_MARKETPLACE)}
-            </Grid>
-            <Grid item xs={6}>
-              ID
-            </Grid>
-            <Grid item xs={6}>
-              {shortAddress(offer.id)}
-            </Grid>
-            <Grid item xs={6}>
-              Price per unit
-            </Grid>
-            <Grid item xs={6}>
-              {offer.price} SAMA
-            </Grid>
-            <Grid item xs={6}>
-              Total requested
-            </Grid>
-            <Grid item xs={6}>
+            </ItemRow>
+            <ItemRow heading="ID">{shortAddress(offer.id)}</ItemRow>
+            <ItemRow heading="Price per unit">{offer.price} SAMA</ItemRow>
+            <ItemRow heading="Total requested">
               {offer.quantity.toFixed(2)}
-            </Grid>
+            </ItemRow>
           </Grid>
 
           <Divider light />
 
           <Grid container spacing={2}>
-            <Grid item xs={6}>
-              Your balance
-            </Grid>
-            <Grid item xs={6}>
-              {balance.toFixed(2)}
-            </Grid>
-            <Grid item xs={6}>
-              You sell
-            </Grid>
-            <Grid item xs={6}>
+            <ItemRow heading="Your balance">{balance.toFixed(2)}</ItemRow>
+            <ItemRow heading="You sell">
               <Paper
                 component="form"
                 sx={{
@@ -107,25 +89,10 @@ const SellToken = ({ offer, onClose }: any) => {
                   MAX
                 </Button>
               </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              Protocol fee
-            </Grid>
-            <Grid item xs={6}>
-              {protocalFee.toFixed(2)}
-            </Grid>
-            <Grid item xs={6}>
-              Royalty fee
-            </Grid>
-            <Grid item xs={6}>
-              {royaltyFee.toFixed(2)}
-            </Grid>
-            <Grid item xs={6}>
-              You get
-            </Grid>
-            <Grid item xs={6}>
-              {gain} SAMA
-            </Grid>
+            </ItemRow>
+            <ItemRow heading="Protocol fee">{protocalFee.toFixed(2)}</ItemRow>
+            <ItemRow heading="Royalty fee">{royaltyFee.toFixed(2)}</ItemRow>
+            <ItemRow heading="You get">{gain} SAMA</ItemRow>
           </Grid>
         </Content>
       </DialogContent>
