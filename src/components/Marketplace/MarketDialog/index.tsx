@@ -17,6 +17,8 @@ const StyledActions = styled(DialogActions)`
 
   background: #01472a;
   color: #ffffff;
+
+  padding-bottom: 24px;
 `;
 
 const MarketDialog = ({ title, actions, onClose, children }: any) => {

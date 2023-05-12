@@ -33,7 +33,7 @@ const BuyToken = ({ offer, onClose }: any) => {
       onClose={onClose}
     >
       <Content>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
           </ItemRow>
@@ -46,7 +46,7 @@ const BuyToken = ({ offer, onClose }: any) => {
 
         <Divider light />
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} alignItems="center">
           <ItemRow heading="You buy">
             <Paper
               component="form"

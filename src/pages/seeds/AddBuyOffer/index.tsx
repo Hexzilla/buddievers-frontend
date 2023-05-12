@@ -6,9 +6,10 @@ import styled from '@emotion/styled';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { shortAddress } from 'utils/utils';
-import ItemRow from '../ItemRow';
-import MarketDialog from '../MarketDialog';
-import ActionButton from '../ActionButton';
+import ItemRow from 'components/Marketplace/ItemRow';
+import InputNumber from 'components/Marketplace/InputNumber';
+import ActionButton from 'components/Marketplace/ActionButton';
+import MarketDialog from 'components/Marketplace/MarketDialog';
 
 const Content = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ const AddBuyOffer = ({ onClose }: any) => {
       onClose={onClose}
     >
       <>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
           </ItemRow>
@@ -44,42 +45,18 @@ const AddBuyOffer = ({ onClose }: any) => {
 
         <Divider light />
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Quantity to buy">
-            <Paper
-              component="form"
-              sx={{
-                p: '0px 4px',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InputBase type="number" sx={{ color: 'white' }} />
-              <Button sx={{ p: '10px' }} aria-label="search">
-                MAX
-              </Button>
-            </Paper>
+            <InputNumber type="number" sx={{ color: 'white' }} />
           </ItemRow>
           <ItemRow heading="Price per unit">
-            <Paper
-              component="form"
-              sx={{
-                p: '0px 4px',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InputBase type="number" sx={{ color: 'white' }} />
-              <Button sx={{ p: '10px' }} aria-label="search">
-                MAX
-              </Button>
-            </Paper>
+            <InputNumber type="number" />
           </ItemRow>
         </Grid>
 
         <Divider light />
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} alignItems="center">
           <ItemRow heading="You have">{balance}</ItemRow>
           <ItemRow heading="You get">{balance}</ItemRow>
           <ItemRow heading="You give brutto">{balance}</ItemRow>

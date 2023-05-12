@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Grid } from '@mui/material';
 import styled from '@emotion/styled';
 
-import AddSellOffer from 'components/Marketplace/AddSellOffer';
-import AddBuyOffer from 'components/Marketplace/AddBuyOffer';
+import AddSellOffer from '../AddSellOffer';
+import AddBuyOffer from '../AddBuyOffer';
 
 const StyledButton = styled.button`
   display: flex;
