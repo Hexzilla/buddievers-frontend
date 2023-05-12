@@ -399,16 +399,16 @@ export const AccountDialog = () => {
           {error instanceof UnsupportedChainIdError && (
             <>
               <div>Wrong Network</div>
-              <h5>Please connect to the appropriate Exosama network.</h5>
+              <h5>Please connect to the appropriate BSC Test network.</h5>
               <Button
                 //className={formButton}
                 onClick={() => {
-                  addNetwork(ChainId.EXOSAMA);
+                  addNetwork(ChainId.BSC_TESTNET);
                 }}
-                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.EXOSAMA]} alt='' />}
+                startIcon={<img height={'16px'} src={NETWORK_ICONS[ChainId.BSC_TESTNET]} alt='' />}
                 color="primary"
               >
-                Switch to Exosama Network
+                Switch to BSC Test Network
               </Button>
               {/* <Button
                 //className={formButton}
