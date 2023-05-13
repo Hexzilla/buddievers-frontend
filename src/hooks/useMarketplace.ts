@@ -88,6 +88,20 @@ export const useMarketplace = () => {
     return tx.wait();
   }, []);
 
+  const sellTokenByOrderId = useCallback(async (orderId: string, quantity: number) => {
+    if (!window.ethereum) return;
+    console.log('sellTokenByOrderId', orderId, quantity);
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    const quantityToWei = ethers.utils.parseUnits(quantity.toString(), 'ether');
+    const tx = await contract.sellTokenByOrderId(orderId, quantityToWei);
+    console.log('sellTokenByOrderId', tx);
+    return tx.wait();
+  }, []);
+
   const userStakeInfo = useCallback(async (address: string) => {
     if (!window.ethereum) return;
 
@@ -103,6 +117,7 @@ export const useMarketplace = () => {
     addSellOrder,
     addBuyOrder,
     buyTokenByOrderId,
+    sellTokenByOrderId,
     userStakeInfo,
   };
 };

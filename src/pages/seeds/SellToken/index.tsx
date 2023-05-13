@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import styled from '@emotion/styled';
 import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
-import { shortAddress } from 'utils/utils';
+import { toastOptions, shortAddress } from 'utils/utils';
 
 import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
@@ -17,7 +16,7 @@ import InputNumber from 'components/Marketplace/InputNumber';
 
 const SellToken = ({ order, onClose }: any) => {
   const { account, refresh } = useMarketContext();
-  const { buyTokenByOrderId } = useMarketplace();
+  const { sellTokenByOrderId } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
 
   const balance = 4050; //TODO
@@ -43,26 +42,21 @@ const SellToken = ({ order, onClose }: any) => {
       return;
     }
 
-    const toastId = toast.loading('Buy token ...');
+    const toastId = toast.loading('Sell token ...');
 
     try {
-      const result = await buyTokenByOrderId(
-        order.id,
-        quantity,
-        Number(order.price)
-      );
+      const result = await sellTokenByOrderId(order.id, quantity);
       if (!result) {
-        toast.update(toastId, {
-          render: 'Failed to buy token!',
-          type: 'error',
-          isLoading: false,
-        });
+        toast.update(toastId, toastOptions('Failed to sell token!'));
       } else {
         refresh();
-        toast.update(toastId, {
-          render: 'You have been bought token order successfully!',
-          type: 'success',
-        });
+        toast.update(
+          toastId,
+          toastOptions(
+            'You have been sold token order successfully!',
+            'success'
+          )
+        );
       }
     } catch (err: any) {
       console.error(err);
@@ -72,8 +66,6 @@ const SellToken = ({ order, onClose }: any) => {
         isLoading: false,
       });
     }
-
-    await buyTokenByOrderId(order.id, quantity, Number(order.price));
   };
 
   return (

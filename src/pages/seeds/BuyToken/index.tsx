@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import styled from '@emotion/styled';
 import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
-import { shortAddress } from 'utils/utils';
+import { toastOptions, shortAddress } from 'utils/utils';
 
 import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
@@ -50,17 +49,16 @@ const BuyToken = ({ order, onClose }: any) => {
         Number(order.price)
       );
       if (!result) {
-        toast.update(toastId, {
-          render: 'Failed to buy token!',
-          type: 'error',
-          isLoading: false,
-        });
+        toast.update(toastId, toastOptions('Failed to buy token!'));
       } else {
         refresh();
-        toast.update(toastId, {
-          render: 'You have been bought token order successfully!',
-          type: 'success',
-        });
+        toast.update(
+          toastId,
+          toastOptions(
+            'You have been bought token order successfully!',
+            'success'
+          )
+        );
       }
     } catch (err: any) {
       console.error(err);
@@ -70,8 +68,6 @@ const BuyToken = ({ order, onClose }: any) => {
         isLoading: false,
       });
     }
-
-    await buyTokenByOrderId(order.id, quantity, Number(order.price));
   };
 
   return (
