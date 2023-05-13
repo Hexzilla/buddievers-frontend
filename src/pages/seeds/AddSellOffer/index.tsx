@@ -108,17 +108,13 @@ const AddSellOffer = ({ onClose }: any) => {
             {shortAddress(CONTRACT_MARKETPLACE)}
           </ItemRow>
           <ItemRow heading="Quantity to sell">
-            <InputNumber
-              sx={{ color: 'white' }}
-              value={quantity}
-              onChange={onChangeQuantity}
-            />
+            <InputNumber value={quantity} onChange={onChangeQuantity} />
           </ItemRow>
           <ItemRow heading="Price per unit">
             <InputNumber
-              sx={{ color: 'white' }}
               value={unitPrice}
               onChange={onChangeUnitPrice}
+              onButtonClick={() => setQuantity(seedBalance)}
             />
           </ItemRow>
         </Grid>

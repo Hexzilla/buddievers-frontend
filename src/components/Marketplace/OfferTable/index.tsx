@@ -16,6 +16,7 @@ const StyledTable = styled(Table)`
   td,
   th {
     color: white;
+    font-size: 18px;
   }
   tr {
     border: none;
@@ -40,7 +41,7 @@ const Message = styled.div`
 const OfferTable = ({ orders, onTakeOffer }: any) => {
   return (
     <TableContainer style={{ marginTop: '30px', textAlign: 'center' }}>
-      <StyledTable sx={{ minWidth: 650 }} aria-label="simple table">
+      <StyledTable aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>

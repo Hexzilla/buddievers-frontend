@@ -1,10 +1,13 @@
 import { useClasses } from 'hooks';
 import { Grid } from '@mui/material';
 
+import { useMarketContext } from 'context/MarketContext';
+import { formatNumber } from 'utils/utils';
 import MarketToolbar from '../Toolbar';
 import { styles } from './styles';
 
 const TokenProfile = () => {
+  const { seedBalance } = useMarketContext();
   const { container, overViewItem } = useClasses(styles);
 
   return (
@@ -118,7 +121,7 @@ const TokenProfile = () => {
           <div style={{ color: 'white', marginTop: '20px' }}>
             <p style={{ fontSize: '24px' }}>
               <span style={{ color: '#00CE4C' }}>YOUR BALANCE</span>
-              &nbsp;&nbsp;&nbsp; 100 000$SEEDS
+              &nbsp;&nbsp;&nbsp; {formatNumber(seedBalance)} $SEEDS
             </p>
           </div>
           <MarketToolbar />

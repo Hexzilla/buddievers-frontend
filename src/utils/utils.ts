@@ -22,7 +22,7 @@ export const shortAddress = (address: string) => {
 };
 
 export const formatNumber = (value: number, digits: number = 4) => {
-  return value == 0 || value >= 1 ? value.toFixed(digits) : value;
+  return value == 0 || value >= 1 ? value.toFixed(digits) : '' + value;
 };
 
 export const getBalance = async (account: string) => {

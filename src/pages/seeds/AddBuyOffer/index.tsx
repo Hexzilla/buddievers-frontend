@@ -110,16 +110,15 @@ const AddBuyOffer = ({ onClose }: any) => {
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Quantity to buy">
             <InputNumber
-              sx={{ color: 'white' }}
               value={quantity}
               onChange={onChangeQuantity}
             />
           </ItemRow>
           <ItemRow heading="Price per unit">
             <InputNumber
-              sx={{ color: 'white' }}
               value={unitPrice}
               onChange={onChangeUnitPrice}
+              onButtonClick={() => console.log('max')}
             />
           </ItemRow>
         </Grid>

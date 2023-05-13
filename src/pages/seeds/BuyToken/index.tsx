@@ -96,7 +96,6 @@ const BuyToken = ({ order, onClose }: any) => {
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="You buy">
             <InputNumber
-              sx={{ color: 'white' }}
               value={quantity}
               onChange={onChangeQuantity}
             />
