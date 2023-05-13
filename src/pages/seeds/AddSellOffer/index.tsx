@@ -67,15 +67,13 @@ const AddSellOffer = ({ onClose }: any) => {
           type: 'error',
           isLoading: false,
         });
-        return;
+      } else {
+        refresh();
+        toast.update(toastId, {
+          render: 'You have been created sell order successfully!',
+          type: 'success',
+        });
       }
-
-      refresh();
-
-      toast.update(toastId, {
-        render: 'You have been created sell order successfully!',
-        type: 'success',
-      });
     } catch (err: any) {
       console.error(err);
       toast.update(toastId, {

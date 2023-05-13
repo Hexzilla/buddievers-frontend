@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { useMarketContext } from 'context/MarketContext';
 import OfferTable from 'components/Marketplace/OfferTable';
 import SellToken from '../SellToken';
-import BuyToken from '..//BuyToken';
+import BuyToken from '../BuyToken';
 import OfferTabs from '../OfferTabs';
 
 const Container = styled.div`
@@ -41,10 +41,10 @@ const ItemTable = () => {
       <OfferTable orders={datasource} onTakeOffer={onTakeOffer} />
 
       {!!offer && orderType == 0 && (
-        <BuyToken order={offer} onClose={() => onTakeOffer(null)} />
+        <SellToken order={offer} onClose={() => onTakeOffer(null)} />
       )}
       {!!offer && orderType == 1 && (
-        <SellToken offer={offer} onClose={() => onTakeOffer(null)} />
+        <BuyToken order={offer} onClose={() => onTakeOffer(null)} />
       )}
     </Container>
   );

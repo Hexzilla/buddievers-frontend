@@ -75,6 +75,7 @@ export const useMarketplace = () => {
 
   const buyTokenByOrderId = useCallback(async (orderId: string, quantity: number, unitPrice: number) => {
     if (!window.ethereum) return;
+    console.log('buyTokenByOrderId', orderId, quantity, unitPrice);
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();

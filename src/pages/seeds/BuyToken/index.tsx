@@ -15,13 +15,6 @@ import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
 import InputNumber from 'components/Marketplace/InputNumber';
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 24px 0px;
-`;
-
 const BuyToken = ({ order, onClose }: any) => {
   const { account, refresh } = useMarketContext();
   const { buyTokenByOrderId } = useMarketplace();
@@ -62,15 +55,13 @@ const BuyToken = ({ order, onClose }: any) => {
           type: 'error',
           isLoading: false,
         });
-        return;
+      } else {
+        refresh();
+        toast.update(toastId, {
+          render: 'You have been bought token order successfully!',
+          type: 'success',
+        });
       }
-
-      refresh();
-
-      toast.update(toastId, {
-        render: 'You have been bought token order successfully!',
-        type: 'success',
-      });
     } catch (err: any) {
       console.error(err);
       toast.update(toastId, {
@@ -94,7 +85,7 @@ const BuyToken = ({ order, onClose }: any) => {
       }
       onClose={onClose}
     >
-      <Content>
+      <>
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
@@ -119,7 +110,7 @@ const BuyToken = ({ order, onClose }: any) => {
           </ItemRow>
           <ItemRow heading="You give">{gain} SAMA</ItemRow>
         </Grid>
-      </Content>
+      </>
     </MarketDialog>
   );
 };
