@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
-import { shortAddress } from 'utils/utils';
+import { toastOptions, shortAddress } from 'utils/utils';
 
 import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
@@ -62,17 +62,16 @@ const AddSellOffer = ({ onClose }: any) => {
       const result = await addSellOrder(account, quantity, unitPrice, 0);
       console.log('add-sell-offer-result', result);
       if (!result) {
-        toast.update(toastId, {
-          render: 'Failed to create sell offer!',
-          type: 'error',
-          isLoading: false,
-        });
+        toast.update(toastId, toastOptions('Failed to create sell offer!'));
       } else {
         refresh();
-        toast.update(toastId, {
-          render: 'You have been created sell order successfully!',
-          type: 'success',
-        });
+        toast.update(
+          toastId,
+          toastOptions(
+            'You have been created sell offer successfully!',
+            'success'
+          )
+        );
       }
     } catch (err: any) {
       console.error(err);
