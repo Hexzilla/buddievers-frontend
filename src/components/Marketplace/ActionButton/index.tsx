@@ -1,10 +1,6 @@
 import styled from '@emotion/styled';
 
-const StyledButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const StyledButton = styled.button`
   border: none;
 
   width: 100%;
@@ -12,15 +8,19 @@ const StyledButton = styled.div`
 
   font-size: 18px;
   color: white;
-  background: #00ce4c;
+  background: ${props => props.disabled ? '#023a17' : '#00ce4c'};
   border-radius: 20px;
 
   cursor: pointer;
   text-transform: uppercase;
 `;
 
-const ActionButton = ({ onClick, children }: any) => {
-  return <StyledButton onClick={onClick}>{children}</StyledButton>;
+const ActionButton = ({ onClick, children, ...props }: any) => {
+  return (
+    <StyledButton onClick={onClick} {...props}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default ActionButton;

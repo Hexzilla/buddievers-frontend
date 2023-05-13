@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled';
 import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
-import { toastOptions, shortAddress } from 'utils/utils';
+import { toastOptions, shortAddress, formatNumber } from 'utils/utils';
 
 import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
@@ -23,16 +23,10 @@ const Content = styled.div`
 `;
 
 const AddSellOffer = ({ onClose }: any) => {
-  const { account, refresh } = useMarketContext();
+  const { account, seedBalance, refresh } = useMarketContext();
   const { addSellOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
-
-  const offer: any = {};
-  const balance = 4050; //TODO
-  const gain = 0.123124;
-  const protocalFee = 0;
-  const royaltyFee = 0;
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -83,12 +77,26 @@ const AddSellOffer = ({ onClose }: any) => {
     }
   };
 
+  const gainAmount = formatNumber(quantity * unitPrice);
+
+  const disabled = useMemo(() => {
+    if (quantity <= 0 || quantity > seedBalance) {
+      return true;
+    }
+    if (unitPrice <= 0) {
+      return true;
+    }
+    return false;
+  }, [quantity, seedBalance]);
+
   return (
     <MarketDialog
       title="Create Sell Offer"
       actions={
         <>
-          <ActionButton onClick={onSubmit}>Place offer</ActionButton>
+          <ActionButton onClick={onSubmit} disabled={disabled}>
+            Place offer
+          </ActionButton>
           <ActionButton onClick={onClose}>Close</ActionButton>
         </>
       }
@@ -118,11 +126,10 @@ const AddSellOffer = ({ onClose }: any) => {
         <Divider light />
 
         <Grid container spacing={4} alignItems="center">
-          <ItemRow heading="You have">{balance}</ItemRow>
-          <ItemRow heading="You give">{balance}</ItemRow>
-          <ItemRow heading="You get brutto">{balance}</ItemRow>
-          <ItemRow heading="Royalty fee">{balance}</ItemRow>
-          <ItemRow heading="You get netto">{balance}</ItemRow>
+          <ItemRow heading="You have">{seedBalance.toFixed(4)} $SEEDS</ItemRow>
+          <ItemRow heading="You give">{formatNumber(quantity)} $SEEDS</ItemRow>
+          <ItemRow heading="Royalty fee">{'0.0000'}</ItemRow>
+          <ItemRow heading="You get">{gainAmount} SAMA</ItemRow>
         </Grid>
       </Content>
     </MarketDialog>

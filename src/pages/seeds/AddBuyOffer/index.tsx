@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import styled from '@emotion/styled';
 import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
-import { toastOptions, shortAddress } from 'utils/utils';
+import { toastOptions, shortAddress, formatNumber } from 'utils/utils';
 
 import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
@@ -15,21 +14,13 @@ import InputNumber from 'components/Marketplace/InputNumber';
 import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 24px 0px;
-`;
-
 const AddBuyOffer = ({ onClose }: any) => {
-  const { account, refresh } = useMarketContext();
+  const { account, balance, seedBalance, refresh } = useMarketContext();
   const { addBuyOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
 
   const offer: any = {};
-  const balance = 4050; //TODO
   const gain = 0.123124;
   const protocalFee = 0;
   const royaltyFee = 0;
@@ -83,12 +74,25 @@ const AddBuyOffer = ({ onClose }: any) => {
     }
   };
 
+  const gainAmount = quantity * unitPrice;
+
+  const disabled = useMemo(() => {
+    if (quantity <= 0 || unitPrice <= 0) {
+      return true;
+    }
+    const totalPrice = quantity * unitPrice;
+    if (totalPrice >= balance) {
+      return true;
+    }
+    return false;
+  }, [quantity, seedBalance]);
+
   return (
     <MarketDialog
       title="BUY $SEEDS"
       actions={
         <>
-          <ActionButton onClick={onSubmit}>Place offer</ActionButton>
+          <ActionButton onClick={onSubmit} disabled={disabled}>Place offer</ActionButton>
           <ActionButton onClick={onClose}>Close</ActionButton>
         </>
       }
@@ -123,12 +127,11 @@ const AddBuyOffer = ({ onClose }: any) => {
         <Divider light />
 
         <Grid container spacing={4} alignItems="center">
-          <ItemRow heading="You have">{balance}</ItemRow>
-          <ItemRow heading="You get">{balance}</ItemRow>
-          <ItemRow heading="You give brutto">{balance}</ItemRow>
-          <ItemRow heading="Protocal fee">{balance}</ItemRow>
-          <ItemRow heading="Royalty fee">{balance}</ItemRow>
-          <ItemRow heading="You give netto">{balance}</ItemRow>
+          <ItemRow heading="You have">{balance.toFixed(4)} SAMA</ItemRow>
+          <ItemRow heading="You get">{formatNumber(quantity)} $SEEDS</ItemRow>
+          <ItemRow heading="Protocal fee">{'0.0000'}</ItemRow>
+          <ItemRow heading="Royalty fee">{'0.0000'}</ItemRow>
+          <ItemRow heading="You give">{formatNumber(seedBalance)} SAMA</ItemRow>
         </Grid>
       </>
     </MarketDialog>

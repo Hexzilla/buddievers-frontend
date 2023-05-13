@@ -14,6 +14,8 @@ export type Order = {
 export interface MarketContext {
   loading: boolean;
   account?: string | null;
+  balance: number;
+  seedBalance: number;
   orders: Order[];
   ownedOrders: Order[];
   refresh: () => Promise<void>;

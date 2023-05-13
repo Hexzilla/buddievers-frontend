@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useActiveWeb3React } from 'hooks';
 import { useMarketplace } from 'hooks/useMarketplace';
+import { useSeedToken } from 'hooks/useSeedToken';
+import { getBalance } from 'utils/utils';
 
 import MarketContextProvider, { Order } from '.';
 
@@ -15,8 +17,11 @@ interface Props {
 export const MarketProvider = ({ children }: Props) => {
   const { account } = useActiveWeb3React();
   const { getOrders } = useMarketplace();
+  const { balanceOf } = useSeedToken();
 
   const [loading, setLoading] = useState(false);
+  const [balance, setBalance] = useState(0);
+  const [seedBalance, setSeedBalance] = useState(0);
   const [orders, setOrders] = useState<Order[]>([]);
 
   const _refresh = useCallback(async () => {
@@ -24,6 +29,14 @@ export const MarketProvider = ({ children }: Props) => {
       toast.warn('Please connect your wallet');
       return;
     }
+
+    const balance = await getBalance(account);
+    if (balance) {
+      setBalance(Number(utils.formatEther(balance)));
+    }
+
+    const seedBalance = await balanceOf(account);
+    setSeedBalance(Number(utils.formatEther(seedBalance)));
 
     const orders = await getOrders();
 
@@ -49,6 +62,8 @@ export const MarketProvider = ({ children }: Props) => {
       value={{
         loading,
         account,
+        balance,
+        seedBalance,
         orders,
         ownedOrders,
         refresh: _refresh,
