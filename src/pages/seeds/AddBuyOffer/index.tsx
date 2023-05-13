@@ -112,13 +112,13 @@ const AddBuyOffer = ({ onClose }: any) => {
             <InputNumber
               value={quantity}
               onChange={onChangeQuantity}
+              onButtonClick={() => console.log('max')}
             />
           </ItemRow>
           <ItemRow heading="Price per unit">
             <InputNumber
               value={unitPrice}
               onChange={onChangeUnitPrice}
-              onButtonClick={() => console.log('max')}
             />
           </ItemRow>
         </Grid>
