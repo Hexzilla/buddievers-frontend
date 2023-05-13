@@ -28,8 +28,19 @@ export const useSeedToken = () => {
     return await contract.allowance(owner, spender);
   }, []);
 
+  const balanceOf = useCallback(async (account: string) => {
+    if (!window.ethereum) return;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(CONTRACT_SEEDS_ADDRESS, abi, signer);
+    return await contract.balanceOf(account);
+  }, []);
+
   return {
     approve,
     allowance,
+    balanceOf,
   };
 };
