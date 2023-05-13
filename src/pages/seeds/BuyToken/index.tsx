@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled';
+import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { shortAddress } from 'utils/utils';
+
+import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
+
 import ItemRow from 'components/Marketplace/ItemRow';
 import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
@@ -19,7 +23,8 @@ const Content = styled.div`
 `;
 
 const BuyToken = ({ order, onClose }: any) => {
-  const { buyTokenByOrderId } = useMarketContext();
+  const { account, refresh } = useMarketContext();
+  const { buyTokenByOrderId } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
 
   const gain = 0.123124;
@@ -30,11 +35,49 @@ const BuyToken = ({ order, onClose }: any) => {
   };
 
   const handleBuyToken = async () => {
+    if (!account) {
+      toast.warn('Please connect your wallet!');
+      return;
+    }
     if (quantity <= 0) {
+      toast.warn('Please input quantity!');
       return;
     }
     if (quantity > Number(order.quantity)) {
+      toast.warn('Too much quantity!');
       return;
+    }
+
+    const toastId = toast.loading('Buy token ...');
+
+    try {
+      const result = await buyTokenByOrderId(
+        order.id,
+        quantity,
+        Number(order.price)
+      );
+      if (!result) {
+        toast.update(toastId, {
+          render: 'Failed to buy token!',
+          type: 'error',
+          isLoading: false,
+        });
+        return;
+      }
+
+      refresh();
+
+      toast.update(toastId, {
+        render: 'You have been bought token order successfully!',
+        type: 'success',
+      });
+    } catch (err: any) {
+      console.error(err);
+      toast.update(toastId, {
+        render: err?.data?.message || 'Something went wrong!',
+        type: 'error',
+        isLoading: false,
+      });
     }
 
     await buyTokenByOrderId(order.id, quantity, Number(order.price));

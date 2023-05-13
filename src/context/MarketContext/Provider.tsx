@@ -1,11 +1,6 @@
 import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
 import { BigNumber, utils } from 'ethers';
-import {
-  Id as ToastId,
-  ToastContainer,
-  UpdateOptions,
-  toast,
-} from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useActiveWeb3React } from 'hooks';
@@ -17,26 +12,9 @@ interface Props {
   children: ReactElement;
 }
 
-const updateToast = (id: ToastId, message: string, type: string = 'error') => {
-  const options = {
-    render: message,
-    type,
-    isLoading: false,
-    autoClose: 2000,
-  } as UpdateOptions;
-  toast.update(id, options);
-};
-
-const handleException = (err: any, toastId: ToastId) => {
-  console.error(err);
-  const message = err?.data?.message || 'Something went wrong!';
-  updateToast(toastId, message);
-};
-
 export const MarketProvider = ({ children }: Props) => {
   const { account } = useActiveWeb3React();
-  const { getOrders, addSellOrder, addBuyOrder, buyTokenByOrderId } =
-    useMarketplace();
+  const { getOrders } = useMarketplace();
 
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -62,95 +40,6 @@ export const MarketProvider = ({ children }: Props) => {
     );
   }, [account, getOrders]);
 
-  const _addSellOrder = useCallback(
-    async (quantity: number, price: number, expiration: number) => {
-      if (!account) {
-        toast.warn('Please connect your wallet!');
-        return;
-      }
-
-      const toastId = toast.loading('Creating your sell offer...');
-
-      try {
-        const result = await addSellOrder(account, quantity, price, expiration);
-        console.log('add-sell-offer-result', result);
-        if (!result) {
-          updateToast(toastId, 'Failed to create sell offer!');
-          return;
-        }
-
-        _refresh();
-        updateToast(
-          toastId,
-          'You have been created sell offer successfully!',
-          'success'
-        );
-      } catch (err: any) {
-        handleException(err, toastId);
-      }
-    },
-    [account, addSellOrder, _refresh]
-  );
-
-  const _addBuyOrder = useCallback(
-    async (quantity: number, price: number, expiration: number) => {
-      if (!account) {
-        toast.warn('Please connect your wallet!');
-        return;
-      }
-
-      const toastId = toast.loading('Creating your buy offer...');
-
-      try {
-        const result = await addBuyOrder(quantity, price, expiration);
-        console.log('add-buy-offer-result', result);
-        if (!result) {
-          updateToast(toastId, 'Failed to create buy offer!');
-          return;
-        }
-
-        _refresh();
-        updateToast(
-          toastId,
-          'You have been created buy order successfully!',
-          'success'
-        );
-      } catch (err: any) {
-        handleException(err, toastId);
-      }
-    },
-    [account, addBuyOrder, _refresh]
-  );
-
-  const _buyTokenByOrderId = useCallback(
-    async (orderId: string, quantity: number, unitPrice: number) => {
-      if (!account) {
-        toast.warn('Please connect your wallet!');
-        return;
-      }
-
-      const toastId = toast.loading('Buy token ...');
-
-      try {
-        const result = await buyTokenByOrderId(orderId, quantity, unitPrice);
-        if (!result) {
-          updateToast(toastId, 'Failed to buy token!');
-          return;
-        }
-
-        _refresh();
-        updateToast(
-          toastId,
-          'You have been bought token order successfully!',
-          'success'
-        );
-      } catch (err: any) {
-        handleException(err, toastId);
-      }
-    },
-    [account, addBuyOrder, _refresh]
-  );
-
   const ownedOrders = useMemo(() => {
     return (orders || []).filter((order: any) => order.owner === account);
   }, [account, orders]);
@@ -163,15 +52,12 @@ export const MarketProvider = ({ children }: Props) => {
         orders,
         ownedOrders,
         refresh: _refresh,
-        addSellOrder: _addSellOrder,
-        addBuyOrder: _addBuyOrder,
-        buyTokenByOrderId: _buyTokenByOrderId,
       }}
     >
       {children}
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={true}
       />
     </MarketContextProvider>

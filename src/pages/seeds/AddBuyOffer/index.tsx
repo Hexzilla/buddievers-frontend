@@ -2,10 +2,14 @@ import { useState } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled';
+import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { shortAddress } from 'utils/utils';
+
+import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
+
 import ItemRow from 'components/Marketplace/ItemRow';
 import InputNumber from 'components/Marketplace/InputNumber';
 import ActionButton from 'components/Marketplace/ActionButton';
@@ -19,7 +23,8 @@ const Content = styled.div`
 `;
 
 const AddBuyOffer = ({ onClose }: any) => {
-  const { addBuyOrder } = useMarketContext();
+  const { account, refresh } = useMarketContext();
+  const { addBuyOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
 
@@ -38,14 +43,47 @@ const AddBuyOffer = ({ onClose }: any) => {
   };
 
   const onSubmit = async () => {
+    if (!account) {
+      toast.warn('Please connect your wallet!');
+      return;
+    }
     if (quantity <= 0) {
+      toast.warn('Please input quantity!');
       return;
     }
     if (unitPrice <= 0) {
+      toast.warn('Please input price!');
       return;
     }
 
-    await addBuyOrder(quantity, unitPrice, 0);
+    const toastId = toast.loading('Creating your buy offer...');
+
+    try {
+      const result = await addBuyOrder(quantity, unitPrice, 0);
+      console.log('add-buy-offer-result', result);
+      if (!result) {
+        toast.update(toastId, {
+          render: 'Failed to create buy offer!',
+          type: 'error',
+          isLoading: false,
+        });
+        return;
+      }
+
+      refresh();
+
+      toast.update(toastId, {
+        render: 'You have been created buy order successfully!',
+        type: 'success',
+      });
+    } catch (err: any) {
+      console.error(err);
+      toast.update(toastId, {
+        render: err?.data?.message || 'Something went wrong!',
+        type: 'error',
+        isLoading: false,
+      });
+    }
   };
 
   return (
