@@ -19,6 +19,7 @@ export interface MarketContext {
   refresh: () => Promise<void>;
   addSellOrder: (quantity: number, price: number, expiration: number) => Promise<void>;
   addBuyOrder: (quantity: number, price: number, expiration: number) => Promise<void>;
+  buyTokenByOrderId: (orderId: string, quantity: number, unitPrice: number) => Promise<void>;
 }
 
 export const marketContext = createContext<MarketContext | null>(null);

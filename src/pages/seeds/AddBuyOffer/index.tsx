@@ -71,7 +71,6 @@ const AddBuyOffer = ({ onClose }: any) => {
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Quantity to buy">
             <InputNumber
-              type="number"
               sx={{ color: 'white' }}
               value={quantity}
               onChange={onChangeQuantity}
@@ -79,7 +78,6 @@ const AddBuyOffer = ({ onClose }: any) => {
           </ItemRow>
           <ItemRow heading="Price per unit">
             <InputNumber
-              type="number"
               sx={{ color: 'white' }}
               value={unitPrice}
               onChange={onChangeUnitPrice}

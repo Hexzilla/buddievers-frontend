@@ -41,7 +41,7 @@ const ItemTable = () => {
       <OfferTable orders={datasource} onTakeOffer={onTakeOffer} />
 
       {!!offer && orderType == 0 && (
-        <BuyToken offer={offer} onClose={() => onTakeOffer(null)} />
+        <BuyToken order={offer} onClose={() => onTakeOffer(null)} />
       )}
       {!!offer && orderType == 1 && (
         <SellToken offer={offer} onClose={() => onTakeOffer(null)} />

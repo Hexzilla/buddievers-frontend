@@ -66,7 +66,6 @@ const AddSellOffer = ({ onClose }: any) => {
           </ItemRow>
           <ItemRow heading="Quantity to sell">
             <InputNumber
-              type="number"
               sx={{ color: 'white' }}
               value={quantity}
               onChange={onChangeQuantity}
@@ -74,7 +73,6 @@ const AddSellOffer = ({ onClose }: any) => {
           </ItemRow>
           <ItemRow heading="Price per unit">
             <InputNumber
-              type="number"
               sx={{ color: 'white' }}
               value={unitPrice}
               onChange={onChangeUnitPrice}

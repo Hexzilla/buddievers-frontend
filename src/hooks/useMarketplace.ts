@@ -73,15 +73,17 @@ export const useMarketplace = () => {
     []
   );
 
-  const claimRewards = useCallback(async () => {
+  const buyTokenByOrderId = useCallback(async (orderId: string, quantity: number, unitPrice: number) => {
     if (!window.ethereum) return;
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-
     const contract = new ethers.Contract(contractAddress, abi, signer);
-    const tx = await contract.claimRewards();
-    console.log('claimRewards', tx);
+
+    const quantityToWei = ethers.utils.parseUnits(quantity.toString(), 'ether');
+    const totalPrice = ethers.utils.parseUnits((unitPrice * quantity).toString(), 'ether');
+    const tx = await contract.buyTokenByOrderId(orderId, quantityToWei, { value: totalPrice });
+    console.log('buyTokenByOrderId', tx);
     return tx.wait();
   }, []);
 
@@ -99,7 +101,7 @@ export const useMarketplace = () => {
     getOrders,
     addSellOrder,
     addBuyOrder,
-    claimRewards,
+    buyTokenByOrderId,
     userStakeInfo,
   };
 };

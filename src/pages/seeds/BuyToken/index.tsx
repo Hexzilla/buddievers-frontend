@@ -1,14 +1,15 @@
-import { Button, Grid } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
+import { useState } from 'react';
+import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import styled from '@emotion/styled';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { shortAddress } from 'utils/utils';
+import { useMarketContext } from 'context/MarketContext';
 import ItemRow from 'components/Marketplace/ItemRow';
 import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
+import InputNumber from 'components/Marketplace/InputNumber';
 
 const Content = styled.div`
   display: flex;
@@ -17,18 +18,34 @@ const Content = styled.div`
   padding: 24px 0px;
 `;
 
-const BuyToken = ({ offer, onClose }: any) => {
+const BuyToken = ({ order, onClose }: any) => {
+  const { buyTokenByOrderId } = useMarketContext();
+  const [quantity, setQuantity] = useState(0);
+
   const gain = 0.123124;
   const protocalFee = 0;
 
-  console.log('offer', offer)
+  const onChangeQuantity = (e: any) => {
+    setQuantity(Number(e.target.value));
+  };
+
+  const handleBuyToken = async () => {
+    if (quantity <= 0) {
+      return;
+    }
+    if (quantity > Number(order.quantity)) {
+      return;
+    }
+
+    await buyTokenByOrderId(order.id, quantity, Number(order.price));
+  };
 
   return (
     <MarketDialog
       title="Take Offer - Buy $SEEDS"
       actions={
         <>
-          <ActionButton onClick={onClose}>Take offer</ActionButton>
+          <ActionButton onClick={handleBuyToken}>Take offer</ActionButton>
           <ActionButton onClick={onClose}>Close</ActionButton>
         </>
       }
@@ -39,30 +56,20 @@ const BuyToken = ({ offer, onClose }: any) => {
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
           </ItemRow>
-          <ItemRow heading="ID">{shortAddress(offer.id)}</ItemRow>
-          <ItemRow heading="Price per unit">{offer.price} SAMA</ItemRow>
-          <ItemRow heading="Total available">
-            {offer.quantity} $SEEDS
-          </ItemRow>
+          <ItemRow heading="ID">{shortAddress(order.id)}</ItemRow>
+          <ItemRow heading="Price per unit">{order.price} SAMA</ItemRow>
+          <ItemRow heading="Total available">{order.quantity} $SEEDS</ItemRow>
         </Grid>
 
         <Divider light />
 
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="You buy">
-            <Paper
-              component="form"
-              sx={{
-                p: '0px 4px',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InputBase type="number" sx={{ color: 'white' }} />
-              <Button sx={{ p: '10px' }} aria-label="search">
-                MAX
-              </Button>
-            </Paper>
+            <InputNumber
+              sx={{ color: 'white' }}
+              value={quantity}
+              onChange={onChangeQuantity}
+            />
           </ItemRow>
           <ItemRow heading="Your balance">
             {protocalFee.toFixed(2)} $SEEDS

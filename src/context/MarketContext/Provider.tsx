@@ -35,7 +35,8 @@ const handleException = (err: any, toastId: ToastId) => {
 
 export const MarketProvider = ({ children }: Props) => {
   const { account } = useActiveWeb3React();
-  const { getOrders, addSellOrder, addBuyOrder } = useMarketplace();
+  const { getOrders, addSellOrder, addBuyOrder, buyTokenByOrderId } =
+    useMarketplace();
 
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -121,6 +122,35 @@ export const MarketProvider = ({ children }: Props) => {
     [account, addBuyOrder, _refresh]
   );
 
+  const _buyTokenByOrderId = useCallback(
+    async (orderId: string, quantity: number, unitPrice: number) => {
+      if (!account) {
+        toast.warn('Please connect your wallet!');
+        return;
+      }
+
+      const toastId = toast.loading('Buy token ...');
+
+      try {
+        const result = await buyTokenByOrderId(orderId, quantity, unitPrice);
+        if (!result) {
+          updateToast(toastId, 'Failed to buy token!');
+          return;
+        }
+
+        _refresh();
+        updateToast(
+          toastId,
+          'You have been bought token order successfully!',
+          'success'
+        );
+      } catch (err: any) {
+        handleException(err, toastId);
+      }
+    },
+    [account, addBuyOrder, _refresh]
+  );
+
   const ownedOrders = useMemo(() => {
     return (orders || []).filter((order: any) => order.owner === account);
   }, [account, orders]);
@@ -135,6 +165,7 @@ export const MarketProvider = ({ children }: Props) => {
         refresh: _refresh,
         addSellOrder: _addSellOrder,
         addBuyOrder: _addBuyOrder,
+        buyTokenByOrderId: _buyTokenByOrderId,
       }}
     >
       {children}
