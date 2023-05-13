@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 
 import { useMarketContext } from 'context/MarketContext';
 import OfferTable from 'components/Marketplace/OfferTable';
-import SellToken from 'components/Marketplace/SellToken';
-import BuyToken from 'components/Marketplace/BuyToken';
+import SellToken from '../SellToken';
+import BuyToken from '..//BuyToken';
 import OfferTabs from '../OfferTabs';
 
 const Container = styled.div`

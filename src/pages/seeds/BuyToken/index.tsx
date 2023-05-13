@@ -2,22 +2,30 @@ import { Button, Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
+import styled from '@emotion/styled';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
 import { shortAddress } from 'utils/utils';
-import ItemRow from '../ItemRow';
-import MarketDialog from '../MarketDialog';
-import ActionButton from '../ActionButton';
+import ItemRow from 'components/Marketplace/ItemRow';
+import ActionButton from 'components/Marketplace/ActionButton';
+import MarketDialog from 'components/Marketplace/MarketDialog';
 
-const SellToken = ({ offer, onClose }: any) => {
-  const balance = 4050; //TODO
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px 0px;
+`;
+
+const BuyToken = ({ offer, onClose }: any) => {
   const gain = 0.123124;
   const protocalFee = 0;
-  const royaltyFee = 0;
+
+  console.log('offer', offer)
 
   return (
     <MarketDialog
-      title="Take Offer - Sell $SEEDS"
+      title="Take Offer - Buy $SEEDS"
       actions={
         <>
           <ActionButton onClick={onClose}>Take offer</ActionButton>
@@ -26,23 +34,22 @@ const SellToken = ({ offer, onClose }: any) => {
       }
       onClose={onClose}
     >
-      <>
+      <Content>
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
           </ItemRow>
           <ItemRow heading="ID">{shortAddress(offer.id)}</ItemRow>
           <ItemRow heading="Price per unit">{offer.price} SAMA</ItemRow>
-          <ItemRow heading="Total requested">
-            {offer.quantity.toFixed(2)}
+          <ItemRow heading="Total available">
+            {offer.quantity} $SEEDS
           </ItemRow>
         </Grid>
 
         <Divider light />
 
         <Grid container spacing={4} alignItems="center">
-          <ItemRow heading="Your balance">{balance.toFixed(2)}</ItemRow>
-          <ItemRow heading="You sell">
+          <ItemRow heading="You buy">
             <Paper
               component="form"
               sx={{
@@ -57,13 +64,14 @@ const SellToken = ({ offer, onClose }: any) => {
               </Button>
             </Paper>
           </ItemRow>
-          <ItemRow heading="Protocol fee">{protocalFee.toFixed(2)}</ItemRow>
-          <ItemRow heading="Royalty fee">{royaltyFee.toFixed(2)}</ItemRow>
-          <ItemRow heading="You get">{gain} SAMA</ItemRow>
+          <ItemRow heading="Your balance">
+            {protocalFee.toFixed(2)} $SEEDS
+          </ItemRow>
+          <ItemRow heading="You give">{gain} SAMA</ItemRow>
         </Grid>
-      </>
+      </Content>
     </MarketDialog>
   );
 };
 
-export default SellToken;
+export default BuyToken;
