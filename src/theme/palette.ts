@@ -80,7 +80,7 @@ export const palette: PaletteOptions = {
     mintBtnBack: mint_btn_back,
   },
   text: {
-    primary: font_green,
+    primary: v2_white,
     secondary: v2_text,
     disabled: V2_grey_disabled,
     mintWhite: mint_white,

@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 import AddSellOffer from '../AddSellOffer';
 import AddBuyOffer from '../AddBuyOffer';
+import Transfer from '../Transfer';
 
 const StyledButton = styled.button`
   display: flex;
@@ -22,30 +23,28 @@ const StyledButton = styled.button`
 `;
 
 const Toolbar = () => {
-  const [showBuyOffer, setShowBuyOffer] = useState(false);
-  const [showSellOffer, setShowSellOffer] = useState(false);
+  const [showDialog, setShowDialog] = useState(0);
 
   return (
     <div style={{ marginTop: '6vh' }}>
       <Grid container spacing={2}>
         <Grid item md={4} sm={12}>
-          <StyledButton onClick={() => setShowBuyOffer(true)}>
+          <StyledButton onClick={() => setShowDialog(1)}>
             BUY $SEEDS
           </StyledButton>
         </Grid>
         <Grid item md={4} sm={12}>
-          <StyledButton onClick={() => setShowSellOffer(true)}>
+          <StyledButton onClick={() => setShowDialog(2)}>
             SELL $SEEDS
           </StyledButton>
         </Grid>
         <Grid item md={4} sm={12}>
-          <StyledButton>TRANSFER</StyledButton>
+          <StyledButton onClick={() => setShowDialog(3)}>TRANSFER</StyledButton>
         </Grid>
       </Grid>
-      {showBuyOffer && <AddBuyOffer onClose={() => setShowBuyOffer(false)} />}
-      {showSellOffer && (
-        <AddSellOffer onClose={() => setShowSellOffer(false)} />
-      )}
+      {showDialog === 1 && <AddBuyOffer onClose={() => setShowDialog(0)} />}
+      {showDialog === 2 && <AddSellOffer onClose={() => setShowDialog(0)} />}
+      {showDialog === 3 && <Transfer onClose={() => setShowDialog(0)} />}
     </div>
   );
 };

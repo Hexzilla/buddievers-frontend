@@ -28,6 +28,17 @@ export const useSeedToken = () => {
     return await contract.allowance(owner, spender);
   }, []);
 
+  const transfer = useCallback(async (to: string, amount: number) => {
+    if (!window.ethereum) return;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(CONTRACT_SEEDS_ADDRESS, abi, signer);
+    const amountToWei = ethers.utils.parseUnits(amount.toString(), 'ether');
+    return await contract.transfer(to, amountToWei);
+  }, []);
+
   const balanceOf = useCallback(async (account: string) => {
     if (!window.ethereum) return;
 
@@ -41,6 +52,7 @@ export const useSeedToken = () => {
   return {
     approve,
     allowance,
+    transfer,
     balanceOf,
   };
 };
