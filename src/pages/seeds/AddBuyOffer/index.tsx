@@ -20,11 +20,6 @@ const AddBuyOffer = ({ onClose }: any) => {
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
 
-  const offer: any = {};
-  const gain = 0.123124;
-  const protocalFee = 0;
-  const royaltyFee = 0;
-
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
   };
@@ -74,8 +69,6 @@ const AddBuyOffer = ({ onClose }: any) => {
     }
   };
 
-  const gainAmount = quantity * unitPrice;
-
   const disabled = useMemo(() => {
     if (quantity <= 0 || unitPrice <= 0) {
       return true;
@@ -85,7 +78,7 @@ const AddBuyOffer = ({ onClose }: any) => {
       return true;
     }
     return false;
-  }, [quantity, seedBalance]);
+  }, [quantity, unitPrice, balance]);
 
   return (
     <MarketDialog
