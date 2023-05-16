@@ -50,6 +50,7 @@ declare module '@mui/material/styles/createPalette' {
     primary: string;
     secondary: string;
     disabled: string;
+    button: string;
     mintWhite: string;
     mintBlack: string;
     mintPrimary: string;
@@ -82,6 +83,7 @@ export const palette: PaletteOptions = {
   text: {
     primary: v2_white,
     secondary: v2_text,
+    button: font_green,
     disabled: V2_grey_disabled,
     mintWhite: mint_white,
     mintBlack: mint_black,
