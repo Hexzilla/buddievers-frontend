@@ -87,7 +87,7 @@ const AddSellOffer = ({ onClose }: any) => {
       return true;
     }
     return false;
-  }, [quantity, seedBalance]);
+  }, [quantity, unitPrice, seedBalance]);
 
   return (
     <MarketDialog
