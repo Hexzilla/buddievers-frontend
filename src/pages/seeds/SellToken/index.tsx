@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { toast } from 'react-toastify';
@@ -15,7 +15,7 @@ import MarketDialog from 'components/Marketplace/MarketDialog';
 import InputNumber from 'components/Marketplace/InputNumber';
 
 const SellToken = ({ order, onClose }: any) => {
-  const { account, seedBalance, refresh } = useMarketContext();
+  const { account, balance, refresh } = useMarketContext();
   const { sellTokenByOrderId } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
 
@@ -65,12 +65,24 @@ const SellToken = ({ order, onClose }: any) => {
 
   const gainAmount = formatNumber(quantity * Number(order.price));
 
+  const disabled = useMemo(() => {
+    if (quantity <= 0 || quantity > Number(order.quantity)) {
+      return true;
+    }
+    if (balance <= 0) {
+      return true;
+    }
+    return false;
+  }, [order, quantity, balance]);
+
   return (
     <MarketDialog
       title="Take Offer - Sell $SEEDS"
       actions={
         <>
-          <ActionButton onClick={onSubmit}>Take offer</ActionButton>
+          <ActionButton disabled={disabled} onClick={onSubmit}>
+            Take offer
+          </ActionButton>
           <ActionButton onClick={onClose}>Close</ActionButton>
         </>
       }
@@ -89,16 +101,16 @@ const SellToken = ({ order, onClose }: any) => {
         <Divider light />
 
         <Grid container spacing={4} alignItems="center">
-          <ItemRow heading="Your balance">{formatNumber(seedBalance)} $SEEDS</ItemRow>
+          <ItemRow heading="Your balance">{formatNumber(balance)} SAMA</ItemRow>
           <ItemRow heading="You sell">
             <InputNumber
               value={quantity}
               onChange={onChangeQuantity}
-              onButtonClick={() => setQuantity(seedBalance)}
+              onButtonClick={() => setQuantity(order.quantity)}
             />
           </ItemRow>
-          <ItemRow heading="Protocol fee">{'0.0000'}</ItemRow>
-          <ItemRow heading="Royalty fee">{'0.0000'}</ItemRow>
+          <ItemRow heading="Protocol fee">{'0.0000 SAMA'}</ItemRow>
+          <ItemRow heading="Royalty fee">{'0.0000 SAMA'}</ItemRow>
           <ItemRow heading="You get">{gainAmount} SAMA</ItemRow>
         </Grid>
       </>

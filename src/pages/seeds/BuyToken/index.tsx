@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
-import { toastOptions, shortAddress } from 'utils/utils';
+import { toastOptions, shortAddress, formatNumber } from 'utils/utils';
 
 import { useMarketplace } from 'hooks/useMarketplace';
 import { useMarketContext } from 'context/MarketContext';
@@ -15,12 +15,9 @@ import MarketDialog from 'components/Marketplace/MarketDialog';
 import InputNumber from 'components/Marketplace/InputNumber';
 
 const BuyToken = ({ order, onClose }: any) => {
-  const { account, refresh } = useMarketContext();
+  const { account, balance, refresh } = useMarketContext();
   const { buyTokenByOrderId } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
-
-  const gain = 0.123124;
-  const protocalFee = 0;
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -70,12 +67,25 @@ const BuyToken = ({ order, onClose }: any) => {
     }
   };
 
+  const disabled = useMemo(() => {
+    if (quantity <= 0 || quantity > Number(order.quantity)) {
+      return true;
+    }
+    const totalPrice = quantity * order.price;
+    if (totalPrice >= balance) {
+      return true;
+    }
+    return false;
+  }, [order, quantity, balance]);
+
   return (
     <MarketDialog
       title="Take Offer - Buy $SEEDS"
       actions={
         <>
-          <ActionButton onClick={handleBuyToken}>Take offer</ActionButton>
+          <ActionButton disabled={disabled} onClick={handleBuyToken}>
+            Take offer
+          </ActionButton>
           <ActionButton onClick={onClose}>Close</ActionButton>
         </>
       }
@@ -98,12 +108,13 @@ const BuyToken = ({ order, onClose }: any) => {
             <InputNumber
               value={quantity}
               onChange={onChangeQuantity}
+              onButtonClick={() => setQuantity(order.quantity)}
             />
           </ItemRow>
-          <ItemRow heading="Your balance">
-            {protocalFee.toFixed(2)} $SEEDS
+          <ItemRow heading="Your balance">{formatNumber(balance)} SAMA</ItemRow>
+          <ItemRow heading="You give">
+            {formatNumber(quantity * order.price)} SAMA
           </ItemRow>
-          <ItemRow heading="You give">{gain} SAMA</ItemRow>
         </Grid>
       </>
     </MarketDialog>

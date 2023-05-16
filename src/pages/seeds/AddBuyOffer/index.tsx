@@ -15,7 +15,7 @@ import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
 
 const AddBuyOffer = ({ onClose }: any) => {
-  const { account, balance, seedBalance, refresh } = useMarketContext();
+  const { account, balance, refresh } = useMarketContext();
   const { addBuyOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
