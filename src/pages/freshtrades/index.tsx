@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
-import { theme } from 'theme/Theme';
 import { Video } from 'ui';
 
 import { MintComplete } from './MintComplete';
@@ -11,7 +10,7 @@ import { Whitelist, WhiteState } from './Whitelist';
 
 const Container = styled.div`
   position: relative;
-  background-color: ${theme.palette.background.mintBlack};
+  background-color: black;
 `;
 
 const VideoContainer = styled.div`

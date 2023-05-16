@@ -19,7 +19,7 @@ const MainTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: ${theme.palette.text.mintWhite};
+  color: white;
   text-transform: uppercase;
 
   padding-top: 30px;
@@ -35,7 +35,7 @@ const SubTitle = styled(Typography)`
   align-items: center;
   text-align: center;
 
-  color: ${theme.palette.text.mintWhite};
+  color: white;
   text-transform: uppercase;
   @media (max-width: 1020px) {
     padding: 20px 50px;

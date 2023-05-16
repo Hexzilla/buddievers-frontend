@@ -5,14 +5,14 @@ export const styles = (theme: Theme) => ({
     padding: '6px 10px',
     background: '#0078BB',
     borderRadius: '10px',
-    color: theme.palette.text.mintBtnColor,
+    color: 'white',
     fontWeight: '900',
     width : '180px',
     "&:hover" : {
       background : '#0078BB',
     },
     "&:active" : {
-      color : theme.palette.text.mintBtnColor,
+      color : 'white',
       background : '#0078BB',
     }
     /*
@@ -25,17 +25,17 @@ export const styles = (theme: Theme) => ({
   },
   buttonHome: {
     padding: '6px 10px',
-    background: theme.palette.background.mintWhite,
+    background: 'white',
     borderRadius: '10px',
     color: theme.palette.background.darkGreen,
     fontWeight: '900',
     width : '180px',
     "&:hover" : {
-      background : theme.palette.background.mintWhite,
+      background : 'white',
     },
     "&:active" : {
       color : theme.palette.background.darkGreen,
-      background : theme.palette.background.mintWhite,
+      background : 'white',
     }
     /*
     [theme.breakpoints.down('sm')]: {

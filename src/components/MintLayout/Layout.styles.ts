@@ -1,9 +1,8 @@
-import { VerticalAlignCenter } from '@mui/icons-material';
 import { Theme } from '@mui/material';
 
 export const styles = (theme: Theme) => ({
     appBar: {
-      backgroundColor: theme.palette.background.mintSecondary,
+      backgroundColor: '#060040',
        height: '65px',
     },
     toolBar: {

@@ -42,8 +42,7 @@ const StyledTitle = styled(Typography)`
     text-align: center;
 
     /* Main/Dark Green */
-
-    color: ${theme.palette.text.mintBtnColor};
+    color: white;
 
     text-transform: uppercase;
 `;

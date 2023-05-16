@@ -25,7 +25,7 @@ const StyledSpan = styled.span`
   display: flex;
   align-items: center;
   text-align: center;
-  color: ${theme.palette.text.mintBtnColor};
+  color: white;
   flex: none;
   flex-grow: 0;
   text-transform: uppercase;

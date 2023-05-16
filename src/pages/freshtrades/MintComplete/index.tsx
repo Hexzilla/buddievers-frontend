@@ -9,7 +9,7 @@ const Container = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: ${theme.palette.text.mintWhite};
+  color: white;
 `;
 
 const LeftPanel = styled.div`
@@ -74,7 +74,7 @@ const MoonBuddleDetail = styled(Typography)`
   display: flex;
   align-items: center;
   text-align: center;
-  color: ${theme.palette.text.mintWhite};
+  color: white;
 
   @media (max-width: 1020px) {
     width: 230px;
@@ -180,7 +180,7 @@ const MintButtonText = styled(Typography)`
   line-height: 24px;
   align-items: center;
   text-align: center;
-  color: ${theme.palette.text.mintWhite};
+  color: white;
   text-transform: uppercase;
   margin-top: 20px;
   margin-bottom: 20px;

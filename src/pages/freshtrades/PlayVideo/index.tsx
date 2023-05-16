@@ -28,7 +28,7 @@ const StyledTitle = styled(Typography)`
     text-transform : uppercase;
     /* Neutral/White */
 
-    color: ${theme.palette.text.mintWhite};
+    color: white;
     
 `;
 const ImageLift = styled('img')`

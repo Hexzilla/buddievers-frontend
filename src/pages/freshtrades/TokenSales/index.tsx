@@ -18,7 +18,7 @@ const MintContainer = styled.div`
   width: 190px;
   height: 337px;
 
-  background: ${theme.palette.background.mintDarkBlue} 80%;
+  background: #06004080;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -38,7 +38,7 @@ const LiveContainer = styled.div`
   width: 260px;
   height: 337px;
 
-  background: ${theme.palette.background.mintBlack} 80%;
+  background: #00000080;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -59,7 +59,7 @@ const SubTitle = styled(Typography)`
   text-align: center;
   margin-top: 80px;
 
-  color: ${theme.palette.text.mintWhite};
+  color: white;
   text-transform: uppercase;
 `;
 
@@ -71,7 +71,7 @@ const AgreementContainer = styled.div`
 
   width: 484px;
 
-  background: ${theme.palette.background.mintBlack}80;
+  background: #00000080;
   border-radius: 10px;
 
   @media (max-width: 760px) {
@@ -81,14 +81,14 @@ const AgreementContainer = styled.div`
 `;
 
 const AgreementFinal = styled.div`
-  color: ${theme.palette.text.mintWhite};
+  color: white;
   padding-left: 13px;
 `;
 
 const AcceptTerms = styled.div`
   display: flex;
   align-items: center;
-  color: ${theme.palette.text.mintWhite};
+  color: white;
 `;
 
 const ImageMarket = styled('img')`
@@ -109,7 +109,7 @@ const TotalMintLabel = styled(Typography)`
   text-align: left;
   padding-left: 20px;
 
-  color: ${theme.palette.text.mintWhite};
+  color: white;
 `;
 const TotalMintNumber = styled.div`
   font-family: 'Poppins';
@@ -123,7 +123,7 @@ const TotalMintNumber = styled.div`
   text-align: center;
   padding-left: 15px;
 
-  color: ${theme.palette.text.mintWhite};
+  color: white;
 `;
 
 const LiveStatusDiv = styled.div`
@@ -153,7 +153,7 @@ const LiveStatus = styled(Typography)`
 
   /* Neutral/White */
 
-  color: ${theme.palette.background.mintWhite};
+  color: white;
 `;
 
 const GreenSpan = styled('span')`
