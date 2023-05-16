@@ -83,14 +83,14 @@ const StakedToken = ({ stakedToken }: Props) => {
         unstake(stakedToken.tokenId.toString());
       }
     }
-  }, [stakedToken, startTime]);
+  }, [stakedToken, startTime, unstake]);
 
   const confirmUnstake = useCallback(() => {
     setShowWarning(false);
     if (stakedToken) {
       unstake(stakedToken.tokenId.toString());
     }
-  }, [stakedTime]);
+  }, [stakedToken, unstake]);
 
   if (!token) {
     return <></>;

@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
 import MaterialButton from '@mui/material/Button';
 
-import { theme } from 'theme/Theme';
-
 const Container = styled.div`
   font-family: 'Poppins';
   font-style: normal;

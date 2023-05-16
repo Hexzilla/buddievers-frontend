@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { Grid, Typography, Checkbox } from '@mui/material';
 
-import { theme } from 'theme/Theme';
 import { useMintedTokenBalance } from 'hooks/useMintedTokenBalance';
 import { useTokenBalance } from 'hooks/useTokenBalance';
 

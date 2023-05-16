@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
 
-import { theme } from 'theme/Theme';
-
 import { MintButton } from '../MintButton';
 import { Logo } from '../Logo';
 

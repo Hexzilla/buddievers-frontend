@@ -1,8 +1,7 @@
+import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
-import React, { useMemo } from 'react';
 
-import { theme } from 'theme/Theme';
 import { useMintOnline } from 'hooks/useMintOnline';
 
 import { MintButton } from '../MintButton';

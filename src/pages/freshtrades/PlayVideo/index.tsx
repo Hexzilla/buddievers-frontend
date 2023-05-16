@@ -1,14 +1,11 @@
 import styled from '@emotion/styled';
 import { Grid, Typography } from '@mui/material';
 
-import { theme } from 'theme/Theme';
-
 const PlayVideoButton = styled.div`
     /* Buttons V2 */
     @media(max-width: 1020px) {
         padding-top: 150px;
     }
-
 `;
 
 const StyledTitle = styled(Typography)`
