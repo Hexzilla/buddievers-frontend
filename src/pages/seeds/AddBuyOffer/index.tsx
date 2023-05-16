@@ -121,7 +121,7 @@ const AddBuyOffer = ({ onClose }: any) => {
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="You have">{balance.toFixed(4)} SAMA</ItemRow>
           <ItemRow heading="You get">{formatNumber(quantity)} $SEEDS</ItemRow>
-          <ItemRow heading="Protocal fee">{'0.0000'}</ItemRow>
+          <ItemRow heading="Protocol fee">{'0.0000'}</ItemRow>
           <ItemRow heading="Royalty fee">{'0.0000'}</ItemRow>
           <ItemRow heading="You give">{formatNumber(seedBalance)} SAMA</ItemRow>
         </Grid>
