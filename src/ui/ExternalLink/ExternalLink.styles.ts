@@ -7,7 +7,7 @@ export const styles = (theme: Theme) => ({
     transition: `color 0.2s`,
     fontWeight: 600,
     '&:hover': {
-      color: `${theme.palette.text.primary}`
+      color: `${theme.palette.text.button}`
     }
   }
 })

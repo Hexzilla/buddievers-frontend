@@ -21,7 +21,7 @@ const StyledButton = styled(MaterialButton)`
 
     /* Main/Beige */
 
-    background: ${theme.palette.background.mintBtnBack};;
+    background: #0078BB;
     border-radius: 20px;
 
 `;

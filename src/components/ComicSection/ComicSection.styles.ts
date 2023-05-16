@@ -25,12 +25,9 @@ export const styles = (theme: Theme) => ({
         height: "80px",
         borderRadius: "10px",
         backgroundColor: "#F5E2B2",
-        // padding: "30px",
         fontSize: "25px",
         fontWeight: 900,
-        color: theme.palette.text.primary,
-        // marginRight: "2vw",
-        // marginLeft: "5vw",
+        color: theme.palette.text.button,
         "&:hover" : {
         background : "#00CE4C"
         },

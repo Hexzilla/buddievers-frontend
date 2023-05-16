@@ -44,7 +44,7 @@ export const styles = (theme: Theme) => ({
     order: '0'
   },
   subheader: {
-    color: theme.palette.text.primary,
+    color: theme.palette.text.button,
     marginTop: '10px',
     fontSize: '12px',
   },

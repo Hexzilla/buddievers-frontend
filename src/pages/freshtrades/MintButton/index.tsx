@@ -10,7 +10,7 @@ const StyledButton = styled(MaterialButton)`
   padding: 20px 40px;
   width: 344px;
   height: 76px;
-  background: ${theme.palette.background.mintBtnBack};
+  background: #0078BB;
   border-radius: 20px;
   flex: none;
   flex-grow: 0;

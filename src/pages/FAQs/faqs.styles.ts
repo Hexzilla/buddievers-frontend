@@ -28,7 +28,7 @@ export const FAQStyles = (theme : Theme) => ({
         padding: "30px",
         fontSize: "25px",
         fontWeight: 900,
-        color: theme.palette.text.primary,
+        color: theme.palette.text.button,
         "&:hover":{
             backgroundColor: "rgba(0,0,0,0.4)",
             boxShadow: "none",

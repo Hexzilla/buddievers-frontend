@@ -3,17 +3,17 @@ import { Theme } from '@mui/material';
 export const styles = (theme: Theme) => ({
   buttonMint: {
     padding: '6px 10px',
-    background: theme.palette.background.mintBtnBack,
+    background: '#0078BB',
     borderRadius: '10px',
     color: theme.palette.text.mintBtnColor,
     fontWeight: '900',
     width : '180px',
     "&:hover" : {
-      background : theme.palette.background.mintBtnBack,
+      background : '#0078BB',
     },
     "&:active" : {
       color : theme.palette.text.mintBtnColor,
-      background : theme.palette.background.mintBtnBack,
+      background : '#0078BB',
     }
     /*
     [theme.breakpoints.down('sm')]: {

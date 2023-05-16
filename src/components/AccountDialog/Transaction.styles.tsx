@@ -26,12 +26,12 @@ export const styles = (theme: Theme) => ({
     padding: '0.25rem 0rem',
     fontWeight: 500,
     fontSize: '0.825rem',
-    color: theme.palette.text.primary,
+    color: theme.palette.text.button,
   },
   iconWrapper: {
     color: ({ pending, success }: Props) =>
       pending
-        ? theme.palette.text.primary
+        ? theme.palette.text.button
         : success
         ? theme.palette.success.main
         : theme.palette.error.main,

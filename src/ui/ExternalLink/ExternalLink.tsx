@@ -20,7 +20,6 @@ export const ExternalLink = ({
       href={href}
       target='_blank'
       rel='noopener noreferrer'
-      //activeStyle={{ color: theme.palette.text.primary }}
       className={`${link} ${className ?? ''}`}
     >
       {children}

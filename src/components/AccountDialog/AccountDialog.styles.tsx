@@ -33,8 +33,7 @@ export const styles = (theme: Theme) => ({
     inlineHeight: '24px',
     align: 'center',
   },
-  otherCard :
-  {
+  otherCard : {
     borderRadius: '10px',
     marginTop: '20px',
     display: 'flex',
@@ -48,6 +47,9 @@ export const styles = (theme: Theme) => ({
     textAlign: 'center',
     width: '220px',
     margin: '35px',
+    "&:hover": {
+      color: 'white',
+    },
     "row:hover" : {
       backgorund : '#FFFFFF'
     }
@@ -97,7 +99,7 @@ export const styles = (theme: Theme) => ({
     textDecoration: 'none',
     background: 'none',
     cursor: 'pointer',
-    color: theme.palette.text.primary,
+    color: theme.palette.text.button,
     fontWeight: 500,
     ':hover': {
       textDecoration: 'underline',

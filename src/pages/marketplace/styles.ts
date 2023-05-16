@@ -42,7 +42,7 @@ export const styles = (theme : Theme) => ({
         padding: "30px",
         fontSize: "25px",
         fontWeight: 900,
-        color: theme.palette.text.primary,
+        color: theme.palette.text.button,
         "&:hover" : {
             background : "#00CE4C"
         },

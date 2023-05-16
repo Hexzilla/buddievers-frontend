@@ -50,7 +50,7 @@ const MoonBuddiesContainer = styled.div`
   margin-bottom: 49px;
 
   width: 100%;
-  background: ${theme.palette.background.mintPrimary}20;
+  background: #0078BB20;
   border-radius: 10px;
 `;
 
@@ -61,7 +61,7 @@ const MoonBuddle = styled(Typography)`
   display: flex;
   align-items: center;
   text-align: center;
-  color: ${theme.palette.text.mintPrimary};
+  color: #0078BB;
 `;
 
 const MoonBuddleDetail = styled(Typography)`
@@ -104,7 +104,7 @@ const MintingComplete = styled(Typography)`
 `;
 
 const GreenSpan = styled('span')`
-  color: ${theme.palette.text.mintPrimary};
+  color: #0078BB;
 `;
 
 const CongrateDesktop = styled(Typography)`
@@ -167,7 +167,7 @@ const MintButton = styled(MaterialButton)`
   padding: 0px;
   margin: 10px;
 
-  background: ${theme.palette.text.mintPrimary}60;
+  background: #0078BB60;
   border-radius: 20px;
 
   @media (max-width: 1020px) {
@@ -209,7 +209,7 @@ export const MintComplete = () => {
                     </MintingComplete>
                     <CongrateDesktop>
                       CONGRATS, YOU'VE MINTED{' '}
-                      <span style={{ color:`${theme.palette.text.mintPrimary}` }}> &nbsp;12&nbsp; </span>
+                      <span style={{ color: '#0078BB' }}> &nbsp;12&nbsp; </span>
                       /&nbsp;500
                     </CongrateDesktop>
                     <CongrateMobile>Congratulations.</CongrateMobile>

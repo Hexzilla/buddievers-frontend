@@ -9,6 +9,6 @@ export const StyledNav = styled(NavLink)`
   font-weight: 900;
   text-transform: uppercase;
   &:hover {
-    color: ${theme.palette.text.primary};
+    color: ${theme.palette.text.button};
   }
 `;

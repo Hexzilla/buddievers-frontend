@@ -41,9 +41,7 @@ declare module '@mui/material/styles/createPalette' {
     mintWhite: string;
     mintBlack: string;
     mintDarkBlue: string;
-    mintPrimary: string;
     mintSecondary: string;
-    mintBtnBack: string
   }
 
   export interface TypeText {
@@ -53,7 +51,6 @@ declare module '@mui/material/styles/createPalette' {
     button: string;
     mintWhite: string;
     mintBlack: string;
-    mintPrimary: string;
     mintSecondary: string;
     mintBtnColor: string;
   }
@@ -76,9 +73,7 @@ export const palette: PaletteOptions = {
     mintWhite: mint_white,
     mintBlack: mint_black,
     mintDarkBlue: mint_dark_blue,
-    mintPrimary: mint_primary,
     mintSecondary: mint_secondary,
-    mintBtnBack: mint_btn_back,
   },
   text: {
     primary: v2_white,
@@ -87,7 +82,6 @@ export const palette: PaletteOptions = {
     disabled: V2_grey_disabled,
     mintWhite: mint_white,
     mintBlack: mint_black,
-    mintPrimary: mint_primary,
     mintSecondary: mint_secondary,
     mintBtnColor: mint_btn_color,
   },

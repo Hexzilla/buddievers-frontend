@@ -13,7 +13,6 @@ export const NavLink = ({
   return (
     <StyledNav
       to={href}
-      // style={({ isActive }) => ({ color: isActive ? theme.palette.text.primary : '' })}
       className={className}
     >
       {children}

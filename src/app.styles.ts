@@ -64,7 +64,7 @@ export const appStyles = (theme: Theme) => ({
     color: theme.palette.grey[500],
   },
   formValue: {
-    color: theme.palette.text.primary,
+    color: theme.palette.text.button,
   },
   formValueTokenDetails: {
     height: 40,

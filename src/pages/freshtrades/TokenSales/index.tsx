@@ -157,24 +157,8 @@ const LiveStatus = styled(Typography)`
 `;
 
 const GreenSpan = styled('span')`
-  color: ${theme.palette.background.mintPrimary};
+  color: #0078BB;
 `;
-
-// const StyledCheckbox = styled(Checkbox)`
-//   box-sizing: border-box;
-
-//   left: 0%;
-//   right: 0%;
-//   top: 0%;
-//   bottom: 0%;
-
-//   /* Main/Light Green */
-
-//   color: #00ce4c;
-//   /* Main/Light Green */
-
-//   border-radius: 5px;
-// `;
 
 export type MintState = 'soon' | 'online';
 
