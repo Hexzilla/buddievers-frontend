@@ -51,7 +51,7 @@ export const MarketProvider = ({ children }: Props) => {
         expiration: order.expiration.toNumber(),
       }))
     );
-  }, [account, getOrders]);
+  }, [account, getOrders, balanceOf]);
 
   const ownedOrders = useMemo(() => {
     return (orders || []).filter((order: any) => order.owner === account);

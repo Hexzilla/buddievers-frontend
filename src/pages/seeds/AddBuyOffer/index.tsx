@@ -61,11 +61,10 @@ const AddBuyOffer = ({ onClose }: any) => {
       }
     } catch (err: any) {
       console.error(err);
-      toast.update(toastId, {
-        render: err?.data?.message || 'Something went wrong!',
-        type: 'error',
-        isLoading: false,
-      });
+      toast.update(
+        toastId,
+        toastOptions(err?.data?.message || 'Something went wrong!', 'error')
+      );
     }
   };
 

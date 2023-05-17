@@ -40,7 +40,7 @@ const SellToken = ({ order, onClose }: any) => {
     const toastId = toast.loading('Sell token ...');
 
     try {
-      const result = await sellTokenByOrderId(order.id, quantity);
+      const result = await sellTokenByOrderId(account, order.id, Number(quantity));
       if (!result) {
         toast.update(toastId, toastOptions('Failed to sell token!'));
       } else {
@@ -55,11 +55,10 @@ const SellToken = ({ order, onClose }: any) => {
       }
     } catch (err: any) {
       console.error(err);
-      toast.update(toastId, {
-        render: err?.data?.message || 'Something went wrong!',
-        type: 'error',
-        isLoading: false,
-      });
+      toast.update(
+        toastId,
+        toastOptions(err?.data?.message || 'Something went wrong!', 'error')
+      );
     }
   };
 

@@ -1,7 +1,6 @@
 import { useCallback } from 'react';
 import { ethers } from 'ethers';
 import { CONTRACT_MARKETPLACE } from '../constants';
-import { useCollection } from './useCollection';
 import { useSeedToken } from './useSeedToken';
 import abis from './abis.json';
 
@@ -9,7 +8,6 @@ const contractAddress = CONTRACT_MARKETPLACE;
 const abi = abis.marketplace;
 
 export const useMarketplace = () => {
-  const { setApprovalForAll, isApprovedForAll } = useCollection();
   const { approve, allowance } = useSeedToken();
 
   const getOrders = useCallback(async () => {
@@ -88,9 +86,18 @@ export const useMarketplace = () => {
     return tx.wait();
   }, []);
 
-  const sellTokenByOrderId = useCallback(async (orderId: string, quantity: number) => {
+  const sellTokenByOrderId = useCallback(async (address: string, orderId: string, quantity: number) => {
     if (!window.ethereum) return;
     console.log('sellTokenByOrderId', orderId, quantity);
+
+    const allownced = await allowance(address, contractAddress);
+    if (!allownced || !allownced.gt(ethers.BigNumber.from('0'))) {
+      const ar = await approve(contractAddress);
+      if (!ar) {
+        console.error('approve error');
+        return null;
+      }
+    }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -100,7 +107,7 @@ export const useMarketplace = () => {
     const tx = await contract.sellTokenByOrderId(orderId, quantityToWei);
     console.log('sellTokenByOrderId', tx);
     return tx.wait();
-  }, []);
+  }, [allowance, approve]);
 
   const userStakeInfo = useCallback(async (address: string) => {
     if (!window.ethereum) return;
