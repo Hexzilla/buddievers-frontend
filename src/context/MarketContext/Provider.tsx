@@ -1,5 +1,5 @@
-import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
-import { BigNumber, utils } from 'ethers';
+import { ReactElement, useCallback, useMemo, useState } from 'react';
+import { utils } from 'ethers';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,15 +41,17 @@ export const MarketProvider = ({ children }: Props) => {
     const orders = await getOrders();
 
     setOrders(
-      (orders || []).map((order: any) => ({
-        id: order.id,
-        owner: order.owner,
-        price: utils.formatEther(order.price),
-        quantity: utils.formatEther(order.quantity),
-        orderType: order.orderType,
-        createdAt: order.createdAt.toNumber(),
-        expiration: order.expiration.toNumber(),
-      }))
+      (orders || [])
+        .map((order: any) => ({
+          id: order.id,
+          owner: order.owner,
+          price: utils.formatEther(order.price),
+          quantity: utils.formatEther(order.quantity),
+          orderType: order.orderType,
+          createdAt: order.createdAt.toNumber(),
+          expiration: order.expiration.toNumber(),
+        }))
+        .filter((order: any) => order.quantity > 0)
     );
   }, [account, getOrders, balanceOf]);
 

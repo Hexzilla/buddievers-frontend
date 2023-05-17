@@ -63,7 +63,7 @@ const OfferTable = ({ orders, onTakeOffer }: any) => {
               </TableCell>
               <TableCell>{row.price}</TableCell>
               <TableCell>{row.quantity}</TableCell>
-              <TableCell>{row.expiration}</TableCell>
+              <TableCell>{row.expiration ? row.expiration : '-'}</TableCell>
               <TableCell>{shortAddress(row.owner)}</TableCell>
               <TableCell align="right">
                 <FillButton onClick={() => onTakeOffer(row)}>FILL</FillButton>
