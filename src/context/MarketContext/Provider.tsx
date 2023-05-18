@@ -45,8 +45,8 @@ export const MarketProvider = ({ children }: Props) => {
         .map((order: any) => ({
           id: order.id,
           owner: order.owner,
-          price: utils.formatEther(order.price),
-          quantity: utils.formatEther(order.quantity),
+          price: Number(utils.formatEther(order.price)),
+          quantity: Number(utils.formatEther(order.quantity)),
           orderType: order.orderType,
           createdAt: order.createdAt.toNumber(),
           expiration: order.expiration.toNumber(),
