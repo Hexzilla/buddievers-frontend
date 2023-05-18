@@ -15,15 +15,15 @@ import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
 
 type Props = {
-  offer: any;
+  order: any;
   onClose: () => void;
 };
 
-const EditSellOffer = ({ offer, onClose }: Props) => {
+const EditSellOffer = ({ order, onClose }: Props) => {
   const { account, seedBalance, refresh } = useMarketContext();
-  const { addSellOrder } = useMarketplace();
-  const [quantity, setQuantity] = useState(offer ? offer.quantity : 0);
-  const [unitPrice, setUnitPrice] = useState(offer ? offer.price : 0);
+  const { updateSellOrder, removeOrder } = useMarketplace();
+  const [quantity, setQuantity] = useState(order.quantity);
+  const [unitPrice, setUnitPrice] = useState(order.price);
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -34,7 +34,7 @@ const EditSellOffer = ({ offer, onClose }: Props) => {
   };
 
   const onSubmit = async () => {
-    /*if (!account) {
+    if (!account) {
       toast.warn('Please connect your wallet!');
       return;
     }
@@ -50,7 +50,7 @@ const EditSellOffer = ({ offer, onClose }: Props) => {
     const toastId = toast.loading('Creating your sell offer...');
 
     try {
-      const result = await addSellOrder(account, quantity, unitPrice, 0);
+      const result = await updateSellOrder(account, order.id, quantity, unitPrice, 0);
       console.log('add-sell-offer-result', result);
       if (!result) {
         toast.update(toastId, toastOptions('Failed to create sell offer!'));
@@ -70,12 +70,40 @@ const EditSellOffer = ({ offer, onClose }: Props) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
-    }*/
+    }
   };
 
-  const onRemove = () => {
+  const onRemove = async () => {
+    if (!account) {
+      toast.warn('Please connect your wallet!');
+      return;
+    }
 
-  }
+    const toastId = toast.loading('Remove your sell offer...');
+
+    try {
+      const result = await removeOrder(order.id);
+      console.log('remove-offer', result);
+      if (!result) {
+        toast.update(toastId, toastOptions('Failed to remove offer!'));
+      } else {
+        refresh();
+        toast.update(
+          toastId,
+          toastOptions(
+            'You have been removed offer successfully!',
+            'success'
+          )
+        );
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.update(
+        toastId,
+        toastOptions(err?.data?.message || 'Something went wrong!', 'error')
+      );
+    }
+  };
 
   const gainAmount = formatNumber(quantity * unitPrice);
 
@@ -97,7 +125,7 @@ const EditSellOffer = ({ offer, onClose }: Props) => {
           <ActionButton onClick={onSubmit} disabled={disabled}>
             Place offer
           </ActionButton>
-          <ActionButton onClick={onRemove} disabled={disabled}>
+          <ActionButton onClick={onRemove}>
             Remove offer
           </ActionButton>
           <ActionButton onClick={onClose}>Close</ActionButton>
@@ -113,12 +141,17 @@ const EditSellOffer = ({ offer, onClose }: Props) => {
           <ItemRow heading="Quantity to sell">
             <InputNumber
               value={quantity}
+              readOnly
               onChange={onChangeQuantity}
               onButtonClick={() => setQuantity(seedBalance)}
             />
           </ItemRow>
           <ItemRow heading="Price per unit">
-            <InputNumber value={unitPrice} onChange={onChangeUnitPrice} />
+            <InputNumber
+              readOnly
+              value={unitPrice}
+              onChange={onChangeUnitPrice}
+            />
           </ItemRow>
         </Grid>
 

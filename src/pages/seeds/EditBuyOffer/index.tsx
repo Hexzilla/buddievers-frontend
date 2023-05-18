@@ -15,15 +15,15 @@ import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
 
 type Props = {
-  offer: any;
+  order: any;
   onClose: () => void;
 };
 
-const EditBuyOffer = ({ onClose }: Props) => {
+const EditBuyOffer = ({ order, onClose }: Props) => {
   const { account, balance, refresh } = useMarketContext();
-  const { addBuyOrder } = useMarketplace();
-  const [quantity, setQuantity] = useState(0);
-  const [unitPrice, setUnitPrice] = useState(0);
+  const { updateBuyOrder, removeOrder } = useMarketplace();
+  const [quantity, setQuantity] = useState(order.quantity);
+  const [unitPrice, setUnitPrice] = useState(order.price);
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -34,7 +34,7 @@ const EditBuyOffer = ({ onClose }: Props) => {
   };
 
   const onSubmit = async () => {
-    /*if (!account) {
+    if (!account) {
       toast.warn('Please connect your wallet!');
       return;
     }
@@ -50,7 +50,7 @@ const EditBuyOffer = ({ onClose }: Props) => {
     const toastId = toast.loading('Creating your buy offer...');
 
     try {
-      const result = await addBuyOrder(quantity, unitPrice, 0);
+      const result = await updateBuyOrder(order.id, quantity, unitPrice, 0);
       console.log('add-buy-offer-result', result);
       if (!result) {
         toast.update(toastId, toastOptions('Failed to create buy offer!'));
@@ -70,12 +70,40 @@ const EditBuyOffer = ({ onClose }: Props) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
-    }*/
+    }
   };
 
-  const onRemove = () => {
+  const onRemove = async () => {
+    if (!account) {
+      toast.warn('Please connect your wallet!');
+      return;
+    }
 
-  }
+    const toastId = toast.loading('Remove your sell offer...');
+
+    try {
+      const result = await removeOrder(order.id);
+      console.log('remove-offer', result);
+      if (!result) {
+        toast.update(toastId, toastOptions('Failed to remove offer!'));
+      } else {
+        refresh();
+        toast.update(
+          toastId,
+          toastOptions(
+            'You have been removed offer successfully!',
+            'success'
+          )
+        );
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.update(
+        toastId,
+        toastOptions(err?.data?.message || 'Something went wrong!', 'error')
+      );
+    }
+  };
 
   const disabled = useMemo(() => {
     if (quantity <= 0 || unitPrice <= 0) {
@@ -94,9 +122,9 @@ const EditBuyOffer = ({ onClose }: Props) => {
       actions={
         <>
           <ActionButton onClick={onSubmit} disabled={disabled}>
-            Place offer
+            Update offer
           </ActionButton>
-          <ActionButton onClick={onRemove} disabled={disabled}>
+          <ActionButton onClick={onRemove}>
             Remove offer
           </ActionButton>
           <ActionButton onClick={onClose}>Close</ActionButton>
@@ -116,13 +144,18 @@ const EditBuyOffer = ({ onClose }: Props) => {
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Quantity to buy">
             <InputNumber
+              readOnly
               value={quantity}
               onChange={onChangeQuantity}
               onButtonClick={() => console.log('max')}
             />
           </ItemRow>
           <ItemRow heading="Price per unit">
-            <InputNumber value={unitPrice} onChange={onChangeUnitPrice} />
+            <InputNumber
+              readOnly
+              value={unitPrice}
+              onChange={onChangeUnitPrice}
+            />
           </ItemRow>
         </Grid>
 

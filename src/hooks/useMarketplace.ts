@@ -71,6 +71,70 @@ export const useMarketplace = () => {
     []
   );
 
+  const updateSellOrder = useCallback(
+    async (
+      address: string,
+      orderId: string,
+      quantity: number,
+      price: number,
+      expiration: number
+    ) => {
+      if (!window.ethereum) return;
+
+      const allownced = await allowance(address, contractAddress);
+      if (!allownced || !allownced.gt(ethers.BigNumber.from('0'))) {
+        const ar = await approve(contractAddress);
+        if (!ar) {
+          console.error('approve error');
+          return null;
+        }
+      }
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+
+      const quantityToWei = ethers.utils.parseUnits(quantity.toString(), 'ether');
+      const priceToWei = ethers.utils.parseUnits(price.toString(), 'ether');
+      const tx = await contract.updateSellOrder(orderId, quantityToWei, priceToWei, expiration);
+      return tx.wait();
+    },
+    [allowance, approve]
+  );
+
+  const updateBuyOrder = useCallback(
+    async (
+      orderId: string,
+      quantity: number,
+      price: number,
+      expiration: number
+    ) => {
+      if (!window.ethereum) return;
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, abi, signer);
+
+      const quantityToWei = ethers.utils.parseUnits(quantity.toString(), 'ether');
+      const priceToWei = ethers.utils.parseUnits(price.toString(), 'ether');
+      const totalPrice = ethers.utils.parseUnits((quantity * price).toString(), 'ether');
+      const tx = await contract.updateBuyOrder(orderId, quantityToWei, priceToWei, expiration, { value: totalPrice });
+      return tx.wait();
+    },
+    []
+  );
+
+  const removeOrder = useCallback(async (orderId: string) => {
+    if (!window.ethereum) return;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    const tx = await contract.removeOrder(orderId);
+    return tx.wait();
+  }, []);
+
   const buyTokenByOrderId = useCallback(async (orderId: string, quantity: number, unitPrice: number) => {
     if (!window.ethereum) return;
     console.log('buyTokenByOrderId', orderId, quantity, unitPrice);
@@ -123,6 +187,9 @@ export const useMarketplace = () => {
     getOrders,
     addSellOrder,
     addBuyOrder,
+    updateSellOrder,
+    updateBuyOrder,
+    removeOrder,
     buyTokenByOrderId,
     sellTokenByOrderId,
     userStakeInfo,

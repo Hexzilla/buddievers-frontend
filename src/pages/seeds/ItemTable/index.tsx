@@ -42,10 +42,10 @@ const ItemTable = () => {
   const editOfferDialog = () => (
     <>
       {offer?.orderType === 0 && (
-        <EditBuyOffer offer={offer} onClose={onCloseDialog} />
+        <EditBuyOffer order={offer} onClose={onCloseDialog} />
       )}
       {offer?.orderType === 1 && (
-        <EditSellOffer offer={offer} onClose={onCloseDialog} />
+        <EditSellOffer order={offer} onClose={onCloseDialog} />
       )}
     </>
   );

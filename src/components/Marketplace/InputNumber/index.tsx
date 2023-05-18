@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
+import InputBase, { InputBaseProps } from '@mui/material/InputBase';
 import styled from '@emotion/styled';
 
 const StyledButton = styled(Button)`
@@ -8,13 +8,13 @@ const StyledButton = styled(Button)`
   background: #00ce4c;
 `;
 
-type Props = {
+interface Props extends InputBaseProps {
   value: number;
   onChange: (e: any) => void;
   onButtonClick?: () => void;
 };
 
-const InputNumber = ({ value, onChange, onButtonClick }: Props) => {
+const InputNumber = ({ value, onChange, onButtonClick, ...props }: Props) => {
   return (
     <Paper
       component="form"
@@ -30,6 +30,7 @@ const InputNumber = ({ value, onChange, onButtonClick }: Props) => {
         sx={{ color: 'white', fontSize: 20 }}
         value={value}
         onChange={onChange}
+        {...props}
       />
       {!!onButtonClick && (
         <StyledButton aria-label="MAX" onClick={onButtonClick}>
