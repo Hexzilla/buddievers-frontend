@@ -86,7 +86,7 @@ const AddBuyOffer = ({ onClose }: any) => {
 
   return (
     <MarketDialog
-      title="BUY $SEEDS"
+      title="Create Buy Offer"
       actions={
         <>
           <ActionButton onClick={onSubmit} disabled={disabled || loading}>

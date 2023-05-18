@@ -122,12 +122,15 @@ const EditSellOffer = ({ order, onClose }: Props) => {
     if (unitPrice <= 0) {
       return true;
     }
+    if (order.quantity === quantity && order.price === unitPrice) {
+      return true;
+    }
     return false;
-  }, [quantity, unitPrice, seedBalance]);
+  }, [order, quantity, unitPrice, seedBalance]);
 
   return (
     <MarketDialog
-      title="Create Sell Offer"
+      title="Edit Your Sell Offer"
       actions={
         <>
           <ActionButton onClick={onSubmit} disabled={disabled || loading}>
@@ -156,17 +159,12 @@ const EditSellOffer = ({ order, onClose }: Props) => {
           <ItemRow heading="Quantity to sell">
             <InputNumber
               value={quantity}
-              readOnly
               onChange={onChangeQuantity}
               onButtonClick={() => setQuantity(seedBalance)}
             />
           </ItemRow>
           <ItemRow heading="Price per unit">
-            <InputNumber
-              readOnly
-              value={unitPrice}
-              onChange={onChangeUnitPrice}
-            />
+            <InputNumber value={unitPrice} onChange={onChangeUnitPrice} />
           </ItemRow>
         </Grid>
 

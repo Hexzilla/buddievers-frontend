@@ -1,5 +1,16 @@
-import { Dialog, DialogActions, DialogContent } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import styled from '@emotion/styled';
+
+const StyledTitle = styled(DialogTitle)`
+  background: #01472a;
+  color: #ffffff;
+  
+  text-align: center;
+  text-transform: uppercase;
+  
+  font-size: 24px;
+  padding: 24px 60px;
+`;
 
 const StyledContent = styled(DialogContent)`
   display: flex;
@@ -30,6 +41,7 @@ const MarketDialog = ({ title, actions, onClose, children }: any) => {
       onClose={() => onClose()}
       title={title}
     >
+      <StyledTitle>{title}</StyledTitle>
       <StyledContent>{children}</StyledContent>
       <StyledActions>
         {actions}

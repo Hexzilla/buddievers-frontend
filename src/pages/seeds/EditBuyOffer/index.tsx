@@ -60,10 +60,7 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
         refresh();
         toast.update(
           toastId,
-          toastOptions(
-            'You have been updated offer successfully!',
-            'success'
-          )
+          toastOptions('You have been updated offer successfully!', 'success')
         );
       }
     } catch (err: any) {
@@ -96,10 +93,7 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
         refresh();
         toast.update(
           toastId,
-          toastOptions(
-            'You have been removed offer successfully!',
-            'success'
-          )
+          toastOptions('You have been removed offer successfully!', 'success')
         );
       }
     } catch (err: any) {
@@ -121,12 +115,15 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
     if (totalPrice >= balance) {
       return true;
     }
+    if (order.quantity === quantity && order.price === unitPrice) {
+      return true;
+    }
     return false;
-  }, [quantity, unitPrice, balance]);
+  }, [order, quantity, unitPrice, balance]);
 
   return (
     <MarketDialog
-      title="BUY $SEEDS"
+      title="Edit Your Offer"
       actions={
         <>
           <ActionButton onClick={onSubmit} disabled={disabled || loading}>
@@ -135,7 +132,9 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
           <ActionButton onClick={onRemove} disabled={loading}>
             Remove offer
           </ActionButton>
-          <ActionButton onClick={onClose} disabled={loading}>Close</ActionButton>
+          <ActionButton onClick={onClose} disabled={loading}>
+            Close
+          </ActionButton>
         </>
       }
       onClose={onClose}
@@ -152,18 +151,13 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Quantity to buy">
             <InputNumber
-              readOnly
               value={quantity}
               onChange={onChangeQuantity}
               onButtonClick={() => console.log('max')}
             />
           </ItemRow>
           <ItemRow heading="Price per unit">
-            <InputNumber
-              readOnly
-              value={unitPrice}
-              onChange={onChangeUnitPrice}
-            />
+            <InputNumber value={unitPrice} onChange={onChangeUnitPrice} />
           </ItemRow>
         </Grid>
 
