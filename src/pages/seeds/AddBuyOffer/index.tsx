@@ -19,6 +19,7 @@ const AddBuyOffer = ({ onClose }: any) => {
   const { addBuyOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -42,6 +43,7 @@ const AddBuyOffer = ({ onClose }: any) => {
       return;
     }
 
+    setLoading(true);
     const toastId = toast.loading('Creating your buy offer...');
 
     try {
@@ -65,6 +67,9 @@ const AddBuyOffer = ({ onClose }: any) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
+    } finally {
+      setLoading(false);
+      onClose();
     }
   };
 
@@ -84,8 +89,12 @@ const AddBuyOffer = ({ onClose }: any) => {
       title="BUY $SEEDS"
       actions={
         <>
-          <ActionButton onClick={onSubmit} disabled={disabled}>Place offer</ActionButton>
-          <ActionButton onClick={onClose}>Close</ActionButton>
+          <ActionButton onClick={onSubmit} disabled={disabled || loading}>
+            Place offer
+          </ActionButton>
+          <ActionButton onClick={onClose} disabled={loading}>
+            Close
+          </ActionButton>
         </>
       }
       onClose={onClose}
@@ -108,10 +117,7 @@ const AddBuyOffer = ({ onClose }: any) => {
             />
           </ItemRow>
           <ItemRow heading="Price per unit">
-            <InputNumber
-              value={unitPrice}
-              onChange={onChangeUnitPrice}
-            />
+            <InputNumber value={unitPrice} onChange={onChangeUnitPrice} />
           </ItemRow>
         </Grid>
 
@@ -122,7 +128,9 @@ const AddBuyOffer = ({ onClose }: any) => {
           <ItemRow heading="You get">{formatNumber(quantity)} $SEEDS</ItemRow>
           <ItemRow heading="Protocol fee">{'0.0000'}</ItemRow>
           <ItemRow heading="Royalty fee">{'0.0000'}</ItemRow>
-          <ItemRow heading="You give">{formatNumber(quantity * unitPrice)} SAMA</ItemRow>
+          <ItemRow heading="You give">
+            {formatNumber(quantity * unitPrice)} SAMA
+          </ItemRow>
         </Grid>
       </>
     </MarketDialog>

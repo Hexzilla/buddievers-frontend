@@ -18,12 +18,13 @@ const BuyToken = ({ order, onClose }: any) => {
   const { account, balance, refresh } = useMarketContext();
   const { buyTokenByOrderId } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
   };
 
-  const handleBuyToken = async () => {
+  const onSubmit = async () => {
     if (!account) {
       toast.warn('Please connect your wallet!');
       return;
@@ -37,6 +38,7 @@ const BuyToken = ({ order, onClose }: any) => {
       return;
     }
 
+    setLoading(true);
     const toastId = toast.loading('Buy token ...');
 
     try {
@@ -63,6 +65,9 @@ const BuyToken = ({ order, onClose }: any) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
+    } finally {
+      setLoading(false);
+      onClose();
     }
   };
 
@@ -82,10 +87,12 @@ const BuyToken = ({ order, onClose }: any) => {
       title="Take Offer - Buy $SEEDS"
       actions={
         <>
-          <ActionButton disabled={disabled} onClick={handleBuyToken}>
+          <ActionButton disabled={disabled || loading} onClick={onSubmit}>
             Take offer
           </ActionButton>
-          <ActionButton onClick={onClose}>Close</ActionButton>
+          <ActionButton onClick={onClose} disabled={loading}>
+            Close
+          </ActionButton>
         </>
       }
       onClose={onClose}

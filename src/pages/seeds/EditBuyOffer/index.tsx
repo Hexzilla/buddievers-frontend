@@ -24,6 +24,7 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
   const { updateBuyOrder, removeOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(order.quantity);
   const [unitPrice, setUnitPrice] = useState(order.price);
+  const [loading, setLoading] = useState(false);
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -47,19 +48,20 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
       return;
     }
 
+    setLoading(true);
     const toastId = toast.loading('Creating your buy offer...');
 
     try {
       const result = await updateBuyOrder(order.id, quantity, unitPrice, 0);
-      console.log('add-buy-offer-result', result);
+      console.log('update-buy-offer-result', result);
       if (!result) {
-        toast.update(toastId, toastOptions('Failed to create buy offer!'));
+        toast.update(toastId, toastOptions('Failed to update offer!'));
       } else {
         refresh();
         toast.update(
           toastId,
           toastOptions(
-            'You have been created buy offer successfully!',
+            'You have been updated offer successfully!',
             'success'
           )
         );
@@ -70,6 +72,9 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
+    } finally {
+      setLoading(false);
+      onClose();
     }
   };
 
@@ -79,6 +84,7 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
       return;
     }
 
+    setLoading(true);
     const toastId = toast.loading('Remove your sell offer...');
 
     try {
@@ -102,6 +108,8 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -121,13 +129,13 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
       title="BUY $SEEDS"
       actions={
         <>
-          <ActionButton onClick={onSubmit} disabled={disabled}>
+          <ActionButton onClick={onSubmit} disabled={disabled || loading}>
             Update offer
           </ActionButton>
-          <ActionButton onClick={onRemove}>
+          <ActionButton onClick={onRemove} disabled={loading}>
             Remove offer
           </ActionButton>
-          <ActionButton onClick={onClose}>Close</ActionButton>
+          <ActionButton onClick={onClose} disabled={loading}>Close</ActionButton>
         </>
       }
       onClose={onClose}

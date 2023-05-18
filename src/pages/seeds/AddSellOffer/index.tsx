@@ -19,6 +19,7 @@ const AddSellOffer = ({ onClose }: any) => {
   const { addSellOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(0);
   const [unitPrice, setUnitPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -42,6 +43,7 @@ const AddSellOffer = ({ onClose }: any) => {
       return;
     }
 
+    setLoading(true);
     const toastId = toast.loading('Creating your sell offer...');
 
     try {
@@ -65,6 +67,9 @@ const AddSellOffer = ({ onClose }: any) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
+    } finally {
+      setLoading(false);
+      onClose();
     }
   };
 
@@ -85,10 +90,12 @@ const AddSellOffer = ({ onClose }: any) => {
       title="Create Sell Offer"
       actions={
         <>
-          <ActionButton onClick={onSubmit} disabled={disabled}>
+          <ActionButton onClick={onSubmit} disabled={disabled || loading}>
             Place offer
           </ActionButton>
-          <ActionButton onClick={onClose}>Close</ActionButton>
+          <ActionButton onClick={onClose} disabled={loading}>
+            Close
+          </ActionButton>
         </>
       }
       onClose={onClose}
@@ -98,6 +105,11 @@ const AddSellOffer = ({ onClose }: any) => {
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
           </ItemRow>
+        </Grid>
+
+        <Divider light />
+
+        <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Quantity to sell">
             <InputNumber
               value={quantity}

@@ -24,6 +24,7 @@ const EditSellOffer = ({ order, onClose }: Props) => {
   const { updateSellOrder, removeOrder } = useMarketplace();
   const [quantity, setQuantity] = useState(order.quantity);
   const [unitPrice, setUnitPrice] = useState(order.price);
+  const [loading, setLoading] = useState(false);
 
   const onChangeQuantity = (e: any) => {
     setQuantity(Number(e.target.value));
@@ -47,21 +48,25 @@ const EditSellOffer = ({ order, onClose }: Props) => {
       return;
     }
 
+    setLoading(true);
     const toastId = toast.loading('Creating your sell offer...');
 
     try {
-      const result = await updateSellOrder(account, order.id, quantity, unitPrice, 0);
-      console.log('add-sell-offer-result', result);
+      const result = await updateSellOrder(
+        account,
+        order.id,
+        quantity,
+        unitPrice,
+        0
+      );
+      console.log('update-sell-offer-result', result);
       if (!result) {
-        toast.update(toastId, toastOptions('Failed to create sell offer!'));
+        toast.update(toastId, toastOptions('Failed to update offer!'));
       } else {
         refresh();
         toast.update(
           toastId,
-          toastOptions(
-            'You have been created sell offer successfully!',
-            'success'
-          )
+          toastOptions('You have been updated offer successfully!', 'success')
         );
       }
     } catch (err: any) {
@@ -70,6 +75,9 @@ const EditSellOffer = ({ order, onClose }: Props) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
+    } finally {
+      setLoading(false);
+      onClose();
     }
   };
 
@@ -79,6 +87,7 @@ const EditSellOffer = ({ order, onClose }: Props) => {
       return;
     }
 
+    setLoading(true);
     const toastId = toast.loading('Remove your sell offer...');
 
     try {
@@ -90,10 +99,7 @@ const EditSellOffer = ({ order, onClose }: Props) => {
         refresh();
         toast.update(
           toastId,
-          toastOptions(
-            'You have been removed offer successfully!',
-            'success'
-          )
+          toastOptions('You have been removed offer successfully!', 'success')
         );
       }
     } catch (err: any) {
@@ -102,6 +108,8 @@ const EditSellOffer = ({ order, onClose }: Props) => {
         toastId,
         toastOptions(err?.data?.message || 'Something went wrong!', 'error')
       );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -122,13 +130,15 @@ const EditSellOffer = ({ order, onClose }: Props) => {
       title="Create Sell Offer"
       actions={
         <>
-          <ActionButton onClick={onSubmit} disabled={disabled}>
+          <ActionButton onClick={onSubmit} disabled={disabled || loading}>
             Place offer
           </ActionButton>
-          <ActionButton onClick={onRemove}>
+          <ActionButton onClick={onRemove} disabled={loading}>
             Remove offer
           </ActionButton>
-          <ActionButton onClick={onClose}>Close</ActionButton>
+          <ActionButton onClick={onClose} disabled={loading}>
+            Close
+          </ActionButton>
         </>
       }
       onClose={onClose}
@@ -138,6 +148,11 @@ const EditSellOffer = ({ order, onClose }: Props) => {
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
           </ItemRow>
+        </Grid>
+
+        <Divider light />
+
+        <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Quantity to sell">
             <InputNumber
               value={quantity}
