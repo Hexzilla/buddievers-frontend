@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 
 import { useMarketContext } from 'context/MarketContext';
 import OfferTable from 'components/Marketplace/OfferTable';
+import EditBuyOffer from '../EditBuyOffer';
+import EditSellOffer from '../EditSellOffer';
 import SellToken from '../SellToken';
 import BuyToken from '../BuyToken';
 import OfferTabs from '../OfferTabs';
@@ -17,7 +19,7 @@ const Container = styled.div`
 
 const ItemTable = () => {
   const { orders, ownedOrders } = useMarketContext();
-  const [offer, setOffer] = useState(null);
+  const [offer, setOffer] = useState<any>(null);
   const [orderType, setOrderType] = useState(0);
 
   const datasource = useMemo(() => {
@@ -27,9 +29,33 @@ const ItemTable = () => {
     return orders.filter((item: any) => item.orderType === orderType);
   }, [ownedOrders, orders, orderType]);
 
+  const editable = useMemo(() => orderType === 2, [orderType]);
+
   const onTakeOffer = (offer: any) => {
     setOffer(offer);
   };
+
+  const onCloseDialog = () => {
+    setOffer(null);
+  };
+
+  const editOfferDialog = () => (
+    <>
+      {offer?.orderType === 0 && (
+        <EditBuyOffer offer={offer} onClose={onCloseDialog} />
+      )}
+      {offer?.orderType === 1 && (
+        <EditSellOffer offer={offer} onClose={onCloseDialog} />
+      )}
+    </>
+  );
+
+  const takeOfferDialog = () => (
+    <>
+      {orderType === 0 && <SellToken order={offer} onClose={onCloseDialog} />}
+      {orderType === 1 && <BuyToken order={offer} onClose={onCloseDialog} />}
+    </>
+  );
 
   return (
     <Container>
@@ -38,14 +64,13 @@ const ItemTable = () => {
         onChange={(e: any, value: number) => setOrderType(value)}
       />
 
-      <OfferTable orders={datasource} onTakeOffer={onTakeOffer} />
+      <OfferTable
+        orders={datasource}
+        onTakeOffer={onTakeOffer}
+        editable={editable}
+      />
 
-      {!!offer && orderType == 0 && (
-        <SellToken order={offer} onClose={() => onTakeOffer(null)} />
-      )}
-      {!!offer && orderType == 1 && (
-        <BuyToken order={offer} onClose={() => onTakeOffer(null)} />
-      )}
+      {!!offer && <>{editable ? editOfferDialog() : takeOfferDialog()}</>}
     </Container>
   );
 };
