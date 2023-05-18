@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
-import styled from '@emotion/styled';
 import { toast } from 'react-toastify';
 
 import { CONTRACT_MARKETPLACE } from '../../../constants';
@@ -14,13 +13,6 @@ import ItemRow from 'components/Marketplace/ItemRow';
 import InputNumber from 'components/Marketplace/InputNumber';
 import ActionButton from 'components/Marketplace/ActionButton';
 import MarketDialog from 'components/Marketplace/MarketDialog';
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 24px 0px;
-`;
 
 const AddSellOffer = ({ onClose }: any) => {
   const { account, seedBalance, refresh } = useMarketContext();
@@ -101,7 +93,7 @@ const AddSellOffer = ({ onClose }: any) => {
       }
       onClose={onClose}
     >
-      <Content>
+      <>
         <Grid container spacing={4} alignItems="center">
           <ItemRow heading="Address">
             {shortAddress(CONTRACT_MARKETPLACE)}
@@ -126,7 +118,7 @@ const AddSellOffer = ({ onClose }: any) => {
           <ItemRow heading="Royalty fee">{'0.0000'}</ItemRow>
           <ItemRow heading="You get">{gainAmount} SAMA</ItemRow>
         </Grid>
-      </Content>
+      </>
     </MarketDialog>
   );
 };
