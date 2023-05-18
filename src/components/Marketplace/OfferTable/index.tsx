@@ -38,7 +38,7 @@ const Message = styled.div`
   padding: 40px;
 `;
 
-const OfferTable = ({ orders, onTakeOffer }: any) => {
+const OfferTable = ({ orders, onTakeOffer, editable }: any) => {
   return (
     <TableContainer style={{ marginTop: '30px', textAlign: 'center' }}>
       <StyledTable aria-label="simple table">
@@ -66,7 +66,11 @@ const OfferTable = ({ orders, onTakeOffer }: any) => {
               <TableCell>{row.expiration ? row.expiration : '-'}</TableCell>
               <TableCell>{shortAddress(row.owner)}</TableCell>
               <TableCell align="right">
-                <FillButton onClick={() => onTakeOffer(row)}>FILL</FillButton>
+                {editable ? (
+                  <FillButton onClick={() => onTakeOffer(row)}>EDIT</FillButton>
+                ) : (
+                  <FillButton onClick={() => onTakeOffer(row)}>FILL</FillButton>
+                )}
               </TableCell>
             </TableRow>
           ))}
