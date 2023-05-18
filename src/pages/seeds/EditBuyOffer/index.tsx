@@ -104,6 +104,7 @@ const EditBuyOffer = ({ order, onClose }: Props) => {
       );
     } finally {
       setLoading(false);
+      onClose();
     }
   };
 

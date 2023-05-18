@@ -45,6 +45,7 @@ const OfferTable = ({ orders, onTakeOffer, editable }: any) => {
         <TableHead>
           <TableRow>
             <TableCell>ID</TableCell>
+            <TableCell>Type</TableCell>
             <TableCell>Unit Price</TableCell>
             <TableCell>Quantity</TableCell>
             <TableCell>Expiration</TableCell>
@@ -61,6 +62,7 @@ const OfferTable = ({ orders, onTakeOffer, editable }: any) => {
               <TableCell component="th" scope="row">
                 {shortAddress(row.id)}
               </TableCell>
+              <TableCell>{row.type === 0 ? 'Buy' : 'Sell'}</TableCell>
               <TableCell>{row.price}</TableCell>
               <TableCell>{row.quantity}</TableCell>
               <TableCell>{row.expiration ? row.expiration : '-'}</TableCell>

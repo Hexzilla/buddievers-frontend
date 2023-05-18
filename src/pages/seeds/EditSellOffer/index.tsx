@@ -110,6 +110,7 @@ const EditSellOffer = ({ order, onClose }: Props) => {
       );
     } finally {
       setLoading(false);
+      onClose();
     }
   };
 
@@ -134,7 +135,7 @@ const EditSellOffer = ({ order, onClose }: Props) => {
       actions={
         <>
           <ActionButton onClick={onSubmit} disabled={disabled || loading}>
-            Place offer
+            Update offer
           </ActionButton>
           <ActionButton onClick={onRemove} disabled={loading}>
             Remove offer
